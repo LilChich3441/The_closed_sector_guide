@@ -249,6 +249,36 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   clip-path:polygon(0 0,100% 0,100% 78%,50% 100%,0 78%);box-shadow:0 4px 16px rgba(0,0,0,.5);transition:.15s}
 #toTop:hover{background:var(--txt)}
 #toTop.show{display:flex}
+/* ===== LOCATIONS + LOOT ===== */
+.loclist{display:flex;flex-direction:column;gap:10px}
+.loccard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid2);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%)}
+.locrow{display:flex;align-items:center;gap:16px;padding:14px 16px;flex-wrap:wrap;transition:background .15s}
+.locrow:hover{background:var(--panel2)}
+.locname{font-family:'Saira Condensed',sans-serif;font-size:21px;font-weight:700;letter-spacing:.5px;color:var(--txt);display:flex;align-items:center;gap:10px;flex:1;min-width:180px}
+.locarrow{color:var(--acid);font-size:13px;transition:transform .2s;display:inline-block;width:14px}
+.locarrow.dim{color:var(--line2)}
+.loctag{font-family:'Saira',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:var(--bg);background:var(--acid);padding:3px 9px;border-radius:20px;margin-left:4px}
+.locstats{display:flex;gap:18px;flex-wrap:wrap}
+.lst{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.lst b{font-family:'Saira Condensed',sans-serif;font-size:22px;font-weight:700}
+.lst i{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-style:normal;margin-top:2px}
+.locloot{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 16px}
+.locloot.open{max-height:6000px;padding:6px 16px 18px}
+.lootsec{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--acid);margin:16px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.lootgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.lootitem{display:flex;gap:10px;background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--line2);padding:9px 10px}
+.lootitem.rr1{border-left-color:var(--r1)}.lootitem.rr2{border-left-color:var(--r2)}.lootitem.rr3{border-left-color:var(--r3)}
+.lootitem.rr4{border-left-color:var(--r4)}.lootitem.rr5{border-left-color:var(--r5)}
+.looticon{width:48px;height:48px;object-fit:cover;background:var(--bg);border:1px solid var(--line);flex:none}
+.lootbody{flex:1;min-width:0}
+.lootname{font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:600;color:var(--txt);line-height:1.1;margin-bottom:4px}
+.lstat{font-size:11px;color:var(--dim);margin-bottom:4px}
+.lstat b{font-family:'Saira Condensed',sans-serif;font-size:16px;color:var(--hot)}
+.lootitem .chips{margin-top:3px}
+.lootdesc{font-size:10.5px;color:var(--dim);line-height:1.4;margin-top:5px}
 /* ===== MOBILE ===== */
 @media(max-width:860px){
   .tagline{display:none}
@@ -281,6 +311,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   .tbl td.tname::before{display:none}
   .tbl td.num{justify-content:space-between}
   .tbl .bignum{font-size:24px!important}
+  .locname{font-size:18px;min-width:140px}
+  .locstats{gap:12px}
+  .lst b{font-size:18px}
+  .lootgrid{grid-template-columns:1fr}
 }
 @media(max-width:560px){
   .hgrid{gap:12px}
@@ -334,7 +368,7 @@ const TABS=[
   {id:'cars',label:'Транспорт'},
   {id:'story',label:'Задания'},
   {id:'quests',label:'Контракты'},
-  {id:'locations',label:'Локации'},
+  {id:'locations',label:'Локации и лут'},
   {id:'guides',label:'Гайды'},
   {id:'progress',label:'Опыт / Звания'},
 ];
@@ -463,33 +497,70 @@ function runCalc(){
 }
 
 // ---------- LOCATIONS ----------
+function lootCard(it){
+  const norep='';
+  const chips=[];
+  if(it.rar)chips.push(`<span class="chip rar${it.rar}">${RARN[it.rar]||''}</span>`);
+  if(it.typ)chips.push(`<span class="chip mat">${esc(it.typ)}</span>`);
+  if(it.heavy)chips.push(`<span class="chip norep">нужна машина</span>`);
+  const stat=it.stat?`<div class="lstat"><b>${esc(it.stat)}</b> <span>${esc(it.statlbl)}</span></div>`:'';
+  return `<div class="lootitem rr${it.rar||1}">
+    <img class="looticon" src="${img(it.icon)}" alt="" loading="lazy">
+    <div class="lootbody">
+      <div class="lootname">${esc(it.name)}</div>
+      ${stat}
+      <div class="chips">${chips.join('')}</div>
+      ${it.desc?`<div class="lootdesc">${esc(it.desc)}</div>`:''}
+    </div>
+  </div>`;
+}
 function renderLocations(){
-  const rows=DB.locations.map(l=>`<tr data-name="${esc(l.name.toLowerCase())}">
-    <td class="tname">${esc(l.name)}</td>
-    <td class="num danger" data-label="Мин. атака">${esc(l.atk)}</td>
-    <td class="num safe" data-label="Мин. защита">${esc(l['def'])}</td>
-    <td class="num muted" data-label="Пешком">${esc(l.footA||'—')}</td>
-    <td class="num gold" data-label="На авто">${esc(l.car||'—')}</td>
-    <td class="num muted" data-label="На локации">${esc(l.onLoc||'—')}</td>
-  </tr>`).join('');
+  const cards=DB.locations.map((l,idx)=>{
+    const data=DB.locLoot&&DB.locLoot[l.name];
+    const hasLoot=!!data;
+    const head=`
+      <div class="locrow" ${hasLoot?`onclick="toggleLoc(${idx})"`:''} ${hasLoot?'style="cursor:pointer"':''}>
+        <div class="locname">${hasLoot?'<span class="locarrow" id="arr'+idx+'">▶</span>':'<span class="locarrow dim">·</span>'}${esc(l.name)}
+          ${hasLoot?'<span class="loctag">нажми — лут</span>':''}</div>
+        <div class="locstats">
+          <span class="lst"><b class="danger">${esc(l.atk)}</b><i>атака</i></span>
+          <span class="lst"><b class="safe">${esc(l['def'])}</b><i>защита</i></span>
+          <span class="lst"><b class="muted">${esc(l.footA||'—')}</b><i>пешком</i></span>
+          <span class="lst"><b class="gold">${esc(l.car||'—')}</b><i>авто</i></span>
+        </div>
+      </div>`;
+    let body='';
+    if(hasLoot){
+      body=`<div class="locloot" id="loot${idx}">
+        <div class="lootsec">Рекомендуемое снаряжение в рейд</div>
+        <div class="lootgrid">${data.rec.map(lootCard).join('')}</div>
+        <div class="lootsec">Что можно найти на локации</div>
+        <div class="lootgrid">${data.loot.map(lootCard).join('')}</div>
+      </div>`;
+    }
+    return `<div class="loccard" data-name="${esc(l.name.toLowerCase())}">${head}${body}</div>`;
+  }).join('');
   const brows=DB.bosses.map(b=>`<tr data-name="${esc(b.name.toLowerCase())}">
     <td class="tname"><span class="dotr d5"></span>${esc(b.name)}</td>
     <td class="num danger" data-label="Мин. атака">${esc(b.atk)}</td>
     <td class="num safe" data-label="Мин. защита">${esc(b['def'])}</td>
   </tr>`).join('');
   return `
-  <div class="intro">Чтобы отправить отряд на локацию, его суммарная <b class="danger">атака</b> и <b class="safe">защита</b> должны быть не ниже минимума. Защита записана как «броня + запас HP/стимулятор». Время рейда зависит от возраста бойца — в таблице показано время для <b>взрослого (25–40 лет)</b> пешком и время на авто.</div>
-  <h2 class="sec">Локации</h2>
-  <table class="tbl">
-    <thead><tr><th>Локация</th><th class="num">Мин. атака</th><th class="num">Мин. защита</th><th class="num">Пешком</th><th class="num">На авто</th><th class="num">На локации</th></tr></thead>
-    <tbody>${rows}</tbody>
-  </table>
+  <div class="intro">Минимальные <b class="danger">атака</b> и <b class="safe">защита</b> отряда для входа. Защита = «броня + запас HP/стимулятор». Время рейда дано для <b>взрослого бойца (25–40 лет)</b>. <b class="gold">Нажми на локацию</b>, где есть пометка «лут» — раскроется список снаряжения и добычи.</div>
+  <div class="loclist">${cards}</div>
   <h2 class="sec" style="margin-top:26px">Боссы</h2>
   <div class="intro" style="margin-top:0">У боссов характеристики не учитывают стимуляторы — нужна чистая броня и урон.</div>
   <table class="tbl" style="max-width:560px">
     <thead><tr><th>Босс</th><th class="num">Мин. атака</th><th class="num">Мин. защита</th></tr></thead>
     <tbody>${brows}</tbody>
   </table>`;
+}
+function toggleLoc(idx){
+  const el=document.getElementById('loot'+idx);
+  const arr=document.getElementById('arr'+idx);
+  if(!el)return;
+  const open=el.classList.toggle('open');
+  if(arr)arr.textContent=open?'▼':'▶';
 }
 
 // ---------- QUESTS ----------
@@ -595,9 +666,9 @@ function renderGuides(){
       <div class="gspec"><div class="gsn">25</div><div class="gsl">шлем + броня<br><span>минимум брони</span></div></div>
     </div>
     <div class="grow2">
-      <div class="gimg sm"><img src="${rifle}" alt="Винтовка СВП"><span>СВП — урон оружия указан прямо на карточке (144)</span></div>
-      <div class="gimg sm"><img src="${helmet}" alt="Шлем пилота"><span>Шлем пилота — защита указана на карточке (8)</span></div>
-      <div class="gimg sm"><img src="${armor}" alt="Байкал 2"><span>Байкал 2 — броня указана на карточке (17)</span></div>
+      <div class="gimg sm"><img src="${rifle}" alt="Винтовка СВП"></div>
+      <div class="gimg sm"><img src="${helmet}" alt="Шлем пилота"></div>
+      <div class="gimg sm"><img src="${armor}" alt="Байкал 2"></div>
     </div>
     <p class="gp gwarn">Локации коварные: с экипировкой ниже рекомендованной обычно прилетает 30–40 урона, но однажды боец может словить <b>&gt;100 урона</b> и не вернуться.</p>
     <p class="gp">В рюкзаки кладём <b>гранаты и стимуляторы</b> — расходники повышают атаку и броню. Не пренебрегаем ими: если экипировки не хватает, ими можно догнать до нужных показателей. Но они не навсегда — теряются в бою, если показателей не хватило.</p>

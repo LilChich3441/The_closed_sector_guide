@@ -498,10 +498,8 @@ function runCalc(){
 
 // ---------- LOCATIONS ----------
 function lootCard(it){
-  const norep='';
   const chips=[];
   if(it.rar)chips.push(`<span class="chip rar${it.rar}">${RARN[it.rar]||''}</span>`);
-  if(it.typ)chips.push(`<span class="chip mat">${esc(it.typ)}</span>`);
   if(it.heavy)chips.push(`<span class="chip norep">нужна машина</span>`);
   const stat=it.stat?`<div class="lstat"><b>${esc(it.stat)}</b> <span>${esc(it.statlbl)}</span></div>`:'';
   return `<div class="lootitem rr${it.rar||1}">

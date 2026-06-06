@@ -88,6 +88,9 @@ section.on{display:block}
 .card.rr1 .statline{border-left-color:var(--r1)}.card.rr2 .statline{border-left-color:var(--r2)}
 .card.rr3 .statline{border-left-color:var(--r3)}.card.rr4 .statline{border-left-color:var(--r4)}.card.rr5 .statline{border-left-color:var(--r5)}
 .cname{font-family:'Saira Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:.3px;color:var(--txt);margin-bottom:10px;line-height:1.05}
+.cnamerow{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cnamerow .cname{margin-bottom:0}
+.gicon{width:44px;height:44px;flex:none;object-fit:cover;background:var(--bg);border:1px solid var(--line);border-radius:3px}
 .statline{display:flex;align-items:center;gap:10px;margin-bottom:10px;background:var(--bg2);
   border-left:3px solid var(--line2);padding:6px 12px;
   clip-path:polygon(0 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%)}
@@ -408,8 +411,12 @@ function gearCard(it){
   if(it.set)chips.push(`<span class="chip set">${esc(it.set)}</span>`);
   let extra='';
   if(it.note && !/[Бб]осс/.test(it.note))extra=`<div class="note">${esc(it.note)}</div>`;
+  if(it.desc)extra+=`<div class="note">${esc(it.desc)}</div>`;
+  const head=it.icon&&typeof img==='function'&&img(it.icon)
+    ? `<div class="cnamerow"><img class="gicon" src="${img(it.icon)}" alt="" loading="lazy"><span class="cname">${esc(it.name)}</span></div>`
+    : `<div class="cname">${esc(it.name)}</div>`;
   return `<div class="card rr${it.rar}" data-name="${esc(it.name.toLowerCase())}">
-    <div class="cname">${esc(it.name)}</div>
+    ${head}
     <div class="statline"><span class="bignum ${it.kind}">${esc(it.stat)||'—'}</span><span class="statlbl">${it.klbl}</span></div>
     <div class="chips">${chips.join('')}</div>${extra}
   </div>`;

@@ -485,15 +485,21 @@ function runCalc(){
   const diff=Math.max(0,100-cur);
   const total=Math.round(diff*per);
   const out=document.getElementById('calcOut');
+  const spp=car.spp?parseFloat(car.spp):0;
+  let raidsLine='';
+  if(spp>0){
+    const full=Math.floor(100/spp);
+    const now=Math.floor(cur/spp);
+    raidsLine=`<div class="csub muted">Хватает на <b>${full}</b> рейд(ов) со 100% · сейчас осталось <b>${now}</b> (теряет ~${esc(car.spp)}% за рейд)</div>`;
+  }
   if(diff<=0){
-    out.innerHTML=`<div class="cresult ok">Чинить не нужно — прочность 100%.</div>`;
+    out.innerHTML=`<div class="cresult ok">Чинить не нужно — прочность 100%.</div>${raidsLine}`;
     return;
   }
-  const raids=car.spp&&parseFloat(car.spp)>0?Math.floor((100-cur)/parseFloat(car.spp)):null;
   out.innerHTML=`
     <div class="cbig">${fmt(total)} <span>мат.</span></div>
     <div class="csub">восстановить <b>${diff}%</b> × ${per} мат = <b>${fmt(total)}</b> материалов</div>
-    ${raids!==null?`<div class="csub muted">≈ хватит на ${raids} рейд(ов) до следующей такой починки (СПП ${esc(car.spp)}%)</div>`:''}`;
+    ${raidsLine}`;
 }
 
 // ---------- LOCATIONS ----------

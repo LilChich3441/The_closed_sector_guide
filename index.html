@@ -279,6 +279,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 .lstat b{font-family:'Saira Condensed',sans-serif;font-size:16px;color:var(--hot)}
 .lootitem .chips{margin-top:3px}
 .lootdesc{font-size:10.5px;color:var(--dim);line-height:1.4;margin-top:5px}
+.bossblk{margin:16px 0 4px;border:1px solid var(--line);border-left:3px solid var(--r5);background:rgba(255,122,69,.05);padding:12px 14px}
+.bosshd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.bosstitle{font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot)}
+.bosstitle .lbl{font-size:11px;color:var(--dim);letter-spacing:1.5px;margin-right:6px}
+.bossst{display:flex;gap:16px;margin-left:auto}
+.bossst .s b{font-family:'Saira Condensed',sans-serif;font-size:18px;font-weight:700}
+.bossst .s i{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-style:normal;margin-left:5px}
+.bosstext{font-size:11px;color:var(--dim);line-height:1.5;margin:6px 0}
+.bosstext b{color:var(--txt);font-weight:600}
+.bossdrop{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--r5);margin:12px 0 8px}
 /* ===== MOBILE ===== */
 @media(max-width:860px){
   .tagline{display:none}
@@ -535,9 +545,24 @@ function renderLocations(){
       </div>`;
     let body='';
     if(hasLoot){
+      const b=data.boss;
+      const bossBlk=b?`<div class="bossblk">
+        <div class="bosshd">
+          <div class="bosstitle"><span class="lbl">БОСС</span>${esc(b.name)}</div>
+          <div class="bossst">
+            <span class="s"><b class="danger">${esc(b.atk)}</b><i>атака</i></span>
+            <span class="s"><b class="safe">${esc(b['def'])}</b><i>защита</i></span>
+          </div>
+        </div>
+        ${b.cond?`<div class="bosstext">${esc(b.cond)}</div>`:''}
+        ${b.fight?`<div class="bosstext">${esc(b.fight)}</div>`:''}
+        ${b.drop&&b.drop.length?`<div class="bossdrop">Добыча с босса</div>
+        <div class="lootgrid">${b.drop.map(lootCard).join('')}</div>`:''}
+      </div>`:'';
       body=`<div class="locloot" id="loot${idx}">
         <div class="lootsec">Рекомендуемое снаряжение в рейд</div>
         <div class="lootgrid">${data.rec.map(lootCard).join('')}</div>
+        ${bossBlk}
         <div class="lootsec">Что можно найти на локации</div>
         <div class="lootgrid">${data.loot.map(lootCard).join('')}</div>
       </div>`;

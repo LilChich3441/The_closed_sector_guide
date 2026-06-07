@@ -110,13 +110,11 @@ section.on{display:block}
 .chip.boss{background:rgba(232,184,75,.14);color:var(--gold);border-color:rgba(232,184,75,.3)}
 .chip.set{background:rgba(179,154,208,.12);color:var(--r3);border-color:rgba(179,154,208,.26)}
 /* D.I.S.S. sets */
-.setwrap{margin:4px 0 22px;border:1px solid rgba(179,154,208,.3);background:linear-gradient(180deg,rgba(179,154,208,.06),transparent);padding:14px 14px 16px;border-radius:5px}
-.setttl{font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1.5px;text-transform:uppercase;color:var(--r3);font-weight:700;margin-bottom:12px}
-.setttl span{display:block;font-size:11.5px;letter-spacing:.3px;text-transform:none;color:var(--dim);font-weight:400;margin-top:3px}
-.setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.setbox{border:1px solid var(--line);border-top:3px solid var(--r3);background:var(--panel);padding:10px 11px 12px;border-radius:4px}
+.setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.setbox{border:1px solid var(--line);border-top:3px solid var(--r3);background:var(--panel);padding:11px 12px 13px;border-radius:4px}
 .setbox.rr4{border-top-color:var(--r4)}.setbox.rr5{border-top-color:var(--r5)}
-.sethead{font-family:'Saira Condensed',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:9px;opacity:.85}
+.sethead{display:flex;align-items:center;gap:8px;font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:10px}
+.setrar{margin-left:auto}
 .setbox .grid{grid-template-columns:1fr;gap:8px}
 .chip.mat{background:var(--panel2);color:var(--dim);border-color:var(--line)}
 .note{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.55;font-style:italic}
@@ -295,16 +293,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 .lstat b{font-family:'Saira Condensed',sans-serif;font-size:16px;color:var(--hot)}
 .lootitem .chips{margin-top:3px}
 .lootdesc{font-size:12.5px;color:var(--dim);line-height:1.5;margin-top:6px}
-.bossblk{margin:16px 0 4px;border:1px solid var(--line);border-left:3px solid var(--r5);background:rgba(255,122,69,.05);padding:12px 14px}
-.bosshd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
-.bosstitle{font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot)}
-.bosstitle .lbl{font-size:11px;color:var(--dim);letter-spacing:1.5px;margin-right:6px}
-.bossst{display:flex;gap:16px;margin-left:auto}
-.bossst .s b{font-family:'Saira Condensed',sans-serif;font-size:18px;font-weight:700}
+.bossblk{margin:18px 0 4px;border:1px solid var(--line);border-left:3px solid var(--r5);background:rgba(255,122,69,.06);padding:14px 16px}
+.bosshd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.bosstitle{font-family:'Saira Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot)}
+.bosstitle .lbl{display:block;font-size:11px;color:var(--dim);letter-spacing:1.5px;margin-bottom:1px;font-weight:600}
+.bossst{display:flex;gap:18px;margin-left:auto}
+.bossst .s b{font-family:'Saira Condensed',sans-serif;font-size:20px;font-weight:700}
 .bossst .s i{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-style:normal;margin-left:5px}
-.bosstext{font-size:11px;color:var(--dim);line-height:1.5;margin:6px 0}
+/* акцентный блок: как заспавнить босса */
+.bosshow{display:flex;gap:12px;align-items:center;background:rgba(255,122,69,.1);border:1px solid rgba(255,122,69,.28);border-radius:4px;padding:11px 13px;margin:10px 0}
+.bosshow-ic{width:52px;height:52px;flex:none;object-fit:cover;background:var(--bg);border:1px solid var(--r5);border-radius:4px}
+.bosshow-tx{font-size:14px;line-height:1.5;color:var(--txt)}
+.bosshow-lbl{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot);margin-bottom:3px}
+.bosstext{font-size:13px;color:var(--dim);line-height:1.55;margin:8px 0}
 .bosstext b{color:var(--txt);font-weight:600}
-.bossdrop{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--r5);margin:12px 0 8px}
+.bossdrop{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--r5);margin:14px 0 8px}
+/* бейдж босса в строке локации */
+.locboss{display:inline-flex;align-items:center;gap:6px;font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.5px;
+  background:rgba(255,122,69,.12);color:var(--hot);border:1px solid rgba(255,122,69,.3);border-radius:3px;padding:3px 9px;margin-left:8px}
+.locboss i{font-size:9px;font-style:normal;letter-spacing:1.5px;color:var(--r5);font-weight:700}
 /* ===== MOBILE ===== */
 @media(max-width:860px){
   .tagline{display:none}
@@ -436,6 +443,8 @@ function gearNameSet(){
   if(_gearNames)return _gearNames;
   _gearNames=new Set();
   ['weapons','armor','helmets'].forEach(a=>DB[a].forEach(x=>_gearNames.add(norm(x.name))));
+  // снаряжение, которое есть только в дропе боссов (не в массивах)
+  ['куртка предателя','шапка предателя'].forEach(n=>_gearNames.add(n));
   return _gearNames;
 }
 function lootCatOf(it){
@@ -459,6 +468,25 @@ function gearItems(){
                klbl:x.statlbl||'', fromLoot:true}));
   }
   return [];
+}
+
+// Собирает комплекты D.I.S.S. из всех массивов снаряжения, сгруппированные по set
+function setGroups(){
+  const all=[
+    ...DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'})),
+    ...DB.armor.map(x=>({...x,kind:'arm',klbl:'Защита'})),
+    ...DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'})),
+  ].filter(x=>x.set&&/D\.I\.S\.S/i.test(x.set));
+  const groups={};
+  all.forEach(x=>{(groups[x.set]=groups[x.set]||[]).push(x);});
+  // порядок частей внутри сета: перчатки → бронекостюм → шлем
+  const part=n=>/перчатк/i.test(n)?0:/бронекостюм/i.test(n)?1:2;
+  Object.values(groups).forEach(g=>g.sort((a,b)=>part(a.name)-part(b.name)));
+  // порядок сетов: базовый → Mk2 → Mk3
+  const order=Object.keys(groups).sort((a,b)=>{
+    const r=v=>v.includes('Mk3')?3:v.includes('Mk2')?2:1; return r(a)-r(b);
+  });
+  return order.map(name=>({name, rar:groups[name][0].rar, parts:groups[name]}));
 }
 function gearCard(it){
   const norep=/Не ремонт/i.test(it.mat||'');
@@ -489,44 +517,44 @@ function renderGear(){
     ['weapons','Оружие',DB.weapons.length],
     ['armor','Броня',DB.armor.length],
     ['helmets','Шлемы',DB.helmets.length],
+    ['sets','Комплекты',setGroups().length],
     ['bags','Рюкзаки',allLootItems().filter(i=>lootCatOf(i)==='bags').length],
     ['consum','Расходники',allLootItems().filter(i=>lootCatOf(i)==='consum').length],
     ['items','Предметы',allLootItems().filter(i=>lootCatOf(i)==='items').length],
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
+
+  // --- подраздел Комплекты ---
+  if(gearFilter.cat==='sets'){
+    let sets=setGroups();
+    if(gearFilter.rar)sets=sets.filter(s=>s.rar===gearFilter.rar);
+    const setsHtml=`<div class="setrow">${sets.map(s=>`
+      <div class="setbox rr${s.rar}">
+        <div class="sethead">${esc(s.name.replace(/^\(\d+\)\s*/,''))}
+          <span class="setrar chip rar${s.rar}">${RARN[s.rar]||''}</span></div>
+        <div class="grid">${s.parts.map(gearCard).join('')}</div>
+      </div>`).join('')}</div>`;
+    return `
+    <div class="intro"><b>Комплекты D.I.S.S.</b> — броня из трёх частей: перчатки (урон), бронекостюм и шлем (защита). Здесь видны полные сеты целиком по уровням улучшения Mk1 → Mk2 → Mk3. Эти же предметы есть и в разделах «Оружие», «Броня», «Шлемы».</div>
+    <div class="bar">
+      ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
+      <span style="width:14px"></span>
+      ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
+      <span class="cnt">${sets.length} комплект(ов)</span>
+    </div>
+    ${setsHtml}
+    <div class="legend">
+      Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
+    </div>`;
+  }
+
   const isGear=['weapons','armor','helmets'].includes(gearFilter.cat);
   let items=gearItems();
   if(gearFilter.rar)items=items.filter(x=>x.rar===gearFilter.rar);
   items.sort((a,b)=>(parseInt(b.stat)||0)-(parseInt(a.stat)||0)||(b.rar-a.rar));
 
-  // Группировка комплектов D.I.S.S. (только в разделах снаряжения)
-  let gridHtml;
-  const setItems=items.filter(x=>x.set&&/D\.I\.S\.S/i.test(x.set));
-  if(isGear && setItems.length){
-    const rest=items.filter(x=>!(x.set&&/D\.I\.S\.S/i.test(x.set)));
-    // сгруппировать по названию комплекта
-    const groups={};
-    setItems.forEach(x=>{(groups[x.set]=groups[x.set]||[]).push(x);});
-    const order=Object.keys(groups).sort((a,b)=>{
-      const r=v=>v.includes('Mk3')?3:v.includes('Mk2')?2:1; return r(a)-r(b);
-    });
-    const setsBlk=`<div class="setwrap">
-      <div class="setttl">Комплекты D.I.S.S. <span>собери все 3 части — перчатки, бронекостюм, шлем</span></div>
-      <div class="setrow">${order.map(name=>{
-        const rar=groups[name][0].rar;
-        return `<div class="setbox rr${rar}">
-          <div class="sethead">${esc(name.replace(/^\(\d+\)\s*/,''))}</div>
-          <div class="grid">${groups[name].map(gearCard).join('')}</div>
-        </div>`;
-      }).join('')}</div>
-    </div>`;
-    gridHtml = setsBlk + `<div class="grid" id="gearGrid">${rest.map(gearCard).join('')}</div>`;
-  } else {
-    gridHtml = `<div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>`;
-  }
-
   const intro = isGear
-    ? `Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания.`
+    ? `Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания. Части комплектов D.I.S.S. собраны целиком во вкладке «Комплекты».`
     : gearFilter.cat==='consum'
     ? `<b>Расходники</b> кладутся в рюкзак исполнителя и тратятся в рейде: аптечки восстанавливают HP, стимулятор усиливает броню, гранаты и взрывчатка добавляют урон. Если показателей не хватило — расходник теряется в бою.`
     : gearFilter.cat==='bags'
@@ -541,7 +569,7 @@ function renderGear(){
     ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
     <span class="cnt">${items.length} шт.</span>
   </div>
-  ${gridHtml}
+  <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
   <div class="legend">
     Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
     &nbsp;•&nbsp; <span class="chip norep">не чинится</span> — нельзя починить; служит, пока прочность не упадёт до 30%
@@ -557,7 +585,7 @@ function cargoLabel(c){
 }
 function renderCars(){
   const carIcons={};
-  allLootItems().forEach(it=>{ if(it.statlbl==='Скорость'&&it.icon) carIcons[norm(it.name)]=it.icon; });
+  allLootItems().forEach(it=>{ if(it.icon&&(it.statlbl==='Скорость'||/эвакуатор/i.test(it.name))) carIcons[norm(it.name)]=it.icon; });
   const rows=DB.cars.slice().sort((a,b)=>(parseInt(b.speed)||0)-(parseInt(a.speed)||0)).map(c=>{
     const cost=c.repCost?`${esc(c.repCost)} мат/1%`:'<span class="muted">нет данных</span>';
     const rep=c.repairable?cost:'<span class="danger">не чинится</span>';
@@ -645,13 +673,27 @@ function lootCard(it){
   </div>`;
 }
 function renderLocations(){
+  // карта имя предмета -> иконка (из всего лута) для триггеров боссов
+  const iconByName={};
+  allLootItems().forEach(it=>{ if(it.icon) iconByName[norm(it.name)]=it.icon; });
+  // извлечь из условия босса название триггер-предмета (в кавычках после "в рюкзак")
+  function triggerItem(cond){
+    if(!cond)return null;
+    const m=cond.match(/рюкзак[^«"]*[«"]([^»"]+)[»"]/i);
+    if(!m)return null;
+    const name=m[1].trim();
+    return {name, icon:iconByName[norm(name)]||''};
+  }
   const cards=DB.locations.map((l,idx)=>{
     const data=DB.locLoot&&DB.locLoot[l.name];
     const hasLoot=!!data;
+    const b=hasLoot?data.boss:null;
+    const trig=b?triggerItem(b.cond):null;
+    const bossTag=b?`<span class="locboss"><i>БОСС</i>${esc(b.name)}${trig?` · нужен «${esc(trig.name)}»`:''}</span>`:'';
     const head=`
       <div class="locrow" ${hasLoot?`onclick="toggleLoc(${idx})"`:''} ${hasLoot?'style="cursor:pointer"':''}>
         <div class="locname">${hasLoot?'<span class="locarrow" id="arr'+idx+'">▶</span>':'<span class="locarrow dim">·</span>'}${esc(l.name)}
-          ${hasLoot?'<span class="loctag">нажми — лут</span>':''}</div>
+          ${hasLoot?'<span class="loctag">нажми — лут</span>':''}${bossTag}</div>
         <div class="locstats">
           <span class="lst"><b class="danger">${esc(l.atk)}</b><i>атака</i></span>
           <span class="lst"><b class="safe">${esc(l['def'])}</b><i>защита</i></span>
@@ -661,16 +703,19 @@ function renderLocations(){
       </div>`;
     let body='';
     if(hasLoot){
-      const b=data.boss;
+      const trigBlk=(b&&b.cond)?`<div class="bosshow">
+        ${trig&&trig.icon?`<img class="bosshow-ic" src="${img(trig.icon)}" alt="" loading="lazy">`:''}
+        <div class="bosshow-tx"><div class="bosshow-lbl">Как заспавнить босса</div>${esc(b.cond)}</div>
+      </div>`:'';
       const bossBlk=b?`<div class="bossblk">
         <div class="bosshd">
-          <div class="bosstitle"><span class="lbl">БОСС</span>${esc(b.name)}</div>
+          <div class="bosstitle"><span class="lbl">БОСС ЛОКАЦИИ</span>${esc(b.name)}</div>
           <div class="bossst">
             <span class="s"><b class="danger">${esc(b.atk)}</b><i>атака</i></span>
             <span class="s"><b class="safe">${esc(b['def'])}</b><i>защита</i></span>
           </div>
         </div>
-        ${b.cond?`<div class="bosstext">${esc(b.cond)}</div>`:''}
+        ${trigBlk}
         ${b.fight?`<div class="bosstext">${esc(b.fight)}</div>`:''}
         ${b.drop&&b.drop.length?`<div class="bossdrop">Добыча с босса</div>
         <div class="lootgrid">${b.drop.map(lootCard).join('')}</div>`:''}
@@ -683,7 +728,7 @@ function renderLocations(){
         <div class="lootgrid">${data.loot.map(lootCard).join('')}</div>
       </div>`;
     }
-    return `<div class="loccard" data-name="${esc(l.name.toLowerCase())}">${head}${body}</div>`;
+    return `<div class="loccard" data-name="${esc(l.name.toLowerCase())}${b?' '+esc(b.name.toLowerCase()):''}">${head}${body}</div>`;
   }).join('');
   const brows=DB.bosses.map(b=>`<tr data-name="${esc(b.name.toLowerCase())}">
     <td class="tname"><span class="dotr d5"></span>${esc(b.name)}</td>

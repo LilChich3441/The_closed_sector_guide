@@ -220,6 +220,26 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .cmp-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--acid);text-align:center;padding:2px 4px;font-family:'Saira Condensed',sans-serif;font-weight:600;border-left:1px solid var(--line);border-right:1px solid var(--line)}
 /* transport filter */
 .cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:16px}
+/* ── Лучший билд для локации ── */
+.bb-req{display:flex;flex-wrap:wrap;gap:8px;padding:10px 16px;align-items:center}
+.bb-req-item{font-size:0.92em;color:var(--text)}
+.bb-req-stim{font-size:0.82em;font-weight:600;color:#d97706;background:rgba(217,119,6,.15);padding:2px 8px;border-radius:4px;border:1px solid rgba(217,119,6,.4)}
+.bb-section-title{font-weight:700;padding:12px 16px 6px;color:var(--acid);font-size:0.88em;text-transform:uppercase;letter-spacing:.6px}
+.bb-build{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px 14px;background:var(--calc);margin:0 16px 4px;border-radius:8px;border:1px solid var(--line2)}
+.bb-plus{color:var(--muted);font-size:1.3em;font-weight:bold}
+.bb-item{display:flex;align-items:center;gap:8px;background:var(--bg2);padding:6px 10px;border-radius:6px}
+.bb-item img,.bb-item span:first-child{width:36px;height:36px;object-fit:contain;display:flex;align-items:center;justify-content:center}
+.bb-item-info{display:flex;flex-direction:column;gap:2px}
+.bb-item-name{font-size:0.83em;color:var(--muted)}
+.bb-item-stat{font-size:1.15em;font-weight:700;color:var(--title)}
+.bb-list{display:flex;flex-direction:column;gap:3px;padding:2px 16px 14px}
+.bb-opt{display:flex;align-items:center;gap:7px;padding:5px 9px;background:var(--bg2);border-radius:6px}
+.bb-opt img{width:26px;height:26px;object-fit:contain}
+.bb-opt>span:first-child{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;font-size:1.1em}
+.bb-opt-name{flex:1;font-size:0.86em;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+.bb-opt-stat{font-weight:700;color:var(--title);min-width:28px;text-align:right;font-size:0.9em}
+.bb-opt-sep{color:var(--muted);font-size:0.85em;padding:0 1px}
+.bb-opt-total{font-weight:700;color:#4ade80;min-width:50px;text-align:right;font-size:0.9em}
 .qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px}
 .qcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line2);padding:14px;display:flex;gap:14px;position:relative;transition:.15s;border-radius:6px}
 .qcard:hover{border-left-color:var(--acid);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.55),0 0 0 1px rgba(232,184,75,.08)}
@@ -439,6 +459,7 @@ let gearFilter={cat:'weapons',rar:0};
 let itemsFilter={transport:0};
 let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
+let bestFilter={loc:''};
 
 const TABS=[
   {id:'gear',label:'⚙ Снаряжение'},
@@ -565,6 +586,7 @@ function renderGear(){
     ['helmets','Шлемы',DB.helmets.length],
     ['sets','Комплекты',setGroups().length],
     ['compare','⚖ Сравнение',''],
+    ['best','🎯 Для локации',''],
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
 
@@ -649,6 +671,81 @@ function renderGear(){
     <div id="cmpOut"></div>`;
   }
 
+  // --- подраздел Для локации ---
+  if(gearFilter.cat==='best'){
+    const locs=DB.locations||[];
+    const curLoc=locs.find(l=>l.name===bestFilter.loc)||null;
+    let result='';
+    if(curLoc){
+      const la=parseInt(curLoc.atk)||0;
+      const defMatch=(curLoc.def||'').match(/(\d+)\s*\+\s*(\d+)/);
+      const defArmor=defMatch?parseInt(defMatch[1]):0;
+      const defHP=defMatch?parseInt(defMatch[2]):100;
+      const needStim=defHP>100;
+      // Подходящее оружие
+      const viableWpns=DB.weapons.filter(w=>(parseInt(w.stat)||0)>=la)
+        .sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0));
+      // Комбинации броня+шлем
+      const noArmor={name:'Без брони',stat:'0',icon:'',rar:0};
+      const noHelm={name:'Без шлема',stat:'0',icon:'',rar:0};
+      const combos=[];
+      for(const arm of [noArmor,...DB.armor]){
+        for(const hlm of [noHelm,...DB.helmets]){
+          const t=(parseInt(arm.stat)||0)+(parseInt(hlm.stat)||0);
+          if(t>=defArmor)combos.push({arm,hlm,total:t,surplus:t-defArmor});
+        }
+      }
+      combos.sort((a,b)=>a.surplus-b.surplus||(a.arm.rar-b.arm.rar)||(a.hlm.rar-b.hlm.rar));
+      const minWpn=viableWpns[0];
+      const minCombo=combos[0];
+      const ico=(icon,ph)=>{const s=icon?img(icon):'';return s?`<img src="${s}" class="gicon" alt="">`:`<span style="font-size:1.2em">${ph}</span>`;};
+      const buildItem=(it,ph)=>`<div class="bb-item">${ico(it.icon,ph)}<div class="bb-item-info"><span class="bb-item-name">${esc(it.name)}</span><span class="bb-item-stat">${it.stat||'0'}</span>${it.rar?`<span class="chip rar${it.rar}" style="font-size:0.68em;padding:1px 5px">${RARN[it.rar]||''}</span>`:''}</div></div>`;
+      result=`
+      <div class="bb-req">
+        <span class="bb-req-item">⚔ нужно <b>≥ ${la}</b> урона</span>
+        <span class="bb-req-item">🛡 нужно <b>≥ ${defArmor}</b> защиты</span>
+        <span class="bb-req-item">❤ <b>${defHP}</b> HP</span>
+        ${needStim?`<span class="bb-req-stim">⚠ Нужен стимулятор (+50 HP)</span>`:''}
+      </div>
+      ${(!viableWpns.length&&!combos.length)?`<div class="intro">В базе нет подходящего снаряжения для этой локации.</div>`:''}
+      ${(viableWpns.length&&combos.length)?`
+      <div class="bb-section-title">🎯 Минимальный билд</div>
+      <div class="bb-build">
+        ${buildItem(minWpn,'⚔')}
+        <div class="bb-plus">+</div>
+        ${buildItem(minCombo.arm,'🛡')}
+        <div class="bb-plus">+</div>
+        ${buildItem(minCombo.hlm,'⛑')}
+      </div>`:''}
+      ${viableWpns.length?`
+      <div class="bb-section-title">⚔ Оружие (нужно ≥ ${la} урона)</div>
+      <div class="bb-list">${viableWpns.map(w=>`
+        <div class="bb-opt">${ico(w.icon,'⚔')}<span class="bb-opt-name">${esc(w.name)}</span><span class="bb-opt-stat">${w.stat}</span><span class="chip rar${w.rar}" style="font-size:0.72em;padding:1px 6px">${RARN[w.rar]||''}</span></div>`).join('')}
+      </div>`:`<div class="intro muted" style="padding:8px 16px">Ни одно оружие в базе не достигает ${la} урона.</div>`}
+      ${combos.length?`
+      <div class="bb-section-title">🛡 Защита (нужно ≥ ${defArmor})<span style="font-size:0.8em;color:var(--muted);margin-left:8px">ближайшие к минимуму</span></div>
+      <div class="bb-list">${combos.slice(0,10).map(c=>`
+        <div class="bb-opt">${ico(c.arm.icon,'🛡')}<span class="bb-opt-name">${esc(c.arm.name)}</span><span class="bb-opt-stat">${c.arm.stat||0}</span><span class="bb-opt-sep">+</span>${ico(c.hlm.icon,'⛑')}<span class="bb-opt-name">${esc(c.hlm.name)}</span><span class="bb-opt-stat">${c.hlm.stat||0}</span><span class="bb-opt-total">= ${c.total}</span></div>`).join('')}
+      </div>`:`<div class="intro muted" style="padding:8px 16px">Ни одна комбинация брони не даёт ${defArmor} защиты.</div>`}`;
+    }
+    return `
+    ${gcCalc}
+    <div class="bar">
+      ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
+    </div>
+    <div class="intro" style="margin-top:0">Выбери локацию — сайт подберёт минимальное снаряжение для безопасного прохождения.</div>
+    <div style="padding:4px 16px 0">
+      <div class="calc-field" style="max-width:380px">
+        <label>Локация</label>
+        <select class="gsel" id="bbLoc" onchange="setBestLoc(this.value)" style="width:100%">
+          <option value="">— выбери локацию —</option>
+          ${locs.map(l=>`<option value="${esc(l.name)}" ${l.name===bestFilter.loc?'selected':''}>${esc(l.name)}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    ${result}`;
+  }
+
   let items=gearItems();
   if(gearFilter.rar)items=items.filter(x=>x.rar===gearFilter.rar);
   items.sort((a,b)=>(parseInt(b.stat)||0)-(parseInt(a.stat)||0)||(b.rar-a.rar));
@@ -702,6 +799,7 @@ function runCmp(){
 }
 function setCarsRar(r){carsFilter.rar=r;render();}
 function setCarsCargoFilt(c){carsFilter.cargo=c;render();}
+function setBestLoc(n){bestFilter.loc=n;render();}
 // ── Кастомный дропдаун с иконками ──
 function mkIconSel(id, opts, onch) {
   // opts: [{val, label, icon}]  onch: строка JS, вызываемая при выборе

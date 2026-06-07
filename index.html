@@ -405,7 +405,6 @@ function gearCard(it){
   const chips=[];
   chips.push(`<span class="chip rar${it.rar}">${RARN[it.rar]||it.rarName}</span>`);
   if(norep)chips.push(`<span class="chip norep">не чинится</span>`);
-  else if(it.mat)chips.push(`<span class="chip mat">починка ${esc(it.mat)} мат.</span>`);
   if(it.craft)chips.push(`<span class="chip craft">крафт ${esc(it.craft.replace(/[()]/g,''))}</span>`);
   if(/[Бб]осс/.test(it.note))chips.push(`<span class="chip boss">${esc(it.note)}</span>`);
   if(it.set)chips.push(`<span class="chip set">${esc(it.set)}</span>`);
@@ -429,7 +428,7 @@ function renderGear(){
   // sort by stat desc
   items.sort((a,b)=>(parseInt(b.stat)||0)-(parseInt(a.stat)||0));
   return `
-  <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>, но «не чинится» означает одноразовый предмет (боссовый или ивентовый). Крафт указывает, на каком уровне мастерской предмет можно скрафтить.</div>
+  <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: таким предметом можно пользоваться, пока его прочность не упадёт до 30%, после чего он ломается и восстановить его нельзя. Крафт указывает, на каком уровне мастерской предмет можно скрафтить.</div>
   <div class="bar">
     ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
     <span style="width:14px"></span>
@@ -439,7 +438,7 @@ function renderGear(){
   <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
   <div class="legend">
     Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
-    &nbsp;•&nbsp; <span class="chip norep">не чинится</span> — одноразовый предмет
+    &nbsp;•&nbsp; <span class="chip norep">не чинится</span> — нельзя починить; служит, пока прочность не упадёт до 30%
   </div>`;
 }
 function setGearCat(c){gearFilter.cat=c;render();}

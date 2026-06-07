@@ -18,17 +18,18 @@ html,body{background:var(--bg);color:var(--txt);font-family:'Saira',system-ui,sa
 body{
   background-color:var(--bg);
   background-image:
-    linear-gradient(rgba(232,184,75,.02) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(232,184,75,.02) 1px,transparent 1px),
-    radial-gradient(circle at 88% -8%,rgba(232,184,75,.12),transparent 46%),
-    radial-gradient(circle at 0% 100%,rgba(143,196,168,.06),transparent 44%);
-  background-size:48px 48px,48px 48px,100% 100%,100% 100%;
+    linear-gradient(rgba(232,184,75,.013) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(232,184,75,.013) 1px,transparent 1px),
+    radial-gradient(circle at 85% -5%,rgba(232,184,75,.09),transparent 50%),
+    radial-gradient(circle at 5% 100%,rgba(143,196,168,.05),transparent 45%);
+  background-size:64px 64px,64px 64px,100% 100%,100% 100%;
   padding:0 0 80px;
 }
 .wrap{max-width:1240px;margin:0 auto;padding:0 18px}
-header{padding:24px 18px 18px;position:relative;overflow:hidden;
+header{padding:24px 18px 20px;position:relative;overflow:hidden;
   border-bottom:1px solid var(--line);
-  background:linear-gradient(180deg,rgba(232,184,75,.04),transparent)}
+  background:linear-gradient(180deg,rgba(232,184,75,.06),transparent);
+  box-shadow:0 4px 20px rgba(0,0,0,.3)}
 header::before{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;
   background:repeating-linear-gradient(90deg,var(--acid) 0 22px,transparent 22px 34px);opacity:.55}
 header::after{content:'';position:absolute;top:14px;right:18px;width:64px;height:64px;
@@ -47,42 +48,37 @@ h1 b{display:block;font-size:12px;letter-spacing:7px;color:var(--acid);font-weig
   border-left:2px solid var(--line2);padding-left:14px}
 .search-wrap{max-width:1240px;margin:18px auto 0;padding:0 18px;position:relative}
 #globalSearch{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-family:inherit;
-  font-size:14px;padding:13px 16px 13px 40px;letter-spacing:.4px;
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%)}
+  font-size:14px;padding:13px 16px 13px 42px;letter-spacing:.4px;border-radius:8px}
 #globalSearch::placeholder{color:var(--dim)}
 #globalSearch:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 1px var(--acid),0 0 24px rgba(232,184,75,.14)}
 .search-wrap::before{content:'⌖';position:absolute;left:30px;top:50%;transform:translateY(-50%);color:var(--acid);font-size:16px;pointer-events:none}
-.tabs{display:flex;gap:2px;flex-wrap:wrap;margin:20px auto 0;max-width:1240px;padding:8px 18px 0;
-  position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--bg) 70%,transparent);
-  backdrop-filter:blur(6px)}
-.tab{background:var(--panel);border:1px solid var(--line);border-bottom:2px solid transparent;color:var(--dim);
-  padding:12px 22px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:15px;letter-spacing:1.5px;
-  font-weight:600;text-transform:uppercase;transition:.18s;position:relative}
-.tab:hover{color:var(--txt);background:var(--panel2)}
-.tab.on{background:var(--panel2);color:var(--acid);border-bottom-color:var(--acid)}
-.tab.on::after{content:'';position:absolute;top:6px;right:8px;width:5px;height:5px;background:var(--acid);border-radius:50%;box-shadow:0 0 8px var(--acid)}
-main{max-width:1240px;margin:0 auto;padding:0 18px}
+.tabs{display:flex;gap:0;flex-wrap:wrap;margin:20px auto 0;max-width:1240px;padding:0 18px;
+  position:sticky;top:0;z-index:50;background:var(--bg);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--dim);
+  padding:12px 16px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:.8px;
+  font-weight:600;text-transform:uppercase;transition:.18s;position:relative;border-radius:0;margin-bottom:-1px;white-space:nowrap}
+.tab:hover{color:var(--txt);background:rgba(232,184,75,.05)}
+.tab.on{color:var(--acid);border-bottom-color:var(--acid);background:rgba(232,184,75,.06)}
+.tab.on::after{display:none}
+main{max-width:1240px;margin:0 auto;padding:20px 18px 0}
 section{display:none;animation:fade .25s}
 section.on{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
-.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:18px 0 14px}
-.filter{background:var(--panel);border:1px solid var(--line);color:var(--dim);padding:8px 15px;
-  cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:1px;font-weight:600;
-  transition:.15s;text-transform:uppercase;
-  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)}
+.bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:16px 0 14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.filter{background:var(--panel);border:1px solid var(--line);color:var(--dim);padding:7px 16px;
+  cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:.8px;font-weight:600;
+  transition:.18s;text-transform:uppercase;border-radius:20px}
 .filter:hover{color:var(--txt);border-color:var(--line2);background:var(--panel2)}
-.filter.on{background:var(--acid);color:var(--bg);border-color:var(--acid);font-weight:700}
+.filter.on{background:var(--acid);color:var(--bg);border-color:var(--acid);font-weight:700;box-shadow:0 0 16px rgba(232,184,75,.28)}
 .cnt{margin-left:auto;color:var(--dim);font-size:12px;letter-spacing:1px;font-family:'Saira Condensed',sans-serif;text-transform:uppercase}
 .intro{color:var(--dim);font-size:13.5px;line-height:1.7;margin:18px 0;max-width:780px;
-  border-left:2px solid var(--acid2);padding-left:14px}
+  border-left:2px solid var(--acid2);padding:10px 14px;background:rgba(232,184,75,.03);border-radius:0 6px 6px 0}
 .intro b{color:var(--acid)}
 /* item grid */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:11px}
-.card{background:var(--panel);border:1px solid var(--line);border-left-width:3px;padding:14px 15px;transition:transform .18s cubic-bezier(.2,.7,.3,1),border-color .18s,box-shadow .18s;position:relative;
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
-.card::after{content:'';position:absolute;right:0;bottom:0;width:12px;height:12px;
-  background:var(--line);clip-path:polygon(100% 0,100% 100%,0 100%)}
-.card:hover{border-color:var(--acid);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.55),0 0 0 1px var(--acid)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-left-width:3px;padding:14px 15px;transition:transform .18s cubic-bezier(.2,.7,.3,1),border-color .18s,box-shadow .18s;position:relative;border-radius:6px}
+.card:hover{border-color:var(--acid);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.6),0 0 0 1px var(--acid),0 0 24px rgba(232,184,75,.1)}
 .card.rr1{border-left-color:var(--r1)}.card.rr2{border-left-color:var(--r2)}.card.rr3{border-left-color:var(--r3)}
 .card.rr4{border-left-color:var(--r4)}.card.rr5{border-left-color:var(--r5)}
 .card.rr1 .statline{border-left-color:var(--r1)}.card.rr2 .statline{border-left-color:var(--r2)}
@@ -92,8 +88,7 @@ section.on{display:block}
 .cnamerow .cname{margin-bottom:0}
 .gicon{width:44px;height:44px;flex:none;object-fit:cover;background:var(--bg);border:1px solid var(--line);border-radius:3px}
 .statline{display:flex;align-items:center;gap:10px;margin-bottom:10px;background:var(--bg2);
-  border-left:3px solid var(--line2);padding:6px 12px;
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%)}
+  border-left:3px solid var(--line2);padding:6px 12px;border-radius:0 4px 4px 0}
 .bignum{font-family:'Saira Condensed',sans-serif;font-size:38px;font-weight:700;line-height:.9;text-shadow:0 0 18px rgba(0,0,0,.4)}
 .bignum.dmg{color:var(--hot)}.bignum.arm{color:var(--steel)}.bignum.spd{color:var(--acid)}
 .statlbl{font-size:11px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;font-family:'Saira Condensed',sans-serif}
@@ -110,23 +105,22 @@ section.on{display:block}
 .chip.boss{background:rgba(232,184,75,.14);color:var(--gold);border-color:rgba(232,184,75,.3)}
 .chip.set{background:rgba(179,154,208,.12);color:var(--r3);border-color:rgba(179,154,208,.26)}
 /* D.I.S.S. sets */
-.setwrap{margin:4px 0 22px;border:1px solid rgba(179,154,208,.3);background:linear-gradient(180deg,rgba(179,154,208,.06),transparent);padding:14px 14px 16px;border-radius:5px}
-.setttl{font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1.5px;text-transform:uppercase;color:var(--r3);font-weight:700;margin-bottom:12px}
-.setttl span{display:block;font-size:11.5px;letter-spacing:.3px;text-transform:none;color:var(--dim);font-weight:400;margin-top:3px}
-.setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.setbox{border:1px solid var(--line);border-top:3px solid var(--r3);background:var(--panel);padding:10px 11px 12px;border-radius:4px}
+.setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.setbox{border:1px solid var(--line);border-top:3px solid var(--r3);background:var(--panel);padding:11px 12px 13px;border-radius:8px}
 .setbox.rr4{border-top-color:var(--r4)}.setbox.rr5{border-top-color:var(--r5)}
-.sethead{font-family:'Saira Condensed',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:9px;opacity:.85}
+.sethead{display:flex;align-items:center;gap:8px;font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:10px}
+.setrar{margin-left:auto}
 .setbox .grid{grid-template-columns:1fr;gap:8px}
 .chip.mat{background:var(--panel2);color:var(--dim);border-color:var(--line)}
-.note{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.55;font-style:italic}
+.note{font-size:14.5px;color:var(--dim);margin-top:8px;line-height:1.55;font-style:italic}
 /* tables */
 .tbl{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel);border:1px solid var(--line)}
-.tbl th{background:var(--panel2);color:var(--acid);text-align:left;padding:11px 14px;font-family:'Saira Condensed',sans-serif;
-  letter-spacing:1.2px;text-transform:uppercase;font-size:12px;font-weight:600;border-bottom:2px solid var(--line2)}
-.tbl td{padding:11px 14px;border-bottom:1px solid #21282a;vertical-align:top}
+.tbl th{background:var(--panel2);color:var(--acid);text-align:left;padding:12px 16px;font-family:'Saira Condensed',sans-serif;
+  letter-spacing:1.2px;text-transform:uppercase;font-size:11px;font-weight:700;border-bottom:1px solid var(--line)}
+.tbl td{padding:12px 16px;border-bottom:1px solid rgba(66,59,44,.5);vertical-align:top}
+.tbl tbody tr:last-child td{border-bottom:none}
 .tbl tbody tr{transition:.1s}
-.tbl tr:hover td{background:rgba(232,184,75,.05)}
+.tbl tr:hover td{background:rgba(232,184,75,.04)}
 .tbl .num{text-align:right;font-variant-numeric:tabular-nums}
 .tname{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;color:var(--txt)}
 .carname{display:flex;align-items:center;gap:10px}
@@ -139,7 +133,7 @@ section.on{display:block}
 .gold{color:var(--gold)}
 .muted{color:var(--dim)}
 /* quests */
-.quest{background:var(--panel);border:1px solid var(--line);border-radius:4px;margin-bottom:14px;overflow:hidden}
+.quest{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:14px;overflow:hidden}
 .qhead{background:var(--panel2);padding:13px 16px;font-family:'Saira Condensed',sans-serif;font-size:20px;letter-spacing:2px;
   color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
 .qhead .qn{margin-left:auto;font-size:11px;color:var(--dim);letter-spacing:1px}
@@ -153,23 +147,21 @@ section.on{display:block}
 /* ranks/progress columns */
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media(max-width:780px){.cols{grid-template-columns:1fr}.tagline{display:none}.bignum{font-size:24px}}
-h2.sec{font-family:'Saira Condensed',sans-serif;font-size:15px;letter-spacing:3px;color:var(--acid);text-transform:uppercase;margin:8px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-.legend{font-size:10.5px;color:var(--dim);margin:14px 0;line-height:1.8}
+h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3px;color:var(--acid);text-transform:uppercase;margin:8px 0 12px;padding:6px 12px;border-left:2px solid var(--acid);background:var(--panel);border-radius:0 4px 4px 0}
+.legend{font-size:11px;color:var(--dim);margin:16px 0;line-height:1.8;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
 .legend .chip{display:inline-block;margin:0 2px}
 .hidden{display:none!important}
 /* repair calculator */
-.calc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);margin:0 0 18px;
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
-.calc-head{background:var(--panel2);padding:11px 16px;font-family:'Saira Condensed',sans-serif;font-size:17px;
-  font-weight:600;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line)}
+.calc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);margin:0 0 18px;border-radius:8px;overflow:hidden}
+.calc-head{background:var(--panel2);padding:12px 16px;font-family:'Saira Condensed',sans-serif;font-size:15px;
+  font-weight:600;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
 .calc-body{padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
 .calc-field{display:flex;flex-direction:column;gap:6px}
 .calc-field label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-family:'Saira Condensed',sans-serif;font-weight:600}
 .calc-field .gsel{min-width:220px}
 .cinput{background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-family:'Saira Condensed',sans-serif;
-  font-size:18px;font-weight:600;padding:7px 12px;width:110px;
-  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)}
-.cinput:focus{outline:none;border-color:var(--acid)}
+  font-size:18px;font-weight:600;padding:7px 12px;width:110px;border-radius:6px}
+.cinput:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.18)}
 .calc-out{margin-left:auto;text-align:right;min-width:200px}
 .cbig{font-family:'Saira Condensed',sans-serif;font-size:38px;font-weight:700;color:var(--acid);line-height:1}
 .cbig span{font-size:16px;color:var(--dim);font-weight:600}
@@ -180,17 +172,14 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:15px;letter-spacing:3p
 @media(max-width:680px){.calc-body{flex-direction:column;align-items:stretch}.calc-out{margin-left:0;text-align:left}.calc-field .gsel,.cinput{width:100%}}
 /* story quests */
 .gsel{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-family:'Saira Condensed',sans-serif;font-size:13px;
-  padding:8px 13px;letter-spacing:.5px;cursor:pointer;text-transform:uppercase;font-weight:600;
-  clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)}
-.gsel:focus{outline:none;border-color:var(--acid)}
-.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:11px}
-.qcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line2);padding:14px;display:flex;gap:14px;position:relative;transition:.15s;
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
-.qcard:hover{border-left-color:var(--acid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+  padding:8px 13px;letter-spacing:.5px;cursor:pointer;text-transform:uppercase;font-weight:600;border-radius:6px}
+.gsel:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.15)}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px}
+.qcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line2);padding:14px;display:flex;gap:14px;position:relative;transition:.15s;border-radius:6px}
+.qcard:hover{border-left-color:var(--acid);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.55),0 0 0 1px rgba(232,184,75,.08)}
 .qcard.isopt{border-left-style:dashed;opacity:.94}
 .qleft{display:flex;flex-direction:column;align-items:center;gap:6px;flex:none;width:72px}
-.qface{width:72px;height:72px;object-fit:cover;background:var(--bg2);border:1px solid var(--line2);
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%)}
+.qface{width:72px;height:72px;object-fit:cover;background:var(--bg2);border:1px solid var(--line2);border-radius:6px}
 .qface.ph{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:30px;font-family:'Saira Condensed',sans-serif}
 .qgiver{font-size:12px;color:var(--steel);letter-spacing:.5px;text-align:center;line-height:1.2;font-family:'Saira Condensed',sans-serif;font-weight:600;text-transform:uppercase}
 .qbody{flex:1;min-width:0}
@@ -209,8 +198,7 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:15px;letter-spacing:3p
 .guide-doc{max-width:840px;margin:14px auto 0}
 .ghdr{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:20px}
 .gtag{display:inline-block;background:var(--acid);color:var(--bg);font-family:'Saira Condensed',sans-serif;font-size:12px;
-  font-weight:700;letter-spacing:2px;padding:4px 12px;margin-bottom:10px;
-  clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px)}
+  font-weight:700;letter-spacing:2px;padding:4px 12px;margin-bottom:10px;border-radius:3px}
 .gtitle{font-family:'Saira Condensed',sans-serif;font-size:32px;font-weight:700;letter-spacing:.5px;color:var(--txt);line-height:1.03;text-transform:uppercase}
 .gsub{color:var(--dim);font-size:13px;margin-top:6px;letter-spacing:.5px}
 .gp{font-size:15px;line-height:1.7;color:var(--txt);margin:14px 0}
@@ -221,7 +209,7 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:15px;letter-spacing:3p
   text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:7px}
 .grules{display:flex;flex-direction:column;gap:8px;margin:14px 0}
 .grule{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);
-  border-radius:4px;padding:13px 15px;font-size:15px;line-height:1.4}
+  border-radius:8px;padding:13px 15px;font-size:15px;line-height:1.4}
 .grule b{color:var(--acid)}
 .grn{font-family:'Saira Condensed',sans-serif;font-size:22px;font-weight:700;color:#0a0c08;background:var(--acid);
   width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
@@ -233,17 +221,17 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:15px;letter-spacing:3p
 .gimg.sm img{width:100%}
 .gimg.sm span{font-size:11px;color:var(--dim);padding:8px 10px;line-height:1.4;border-top:1px solid var(--line)}
 .gspecs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
-.gspec{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:16px;text-align:center}
+.gspec{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;text-align:center}
 .gsn{font-family:'Saira Condensed',sans-serif;font-size:42px;font-weight:700;color:var(--acid);line-height:1}
 .gsl{font-size:13px;color:var(--txt);margin-top:8px;font-family:'Saira Condensed',sans-serif;letter-spacing:.5px}
 .gsl span{display:block;color:var(--dim);font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0}
 .gcards{display:flex;flex-direction:column;gap:12px;margin:14px 0}
-.gmech{background:var(--panel);border:1px solid var(--line);border-left-width:3px;border-left-color:var(--acid2);border-radius:5px;padding:16px}
+.gmech{background:var(--panel);border:1px solid var(--line);border-left-width:3px;border-left-color:var(--acid2);border-radius:8px;padding:16px}
 .gmh{font-family:'Saira Condensed',sans-serif;font-size:19px;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;margin-bottom:8px}
 .gmech p{font-size:14px;line-height:1.65;color:var(--txt)}
 .gmech p b{color:var(--gold)}
-.gformula{margin-top:12px;background:#070905;border:1px dashed var(--line);border-radius:4px;padding:10px 14px;
-  font-size:14px;color:var(--acid);text-align:center;letter-spacing:.5px}
+.gformula{margin-top:12px;background:#070905;border:1px dashed var(--line2);border-radius:6px;padding:12px 16px;
+  font-size:14px;color:var(--acid);text-align:center;letter-spacing:.5px;font-family:'Saira Condensed',sans-serif}
 .gsplit{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .gok,.gbad{font-size:12.5px;line-height:1.5;padding:11px 13px;border-radius:4px}
 .gok{background:rgba(232,184,75,.08);border:1px solid var(--acid2);color:var(--txt)}
@@ -265,12 +253,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 #toTop:hover{background:var(--txt)}
 #toTop.show{display:flex}
 /* ===== LOCATIONS + LOOT ===== */
-.loclist{display:flex;flex-direction:column;gap:10px}
-.loccard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid2);
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%)}
+.loclist{display:flex;flex-direction:column;gap:8px}
+.loccard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid2);border-radius:6px;overflow:hidden}
 .locrow{display:flex;align-items:center;gap:16px;padding:14px 16px;flex-wrap:wrap;transition:background .15s}
 .locrow:hover{background:var(--panel2)}
-.locname{font-family:'Saira Condensed',sans-serif;font-size:21px;font-weight:700;letter-spacing:.5px;color:var(--txt);display:flex;align-items:center;gap:10px;flex:1;min-width:180px}
+.locname{font-family:'Saira Condensed',sans-serif;font-size:21px;font-weight:700;letter-spacing:.5px;color:var(--txt);display:flex;align-items:center;gap:10px;flex:1;min-width:180px;flex-wrap:wrap}
 .locarrow{color:var(--acid);font-size:13px;transition:transform .2s;display:inline-block;width:14px}
 .locarrow.dim{color:var(--line2)}
 .loctag{font-family:'Saira',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
@@ -281,11 +268,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 .lst i{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-style:normal;margin-top:2px}
 .locloot{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 16px}
 .locloot.open{max-height:6000px;padding:6px 16px 18px}
-.lootsec{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--acid);margin:16px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-.lootgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
-.lootitem{display:flex;gap:10px;background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--line2);padding:9px 10px;transition:border-color .16s,transform .16s,box-shadow .16s}
-.lootitem:hover{border-color:var(--line2);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.lootsec{font-family:'Saira Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);margin:18px 0 10px;display:flex;align-items:center;gap:10px}
+.lootsec::before,.lootsec::after{content:'';flex:1;height:1px;background:var(--line)}
+.lootgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.lootitem{display:flex;gap:10px;background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--line2);padding:9px 10px;transition:border-color .16s,transform .16s,box-shadow .16s;border-radius:4px}
+.lootitem:hover{border-color:var(--acid2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .lootitem.rr1{border-left-color:var(--r1)}.lootitem.rr2{border-left-color:var(--r2)}.lootitem.rr3{border-left-color:var(--r3)}
 .lootitem.rr4{border-left-color:var(--r4)}.lootitem.rr5{border-left-color:var(--r5)}
 .looticon{width:48px;height:48px;object-fit:cover;background:var(--bg);border:1px solid var(--line);flex:none}
@@ -294,17 +282,29 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 .lstat{font-size:11px;color:var(--dim);margin-bottom:4px}
 .lstat b{font-family:'Saira Condensed',sans-serif;font-size:16px;color:var(--hot)}
 .lootitem .chips{margin-top:3px}
-.lootdesc{font-size:12.5px;color:var(--dim);line-height:1.5;margin-top:6px}
-.bossblk{margin:16px 0 4px;border:1px solid var(--line);border-left:3px solid var(--r5);background:rgba(255,122,69,.05);padding:12px 14px}
-.bosshd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
-.bosstitle{font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot)}
-.bosstitle .lbl{font-size:11px;color:var(--dim);letter-spacing:1.5px;margin-right:6px}
-.bossst{display:flex;gap:16px;margin-left:auto}
-.bossst .s b{font-family:'Saira Condensed',sans-serif;font-size:18px;font-weight:700}
+.lootdesc{font-size:14px;color:var(--dim);line-height:1.5;margin-top:6px}
+.bossblk{margin:18px 0 4px;border:1px solid var(--line);border-left:3px solid var(--r5);background:rgba(255,122,69,.06);padding:14px 16px;border-radius:6px}
+.bosshd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.bosstitle{font-family:'Saira Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot)}
+.bosstitle .lbl{display:block;font-size:11px;color:var(--dim);letter-spacing:1.5px;margin-bottom:1px;font-weight:600}
+.bossst{display:flex;gap:18px;margin-left:auto}
+.bossst .s b{font-family:'Saira Condensed',sans-serif;font-size:20px;font-weight:700}
 .bossst .s i{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-style:normal;margin-left:5px}
-.bosstext{font-size:11px;color:var(--dim);line-height:1.5;margin:6px 0}
+/* акцентный блок: как заспавнить босса */
+.bosshow{display:flex;gap:12px;align-items:center;background:rgba(255,122,69,.1);border:1px solid rgba(255,122,69,.28);border-radius:6px;padding:11px 13px;margin:10px 0}
+.bosshow-ic{width:52px;height:52px;flex:none;object-fit:cover;background:var(--bg);border:1px solid var(--r5);border-radius:4px}
+.bosshow-tx{font-size:14px;line-height:1.5;color:var(--txt)}
+.bosshow-lbl{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot);margin-bottom:3px}
+.bosstext{font-size:13px;color:var(--dim);line-height:1.55;margin:8px 0}
 .bosstext b{color:var(--txt);font-weight:600}
-.bossdrop{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--r5);margin:12px 0 8px}
+.bossdrop{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--r5);margin:14px 0 8px}
+/* бейдж босса в строке локации */
+.locboss{display:inline-flex;align-items:baseline;gap:7px;font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.4px;line-height:1.3;
+  background:rgba(255,122,69,.12);color:var(--hot);border:1px solid rgba(255,122,69,.3);border-radius:4px;padding:4px 10px;white-space:normal}
+.locboss i{font-size:9px;font-style:normal;letter-spacing:1.5px;color:var(--r5);font-weight:700;flex:none}
+.locboss b{font-weight:700}
+.locboss-need{font-size:11px;font-weight:600;letter-spacing:.3px;color:var(--dim);text-transform:none}
+.locboss-need::before{content:'· ';color:var(--r5)}
 /* ===== MOBILE ===== */
 @media(max-width:860px){
   .tagline{display:none}
@@ -358,9 +358,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   .calc-field .gsel,.cinput{width:100%}
   #toTop{right:14px;bottom:14px;width:52px;height:52px}
 }
-footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;margin-top:48px;padding-top:18px;
+footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;margin-top:48px;padding:20px 18px 24px;
   text-transform:uppercase;font-family:'Saira Condensed',sans-serif;
-  border-top:1px solid var(--line);max-width:1240px;margin-left:auto;margin-right:auto;padding-left:18px;padding-right:18px}
+  border-top:1px solid var(--line);max-width:1240px;margin-left:auto;margin-right:auto;
+  background:linear-gradient(0deg,rgba(232,184,75,.025),transparent)}
 </style>
 </head>
 <body>
@@ -389,15 +390,17 @@ function img(k){return (k&&typeof IMG!=='undefined'&&IMG[k])?IMG[k]:'';}
 
 let activeTab='gear';
 let gearFilter={cat:'weapons',rar:0};
+let itemsFilter={transport:0};
 
 const TABS=[
-  {id:'gear',label:'Каталог'},
-  {id:'cars',label:'Транспорт'},
-  {id:'story',label:'Задания'},
-  {id:'quests',label:'Контракты'},
-  {id:'locations',label:'Локации и лут'},
-  {id:'guides',label:'Гайды'},
-  {id:'progress',label:'Опыт / Звания'},
+  {id:'gear',label:'⚙ Снаряжение'},
+  {id:'items',label:'📦 Предметы'},
+  {id:'cars',label:'🚗 Транспорт'},
+  {id:'story',label:'📋 Задания'},
+  {id:'quests',label:'🎯 Контракты'},
+  {id:'locations',label:'📍 Локации'},
+  {id:'guides',label:'📖 Гайды'},
+  {id:'progress',label:'⭐ Прогресс'},
 ];
 let storyFilter={chap:1,giver:'',opt:false};
 
@@ -427,6 +430,7 @@ function allLootItems(){
     (bl.loot||[]).forEach(push);
     if(bl.boss&&bl.boss.drop)bl.boss.drop.forEach(push);
   }
+  (DB.bags||[]).forEach(push);
   _lootCache=[...seen.values()];
   return _lootCache;
 }
@@ -436,6 +440,8 @@ function gearNameSet(){
   if(_gearNames)return _gearNames;
   _gearNames=new Set();
   ['weapons','armor','helmets'].forEach(a=>DB[a].forEach(x=>_gearNames.add(norm(x.name))));
+  // снаряжение, которое есть только в дропе боссов (не в массивах)
+  ['куртка предателя','шапка предателя'].forEach(n=>_gearNames.add(n));
   return _gearNames;
 }
 function lootCatOf(it){
@@ -459,6 +465,25 @@ function gearItems(){
                klbl:x.statlbl||'', fromLoot:true}));
   }
   return [];
+}
+
+// Собирает комплекты D.I.S.S. из всех массивов снаряжения, сгруппированные по set
+function setGroups(){
+  const all=[
+    ...DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'})),
+    ...DB.armor.map(x=>({...x,kind:'arm',klbl:'Защита'})),
+    ...DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'})),
+  ].filter(x=>x.set&&/D\.I\.S\.S/i.test(x.set));
+  const groups={};
+  all.forEach(x=>{(groups[x.set]=groups[x.set]||[]).push(x);});
+  // порядок частей внутри сета: перчатки → бронекостюм → шлем
+  const part=n=>/перчатк/i.test(n)?0:/бронекостюм/i.test(n)?1:2;
+  Object.values(groups).forEach(g=>g.sort((a,b)=>part(a.name)-part(b.name)));
+  // порядок сетов: базовый → Mk2 → Mk3
+  const order=Object.keys(groups).sort((a,b)=>{
+    const r=v=>v.includes('Mk3')?3:v.includes('Mk2')?2:1; return r(a)-r(b);
+  });
+  return order.map(name=>({name, rar:groups[name][0].rar, parts:groups[name]}));
 }
 function gearCard(it){
   const norep=/Не ремонт/i.test(it.mat||'');
@@ -489,59 +514,88 @@ function renderGear(){
     ['weapons','Оружие',DB.weapons.length],
     ['armor','Броня',DB.armor.length],
     ['helmets','Шлемы',DB.helmets.length],
-    ['bags','Рюкзаки',allLootItems().filter(i=>lootCatOf(i)==='bags').length],
-    ['consum','Расходники',allLootItems().filter(i=>lootCatOf(i)==='consum').length],
-    ['items','Предметы',allLootItems().filter(i=>lootCatOf(i)==='items').length],
+    ['sets','Комплекты',setGroups().length],
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
-  const isGear=['weapons','armor','helmets'].includes(gearFilter.cat);
+
+  const gcCalc=`
+  <div class="calc">
+    <div class="calc-head">⌖ Калькулятор снаряжения</div>
+    <div class="calc-body" style="flex-wrap:wrap;gap:14px">
+      <div class="calc-field">
+        <label>Оружие</label>
+        <select class="gsel" id="gcWpn" onchange="runGearCalc()" style="min-width:200px">
+          <option value="">— без оружия —</option>
+          ${DB.weapons.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(w=>`<option value="${esc(w.name)}">${esc(w.name)} (${esc(w.stat)})</option>`).join('')}
+        </select>
+      </div>
+      <div class="calc-field">
+        <label>Броня</label>
+        <select class="gsel" id="gcArm" onchange="runGearCalc()" style="min-width:180px">
+          <option value="">— без брони —</option>
+          ${DB.armor.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(a=>`<option value="${esc(a.name)}">${esc(a.name)} (${esc(a.stat)})</option>`).join('')}
+        </select>
+      </div>
+      <div class="calc-field">
+        <label>Шлем</label>
+        <select class="gsel" id="gcHlm" onchange="runGearCalc()" style="min-width:160px">
+          <option value="">— без шлема —</option>
+          ${DB.helmets.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(h=>`<option value="${esc(h.name)}">${esc(h.name)} (${esc(h.stat)})</option>`).join('')}
+        </select>
+      </div>
+      <div class="calc-field">
+        <label>Расходник (+атака)</label>
+        <select class="gsel" id="gcCon" onchange="runGearCalc()" style="min-width:160px">
+          <option value="0">— без расходника —</option>
+          <option value="7">РТД-11 (+7)</option>
+          <option value="14">Г1 (+14)</option>
+          <option value="21">Г2 (+21)</option>
+          <option value="33">РПОГ (+33)</option>
+        </select>
+      </div>
+    </div>
+    <div id="gcResult" style="padding:0 16px 16px"></div>
+  </div>`;
+
+  // --- подраздел Комплекты ---
+  if(gearFilter.cat==='sets'){
+    let sets=setGroups();
+    if(gearFilter.rar)sets=sets.filter(s=>s.rar===gearFilter.rar);
+    const setsHtml=`<div class="setrow">${sets.map(s=>`
+      <div class="setbox rr${s.rar}">
+        <div class="sethead">${esc(s.name.replace(/^\(\d+\)\s*/,''))}
+          <span class="setrar chip rar${s.rar}">${RARN[s.rar]||''}</span></div>
+        <div class="grid">${s.parts.map(gearCard).join('')}</div>
+      </div>`).join('')}</div>`;
+    return `
+    ${gcCalc}
+    <div class="intro"><b>Комплекты D.I.S.S.</b> — броня из трёх частей: перчатки (урон), бронекостюм и шлем (защита). Здесь видны полные сеты целиком по уровням улучшения Mk1 → Mk2 → Mk3. Эти же предметы есть и в разделах «Оружие», «Броня», «Шлемы».</div>
+    <div class="bar">
+      ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
+      <span style="width:14px"></span>
+      ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
+      <span class="cnt">${sets.length} комплект(ов)</span>
+    </div>
+    ${setsHtml}
+    <div class="legend">
+      Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
+    </div>`;
+  }
+
   let items=gearItems();
   if(gearFilter.rar)items=items.filter(x=>x.rar===gearFilter.rar);
   items.sort((a,b)=>(parseInt(b.stat)||0)-(parseInt(a.stat)||0)||(b.rar-a.rar));
 
-  // Группировка комплектов D.I.S.S. (только в разделах снаряжения)
-  let gridHtml;
-  const setItems=items.filter(x=>x.set&&/D\.I\.S\.S/i.test(x.set));
-  if(isGear && setItems.length){
-    const rest=items.filter(x=>!(x.set&&/D\.I\.S\.S/i.test(x.set)));
-    // сгруппировать по названию комплекта
-    const groups={};
-    setItems.forEach(x=>{(groups[x.set]=groups[x.set]||[]).push(x);});
-    const order=Object.keys(groups).sort((a,b)=>{
-      const r=v=>v.includes('Mk3')?3:v.includes('Mk2')?2:1; return r(a)-r(b);
-    });
-    const setsBlk=`<div class="setwrap">
-      <div class="setttl">Комплекты D.I.S.S. <span>собери все 3 части — перчатки, бронекостюм, шлем</span></div>
-      <div class="setrow">${order.map(name=>{
-        const rar=groups[name][0].rar;
-        return `<div class="setbox rr${rar}">
-          <div class="sethead">${esc(name.replace(/^\(\d+\)\s*/,''))}</div>
-          <div class="grid">${groups[name].map(gearCard).join('')}</div>
-        </div>`;
-      }).join('')}</div>
-    </div>`;
-    gridHtml = setsBlk + `<div class="grid" id="gearGrid">${rest.map(gearCard).join('')}</div>`;
-  } else {
-    gridHtml = `<div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>`;
-  }
-
-  const intro = isGear
-    ? `Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания.`
-    : gearFilter.cat==='consum'
-    ? `<b>Расходники</b> кладутся в рюкзак исполнителя и тратятся в рейде: аптечки восстанавливают HP, стимулятор усиливает броню, гранаты и взрывчатка добавляют урон. Если показателей не хватило — расходник теряется в бою.`
-    : gearFilter.cat==='bags'
-    ? `<b>Рюкзаки</b> увеличивают число предметов, которые исполнитель берёт в рейд. Чем вместительнее — тем больше расходников и добычи можно унести.`
-    : `<b>Предметы</b> — весь остальной лут сектора: квестовые вещи, материалы для крафта и ремонта, ценности и электроника. Транспорт и снаряжение вынесены в отдельные вкладки.`;
-
   return `
-  <div class="intro">${intro}</div>
+  ${gcCalc}
+  <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания. Части комплектов D.I.S.S. собраны целиком во вкладке «Комплекты».</div>
   <div class="bar">
     ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
     <span style="width:14px"></span>
     ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
     <span class="cnt">${items.length} шт.</span>
   </div>
-  ${gridHtml}
+  <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
   <div class="legend">
     Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
     &nbsp;•&nbsp; <span class="chip norep">не чинится</span> — нельзя починить; служит, пока прочность не упадёт до 30%
@@ -549,6 +603,70 @@ function renderGear(){
 }
 function setGearCat(c){gearFilter.cat=c;gearFilter.rar=0;render();}
 function setGearRar(r){gearFilter.rar=r;render();}
+function runGearCalc(){
+  const wName=document.getElementById('gcWpn')?.value;
+  const aName=document.getElementById('gcArm')?.value;
+  const hName=document.getElementById('gcHlm')?.value;
+  const conBonus=parseInt(document.getElementById('gcCon')?.value)||0;
+  const w=DB.weapons.find(x=>x.name===wName);
+  const a=DB.armor.find(x=>x.name===aName);
+  const h=DB.helmets.find(x=>x.name===hName);
+  const atk=(parseInt(w?.stat)||0)+conBonus;
+  const def=(parseInt(a?.stat)||0)+(parseInt(h?.stat)||0);
+  const out=document.getElementById('gcResult');
+  if(!out)return;
+  if(!w&&!a&&!h&&!conBonus){out.innerHTML='';return;}
+  const locRows=DB.locations.map(l=>{
+    const la=parseInt(l.atk)||0;
+    const ld=parseInt((l.def||'').match(/^(\d+)/)?.[1])||0;
+    const okAtk=atk>=la, okDef=def>=ld;
+    const ok=okAtk&&okDef;
+    const miss=[];
+    if(!okAtk)miss.push(`атака: нужно ${la}, есть ${atk}`);
+    if(!okDef)miss.push(`броня: нужно ${ld}, есть ${def}`);
+    return `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px">
+      <span style="font-size:15px">${ok?'✅':'❌'}</span>
+      <span style="font-family:'Saira Condensed',sans-serif;font-weight:600;color:var(--txt);min-width:220px">${esc(l.name)}</span>
+      <span style="color:var(--dim);font-size:12px">${ok?`<span class="safe">подходит</span>`:miss.map(m=>`<span class="danger">${esc(m)}</span>`).join(' / ')}</span>
+    </div>`;
+  }).join('');
+  out.innerHTML=`
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin:12px 0 14px">
+      <div style="text-align:center"><div class="bignum dmg">${atk}</div><div class="statlbl">атака</div></div>
+      <div style="text-align:center"><div class="bignum arm">${def}</div><div class="statlbl">защита</div></div>
+      <div style="color:var(--dim);font-size:12px;align-self:flex-end;padding-bottom:4px">(HP базовые 100 не учтены)</div>
+    </div>
+    ${locRows}`;
+}
+
+// ---------- ПРЕДМЕТЫ ----------
+function renderItems(){
+  const trs=[
+    [0,'Все'],
+    [1,'Пешком'],
+    [2,'На машине'],
+  ];
+  const all=allLootItems().filter(it=>{
+    const c=lootCatOf(it);
+    return c==='bags'||c==='consum'||c==='items';
+  }).map(x=>({...x, rarName:RARN[x.rar]||'', kind:x.statlbl==='Урон'?'dmg':'arm', klbl:x.statlbl||'', fromLoot:true}));
+  let list=all;
+  if(itemsFilter.transport===1)list=all.filter(x=>!x.heavy);
+  if(itemsFilter.transport===2)list=all.filter(x=>x.heavy);
+  list.sort((a,b)=>(b.rar-a.rar)||(parseInt(b.stat)||0)-(parseInt(a.stat)||0));
+  return `
+  <div class="intro"><b>Предметы</b> — весь лут сектора кроме снаряжения: квестовые вещи, материалы, ценности, электроника, рюкзаки и расходники. <b>Пешком</b> — можно унести без транспорта. <b>На машине</b> — нужна машина с грузом.</div>
+  <div class="bar">
+    ${trs.map(t=>`<button class="filter ${itemsFilter.transport===t[0]?'on':''}" onclick="setItemsTransport(${t[0]})">${t[1]}</button>`).join('')}
+    <span class="cnt">${list.length} шт.</span>
+  </div>
+  <div class="grid">${list.map(gearCard).join('')}</div>
+  <div class="legend">
+    Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
+    &nbsp;•&nbsp; <span class="chip norep">нужна машина</span> — нельзя унести без транспорта
+  </div>`;
+}
+function setItemsTransport(t){itemsFilter.transport=t;render();}
 
 // ---------- CARS ----------
 function cargoLabel(c){
@@ -557,7 +675,7 @@ function cargoLabel(c){
 }
 function renderCars(){
   const carIcons={};
-  allLootItems().forEach(it=>{ if(it.statlbl==='Скорость'&&it.icon) carIcons[norm(it.name)]=it.icon; });
+  allLootItems().forEach(it=>{ if(it.icon&&(it.statlbl==='Скорость'||/эвакуатор/i.test(it.name))) carIcons[norm(it.name)]=it.icon; });
   const rows=DB.cars.slice().sort((a,b)=>(parseInt(b.speed)||0)-(parseInt(a.speed)||0)).map(c=>{
     const cost=c.repCost?`${esc(c.repCost)} мат/1%`:'<span class="muted">нет данных</span>';
     const rep=c.repairable?cost:'<span class="danger">не чинится</span>';
@@ -580,9 +698,12 @@ function renderCars(){
     <div class="calc-body">
       <div class="calc-field">
         <label>Машина</label>
-        <select class="gsel" id="calcCar" onchange="runCalc()">
-          ${DB.cars.filter(c=>c.repairable&&c.repCost).map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join('')}
-        </select>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img id="calcCarIcon" style="width:44px;height:44px;object-fit:cover;background:var(--bg);border:1px solid var(--line);border-radius:3px;flex:none;display:none" alt="">
+          <select class="gsel" id="calcCar" onchange="runCalc()">
+            ${DB.cars.filter(c=>c.repairable&&c.repCost).map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join('')}
+          </select>
+        </div>
       </div>
       <div class="calc-field">
         <label>Текущая прочность, %</label>
@@ -604,6 +725,12 @@ function renderCars(){
 function runCalc(){
   const car=DB.cars.find(c=>c.name===document.getElementById('calcCar').value);
   if(!car){return;}
+  // update car icon
+  const carIcons2={};
+  allLootItems().forEach(it=>{ if(it.icon&&(it.statlbl==='Скорость'||/эвакуатор/i.test(it.name))) carIcons2[norm(it.name)]=it.icon; });
+  const iconKey=car.icon||carIcons2[norm(car.name)];
+  const iconEl=document.getElementById('calcCarIcon');
+  if(iconEl){const src=iconKey&&img(iconKey);iconEl.src=src||'';iconEl.style.display=src?'block':'none';}
   let cur=parseFloat(document.getElementById('calcCur').value);
   if(isNaN(cur))cur=0;
   cur=Math.max(0,Math.min(100,cur));
@@ -645,13 +772,27 @@ function lootCard(it){
   </div>`;
 }
 function renderLocations(){
+  // карта имя предмета -> иконка (из всего лута) для триггеров боссов
+  const iconByName={};
+  allLootItems().forEach(it=>{ if(it.icon) iconByName[norm(it.name)]=it.icon; });
+  // извлечь из условия босса название триггер-предмета (в кавычках после "в рюкзак")
+  function triggerItem(cond){
+    if(!cond)return null;
+    const m=cond.match(/рюкзак[^«"]*[«"]([^»"]+)[»"]/i);
+    if(!m)return null;
+    const name=m[1].trim();
+    return {name, icon:iconByName[norm(name)]||''};
+  }
   const cards=DB.locations.map((l,idx)=>{
     const data=DB.locLoot&&DB.locLoot[l.name];
     const hasLoot=!!data;
+    const b=hasLoot?data.boss:null;
+    const trig=b?triggerItem(b.cond):null;
+    const bossTag=b?`<span class="locboss"><i>БОСС</i><b>${esc(b.name)}</b>${trig?`<span class="locboss-need">нужен «${esc(trig.name)}»</span>`:''}</span>`:'';
     const head=`
       <div class="locrow" ${hasLoot?`onclick="toggleLoc(${idx})"`:''} ${hasLoot?'style="cursor:pointer"':''}>
         <div class="locname">${hasLoot?'<span class="locarrow" id="arr'+idx+'">▶</span>':'<span class="locarrow dim">·</span>'}${esc(l.name)}
-          ${hasLoot?'<span class="loctag">нажми — лут</span>':''}</div>
+          ${hasLoot?'<span class="loctag">нажми — лут</span>':''}${bossTag}</div>
         <div class="locstats">
           <span class="lst"><b class="danger">${esc(l.atk)}</b><i>атака</i></span>
           <span class="lst"><b class="safe">${esc(l['def'])}</b><i>защита</i></span>
@@ -661,16 +802,19 @@ function renderLocations(){
       </div>`;
     let body='';
     if(hasLoot){
-      const b=data.boss;
+      const trigBlk=(b&&b.cond)?`<div class="bosshow">
+        ${trig&&trig.icon?`<img class="bosshow-ic" src="${img(trig.icon)}" alt="" loading="lazy">`:''}
+        <div class="bosshow-tx"><div class="bosshow-lbl">Как заспавнить босса</div>${esc(b.cond)}</div>
+      </div>`:'';
       const bossBlk=b?`<div class="bossblk">
         <div class="bosshd">
-          <div class="bosstitle"><span class="lbl">БОСС</span>${esc(b.name)}</div>
+          <div class="bosstitle"><span class="lbl">БОСС ЛОКАЦИИ</span>${esc(b.name)}</div>
           <div class="bossst">
             <span class="s"><b class="danger">${esc(b.atk)}</b><i>атака</i></span>
             <span class="s"><b class="safe">${esc(b['def'])}</b><i>защита</i></span>
           </div>
         </div>
-        ${b.cond?`<div class="bosstext">${esc(b.cond)}</div>`:''}
+        ${trigBlk}
         ${b.fight?`<div class="bosstext">${esc(b.fight)}</div>`:''}
         ${b.drop&&b.drop.length?`<div class="bossdrop">Добыча с босса</div>
         <div class="lootgrid">${b.drop.map(lootCard).join('')}</div>`:''}
@@ -683,7 +827,7 @@ function renderLocations(){
         <div class="lootgrid">${data.loot.map(lootCard).join('')}</div>
       </div>`;
     }
-    return `<div class="loccard" data-name="${esc(l.name.toLowerCase())}">${head}${body}</div>`;
+    return `<div class="loccard" data-name="${esc(l.name.toLowerCase())}${b?' '+esc(b.name.toLowerCase()):''}">${head}${body}</div>`;
   }).join('');
   const brows=DB.bosses.map(b=>`<tr data-name="${esc(b.name.toLowerCase())}">
     <td class="tname"><span class="dotr d5"></span>${esc(b.name)}</td>
@@ -870,7 +1014,8 @@ function renderProgress(){
 
 function render(){
   const m=$('#main');
-  if(activeTab==='gear')m.innerHTML=`<section class="on">${renderGear()}</section>`;
+  if(activeTab==='gear'){m.innerHTML=`<section class="on">${renderGear()}</section>`;runGearCalc();}
+  else if(activeTab==='items')m.innerHTML=`<section class="on">${renderItems()}</section>`;
   else if(activeTab==='story')m.innerHTML=`<section class="on">${renderStory()}</section>`;
   else if(activeTab==='cars'){m.innerHTML=`<section class="on">${renderCars()}</section>`;runCalc();}
   else if(activeTab==='locations')m.innerHTML=`<section class="on">${renderLocations()}</section>`;

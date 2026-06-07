@@ -152,9 +152,9 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .legend .chip{display:inline-block;margin:0 2px}
 .hidden{display:none!important}
 /* repair calculator */
-.calc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);margin:0 0 18px;border-radius:8px;overflow:hidden}
+.calc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);margin:0 0 18px;border-radius:8px;overflow:visible}
 .calc-head{background:var(--panel2);padding:12px 16px;font-family:'Saira Condensed',sans-serif;font-size:15px;
-  font-weight:600;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  font-weight:600;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;border-radius:8px 8px 0 0}
 .calc-body{padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
 .calc-field{display:flex;flex-direction:column;gap:6px}
 .calc-field label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-family:'Saira Condensed',sans-serif;font-weight:600}
@@ -808,12 +808,20 @@ function mkIconSel(id, opts, onch) {
   const f = opts[0];
   return `<div class="gsi-wrap" id="${id}_wrap"><input type="hidden" id="${id}" value="${esc(f.val)}"><div class="gsi-btn" onclick="gsiToggle('${id}')"><span class="gsi-ico" id="${id}_ico">${icoHtml(f.icon)}</span><span class="gsi-lbl" id="${id}_lbl">${esc(f.label)}</span><span class="gsi-arr">▾</span></div><div class="gsi-list" id="${id}_list" style="display:none">${items}</div></div>`;
 }
+function gsiCloseAll() {
+  document.querySelectorAll('.gsi-list').forEach(el=>el.style.display='none');
+  document.querySelectorAll('.gsi-wrap').forEach(el=>el.style.zIndex='');
+}
 function gsiToggle(id) {
   const list = document.getElementById(id+'_list');
   if (!list) return;
   const open = list.style.display !== 'none';
-  document.querySelectorAll('.gsi-list').forEach(el => el.style.display='none');
-  if (!open) list.style.display = 'block';
+  gsiCloseAll();
+  if (!open) {
+    list.style.display = 'block';
+    const wrap = document.getElementById(id+'_wrap');
+    if (wrap) wrap.style.zIndex = '9999';
+  }
 }
 function gsiPick(id, el) {
   const val=el.dataset.val, lbl=el.dataset.lbl, ico=el.dataset.ico;
@@ -821,9 +829,9 @@ function gsiPick(id, el) {
   const lb=document.getElementById(id+'_lbl'); if(lb) lb.textContent=lbl;
   const s=ico?img(ico):'';
   const ie=document.getElementById(id+'_ico'); if(ie) ie.innerHTML=s?`<img src="${s}" class="gsi-img" alt="">`:`<span class="gsi-ph"></span>`;
-  const li=document.getElementById(id+'_list'); if(li) li.style.display='none';
+  gsiCloseAll();
 }
-document.addEventListener('click', e=>{ if(!e.target.closest('.gsi-wrap')) document.querySelectorAll('.gsi-list').forEach(el=>el.style.display='none'); });
+document.addEventListener('click', e=>{ if(!e.target.closest('.gsi-wrap')) gsiCloseAll(); });
 
 function gcSlotUpdate(sfx, item, typeStat) {
   const icoEl=document.getElementById('gcSico_'+sfx);

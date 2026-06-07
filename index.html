@@ -109,8 +109,17 @@ section.on{display:block}
 .chip.craft{background:rgba(232,184,75,.13);color:var(--acid);border-color:rgba(232,184,75,.3)}
 .chip.boss{background:rgba(232,184,75,.14);color:var(--gold);border-color:rgba(232,184,75,.3)}
 .chip.set{background:rgba(179,154,208,.12);color:var(--r3);border-color:rgba(179,154,208,.26)}
+/* D.I.S.S. sets */
+.setwrap{margin:4px 0 22px;border:1px solid rgba(179,154,208,.3);background:linear-gradient(180deg,rgba(179,154,208,.06),transparent);padding:14px 14px 16px;border-radius:5px}
+.setttl{font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1.5px;text-transform:uppercase;color:var(--r3);font-weight:700;margin-bottom:12px}
+.setttl span{display:block;font-size:11.5px;letter-spacing:.3px;text-transform:none;color:var(--dim);font-weight:400;margin-top:3px}
+.setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.setbox{border:1px solid var(--line);border-top:3px solid var(--r3);background:var(--panel);padding:10px 11px 12px;border-radius:4px}
+.setbox.rr4{border-top-color:var(--r4)}.setbox.rr5{border-top-color:var(--r5)}
+.sethead{font-family:'Saira Condensed',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:9px;opacity:.85}
+.setbox .grid{grid-template-columns:1fr;gap:8px}
 .chip.mat{background:var(--panel2);color:var(--dim);border-color:var(--line)}
-.note{font-size:11.5px;color:var(--dim);margin-top:8px;line-height:1.5;font-style:italic}
+.note{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.55;font-style:italic}
 /* tables */
 .tbl{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel);border:1px solid var(--line)}
 .tbl th{background:var(--panel2);color:var(--acid);text-align:left;padding:11px 14px;font-family:'Saira Condensed',sans-serif;
@@ -120,6 +129,9 @@ section.on{display:block}
 .tbl tr:hover td{background:rgba(232,184,75,.05)}
 .tbl .num{text-align:right;font-variant-numeric:tabular-nums}
 .tname{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;color:var(--txt)}
+.carname{display:flex;align-items:center;gap:10px}
+.carico{width:38px;height:38px;object-fit:cover;background:var(--bg);border:1px solid var(--line);border-radius:3px;flex:none}
+.carico.ph{background:repeating-linear-gradient(45deg,var(--bg),var(--bg) 4px,var(--panel2) 4px,var(--panel2) 8px);opacity:.4}
 .dotr{display:inline-block;width:8px;height:8px;margin-right:8px;vertical-align:middle;transform:rotate(45deg)}
 .d1{background:var(--r1)}.d2{background:var(--r2)}.d3{background:var(--r3)}.d4{background:var(--r4)}.d5{background:var(--r5)}
 .danger{color:var(--hot);font-weight:700}
@@ -272,16 +284,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 .lootsec{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
   color:var(--acid);margin:16px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
 .lootgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
-.lootitem{display:flex;gap:10px;background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--line2);padding:9px 10px}
+.lootitem{display:flex;gap:10px;background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--line2);padding:9px 10px;transition:border-color .16s,transform .16s,box-shadow .16s}
+.lootitem:hover{border-color:var(--line2);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.35)}
 .lootitem.rr1{border-left-color:var(--r1)}.lootitem.rr2{border-left-color:var(--r2)}.lootitem.rr3{border-left-color:var(--r3)}
 .lootitem.rr4{border-left-color:var(--r4)}.lootitem.rr5{border-left-color:var(--r5)}
 .looticon{width:48px;height:48px;object-fit:cover;background:var(--bg);border:1px solid var(--line);flex:none}
 .lootbody{flex:1;min-width:0}
-.lootname{font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:600;color:var(--txt);line-height:1.1;margin-bottom:4px}
+.lootname{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:600;color:var(--txt);line-height:1.12;margin-bottom:4px}
 .lstat{font-size:11px;color:var(--dim);margin-bottom:4px}
 .lstat b{font-family:'Saira Condensed',sans-serif;font-size:16px;color:var(--hot)}
 .lootitem .chips{margin-top:3px}
-.lootdesc{font-size:10.5px;color:var(--dim);line-height:1.4;margin-top:5px}
+.lootdesc{font-size:12.5px;color:var(--dim);line-height:1.5;margin-top:6px}
 .bossblk{margin:16px 0 4px;border:1px solid var(--line);border-left:3px solid var(--r5);background:rgba(255,122,69,.05);padding:12px 14px}
 .bosshd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
 .bosstitle{font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot)}
@@ -328,6 +341,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   .locstats{gap:12px}
   .lst b{font-size:18px}
   .lootgrid{grid-template-columns:1fr}
+  .setrow{grid-template-columns:1fr}
 }
 @media(max-width:560px){
   .hgrid{gap:12px}
@@ -377,7 +391,7 @@ let activeTab='gear';
 let gearFilter={cat:'weapons',rar:0};
 
 const TABS=[
-  {id:'gear',label:'Снаряжение'},
+  {id:'gear',label:'Каталог'},
   {id:'cars',label:'Транспорт'},
   {id:'story',label:'Задания'},
   {id:'quests',label:'Контракты'},
@@ -393,20 +407,67 @@ function buildTabs(){
 }
 function switchTab(id){activeTab=id;buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});}
 
-// ---------- GEAR ----------
+// ---------- CATALOG (GEAR) ----------
+function norm(s){return (s||'').replace(/[«»„""'']/g,'"').replace(/\s+/g,' ').trim().replace(/ё/g,'е').toLowerCase();}
+
+// Белый список расходников (предметы в рюкзак, расходуются). Без динамита.
+const CONSUM=new Set(['базовая аптечка','военная аптечка','экспериментальная аптечка',
+ 'г1','г2','ртд-11','рпог','c4','коктейль молотова','дымовая граната',
+ 'стимулятор','парацетамин','срочная эвакуация']);
+
+// Агрегируем уникальные предметы из всего лута локаций (единый источник правды)
+let _lootCache=null;
+function allLootItems(){
+  if(_lootCache)return _lootCache;
+  const seen=new Map();
+  const push=it=>{const k=norm(it.name); if(!seen.has(k))seen.set(k,it);};
+  if(DB.locLoot)for(const loc in DB.locLoot){
+    const bl=DB.locLoot[loc];
+    (bl.rec||[]).forEach(push);
+    (bl.loot||[]).forEach(push);
+    if(bl.boss&&bl.boss.drop)bl.boss.drop.forEach(push);
+  }
+  _lootCache=[...seen.values()];
+  return _lootCache;
+}
+// множество имён снаряжения (оружие/броня/шлемы) — чтобы не дублировать в "Предметах"
+let _gearNames=null;
+function gearNameSet(){
+  if(_gearNames)return _gearNames;
+  _gearNames=new Set();
+  ['weapons','armor','helmets'].forEach(a=>DB[a].forEach(x=>_gearNames.add(norm(x.name))));
+  return _gearNames;
+}
+function lootCatOf(it){
+  const n=norm(it.name);
+  if(it.statlbl==='Скорость'||n.indexOf('эвакуатор')>=0)return 'cars';
+  if(CONSUM.has(n))return 'consum';
+  if(n.indexOf('рюкзак')>=0||n.indexOf('наплечная сумка')>=0)return 'bags';
+  if(gearNameSet().has(n))return 'gear';   // снаряжение — в своих вкладках
+  return 'items';
+}
+
 function gearItems(){
-  if(gearFilter.cat==='weapons')return DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'}));
-  if(gearFilter.cat==='armor')return DB.armor.map(x=>({...x,kind:'arm',klbl:'Броня'}));
-  if(gearFilter.cat==='helmets')return DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'}));
+  const c=gearFilter.cat;
+  if(c==='weapons')return DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'}));
+  if(c==='armor')return DB.armor.map(x=>({...x,kind:'arm',klbl:'Броня'}));
+  if(c==='helmets')return DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'}));
+  // категории из лута локаций
+  if(c==='consum'||c==='bags'||c==='items'){
+    return allLootItems().filter(it=>lootCatOf(it)===c)
+      .map(x=>({...x, rarName:RARN[x.rar]||'', kind: x.statlbl==='Урон'?'dmg':'arm',
+               klbl:x.statlbl||'', fromLoot:true}));
+  }
   return [];
 }
 function gearCard(it){
-  const norep=/Не ремонт/i.test(it.mat);
+  const norep=/Не ремонт/i.test(it.mat||'');
   const chips=[];
-  chips.push(`<span class="chip rar${it.rar}">${RARN[it.rar]||it.rarName}</span>`);
+  chips.push(`<span class="chip rar${it.rar}">${RARN[it.rar]||it.rarName||''}</span>`);
   if(norep)chips.push(`<span class="chip norep">не чинится</span>`);
+  if(it.heavy)chips.push(`<span class="chip norep">нужна машина</span>`);
   if(it.craft)chips.push(`<span class="chip craft">крафт ${esc(it.craft.replace(/[()]/g,''))}</span>`);
-  if(/[Бб]осс/.test(it.note))chips.push(`<span class="chip boss">${esc(it.note)}</span>`);
+  if(/[Бб]осс/.test(it.note||''))chips.push(`<span class="chip boss">${esc(it.note)}</span>`);
   if(it.set)chips.push(`<span class="chip set">${esc(it.set)}</span>`);
   let extra='';
   if(it.note && !/[Бб]осс/.test(it.note))extra=`<div class="note">${esc(it.note)}</div>`;
@@ -414,34 +475,79 @@ function gearCard(it){
   const head=it.icon&&typeof img==='function'&&img(it.icon)
     ? `<div class="cnamerow"><img class="gicon" src="${img(it.icon)}" alt="" loading="lazy"><span class="cname">${esc(it.name)}</span></div>`
     : `<div class="cname">${esc(it.name)}</div>`;
+  const statline = (it.klbl||it.stat)
+    ? `<div class="statline"><span class="bignum ${it.kind}">${esc(it.stat)||'—'}</span><span class="statlbl">${esc(it.klbl||'')}</span></div>`
+    : '';
   return `<div class="card rr${it.rar}" data-name="${esc(it.name.toLowerCase())}">
     ${head}
-    <div class="statline"><span class="bignum ${it.kind}">${esc(it.stat)||'—'}</span><span class="statlbl">${it.klbl}</span></div>
+    ${statline}
     <div class="chips">${chips.join('')}</div>${extra}
   </div>`;
 }
 function renderGear(){
-  const cats=[['weapons','Оружие',DB.weapons.length],['armor','Броня',DB.armor.length],['helmets','Шлемы',DB.helmets.length]];
+  const cats=[
+    ['weapons','Оружие',DB.weapons.length],
+    ['armor','Броня',DB.armor.length],
+    ['helmets','Шлемы',DB.helmets.length],
+    ['bags','Рюкзаки',allLootItems().filter(i=>lootCatOf(i)==='bags').length],
+    ['consum','Расходники',allLootItems().filter(i=>lootCatOf(i)==='consum').length],
+    ['items','Предметы',allLootItems().filter(i=>lootCatOf(i)==='items').length],
+  ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
+  const isGear=['weapons','armor','helmets'].includes(gearFilter.cat);
   let items=gearItems();
   if(gearFilter.rar)items=items.filter(x=>x.rar===gearFilter.rar);
-  // sort by stat desc
-  items.sort((a,b)=>(parseInt(b.stat)||0)-(parseInt(a.stat)||0));
+  items.sort((a,b)=>(parseInt(b.stat)||0)-(parseInt(a.stat)||0)||(b.rar-a.rar));
+
+  // Группировка комплектов D.I.S.S. (только в разделах снаряжения)
+  let gridHtml;
+  const setItems=items.filter(x=>x.set&&/D\.I\.S\.S/i.test(x.set));
+  if(isGear && setItems.length){
+    const rest=items.filter(x=>!(x.set&&/D\.I\.S\.S/i.test(x.set)));
+    // сгруппировать по названию комплекта
+    const groups={};
+    setItems.forEach(x=>{(groups[x.set]=groups[x.set]||[]).push(x);});
+    const order=Object.keys(groups).sort((a,b)=>{
+      const r=v=>v.includes('Mk3')?3:v.includes('Mk2')?2:1; return r(a)-r(b);
+    });
+    const setsBlk=`<div class="setwrap">
+      <div class="setttl">Комплекты D.I.S.S. <span>собери все 3 части — перчатки, бронекостюм, шлем</span></div>
+      <div class="setrow">${order.map(name=>{
+        const rar=groups[name][0].rar;
+        return `<div class="setbox rr${rar}">
+          <div class="sethead">${esc(name.replace(/^\(\d+\)\s*/,''))}</div>
+          <div class="grid">${groups[name].map(gearCard).join('')}</div>
+        </div>`;
+      }).join('')}</div>
+    </div>`;
+    gridHtml = setsBlk + `<div class="grid" id="gearGrid">${rest.map(gearCard).join('')}</div>`;
+  } else {
+    gridHtml = `<div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>`;
+  }
+
+  const intro = isGear
+    ? `Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания.`
+    : gearFilter.cat==='consum'
+    ? `<b>Расходники</b> кладутся в рюкзак исполнителя и тратятся в рейде: аптечки восстанавливают HP, стимулятор усиливает броню, гранаты и взрывчатка добавляют урон. Если показателей не хватило — расходник теряется в бою.`
+    : gearFilter.cat==='bags'
+    ? `<b>Рюкзаки</b> увеличивают число предметов, которые исполнитель берёт в рейд. Чем вместительнее — тем больше расходников и добычи можно унести.`
+    : `<b>Предметы</b> — весь остальной лут сектора: квестовые вещи, материалы для крафта и ремонта, ценности и электроника. Транспорт и снаряжение вынесены в отдельные вкладки.`;
+
   return `
-  <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: таким предметом можно пользоваться, пока его прочность не упадёт до 30%, после чего он ломается и восстановить его нельзя. Крафт указывает, на каком уровне мастерской предмет можно скрафтить.</div>
+  <div class="intro">${intro}</div>
   <div class="bar">
     ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
     <span style="width:14px"></span>
     ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
-    <span class="cnt" id="gearCnt"></span>
+    <span class="cnt">${items.length} шт.</span>
   </div>
-  <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
+  ${gridHtml}
   <div class="legend">
     Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
     &nbsp;•&nbsp; <span class="chip norep">не чинится</span> — нельзя починить; служит, пока прочность не упадёт до 30%
   </div>`;
 }
-function setGearCat(c){gearFilter.cat=c;render();}
+function setGearCat(c){gearFilter.cat=c;gearFilter.rar=0;render();}
 function setGearRar(r){gearFilter.rar=r;render();}
 
 // ---------- CARS ----------
@@ -450,12 +556,16 @@ function cargoLabel(c){
   return map[c]||c;
 }
 function renderCars(){
+  const carIcons={};
+  allLootItems().forEach(it=>{ if(it.statlbl==='Скорость'&&it.icon) carIcons[norm(it.name)]=it.icon; });
   const rows=DB.cars.slice().sort((a,b)=>(parseInt(b.speed)||0)-(parseInt(a.speed)||0)).map(c=>{
     const cost=c.repCost?`${esc(c.repCost)} мат/1%`:'<span class="muted">нет данных</span>';
     const rep=c.repairable?cost:'<span class="danger">не чинится</span>';
     const spp=c.spp?esc(c.spp)+'%':'<span class="muted">?</span>';
+    const iconKey=c.icon||carIcons[norm(c.name)];
+    const ic=(iconKey&&img(iconKey))?`<img class="carico" src="${img(iconKey)}" alt="" loading="lazy">`:'<span class="carico ph"></span>';
     return `<tr data-name="${esc(c.name.toLowerCase())}">
-      <td class="tname"><span class="dotr d${c.rar}"></span>${esc(c.name)}</td>
+      <td class="tname"><span class="carname">${ic}<span><span class="dotr d${c.rar}"></span>${esc(c.name)}</span></span></td>
       <td class="num" data-label="Скорость"><span class="bignum spd" style="font-size:20px">${esc(c.speed)}</span></td>
       <td class="num" data-label="СПП">${spp}</td>
       <td data-label="Тип груза">${cargoLabel(c.cargo)}</td>

@@ -174,6 +174,52 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .gsel{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-family:'Saira Condensed',sans-serif;font-size:13px;
   padding:8px 13px;letter-spacing:.5px;cursor:pointer;text-transform:uppercase;font-weight:600;border-radius:6px}
 .gsel:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.15)}
+/* custom icon-select */
+.gsi-wrap{position:relative;display:inline-block}
+.gsi-btn{display:flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);color:var(--txt);font-family:'Saira Condensed',sans-serif;font-size:13px;padding:7px 10px 7px 8px;letter-spacing:.4px;font-weight:600;border-radius:6px;cursor:pointer;min-width:180px;user-select:none}
+.gsi-btn:hover{border-color:var(--line2);background:var(--panel2)}
+.gsi-img{width:28px;height:28px;object-fit:cover;border-radius:3px;flex:none;background:var(--bg2)}
+.gsi-ph{display:inline-block;width:28px;height:28px;flex:none}
+.gsi-lbl{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:uppercase}
+.gsi-arr{color:var(--dim);font-size:10px;flex:none}
+.gsi-list{position:absolute;top:calc(100% + 2px);left:0;min-width:100%;background:var(--panel2);border:1px solid var(--line2);border-radius:6px;z-index:500;max-height:280px;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+.gsi-opt{display:flex;align-items:center;gap:8px;padding:7px 10px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.4px;border-bottom:1px solid rgba(66,59,44,.3)}
+.gsi-opt:last-child{border-bottom:none}
+.gsi-opt:hover{background:var(--panel);color:var(--acid)}
+.gsi-opt img{width:28px;height:28px;object-fit:cover;border-radius:3px;flex:none;background:var(--bg2)}
+@media(max-width:680px){.gsi-btn{min-width:0;width:100%}.gsi-wrap{width:100%}}
+/* gear calc slot preview */
+.gc-slots{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px 14px;border-top:1px solid var(--line);background:rgba(0,0,0,.15)}
+.gc-slot{display:flex;align-items:center;gap:9px;flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 11px;transition:.15s}
+.gc-slot.active{border-color:var(--line2);background:var(--panel2)}
+.gc-sph{width:36px;height:36px;border-radius:5px;background:var(--bg2);border:1px dashed var(--line2);flex:none;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:15px}
+.gc-sico-w{width:36px;height:36px;flex:none}
+.gc-sico-w img{width:36px;height:36px;object-fit:cover;border-radius:5px;background:var(--bg2)}
+.gc-sinfo{overflow:hidden;min-width:0;display:flex;flex-direction:column;gap:1px}
+.gc-stype{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.9px}
+.gc-sname{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gc-sval{font-size:12px;color:var(--acid);font-weight:700;font-family:'Saira Condensed',sans-serif;letter-spacing:.3px}
+/* stat card in calc result */
+.gc-statcard{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 18px;text-align:center;min-width:90px;flex:1}
+.gc-statcard.dmg-card{border-color:rgba(255,122,69,.35);background:rgba(255,122,69,.07)}
+.gc-statcard.arm-card{border-color:rgba(143,196,168,.35);background:rgba(143,196,168,.07)}
+.gc-statcard .bignum{font-size:44px;line-height:1}
+/* comparison */
+.cmp-hd{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.cmp-hd img{width:40px;height:40px;object-fit:cover;border-radius:6px;flex:none;background:var(--bg2)}
+.cmp-hd-ph{width:40px;height:40px;border-radius:6px;background:var(--bg2);border:1px dashed var(--line2);flex:none}
+.cmp-hd-name{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--txt);line-height:1.2}
+.cmp-hd-sub{font-size:11px;color:var(--dim);margin-top:2px}
+.cmp-rows{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:12px}
+.cmp-row{display:grid;grid-template-columns:1fr 90px 1fr;align-items:center;border-bottom:1px solid rgba(66,59,44,.3)}
+.cmp-row:last-child{border-bottom:none}
+.cmp-v{font-family:'Saira Condensed',sans-serif;font-size:20px;font-weight:700;text-align:center;padding:8px 6px}
+.cmp-v.win{color:var(--steel)}
+.cmp-v.lose{color:var(--dim);font-size:15px;font-weight:400}
+.cmp-v.tie{color:var(--txt);font-size:17px}
+.cmp-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--acid);text-align:center;padding:2px 4px;font-family:'Saira Condensed',sans-serif;font-weight:600;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+/* transport filter */
+.cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:16px}
 .qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px}
 .qcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line2);padding:14px;display:flex;gap:14px;position:relative;transition:.15s;border-radius:6px}
 .qcard:hover{border-left-color:var(--acid);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.55),0 0 0 1px rgba(232,184,75,.08)}
@@ -384,13 +430,15 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const $=s=>document.querySelector(s);
-function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function fmt(n){return (n||0).toLocaleString('ru-RU');}
 function img(k){return (k&&typeof IMG!=='undefined'&&IMG[k])?IMG[k]:'';}
 
 let activeTab='gear';
 let gearFilter={cat:'weapons',rar:0};
 let itemsFilter={transport:0};
+let carsFilter={rar:0,cargo:''};
+let cmpFilter={type:'weapons',a:'',b:''};
 
 const TABS=[
   {id:'gear',label:'⚙ Снаряжение'},
@@ -401,6 +449,7 @@ const TABS=[
   {id:'locations',label:'📍 Локации'},
   {id:'guides',label:'📖 Гайды'},
   {id:'progress',label:'⭐ Прогресс'},
+  {id:'terms',label:'📄 Соглашение'},
 ];
 let storyFilter={chap:1,giver:'',opt:false};
 
@@ -515,6 +564,7 @@ function renderGear(){
     ['armor','Броня',DB.armor.length],
     ['helmets','Шлемы',DB.helmets.length],
     ['sets','Комплекты',setGroups().length],
+    ['compare','⚖ Сравнение',''],
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
 
@@ -524,24 +574,15 @@ function renderGear(){
     <div class="calc-body" style="flex-wrap:wrap;gap:14px">
       <div class="calc-field">
         <label>Оружие</label>
-        <select class="gsel" id="gcWpn" onchange="runGearCalc()" style="min-width:200px">
-          <option value="">— без оружия —</option>
-          ${DB.weapons.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(w=>`<option value="${esc(w.name)}">${esc(w.name)} (${esc(w.stat)})</option>`).join('')}
-        </select>
+        ${mkIconSel('gcWpn',[{val:'',label:'— без оружия —',icon:''},...DB.weapons.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(w=>({val:w.name,label:w.name+' ('+w.stat+')',icon:w.icon||''}))], 'runGearCalc()')}
       </div>
       <div class="calc-field">
         <label>Броня</label>
-        <select class="gsel" id="gcArm" onchange="runGearCalc()" style="min-width:180px">
-          <option value="">— без брони —</option>
-          ${DB.armor.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(a=>`<option value="${esc(a.name)}">${esc(a.name)} (${esc(a.stat)})</option>`).join('')}
-        </select>
+        ${mkIconSel('gcArm',[{val:'',label:'— без брони —',icon:''},...DB.armor.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(a=>({val:a.name,label:a.name+' ('+a.stat+')',icon:a.icon||''}))], 'runGearCalc()')}
       </div>
       <div class="calc-field">
         <label>Шлем</label>
-        <select class="gsel" id="gcHlm" onchange="runGearCalc()" style="min-width:160px">
-          <option value="">— без шлема —</option>
-          ${DB.helmets.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(h=>`<option value="${esc(h.name)}">${esc(h.name)} (${esc(h.stat)})</option>`).join('')}
-        </select>
+        ${mkIconSel('gcHlm',[{val:'',label:'— без шлема —',icon:''},...DB.helmets.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(h=>({val:h.name,label:h.name+' ('+h.stat+')',icon:h.icon||''}))], 'runGearCalc()')}
       </div>
       <div class="calc-field">
         <label>Расходник (+атака)</label>
@@ -553,6 +594,11 @@ function renderGear(){
           <option value="33">РПОГ (+33)</option>
         </select>
       </div>
+    </div>
+    <div class="gc-slots">
+      <div class="gc-slot" id="gcSlot_w"><div class="gc-sico-w" id="gcSico_w"><div class="gc-sph">⚔</div></div><div class="gc-sinfo"><span class="gc-stype">Оружие</span><span class="gc-sname" id="gcSname_w">не выбрано</span><span class="gc-sval" id="gcSval_w"></span></div></div>
+      <div class="gc-slot" id="gcSlot_a"><div class="gc-sico-w" id="gcSico_a"><div class="gc-sph">🛡</div></div><div class="gc-sinfo"><span class="gc-stype">Броня</span><span class="gc-sname" id="gcSname_a">не выбрано</span><span class="gc-sval" id="gcSval_a"></span></div></div>
+      <div class="gc-slot" id="gcSlot_h"><div class="gc-sico-w" id="gcSico_h"><div class="gc-sph">⛑</div></div><div class="gc-sinfo"><span class="gc-stype">Шлем</span><span class="gc-sname" id="gcSname_h">не выбрано</span><span class="gc-sval" id="gcSval_h"></span></div></div>
     </div>
     <div id="gcResult" style="padding:0 16px 16px"></div>
   </div>`;
@@ -572,7 +618,7 @@ function renderGear(){
     <div class="intro"><b>Комплекты D.I.S.S.</b> — броня из трёх частей: перчатки (урон), бронекостюм и шлем (защита). Здесь видны полные сеты целиком по уровням улучшения Mk1 → Mk2 → Mk3. Эти же предметы есть и в разделах «Оружие», «Броня», «Шлемы».</div>
     <div class="bar">
       ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
-      <span style="width:14px"></span>
+      <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
       ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
       <span class="cnt">${sets.length} комплект(ов)</span>
     </div>
@@ -580,6 +626,27 @@ function renderGear(){
     <div class="legend">
       Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
     </div>`;
+  }
+
+  // --- подраздел Сравнение ---
+  if(gearFilter.cat==='compare'){
+    const cmpTypes=[['weapons','⚔ Оружие'],['armor','🛡 Броня'],['helmets','⛑ Шлемы']];
+    const cmpArr=DB[cmpFilter.type]||[];
+    const cmpOpts=cmpArr.slice().sort((a,b)=>(parseInt(b.stat)||0)-(parseInt(a.stat)||0)).map(x=>({val:x.name,label:x.name+' ('+x.stat+')',icon:x.icon||''}));
+    return `
+    ${gcCalc}
+    <div class="bar">
+      ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
+    </div>
+    <div class="intro" style="margin-top:0">Выбери тип и два предмета — сайт сравнит их характеристики.</div>
+    <div class="bar" style="margin-top:0">
+      ${cmpTypes.map(t=>`<button class="filter ${cmpFilter.type===t[0]?'on':''}" onclick="setCmpType('${t[0]}')">${t[1]}</button>`).join('')}
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px">
+      <div class="calc-field"><label>Предмет 1</label>${mkIconSel('cmpA',[{val:'',label:'— выбрать —',icon:''},...cmpOpts],'runCmp()')}</div>
+      <div class="calc-field"><label>Предмет 2</label>${mkIconSel('cmpB',[{val:'',label:'— выбрать —',icon:''},...cmpOpts],'runCmp()')}</div>
+    </div>
+    <div id="cmpOut"></div>`;
   }
 
   let items=gearItems();
@@ -591,7 +658,7 @@ function renderGear(){
   <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания. Части комплектов D.I.S.S. собраны целиком во вкладке «Комплекты».</div>
   <div class="bar">
     ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
-    <span style="width:14px"></span>
+    <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
     ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
     <span class="cnt">${items.length} шт.</span>
   </div>
@@ -603,6 +670,82 @@ function renderGear(){
 }
 function setGearCat(c){gearFilter.cat=c;gearFilter.rar=0;render();}
 function setGearRar(r){gearFilter.rar=r;render();}
+function setCmpType(t){cmpFilter.type=t;cmpFilter.a='';cmpFilter.b='';render();}
+function runCmp(){
+  const aName=document.getElementById('cmpA')?.value;
+  const bName=document.getElementById('cmpB')?.value;
+  cmpFilter.a=aName||''; cmpFilter.b=bName||'';
+  const out=document.getElementById('cmpOut');
+  if(!out)return;
+  const arr=DB[cmpFilter.type]||[];
+  const a=arr.find(x=>x.name===aName), b=arr.find(x=>x.name===bName);
+  if(!a||!b){out.innerHTML='';return;}
+  const isWpn=cmpFilter.type==='weapons';
+  const statLbl=isWpn?'Урон':'Защита';
+  const hd=item=>{
+    const src=item.icon?img(item.icon):'';
+    return `<div class="cmp-hd">${src?`<img src="${src}" alt="">`:'<div class="cmp-hd-ph"></div>'}<div><div class="cmp-hd-name">${esc(item.name)}</div><div class="cmp-hd-sub">${esc(item.rarName||'')} · ${statLbl} ${item.stat}</div></div></div>`;
+  };
+  const fields=[
+    {lbl:statLbl, av:parseInt(a.stat)||0, bv:parseInt(b.stat)||0, higher:true},
+    {lbl:'Редкость', av:a.rar, bv:b.rar, higher:true},
+    ...(a.mat!==undefined?[{lbl:'Крафт', av:parseInt(a.mat)||0, bv:parseInt(b.mat)||0, higher:false}]:[]),
+  ];
+  const rows=fields.map(f=>{
+    const aW=f.higher?f.av>f.bv:f.av<f.bv, bW=f.higher?f.bv>f.av:f.bv<f.av;
+    const cls=x=>x?'win':(!aW&&!bW)?'tie':'lose';
+    return `<div class="cmp-row"><div class="cmp-v ${cls(aW)}">${f.av}${aW?' ↑':''}</div><div class="cmp-lbl">${f.lbl}</div><div class="cmp-v ${cls(bW)}">${f.bv}${bW?' ↑':''}</div></div>`;
+  }).join('');
+  out.innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">${hd(a)}${hd(b)}</div>
+    <div class="cmp-rows">${rows}</div>`;
+}
+function setCarsRar(r){carsFilter.rar=r;render();}
+function setCarsCargoFilt(c){carsFilter.cargo=c;render();}
+// ── Кастомный дропдаун с иконками ──
+function mkIconSel(id, opts, onch) {
+  // opts: [{val, label, icon}]  onch: строка JS, вызываемая при выборе
+  const icoHtml = k => { const s=k?img(k):''; return s?`<img src="${s}" class="gsi-img" alt="">`:`<span class="gsi-ph"></span>`; };
+  const items = opts.map(o => `<div class="gsi-opt" data-val="${esc(o.val)}" data-lbl="${esc(o.label)}" data-ico="${o.icon||''}" onclick="gsiPick('${id}',this);${onch}">${icoHtml(o.icon)}<span>${esc(o.label)}</span></div>`).join('');
+  const f = opts[0];
+  return `<div class="gsi-wrap" id="${id}_wrap"><input type="hidden" id="${id}" value="${esc(f.val)}"><div class="gsi-btn" onclick="gsiToggle('${id}')"><span class="gsi-ico" id="${id}_ico">${icoHtml(f.icon)}</span><span class="gsi-lbl" id="${id}_lbl">${esc(f.label)}</span><span class="gsi-arr">▾</span></div><div class="gsi-list" id="${id}_list" style="display:none">${items}</div></div>`;
+}
+function gsiToggle(id) {
+  const list = document.getElementById(id+'_list');
+  if (!list) return;
+  const open = list.style.display !== 'none';
+  document.querySelectorAll('.gsi-list').forEach(el => el.style.display='none');
+  if (!open) list.style.display = 'block';
+}
+function gsiPick(id, el) {
+  const val=el.dataset.val, lbl=el.dataset.lbl, ico=el.dataset.ico;
+  const h=document.getElementById(id); if(h) h.value=val;
+  const lb=document.getElementById(id+'_lbl'); if(lb) lb.textContent=lbl;
+  const s=ico?img(ico):'';
+  const ie=document.getElementById(id+'_ico'); if(ie) ie.innerHTML=s?`<img src="${s}" class="gsi-img" alt="">`:`<span class="gsi-ph"></span>`;
+  const li=document.getElementById(id+'_list'); if(li) li.style.display='none';
+}
+document.addEventListener('click', e=>{ if(!e.target.closest('.gsi-wrap')) document.querySelectorAll('.gsi-list').forEach(el=>el.style.display='none'); });
+
+function gcSlotUpdate(sfx, item, typeStat) {
+  const icoEl=document.getElementById('gcSico_'+sfx);
+  const nameEl=document.getElementById('gcSname_'+sfx);
+  const valEl=document.getElementById('gcSval_'+sfx);
+  const slotEl=document.getElementById('gcSlot_'+sfx);
+  if(!icoEl)return;
+  if(item){
+    const src=item.icon?img(item.icon):'';
+    icoEl.innerHTML=src?`<img src="${src}" style="width:36px;height:36px;object-fit:cover;border-radius:5px;background:var(--bg2)">`:'<div class="gc-sph" style="font-size:15px">'+(sfx==='w'?'⚔':sfx==='a'?'🛡':'⛑')+'</div>';
+    if(nameEl)nameEl.textContent=item.name;
+    if(valEl)valEl.textContent=item.stat+' '+typeStat;
+    if(slotEl)slotEl.classList.add('active');
+  } else {
+    icoEl.innerHTML='<div class="gc-sph" style="font-size:15px">'+(sfx==='w'?'⚔':sfx==='a'?'🛡':'⛑')+'</div>';
+    if(nameEl)nameEl.textContent='не выбрано';
+    if(valEl)valEl.textContent='';
+    if(slotEl)slotEl.classList.remove('active');
+  }
+}
 function runGearCalc(){
   const wName=document.getElementById('gcWpn')?.value;
   const aName=document.getElementById('gcArm')?.value;
@@ -611,8 +754,12 @@ function runGearCalc(){
   const w=DB.weapons.find(x=>x.name===wName);
   const a=DB.armor.find(x=>x.name===aName);
   const h=DB.helmets.find(x=>x.name===hName);
+  gcSlotUpdate('w',w,'ур.');
+  gcSlotUpdate('a',a,'зщ.');
+  gcSlotUpdate('h',h,'зщ.');
   const atk=(parseInt(w?.stat)||0)+conBonus;
-  const def=(parseInt(a?.stat)||0)+(parseInt(h?.stat)||0);
+  const armor=(parseInt(a?.stat)||0)+(parseInt(h?.stat)||0);
+  const def=armor+100;
   const out=document.getElementById('gcResult');
   if(!out)return;
   if(!w&&!a&&!h&&!conBonus){out.innerHTML='';return;}
@@ -622,21 +769,20 @@ function runGearCalc(){
     const okAtk=atk>=la, okDef=def>=ld;
     const ok=okAtk&&okDef;
     const miss=[];
-    if(!okAtk)miss.push(`атака: нужно ${la}, есть ${atk}`);
-    if(!okDef)miss.push(`броня: нужно ${ld}, есть ${def}`);
-    return `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px">
-      <span style="font-size:15px">${ok?'✅':'❌'}</span>
-      <span style="font-family:'Saira Condensed',sans-serif;font-weight:600;color:var(--txt);min-width:220px">${esc(l.name)}</span>
-      <span style="color:var(--dim);font-size:12px">${ok?`<span class="safe">подходит</span>`:miss.map(m=>`<span class="danger">${esc(m)}</span>`).join(' / ')}</span>
+    if(!okAtk)miss.push(`атака: нужно <b>${la}</b>, есть ${atk}`);
+    if(!okDef)miss.push(`защита: нужно <b>${ld}</b>, есть ${def}`);
+    return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px">
+      <span style="font-size:14px;flex:none">${ok?'✅':'❌'}</span>
+      <span style="font-family:'Saira Condensed',sans-serif;font-weight:600;color:var(--txt);flex:1;min-width:0">${esc(l.name)}</span>
+      <span style="font-size:12px;text-align:right">${ok?`<span class="safe">подходит</span>`:miss.map(m=>`<span class="danger">${m}</span>`).join(' · ')}</span>
     </div>`;
   }).join('');
   out.innerHTML=`
-    <div style="display:flex;gap:20px;flex-wrap:wrap;margin:12px 0 14px">
-      <div style="text-align:center"><div class="bignum dmg">${atk}</div><div class="statlbl">атака</div></div>
-      <div style="text-align:center"><div class="bignum arm">${def}</div><div class="statlbl">защита</div></div>
-      <div style="color:var(--dim);font-size:12px;align-self:flex-end;padding-bottom:4px">(HP базовые 100 не учтены)</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 14px">
+      <div class="gc-statcard dmg-card"><div class="bignum dmg">${atk}</div><div class="statlbl">атака</div>${conBonus?`<div style="font-size:10px;color:var(--dim);margin-top:2px">расходник +${conBonus}</div>`:''}</div>
+      <div class="gc-statcard arm-card"><div class="bignum arm">${def}</div><div class="statlbl">защита</div><div style="font-size:10px;color:var(--dim);margin-top:2px">броня ${armor} + 100 HP</div></div>
     </div>
-    ${locRows}`;
+    <div style="border-top:1px solid var(--line);padding-top:10px">${locRows}</div>`;
 }
 
 // ---------- ПРЕДМЕТЫ ----------
@@ -676,7 +822,13 @@ function cargoLabel(c){
 function renderCars(){
   const carIcons={};
   allLootItems().forEach(it=>{ if(it.icon&&(it.statlbl==='Скорость'||/эвакуатор/i.test(it.name))) carIcons[norm(it.name)]=it.icon; });
-  const rows=DB.cars.slice().sort((a,b)=>(parseInt(b.speed)||0)-(parseInt(a.speed)||0)).map(c=>{
+  const cargoTypes=[['','Все'],['машины','🚛 Машины'],['большие грузы','▣ Большие'],['малые грузы','▪ Малые'],['ничего','— Ничего']];
+  const rarsCar=[[0,'Все'],[5,'Мифич.'],[4,'Легенд.'],[3,'Мистич.'],[2,'Редкий'],[1,'Обычный']];
+  let filtered=DB.cars.slice();
+  if(carsFilter.cargo)filtered=filtered.filter(c=>c.cargo===carsFilter.cargo);
+  if(carsFilter.rar)filtered=filtered.filter(c=>c.rar===carsFilter.rar);
+  filtered.sort((a,b)=>(parseInt(b.speed)||0)-(parseInt(a.speed)||0));
+  const rows=filtered.map(c=>{
     const cost=c.repCost?`${esc(c.repCost)} мат/1%`:'<span class="muted">нет данных</span>';
     const rep=c.repairable?cost:'<span class="danger">не чинится</span>';
     const spp=c.spp?esc(c.spp)+'%':'<span class="muted">?</span>';
@@ -692,18 +844,19 @@ function renderCars(){
   }).join('');
   return `
   <div class="intro"><b>Скорость</b> — насколько быстрее проходит рейд. <b>СПП</b> — средняя потеря прочности за рейд (чем меньше, тем реже чинить). <b>Тип</b> — что машина возит из рейда. Последний столбец — стоимость починки за 1% прочности.</div>
+  <div class="bar">
+    ${cargoTypes.map(([v,l])=>`<button class="filter ${carsFilter.cargo===v?'on':''}" onclick="setCarsCargoFilt('${v}')">${l}</button>`).join('')}
+    <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
+    ${rarsCar.map(([v,l])=>`<button class="filter ${carsFilter.rar===v?'on':''}" onclick="setCarsRar(${v})">${l}</button>`).join('')}
+    <span class="cnt">${filtered.length} шт.</span>
+  </div>
 
   <div class="calc">
     <div class="calc-head">▣ Калькулятор починки</div>
     <div class="calc-body">
       <div class="calc-field">
         <label>Машина</label>
-        <div style="display:flex;align-items:center;gap:10px">
-          <img id="calcCarIcon" style="width:44px;height:44px;object-fit:cover;background:var(--bg);border:1px solid var(--line);border-radius:3px;flex:none;display:none" alt="">
-          <select class="gsel" id="calcCar" onchange="runCalc()">
-            ${DB.cars.filter(c=>c.repairable&&c.repCost).map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join('')}
-          </select>
-        </div>
+        ${mkIconSel('calcCar', DB.cars.filter(c=>c.repairable&&c.repCost).map(c=>({val:c.name,label:c.name,icon:c.icon||''})), 'runCalc()')}
       </div>
       <div class="calc-field">
         <label>Текущая прочность, %</label>
@@ -725,12 +878,6 @@ function renderCars(){
 function runCalc(){
   const car=DB.cars.find(c=>c.name===document.getElementById('calcCar').value);
   if(!car){return;}
-  // update car icon
-  const carIcons2={};
-  allLootItems().forEach(it=>{ if(it.icon&&(it.statlbl==='Скорость'||/эвакуатор/i.test(it.name))) carIcons2[norm(it.name)]=it.icon; });
-  const iconKey=car.icon||carIcons2[norm(car.name)];
-  const iconEl=document.getElementById('calcCarIcon');
-  if(iconEl){const src=iconKey&&img(iconKey);iconEl.src=src||'';iconEl.style.display=src?'block':'none';}
   let cur=parseFloat(document.getElementById('calcCur').value);
   if(isNaN(cur))cur=0;
   cur=Math.max(0,Math.min(100,cur));
@@ -1012,9 +1159,66 @@ function renderProgress(){
   </div>`;
 }
 
+// ---------- СОГЛАШЕНИЕ ----------
+function renderTerms(){
+  return `
+  <div style="max-width:780px;margin:0 auto">
+    <h2 class="sec">Пользовательское соглашение</h2>
+
+    <div class="intro" style="margin-top:10px">
+      Используя этот сайт, вы соглашаетесь с условиями, изложенными ниже. Если вы не согласны — пожалуйста, покиньте сайт.
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:20px">
+
+      <div style="background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);border-radius:8px;padding:18px 20px">
+        <div style="font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px">§ 1 · Статус сайта</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--txt)">
+          <b>«Закрытый Сектор: Гид»</b> — неофициальный фанатский информационный ресурс, созданный и поддерживаемый игроками. Сайт не имеет никакого отношения к разработчикам и издателям игры, не аффилирован с ними и не одобрен ими официально.
+        </p>
+      </div>
+
+      <div style="background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);border-radius:8px;padding:18px 20px">
+        <div style="font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px">§ 2 · Права на контент игры</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--txt)">
+          Все названия, изображения, игровые механики, персонажи, локации и иные элементы, принадлежащие игре «Закрытый Сектор», являются интеллектуальной собственностью их правообладателей. Использование таких материалов на данном сайте осуществляется исключительно в информационных и некоммерческих целях в рамках фанатского творчества.
+        </p>
+      </div>
+
+      <div style="background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);border-radius:8px;padding:18px 20px">
+        <div style="font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px">§ 3 · Точность данных</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--txt)">
+          Информация на сайте предоставляется «как есть» на основе опыта игроков и актуальной на момент публикации версии игры. Данные могут устаревать после обновлений игры. Авторы сайта не несут ответственности за любые последствия, возникшие в результате использования представленной информации.
+        </p>
+      </div>
+
+      <div style="background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);border-radius:8px;padding:18px 20px">
+        <div style="font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px">§ 4 · Авторские права на материалы сайта</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--txt)">
+          Тексты, структура базы данных и оригинальные материалы сайта являются собственностью его авторов. Сайт может включать рекламу и иные формы монетизации. Третьим лицам запрещено копировать и воспроизводить материалы сайта в коммерческих целях без письменного согласия авторов. Некоммерческое распространение допускается при обязательном указании источника.
+        </p>
+      </div>
+
+      <div style="background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);border-radius:8px;padding:18px 20px">
+        <div style="font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px">§ 5 · Изменения</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--txt)">
+          Авторы оставляют за собой право вносить изменения в данное соглашение в любое время без предварительного уведомления. Продолжение использования сайта после внесения изменений означает ваше согласие с новой редакцией.
+        </p>
+      </div>
+
+    </div>
+
+    <div style="margin-top:24px;padding:14px 18px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;font-size:12px;color:var(--dim);line-height:1.6">
+      По вопросам и предложениям обращайтесь к авторам через официальное сообщество игры.<br>
+      Дата последнего обновления соглашения: <b style="color:var(--txt)">2026</b>
+    </div>
+  </div>`;
+}
+
 function render(){
   const m=$('#main');
-  if(activeTab==='gear'){m.innerHTML=`<section class="on">${renderGear()}</section>`;runGearCalc();}
+  if(activeTab==='terms')m.innerHTML=`<section class="on">${renderTerms()}</section>`;
+  else if(activeTab==='gear'){m.innerHTML=`<section class="on">${renderGear()}</section>`;runGearCalc();}
   else if(activeTab==='items')m.innerHTML=`<section class="on">${renderItems()}</section>`;
   else if(activeTab==='story')m.innerHTML=`<section class="on">${renderStory()}</section>`;
   else if(activeTab==='cars'){m.innerHTML=`<section class="on">${renderCars()}</section>`;runCalc();}

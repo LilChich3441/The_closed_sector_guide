@@ -441,6 +441,96 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 /* ── stat progress bars ── */
 .statbar{height:3px;background:var(--bg2);border-radius:2px;margin:3px 0 6px;overflow:hidden}
 .statfill{height:100%;border-radius:2px}
+/* ── best-for-location redesign ── */
+.bb2-hero{background:var(--panel2);border:1px solid var(--line);border-top:3px solid var(--acid);
+  border-radius:8px;padding:18px 20px 16px;margin-bottom:14px}
+.bb2-hero-title{font-family:'Saira Condensed',sans-serif;font-size:12px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px}
+.bb2-sel{width:100%;background:var(--bg2);border:1px solid var(--line2);color:var(--txt);
+  font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:600;padding:11px 14px;
+  border-radius:6px;cursor:pointer}
+.bb2-sel:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.18)}
+.bb2-hero-sub{font-size:12px;color:var(--dim);margin-top:8px}
+.bb2-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.bb2-stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center}
+.bb2-stat-val{font-family:'Saira Condensed',sans-serif;font-size:40px;font-weight:700;line-height:1;margin-bottom:4px}
+.bb2-stat.atk .bb2-stat-val{color:var(--hot)}
+.bb2-stat.def .bb2-stat-val{color:var(--steel)}
+.bb2-stat.hp  .bb2-stat-val{color:var(--r3)}
+.bb2-stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);
+  font-family:'Saira Condensed',sans-serif;font-weight:600}
+.bb2-build-hd{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px}
+.bb2-slots{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.bb2-slot{flex:1;min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
+.bb2-slot-type{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);
+  font-family:'Saira Condensed',sans-serif;font-weight:700}
+.bb2-slot-ico{width:60px;height:60px;object-fit:cover;background:var(--bg2);border:1px solid var(--line);border-radius:6px}
+.bb2-slot-ph{width:60px;height:60px;background:var(--bg2);border:1px dashed var(--line);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--dim)}
+.bb2-slot-name{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--txt);line-height:1.2}
+.bb2-slot-val{font-family:'Saira Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--acid)}
+.bb2-plus{font-size:18px;font-weight:700;color:var(--line2);flex:none;padding:0 2px;align-self:center}
+.bb2-stim{background:rgba(255,122,69,.1);border:1px solid rgba(255,122,69,.3);border-radius:6px;
+  padding:10px 14px;font-size:13px;color:var(--hot);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.bb2-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.bb2-opt-hd{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);font-weight:700;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.bb2-opt-row{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid rgba(66,59,44,.2)}
+.bb2-opt-row:last-child{border-bottom:none}
+.bb2-opt-ico{width:26px;height:26px;object-fit:cover;background:var(--bg2);border:1px solid var(--line);border-radius:3px;flex:none}
+.bb2-opt-ph{width:26px;height:26px;background:var(--bg2);border:1px dashed var(--line);border-radius:3px;flex:none;
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--dim)}
+.bb2-opt-name{flex:1;font-size:12px;font-family:'Saira Condensed',sans-serif;font-weight:600;
+  color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.bb2-opt-stat{font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--acid);flex:none}
+.bb2-combo-sep{font-size:10px;color:var(--dim);padding:0 1px;flex:none}
+.bb2-combo-total{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--steel);flex:none;min-width:26px;text-align:right}
+.bb2-empty{color:var(--dim);font-size:13px;padding:20px;text-align:center}
+@media(max-width:560px){
+  .bb2-stat-val{font-size:26px}
+  .bb2-opts{grid-template-columns:1fr}
+  .bb2-slot{min-width:90px}
+  .bb2-slot-ico,.bb2-slot-ph{width:48px;height:48px}
+  .bb2-slot-val{font-size:18px}
+}
+/* ── search highlight ── */
+.hl-w{background:rgba(232,184,75,.32);color:var(--txt);border-radius:2px;padding:0 1px}
+/* ── item popup ── */
+#imodal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:16px;
+  background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
+#imodal.open{display:flex;animation:fade .18s}
+#imodal-box{background:var(--panel);border:1px solid var(--line2);border-top:3px solid var(--acid);
+  border-radius:10px;max-width:480px;width:100%;position:relative;overflow:hidden;
+  max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.85)}
+#imodal-top{display:flex;gap:16px;padding:20px 20px 14px}
+#imodal-ico{width:88px;height:88px;object-fit:cover;background:var(--bg2);border:1px solid var(--line);border-radius:6px;flex:none}
+#imodal-ico-ph{width:88px;height:88px;background:var(--bg2);border:1px dashed var(--line);border-radius:6px;flex:none}
+#imodal-info{flex:1;min-width:0;padding-right:32px}
+#imodal-name{font-family:'Saira Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--txt);line-height:1.1;margin-bottom:8px}
+.imodal-sn{font-family:'Saira Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1}
+.imodal-sn.dmg{color:var(--hot)}.imodal-sn.arm{color:var(--steel)}
+.imodal-sl{font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+#imodal-desc{font-size:14px;line-height:1.65;color:var(--dim);padding:13px 20px;border-top:1px solid var(--line)}
+#imodal-locs{padding:12px 20px 18px;border-top:1px solid var(--line)}
+.imodal-lh{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:8px}
+.imloc{display:inline-flex;align-items:baseline;gap:5px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:4px;padding:4px 9px;margin:2px 4px 2px 0;font-family:'Saira Condensed',sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:.3px}
+.imloc-t{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+#imodal-close{position:absolute;top:10px;right:12px;background:rgba(255,255,255,.07);border:none;
+  color:var(--dim);font-size:16px;cursor:pointer;padding:4px 9px;line-height:1;border-radius:4px;transition:.15s}
+#imodal-close:hover{color:var(--txt);background:rgba(255,255,255,.13)}
+/* ── mobile table scroll ── */
+@media(max-width:900px) and (min-width:681px){
+  .tbl{display:block;overflow-x:auto}
+}
+/* ── extra small screens ── */
+@media(max-width:400px){
+  .filter{padding:5px 10px;font-size:11px}
+  .tab{padding:10px 11px;font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -458,6 +548,9 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <main id="main"></main>
 <footer>THE CLOSED SECTOR — фанатский справочник • данные могут меняться с патчами</footer>
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">▲</button>
+<div id="imodal" onclick="if(event.target===this)closeItemPopup()">
+  <div id="imodal-box"></div>
+</div>
 <script src="images.js"></script>
 <script src="data.js"></script>
 <script>
@@ -694,80 +787,35 @@ function renderGear(){
   if(gearFilter.cat==='best'){
     const locs=DB.locations||[];
     const curLoc=locs.find(l=>l.name===bestFilter.loc)||null;
-    let result='';
+    const locSel=`<div class="bb2-hero"><div class="bb2-hero-title">🎯 Подбор снаряжения для локации</div><select class="bb2-sel" id="bbLoc" onchange="setBestLoc(this.value)"><option value="">— выбери локацию —</option>${locs.map(l=>`<option value="${esc(l.name)}" ${l.name===bestFilter.loc?'selected':''}>${esc(l.name)}</option>`).join('')}</select><div class="bb2-hero-sub">Выбери локацию — сайт подберёт минимальное снаряжение для безопасного прохождения</div></div>`;
+    let content='';
     if(curLoc){
       const la=parseInt(curLoc.atk)||0;
       const defMatch=(curLoc.def||'').match(/(\d+)\s*\+\s*(\d+)/);
       const defArmor=defMatch?parseInt(defMatch[1]):0;
       const defHP=defMatch?parseInt(defMatch[2]):100;
       const needStim=defHP>100;
-      // Подходящее оружие
-      const viableWpns=DB.weapons.filter(w=>(parseInt(w.stat)||0)>=la)
-        .sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0));
-      // Комбинации броня+шлем
+      const viableWpns=DB.weapons.filter(w=>(parseInt(w.stat)||0)>=la).sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0));
       const noArmor={name:'Без брони',stat:'0',icon:'',rar:0};
       const noHelm={name:'Без шлема',stat:'0',icon:'',rar:0};
       const combos=[];
-      for(const arm of [noArmor,...DB.armor]){
-        for(const hlm of [noHelm,...DB.helmets]){
-          const t=(parseInt(arm.stat)||0)+(parseInt(hlm.stat)||0);
-          if(t>=defArmor)combos.push({arm,hlm,total:t,surplus:t-defArmor});
-        }
+      for(const arm of [noArmor,...DB.armor])for(const hlm of [noHelm,...DB.helmets]){
+        const t=(parseInt(arm.stat)||0)+(parseInt(hlm.stat)||0);
+        if(t>=defArmor)combos.push({arm,hlm,total:t,surplus:t-defArmor});
       }
       combos.sort((a,b)=>a.surplus-b.surplus||(a.arm.rar-b.arm.rar)||(a.hlm.rar-b.hlm.rar));
-      const minWpn=viableWpns[0];
-      const minCombo=combos[0];
-      const ico=(icon,ph)=>{const s=icon?img(icon):'';return s?`<img src="${s}" class="gicon" alt="">`:`<span style="font-size:1.2em">${ph}</span>`;};
-      const buildItem=(it,ph)=>`<div class="bb-item">${ico(it.icon,ph)}<div class="bb-item-info"><span class="bb-item-name">${esc(it.name)}</span><span class="bb-item-stat">${it.stat||'0'}</span>${it.rar?`<span class="chip rar${it.rar}" style="font-size:0.68em;padding:1px 5px">${RARN[it.rar]||''}</span>`:''}</div></div>`;
-      // Compact layout
-      const minBuildHtml=(viableWpns.length&&combos.length)?`
-      <div class="bb-minbuild">
-        <div class="bb-minbuild-label">🎯 Минимальный билд</div>
-        <div class="bb-minbuild-row">
-          ${buildItem(minWpn,'⚔')}
-          <div class="bb-plus">+</div>
-          ${buildItem(minCombo.arm,'🛡')}
-          <div class="bb-plus">+</div>
-          ${buildItem(minCombo.hlm,'⛑')}
-        </div>
-      </div>`:(!viableWpns.length&&!combos.length)?`<div class="intro muted">В базе нет подходящего снаряжения для этой локации.</div>`:'';
-      const wpnGrid=viableWpns.length?`
-      <div class="bb-block">
-        <div class="bb-block-hd">⚔ Оружие <span class="muted">≥ ${la} урона · ${viableWpns.length} вариантов</span></div>
-        <div class="bb-chip-list">${viableWpns.map(w=>`<div class="bb-chip">${ico(w.icon,'⚔')}<span class="bb-opt-name">${esc(w.name)}</span><b class="bb-opt-stat">${w.stat}</b><span class="chip rar${w.rar}">${RARN[w.rar]||''}</span></div>`).join('')}</div>
-      </div>`:'';
-      const armGrid=combos.length?`
-      <div class="bb-block">
-        <div class="bb-block-hd">🛡 Броня + шлем <span class="muted">≥ ${defArmor} защиты · топ-8</span></div>
-        <div class="bb-combo-list">${combos.slice(0,8).map(c=>`<div class="bb-combo-row">${ico(c.arm.icon,'🛡')}<span class="bb-opt-name">${esc(c.arm.name)}</span><b>${c.arm.stat||0}</b><span class="bb-opt-sep">+</span>${ico(c.hlm.icon,'⛑')}<span class="bb-opt-name">${esc(c.hlm.name)}</span><b>${c.hlm.stat||0}</b><span class="bb-opt-total">= ${c.total}</span></div>`).join('')}
-        </div>
-      </div>`:'';
-      result=`
-      <div class="bb-req">
-        <span class="bb-req-item">⚔ <b>≥ ${la}</b> урона</span>
-        <span class="bb-req-item">🛡 <b>≥ ${defArmor}</b> защиты</span>
-        <span class="bb-req-item">❤ <b>${defHP} HP</b></span>
-        ${needStim?`<span class="bb-req-stim">⚠ нужен стимулятор</span>`:''}
-      </div>
-      ${minBuildHtml}
-      <div class="bb-two-col">${wpnGrid}${armGrid}</div>`;
+      const si=(icon,ph)=>{const s=icon?img(icon):'';return s?`<img class="bb2-opt-ico" src="${s}" alt="">`:`<span class="bb2-opt-ph">${ph}</span>`;};
+      const bi=(icon,ph)=>{const s=icon?img(icon):'';return s?`<img class="bb2-slot-ico" src="${s}" alt="">`:`<div class="bb2-slot-ph">${ph}</div>`;};
+      const slot=(it,type,ph)=>`<div class="bb2-slot"><div class="bb2-slot-type">${type}</div>${bi(it.icon,ph)}<div class="bb2-slot-name">${esc(it.name)}</div><div class="bb2-slot-val">${it.stat||'0'}</div>${it.rar?`<span class="chip rar${it.rar}">${RARN[it.rar]||''}</span>`:''}</div>`;
+      const minWpn=viableWpns[0];const minCombo=combos[0];
+      const statsHtml=`<div class="bb2-stats"><div class="bb2-stat atk"><div class="bb2-stat-val">${la||'—'}</div><div class="bb2-stat-lbl">урон ≥</div></div><div class="bb2-stat def"><div class="bb2-stat-val">${defArmor||'—'}</div><div class="bb2-stat-lbl">защита ≥</div></div><div class="bb2-stat hp"><div class="bb2-stat-val">${defHP}</div><div class="bb2-stat-lbl">HP врагов</div></div></div>`;
+      const stimHtml=needStim?`<div class="bb2-stim">⚠ HP врагов &gt; 100 — возьми стимулятор или военную аптечку</div>`:'';
+      const minBuild=(minWpn&&minCombo)?`<div style="margin-bottom:16px"><div class="bb2-build-hd">Минимальный билд</div><div class="bb2-slots">${slot(minWpn,'Оружие','⚔')}<div class="bb2-plus">+</div>${slot(minCombo.arm,'Броня','🛡')}<div class="bb2-plus">+</div>${slot(minCombo.hlm,'Шлем','⛑')}</div></div>`:'';
+      const wpnRows=viableWpns.map(w=>`<div class="bb2-opt-row">${si(w.icon,'⚔')}<span class="bb2-opt-name">${esc(w.name)}</span><span class="chip rar${w.rar}" style="font-size:9px;padding:2px 5px;flex:none">${RARN[w.rar]||''}</span><span class="bb2-opt-stat">${w.stat}</span></div>`).join('');
+      const armRows=combos.slice(0,8).map(c=>`<div class="bb2-opt-row">${si(c.arm.icon,'🛡')}<span class="bb2-opt-name">${esc(c.arm.name)}</span><span class="bb2-combo-sep">+</span>${si(c.hlm.icon,'⛑')}<span class="bb2-opt-name">${esc(c.hlm.name)}</span><span class="bb2-combo-total">${c.total}</span></div>`).join('');
+      content=statsHtml+stimHtml+minBuild+`<div class="bb2-opts"><div><div class="bb2-opt-hd">⚔ Оружие <span class="muted">${viableWpns.length} вар.</span></div>${wpnRows||'<div class="bb2-empty">Нет вариантов</div>'}</div><div><div class="bb2-opt-hd">🛡 Броня + шлем <span class="muted">топ-8</span></div>${armRows||'<div class="bb2-empty">Нет вариантов</div>'}</div></div>`;
     }
-    return `
-    ${gcCalc}
-    <div class="bar">
-      ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
-    </div>
-    <div class="intro" style="margin-top:0">Выбери локацию — сайт подберёт минимальное снаряжение для безопасного прохождения.</div>
-    <div style="padding:4px 16px 0">
-      <div class="calc-field" style="max-width:380px">
-        <label>Локация</label>
-        <select class="gsel" id="bbLoc" onchange="setBestLoc(this.value)" style="width:100%">
-          <option value="">— выбери локацию —</option>
-          ${locs.map(l=>`<option value="${esc(l.name)}" ${l.name===bestFilter.loc?'selected':''}>${esc(l.name)}</option>`).join('')}
-        </select>
-      </div>
-    </div>
-    ${result}`;
+    return `${gcCalc}<div class="bar">${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}</div>${locSel}${content}`;
   }
 
   let items=gearItems();
@@ -1038,7 +1086,7 @@ function lootCard(it){
   if(it.rar)chips.push(`<span class="chip rar${it.rar}">${RARN[it.rar]||''}</span>`);
   if(it.heavy)chips.push(`<span class="chip norep">нужна машина</span>`);
   const stat=it.stat?`<div class="lstat"><b>${esc(it.stat)}</b> <span>${esc(it.statlbl)}</span></div>`:'';
-  return `<div class="lootitem rr${it.rar||1}">
+  return `<div class="lootitem rr${it.rar||1}" style="cursor:pointer" data-item-name="${esc(it.name)}" onclick="openItemPopup(this.dataset.itemName)">
     <img class="looticon" src="${img(it.icon)}" alt="" loading="lazy">
     <div class="lootbody">
       <div class="lootname">${esc(it.name)}</div>
@@ -1380,9 +1428,84 @@ function render(){
 function globalSearch(q){
   q=q.trim().toLowerCase();
   const nodes=document.querySelectorAll('[data-name]');
-  if(!q){nodes.forEach(n=>n.classList.remove('hidden'));return;}
+  if(!q){nodes.forEach(n=>n.classList.remove('hidden'));applyHL();return;}
   nodes.forEach(n=>{
     n.classList.toggle('hidden',!n.dataset.name.includes(q));
+  });
+  applyHL();
+}
+
+// ── item popup ──
+function findItemLocs(name){
+  const n=norm(name);const locs=[];
+  if(!DB.locLoot)return locs;
+  for(const loc in DB.locLoot){
+    const bl=DB.locLoot[loc];
+    if((bl.rec||[]).some(it=>norm(it.name)===n))locs.push({loc,type:'снаряга'});
+    if((bl.loot||[]).some(it=>norm(it.name)===n))locs.push({loc,type:'лут'});
+    if(bl.boss&&bl.boss.drop&&bl.boss.drop.some(it=>norm(it.name)===n))
+      locs.push({loc,type:'дроп '+(bl.boss.name||'босс')});
+  }
+  return locs;
+}
+function openItemPopup(name){
+  const n=norm(name);let it=null;
+  if(DB.locLoot){
+    outer:for(const loc in DB.locLoot){
+      const bl=DB.locLoot[loc];
+      for(const x of [...(bl.rec||[]),...(bl.loot||[]),...(bl.boss&&bl.boss.drop||[])]){
+        if(norm(x.name)===n){it=x;break outer;}
+      }
+    }
+  }
+  if(!it)return;
+  const locs=findItemLocs(name);
+  const chips=[];
+  if(it.rar)chips.push(`<span class="chip rar${it.rar}">${RARN[it.rar]||''}</span>`);
+  if(it.heavy)chips.push(`<span class="chip norep">нужна машина</span>`);
+  const icHtml=it.icon&&img(it.icon)
+    ?`<img id="imodal-ico" src="${img(it.icon)}" alt="">`
+    :`<div id="imodal-ico-ph"></div>`;
+  const statKind=it.statlbl==='Урон'?'dmg':'arm';
+  const statHtml=it.stat
+    ?`<div class="imodal-sn ${statKind}">${esc(it.stat)}</div><div class="imodal-sl">${esc(it.statlbl)}</div>`
+    :'';
+  const locsHtml=locs.length
+    ?`<div id="imodal-locs"><div class="imodal-lh">Где найти</div>${locs.map(l=>`<span class="imloc">${esc(l.loc)}<span class="imloc-t">${esc(l.type)}</span></span>`).join('')}</div>`
+    :'';
+  document.getElementById('imodal-box').innerHTML=`
+    <button id="imodal-close" onclick="closeItemPopup()" title="Закрыть">✕</button>
+    <div id="imodal-top">${icHtml}
+      <div id="imodal-info">
+        <div id="imodal-name">${esc(name)}</div>
+        ${statHtml}
+        <div class="chips">${chips.join('')}</div>
+      </div>
+    </div>
+    ${it.desc?`<div id="imodal-desc">${esc(it.desc)}</div>`:''}
+    ${locsHtml}`;
+  document.getElementById('imodal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeItemPopup(){
+  document.getElementById('imodal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeItemPopup();});
+
+// ── search highlight ──
+function applyHL(){
+  const q=norm(document.getElementById('globalSearch').value.trim());
+  document.querySelectorAll('.hl-w').forEach(el=>{
+    if(el.parentNode){el.parentNode.replaceChild(document.createTextNode(el.textContent),el);}
+  });
+  if(!q)return;
+  document.querySelectorAll('[data-name]:not(.hidden) .cname,[data-name]:not(.hidden) .lootname').forEach(el=>{
+    const text=el.textContent;
+    const lower=norm(text);
+    const idx=lower.indexOf(q);
+    if(idx<0)return;
+    el.innerHTML=esc(text.slice(0,idx))+`<span class="hl-w">${esc(text.slice(idx,idx+q.length))}</span>`+esc(text.slice(idx+q.length));
   });
 }
 

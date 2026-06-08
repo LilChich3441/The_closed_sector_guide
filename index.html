@@ -221,34 +221,25 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 /* transport filter */
 .cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:16px}
 /* ── Лучший билд для локации ── */
-.bb-req{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px 6px;align-items:center}
-.bb-req-item{font-size:0.88em;background:var(--bg2);padding:3px 9px;border-radius:4px;color:var(--txt)}
-.bb-req-stim{font-size:0.82em;font-weight:600;color:#d97706;background:rgba(217,119,6,.15);padding:3px 9px;border-radius:4px;border:1px solid rgba(217,119,6,.4)}
-.bb-minbuild{margin:8px 16px 10px;background:var(--panel2);border:1px solid var(--line2);border-left:3px solid var(--acid);border-radius:8px;padding:10px 14px}
-.bb-minbuild-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:8px;font-family:'Saira Condensed',sans-serif;font-weight:600}
-.bb-minbuild-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.bb-plus{color:var(--dim);font-size:1.1em;font-weight:700}
+.bb-req{display:flex;flex-wrap:wrap;gap:8px;padding:10px 16px;align-items:center}
+.bb-req-item{font-size:0.92em;color:var(--text)}
+.bb-req-stim{font-size:0.82em;font-weight:600;color:#d97706;background:rgba(217,119,6,.15);padding:2px 8px;border-radius:4px;border:1px solid rgba(217,119,6,.4)}
+.bb-section-title{font-weight:700;padding:12px 16px 6px;color:var(--acid);font-size:0.88em;text-transform:uppercase;letter-spacing:.6px}
+.bb-build{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px 14px;background:var(--calc);margin:0 16px 4px;border-radius:8px;border:1px solid var(--line2)}
+.bb-plus{color:var(--muted);font-size:1.3em;font-weight:bold}
 .bb-item{display:flex;align-items:center;gap:8px;background:var(--bg2);padding:6px 10px;border-radius:6px}
-.bb-item img,.bb-item span:first-child{width:32px;height:32px;object-fit:contain;display:flex;align-items:center;justify-content:center}
-.bb-item-info{display:flex;flex-direction:column;gap:1px}
-.bb-item-name{font-size:0.8em;color:var(--dim)}
-.bb-item-stat{font-size:1.1em;font-weight:700;color:var(--txt)}
-.bb-two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px 16px}
-.bb-block{background:var(--bg2);border-radius:8px;padding:10px 12px;min-width:0}
-.bb-block-hd{font-size:11px;font-weight:600;margin-bottom:7px;color:var(--acid);text-transform:uppercase;letter-spacing:.5px;font-family:'Saira Condensed',sans-serif}
-.bb-chip-list,.bb-combo-list{display:flex;flex-direction:column;gap:3px}
-.bb-chip,.bb-combo-row{display:flex;align-items:center;gap:6px;padding:4px 7px;background:var(--panel);border-radius:5px;font-size:0.83em}
-.bb-chip img,.bb-combo-row img{width:24px;height:24px;object-fit:contain;flex:none}
-.bb-chip>span:first-child,.bb-combo-row>span:first-child{width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;flex:none}
-.bb-opt-name{flex:1;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bb-opt-stat{font-weight:700;color:var(--txt);min-width:22px;text-align:right}
-.bb-opt-sep{color:var(--dim);padding:0 2px}
-.bb-opt-total{font-weight:700;color:#4ade80;min-width:40px;text-align:right}
-@media(max-width:680px){.bb-two-col{grid-template-columns:1fr}}
-.q-chapter{margin-bottom:24px}
-.q-chap-hd{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--line2)}
-.q-chap-title{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase}
-.q-chap-cnt{font-size:12px;color:var(--dim)}
+.bb-item img,.bb-item span:first-child{width:36px;height:36px;object-fit:contain;display:flex;align-items:center;justify-content:center}
+.bb-item-info{display:flex;flex-direction:column;gap:2px}
+.bb-item-name{font-size:0.83em;color:var(--muted)}
+.bb-item-stat{font-size:1.15em;font-weight:700;color:var(--title)}
+.bb-list{display:flex;flex-direction:column;gap:3px;padding:2px 16px 14px}
+.bb-opt{display:flex;align-items:center;gap:7px;padding:5px 9px;background:var(--bg2);border-radius:6px}
+.bb-opt img{width:26px;height:26px;object-fit:contain}
+.bb-opt>span:first-child{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;font-size:1.1em}
+.bb-opt-name{flex:1;font-size:0.86em;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+.bb-opt-stat{font-weight:700;color:var(--title);min-width:28px;text-align:right;font-size:0.9em}
+.bb-opt-sep{color:var(--muted);font-size:0.85em;padding:0 1px}
+.bb-opt-total{font-weight:700;color:#4ade80;min-width:50px;text-align:right;font-size:0.9em}
 .qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px}
 .qcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line2);padding:14px;display:flex;gap:14px;position:relative;transition:.15s;border-radius:6px}
 .qcard:hover{border-left-color:var(--acid);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.55),0 0 0 1px rgba(232,184,75,.08)}
@@ -258,6 +249,7 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .qface.ph{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:30px;font-family:'Saira Condensed',sans-serif}
 .qgiver{font-size:12px;color:var(--steel);letter-spacing:.5px;text-align:center;line-height:1.2;font-family:'Saira Condensed',sans-serif;font-weight:600;text-transform:uppercase}
 .qbody{flex:1;min-width:0}
+.qnum{position:absolute;top:10px;right:13px;font-family:'Saira Condensed',sans-serif;font-size:15px;color:var(--dim);letter-spacing:1px;font-weight:700}
 .qtitle{font-family:'Saira Condensed',sans-serif;font-size:21px;font-weight:600;letter-spacing:.5px;color:var(--txt);line-height:1.08;margin-bottom:9px;padding-right:34px}
 .qreq,.qrew{font-size:14px;margin-bottom:5px;line-height:1.45;display:flex;align-items:center;gap:8px}
 .qicon{width:34px;height:34px;object-fit:cover;background:var(--bg2);border:1px solid var(--line);flex:none}
@@ -379,8 +371,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 .locboss b{font-weight:700}
 .locboss-need{font-size:11px;font-weight:600;letter-spacing:.3px;color:var(--dim);text-transform:none}
 .locboss-need::before{content:'· ';color:var(--r5)}
-.locentry{display:inline-flex;align-items:baseline;gap:5px;font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.3px;background:rgba(199,154,224,.10);color:var(--r3);border:1px solid rgba(199,154,224,.3);border-radius:4px;padding:3px 8px;white-space:normal;margin-left:6px}
-.locentry i{font-size:9px;font-style:normal;letter-spacing:1.5px;color:var(--r3);font-weight:700;flex:none;text-transform:uppercase}
 /* ===== MOBILE ===== */
 @media(max-width:860px){
   .tagline{display:none}
@@ -595,6 +585,7 @@ function renderGear(){
     ['armor','Броня',DB.armor.length],
     ['helmets','Шлемы',DB.helmets.length],
     ['sets','Комплекты',setGroups().length],
+    ['compare','⚖ Сравнение',''],
     ['best','🎯 Для локации',''],
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
@@ -709,38 +700,33 @@ function renderGear(){
       const minCombo=combos[0];
       const ico=(icon,ph)=>{const s=icon?img(icon):'';return s?`<img src="${s}" class="gicon" alt="">`:`<span style="font-size:1.2em">${ph}</span>`;};
       const buildItem=(it,ph)=>`<div class="bb-item">${ico(it.icon,ph)}<div class="bb-item-info"><span class="bb-item-name">${esc(it.name)}</span><span class="bb-item-stat">${it.stat||'0'}</span>${it.rar?`<span class="chip rar${it.rar}" style="font-size:0.68em;padding:1px 5px">${RARN[it.rar]||''}</span>`:''}</div></div>`;
-      // Compact layout
-      const minBuildHtml=(viableWpns.length&&combos.length)?`
-      <div class="bb-minbuild">
-        <div class="bb-minbuild-label">🎯 Минимальный билд</div>
-        <div class="bb-minbuild-row">
-          ${buildItem(minWpn,'⚔')}
-          <div class="bb-plus">+</div>
-          ${buildItem(minCombo.arm,'🛡')}
-          <div class="bb-plus">+</div>
-          ${buildItem(minCombo.hlm,'⛑')}
-        </div>
-      </div>`:(!viableWpns.length&&!combos.length)?`<div class="intro muted">В базе нет подходящего снаряжения для этой локации.</div>`:'';
-      const wpnGrid=viableWpns.length?`
-      <div class="bb-block">
-        <div class="bb-block-hd">⚔ Оружие <span class="muted">≥ ${la} урона · ${viableWpns.length} вариантов</span></div>
-        <div class="bb-chip-list">${viableWpns.map(w=>`<div class="bb-chip">${ico(w.icon,'⚔')}<span class="bb-opt-name">${esc(w.name)}</span><b class="bb-opt-stat">${w.stat}</b><span class="chip rar${w.rar}">${RARN[w.rar]||''}</span></div>`).join('')}</div>
-      </div>`:'';
-      const armGrid=combos.length?`
-      <div class="bb-block">
-        <div class="bb-block-hd">🛡 Броня + шлем <span class="muted">≥ ${defArmor} защиты · топ-8</span></div>
-        <div class="bb-combo-list">${combos.slice(0,8).map(c=>`<div class="bb-combo-row">${ico(c.arm.icon,'🛡')}<span class="bb-opt-name">${esc(c.arm.name)}</span><b>${c.arm.stat||0}</b><span class="bb-opt-sep">+</span>${ico(c.hlm.icon,'⛑')}<span class="bb-opt-name">${esc(c.hlm.name)}</span><b>${c.hlm.stat||0}</b><span class="bb-opt-total">= ${c.total}</span></div>`).join('')}
-        </div>
-      </div>`:'';
       result=`
       <div class="bb-req">
-        <span class="bb-req-item">⚔ <b>≥ ${la}</b> урона</span>
-        <span class="bb-req-item">🛡 <b>≥ ${defArmor}</b> защиты</span>
-        <span class="bb-req-item">❤ <b>${defHP} HP</b></span>
-        ${needStim?`<span class="bb-req-stim">⚠ нужен стимулятор</span>`:''}
+        <span class="bb-req-item">⚔ нужно <b>≥ ${la}</b> урона</span>
+        <span class="bb-req-item">🛡 нужно <b>≥ ${defArmor}</b> защиты</span>
+        <span class="bb-req-item">❤ <b>${defHP}</b> HP</span>
+        ${needStim?`<span class="bb-req-stim">⚠ Нужен стимулятор (+50 HP)</span>`:''}
       </div>
-      ${minBuildHtml}
-      <div class="bb-two-col">${wpnGrid}${armGrid}</div>`;
+      ${(!viableWpns.length&&!combos.length)?`<div class="intro">В базе нет подходящего снаряжения для этой локации.</div>`:''}
+      ${(viableWpns.length&&combos.length)?`
+      <div class="bb-section-title">🎯 Минимальный билд</div>
+      <div class="bb-build">
+        ${buildItem(minWpn,'⚔')}
+        <div class="bb-plus">+</div>
+        ${buildItem(minCombo.arm,'🛡')}
+        <div class="bb-plus">+</div>
+        ${buildItem(minCombo.hlm,'⛑')}
+      </div>`:''}
+      ${viableWpns.length?`
+      <div class="bb-section-title">⚔ Оружие (нужно ≥ ${la} урона)</div>
+      <div class="bb-list">${viableWpns.map(w=>`
+        <div class="bb-opt">${ico(w.icon,'⚔')}<span class="bb-opt-name">${esc(w.name)}</span><span class="bb-opt-stat">${w.stat}</span><span class="chip rar${w.rar}" style="font-size:0.72em;padding:1px 6px">${RARN[w.rar]||''}</span></div>`).join('')}
+      </div>`:`<div class="intro muted" style="padding:8px 16px">Ни одно оружие в базе не достигает ${la} урона.</div>`}
+      ${combos.length?`
+      <div class="bb-section-title">🛡 Защита (нужно ≥ ${defArmor})<span style="font-size:0.8em;color:var(--muted);margin-left:8px">ближайшие к минимуму</span></div>
+      <div class="bb-list">${combos.slice(0,10).map(c=>`
+        <div class="bb-opt">${ico(c.arm.icon,'🛡')}<span class="bb-opt-name">${esc(c.arm.name)}</span><span class="bb-opt-stat">${c.arm.stat||0}</span><span class="bb-opt-sep">+</span>${ico(c.hlm.icon,'⛑')}<span class="bb-opt-name">${esc(c.hlm.name)}</span><span class="bb-opt-stat">${c.hlm.stat||0}</span><span class="bb-opt-total">= ${c.total}</span></div>`).join('')}
+      </div>`:`<div class="intro muted" style="padding:8px 16px">Ни одна комбинация брони не даёт ${defArmor} защиты.</div>`}`;
     }
     return `
     ${gcCalc}
@@ -1056,11 +1042,10 @@ function renderLocations(){
     const b=hasLoot?data.boss:null;
     const trig=b?triggerItem(b.cond):null;
     const bossTag=b?`<span class="locboss"><i>БОСС</i><b>${esc(b.name)}</b>${trig?`<span class="locboss-need">нужен «${esc(trig.name)}»</span>`:''}</span>`:'';
-    const entryTag=(hasLoot&&data.entry)?`<span class="locentry"><i>ключ</i>нужен «${esc(data.entry)}»</span>`:'';
     const head=`
       <div class="locrow" ${hasLoot?`onclick="toggleLoc(${idx})"`:''} ${hasLoot?'style="cursor:pointer"':''}>
         <div class="locname">${hasLoot?'<span class="locarrow" id="arr'+idx+'">▶</span>':'<span class="locarrow dim">·</span>'}${esc(l.name)}
-          ${hasLoot?'<span class="loctag">нажми — лут</span>':''}${bossTag}${entryTag}</div>
+          ${hasLoot?'<span class="loctag">нажми — лут</span>':''}${bossTag}</div>
         <div class="locstats">
           <span class="lst"><b class="danger">${esc(l.atk)}</b><i>атака</i></span>
           <span class="lst"><b class="safe">${esc(l['def'])}</b><i>защита</i></span>
@@ -1146,17 +1131,11 @@ function normGiver(g){return g==='лидер фракции'?'Лидер фра�
 function renderStory(){
   const all=DB.story.map(q=>({...q,giver:normGiver(q.giver)}));
   const givers=[...new Set(all.map(q=>q.giver).filter(Boolean))].sort();
-  let list=all;
+  let list=all.filter(q=>q.chap===storyFilter.chap);
   if(storyFilter.giver)list=list.filter(q=>q.giver===storyFilter.giver);
   if(storyFilter.opt)list=list.filter(q=>q.optional);
   const ch1n=all.filter(q=>q.chap===1).length, ch2n=all.filter(q=>q.chap===2).length, ch3n=all.filter(q=>q.chap===3).length;
-  const chapLabel={1:'Глава 1',2:'Глава 2',3:'Глава 3'};
-  const chapDesc={
-    1:'Начало игры — первые задания и разблокировка базовых механик.',
-    2:'Середина сюжета — организации, рынок, расследования.',
-    3:'Финал — восток и развязка истории.'
-  };
-  function qCard(q){
+  const cards=list.map(q=>{
     const chips=[];
     if(q.optional)chips.push(`<span class="chip opt">необязательный</span>`);
     if(q.unlock)chips.push(`<span class="chip unlock">★ ${esc(q.unlock)}</span>`);
@@ -1164,12 +1143,13 @@ function renderStory(){
     const icon=q.icon?`<img class="qicon" src="${img(q.icon)}" alt="">`:'';
     const rew=q.reward?`<div class="qrew"><span class="ql">Награда</span> ${esc(q.reward)}</div>`:`<div class="qrew muted"><span class="ql">Награда</span> —</div>`;
     const note=q.note?`<div class="qnote">${esc(q.note)}</div>`:'';
-    return `<div class="qcard ${q.optional?'isopt':''}" data-name="${esc((q.title+' '+q.giver+' '+q.req+' '+q.reward).toLowerCase())}">
+    return `<div class="qcard ${q.optional?'isopt':''}" data-name="${esc((q.num+' '+q.title+' '+q.giver+' '+q.req+' '+q.reward).toLowerCase())}">
       <div class="qleft">
         ${face}
         <div class="qgiver">${esc(q.giver)||'—'}</div>
       </div>
       <div class="qbody">
+        <div class="qnum">${esc(q.num)}</div>
         <div class="qtitle">${esc(q.title)}</div>
         <div class="qreq">${icon}<div><span class="ql">Сдать</span> ${esc(q.req)||'—'}</div></div>
         ${rew}
@@ -1177,34 +1157,24 @@ function renderStory(){
         ${note}
       </div>
     </div>`;
-  }
-  // Group by chapter, render chapter blocks
-  let html='';
-  for(const chap of [1,2,3]){
-    const chapList=list.filter(q=>q.chap===chap);
-    if(!chapList.length)continue;
-    const isIncomp=chap===3&&!storyFilter.giver&&!storyFilter.opt;
-    html+=`<div class="q-chapter">
-      <div class="q-chap-hd">
-        <span class="q-chap-title">${chapLabel[chap]}</span>
-        <span class="q-chap-cnt">${chapList.length} квест(ов)</span>
-      </div>
-      ${isIncomp?`<div class="gp gwarn" style="margin:0 0 10px;font-size:12px">⚠ Глава 3 ещё не завершена — квесты будут добавляться.</div>`:''}
-      <div class="qgrid">${chapList.map(qCard).join('')}</div>
-    </div>`;
-  }
-  if(!html)html=`<div class="intro muted">Квесты не найдены</div>`;
+  }).join('');
+  const incomplete = storyFilter.chap===3 ? `<div class="gp gwarn" style="margin:0 0 14px">⚠ Глава 3 ещё не завершена — статья дополняется, квесты будут добавляться.</div>` : '';
   return `
-  <div class="intro">Основная цепочка заданий по главам. <b>Сдать</b> — что нужно принести квестодателю, <b>Награда</b> — что получишь. Звёздочкой ★ отмечены квесты, открывающие важные механики (рынок, лагерь, организация).</div>
+  <div class="intro">Основная цепочка заданий по порядку. <b>Сдать</b> — что нужно принести квестодателю, <b>Награда</b> — что получишь. Звёздочкой ★ отмечены квесты, открывающие важные механики (рынок, лагерь, организация). Иконка показывает нужный предмет.</div>
   <div class="bar">
+    <button class="filter ${storyFilter.chap===1?'on':''}" onclick="setStoryChap(1)">Глава 1 <span class="muted">${ch1n}</span></button>
+    <button class="filter ${storyFilter.chap===2?'on':''}" onclick="setStoryChap(2)">Глава 2 <span class="muted">${ch2n}</span></button>
+    <button class="filter ${storyFilter.chap===3?'on':''}" onclick="setStoryChap(3)">Глава 3 <span class="muted">${ch3n}</span></button>
+    <span style="width:14px"></span>
     <select class="gsel" onchange="setStoryGiver(this.value)">
       <option value="">Все квестодатели</option>
       ${givers.map(g=>`<option value="${esc(g)}" ${storyFilter.giver===g?'selected':''}>${esc(g)}</option>`).join('')}
     </select>
-    <button class="filter ${storyFilter.opt?'on':''}" onclick="toggleStoryOpt()">Необязательные</button>
+    <button class="filter ${storyFilter.opt?'on':''}" onclick="toggleStoryOpt()">Только необязательные</button>
     <span class="cnt">${list.length} заданий</span>
   </div>
-  ${html}`;
+  ${incomplete}
+  <div class="qgrid">${cards}</div>`;
 }
 function setStoryChap(c){storyFilter.chap=c;render();}
 function setStoryGiver(g){storyFilter.giver=g;render();}

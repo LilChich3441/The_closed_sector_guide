@@ -438,6 +438,10 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   text-transform:uppercase;font-family:'Saira Condensed',sans-serif;
   border-top:1px solid var(--line);max-width:1240px;margin-left:auto;margin-right:auto;
   background:linear-gradient(0deg,rgba(232,184,75,.025),transparent)}
+/* ── stat progress bars ── */
+.statbar{height:3px;background:var(--bg2);border-radius:2px;margin:3px 0 6px;overflow:hidden}
+.statfill{height:100%;border-radius:2px}
+.statfill.dmg{background:var(--hot)}.statfill.arm{background:var(--steel)}.statfill.spd{background:var(--acid)}
 </style>
 </head>
 <body>
@@ -459,12 +463,17 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <script src="data.js"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
+const STAT_MAX={
+  dmg:Math.max(...DB.weapons.map(w=>parseInt(w.stat)||0)),
+  arm:Math.max(...[...DB.armor,...DB.helmets].map(a=>parseInt(a.stat)||0)),
+  spd:Math.max(...DB.cars.map(c=>parseInt(c.speed)||0))
+};
 const $=s=>document.querySelector(s);
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function fmt(n){return (n||0).toLocaleString('ru-RU');}
 function img(k){return (k&&typeof IMG!=='undefined'&&IMG[k])?IMG[k]:'';}
 
-let activeTab='gear';
+let activeTab=localStorage.getItem('cs_tab')||'gear';
 let gearFilter={cat:'weapons',rar:0};
 let itemsFilter={transport:0};
 let carsFilter={rar:0,cargo:''};
@@ -488,7 +497,7 @@ function buildTabs(){
   $('#tabs').innerHTML=TABS.map(t=>
     `<div class="tab ${t.id===activeTab?'on':''}" data-tab="${t.id}" onclick="switchTab('${t.id}')">${t.label}</div>`).join('');
 }
-function switchTab(id){activeTab=id;buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});}
+function switchTab(id){activeTab=id;localStorage.setItem('cs_tab',id);buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});}
 
 // ---------- CATALOG (GEAR) ----------
 function norm(s){return (s||'').replace(/[«»„""'']/g,'"').replace(/\s+/g,' ').trim().replace(/ё/g,'е').toLowerCase();}
@@ -580,8 +589,10 @@ function gearCard(it){
   const head=it.icon&&typeof img==='function'&&img(it.icon)
     ? `<div class="cnamerow"><img class="gicon" src="${img(it.icon)}" alt="" loading="lazy"><span class="cname">${esc(it.name)}</span></div>`
     : `<div class="cname">${esc(it.name)}</div>`;
+  const _pct=it.stat&&STAT_MAX[it.kind]?Math.round(parseInt(it.stat)/STAT_MAX[it.kind]*100):0;
+  const _bar=_pct>0?`<div class="statbar" title="${_pct}%"><div class="statfill ${it.kind}" style="width:${_pct}%"></div></div>`:'';
   const statline = (it.klbl||it.stat)
-    ? `<div class="statline"><span class="bignum ${it.kind}">${esc(it.stat)||'—'}</span><span class="statlbl">${esc(it.klbl||'')}</span></div>`
+    ? `<div class="statline"><span class="bignum ${it.kind}">${esc(it.stat)||'—'}</span><span class="statlbl">${esc(it.klbl||'')}</span></div>${_bar}`
     : '';
   return `<div class="card rr${it.rar}" data-name="${esc(it.name.toLowerCase())}">
     ${head}

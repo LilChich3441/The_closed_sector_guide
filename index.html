@@ -441,7 +441,6 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 /* ── stat progress bars ── */
 .statbar{height:3px;background:var(--bg2);border-radius:2px;margin:3px 0 6px;overflow:hidden}
 .statfill{height:100%;border-radius:2px}
-.statfill.dmg{background:var(--hot)}.statfill.arm{background:var(--steel)}.statfill.spd{background:var(--acid)}
 </style>
 </head>
 <body>
@@ -465,8 +464,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
   dmg:Math.max(...DB.weapons.map(w=>parseInt(w.stat)||0)),
-  arm:Math.max(...[...DB.armor,...DB.helmets].map(a=>parseInt(a.stat)||0)),
-  spd:Math.max(...DB.cars.map(c=>parseInt(c.speed)||0))
+  arm:Math.max(...[...DB.armor,...DB.helmets].map(a=>parseInt(a.stat)||0))
 };
 const $=s=>document.querySelector(s);
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -590,7 +588,8 @@ function gearCard(it){
     ? `<div class="cnamerow"><img class="gicon" src="${img(it.icon)}" alt="" loading="lazy"><span class="cname">${esc(it.name)}</span></div>`
     : `<div class="cname">${esc(it.name)}</div>`;
   const _pct=it.stat&&STAT_MAX[it.kind]?Math.round(parseInt(it.stat)/STAT_MAX[it.kind]*100):0;
-  const _bar=_pct>0?`<div class="statbar" title="${_pct}%"><div class="statfill ${it.kind}" style="width:${_pct}%"></div></div>`:'';
+  const _col=_pct<35?'#d94040':_pct<70?'#e8b84b':'#5cc87a';
+  const _bar=_pct>0?`<div class="statbar" title="${_pct}%"><div class="statfill" style="width:${_pct}%;background:${_col}"></div></div>`:'';
   const statline = (it.klbl||it.stat)
     ? `<div class="statline"><span class="bignum ${it.kind}">${esc(it.stat)||'—'}</span><span class="statlbl">${esc(it.klbl||'')}</span></div>${_bar}`
     : '';

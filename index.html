@@ -108,6 +108,18 @@ section.on{display:block}
 /* D.I.S.S. sets */
 .setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
 .setbox{border:1px solid var(--line);border-top:3px solid var(--r3);background:var(--panel);padding:11px 12px 13px;border-radius:8px}
+.setbonus{background:rgba(232,184,75,.05);border:1px solid rgba(232,184,75,.22);border-left:3px solid var(--acid);
+  border-radius:6px;padding:10px 12px;margin-bottom:12px}
+.setbonus-hd{font-family:'Saira Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--acid);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.setbonus-hd::before{content:'';flex:1;height:1px;background:rgba(232,184,75,.2)}
+.setbonus-item{display:flex;align-items:flex-start;gap:9px;margin-bottom:6px}
+.setbonus-item:last-child{margin-bottom:0}
+.setbonus-ico{font-size:15px;flex:none;width:22px;text-align:center;margin-top:2px}
+.setbonus-lbl{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--acid);
+  display:block;margin-bottom:2px;letter-spacing:.3px}
+.setbonus-desc{font-size:12.5px;color:var(--txt);line-height:1.5;display:block}
+.setbonus-desc b{color:var(--acid)}
 .setbox.rr4{border-top-color:var(--r4)}.setbox.rr5{border-top-color:var(--r5)}
 .sethead{display:flex;align-items:center;gap:8px;font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:10px}
 .setrar{margin-left:auto}
@@ -976,12 +988,25 @@ function renderGear(){
   if(gearFilter.cat==='sets'){
     let sets=setGroups();
     if(gearFilter.rar)sets=sets.filter(s=>s.rar===gearFilter.rar);
-    const setsHtml=`<div class="setrow">${sets.map(s=>`
-      <div class="setbox rr${s.rar}">
+    const setsHtml=`<div class="setrow">${sets.map(s=>{
+      const si=(DB.setInfo||{})[s.name];
+      const bHtml=si
+        ?`<div class="setbonus">
+          <div class="setbonus-hd">Бонус комплекта</div>
+          ${si.map(b=>`<div class="setbonus-item">
+            <span class="setbonus-ico">${b.icon}</span>
+            <div><span class="setbonus-lbl">${esc(b.label)}</span>
+            <span class="setbonus-desc">${esc(b.desc)}</span></div>
+          </div>`).join('')}
+        </div>`
+        :'';
+      return `<div class="setbox rr${s.rar}">
         <div class="sethead">${esc(s.name.replace(/^\(\d+\)\s*/,''))}
           <span class="setrar chip rar${s.rar}">${RARN[s.rar]||''}</span></div>
+        ${bHtml}
         <div class="grid">${s.parts.map(gearCard).join('')}</div>
-      </div>`).join('')}</div>`;
+      </div>`;
+    }).join('')}</div>`;
     return `
     ${gcCalc}
     <div class="intro"><b>Комплекты D.I.S.S.</b> — броня из трёх частей: перчатки (урон), бронекостюм и шлем (защита). Здесь видны полные сеты целиком по уровням улучшения Mk1 → Mk2 → Mk3. Эти же предметы есть и в разделах «Оружие», «Броня», «Шлемы».</div>

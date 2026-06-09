@@ -772,7 +772,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <div class="tabs" id="tabs"></div>
 <main id="main"></main>
 <div id="progress-bar"></div>
-<footer>THE CLOSED SECTOR — фанатский справочник • данные могут меняться с патчами</footer>
+<footer>THE CLOSED SECTOR — фанатский справочник • данные могут меняться с патчами<br><span style="font-size:11px;opacity:.45">Неофициальный фан-сайт, не связан с Akari Group. The Closed Sector является торговым знаком Akari Group.</span></footer>
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">▲</button>
 <div id="imodal" onclick="if(event.target===this)closeItemPopup()">
   <div id="imodal-box"></div>
@@ -1787,7 +1787,7 @@ function renderCraft(){
   const hint=`<div class="cft-hint-row"><div class="cft-tile-hint">Нажми — рецепт&nbsp;&nbsp;•&nbsp;&nbsp;«+» — сравнить&nbsp;&nbsp;•&nbsp;&nbsp;📍 — где найти</div><button class="cft-sel-all-btn${selAll?' on':''}" onclick="craftSelAll()">${selAll?'✓ Снять всё':'Выбрать все'}</button></div>`;
   return `${warn}${hint}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
 }
-function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
+function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
 function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
 function setCraftItem(i){
   craftSelected.clear();

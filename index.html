@@ -504,6 +504,24 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .bb2-slot-ico,.bb2-slot-ph{width:48px;height:48px}
   .bb2-slot-val{font-size:18px}
 }
+/* ── craft section ── */
+.craft-warn{background:rgba(255,122,69,.1);border:1px solid rgba(255,122,69,.4);border-left:3px solid var(--hot);
+  border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.6;color:var(--txt)}
+.craft-warn strong{color:var(--hot);display:block;margin-bottom:3px;font-size:15px}
+.craft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.craft-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.craft-card-hd{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.craft-card-ico{width:44px;height:44px;background:var(--bg2);border:1px solid var(--line);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;overflow:hidden}
+.craft-card-ico img{width:100%;height:100%;object-fit:cover}
+.craft-card-lv{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:2px}
+.craft-card-title{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--txt);line-height:1.2}
+.craft-ing{list-style:none;padding:0;margin:0}
+.craft-ing li{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(66,59,44,.2);font-size:13px;color:var(--txt)}
+.craft-ing li:last-child{border-bottom:none}
+.craft-ing-prev{background:rgba(232,184,75,.14);border:1px solid rgba(232,184,75,.3);border-radius:4px;
+  padding:2px 8px;font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--acid);white-space:nowrap}
+.craft-ing-dot{width:5px;height:5px;border-radius:50%;background:var(--line2);flex:none;margin-left:2px}
 /* ── search highlight ── */
 .hl-w{background:rgba(232,184,75,.32);color:var(--txt);border-radius:2px;padding:0 1px}
 /* ── item popup ── */
@@ -579,9 +597,11 @@ let itemsFilter={transport:0};
 let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
 let bestFilter={loc:''};
+let craftFilter={cat:'armor'};
 
 const TABS=[
   {id:'gear',label:'⚙ Снаряжение'},
+  {id:'craft',label:'🔨 Крафт'},
   {id:'items',label:'📦 Предметы'},
   {id:'cars',label:'🚗 Транспорт'},
   {id:'story',label:'📋 Задания'},
@@ -1419,10 +1439,31 @@ function renderTerms(){
   </div>`;
 }
 
+function renderCraft(){
+  const cats=[
+    ['armor','🛡 Броня'],['garage','🔧 Гараж'],['weapons','⚔ Оружие'],['helmets','⛑ Шлемы'],['workshop','🔩 Мастерская'],
+  ];
+  const items=(DB.crafting||[]).filter(x=>x.cat===craftFilter.cat).sort((a,b)=>a.level-b.level);
+  const bar=`<div class="bar">${cats.map(c=>`<button class="filter ${craftFilter.cat===c[0]?'on':''}" onclick="setCraftCat('${c[0]}')">${c[1]}</button>`).join('')}</div>`;
+  const warn=`<div class="craft-warn"><strong>⚠ Не применяй верстак сразу после создания!</strong>Если использовать только что скрафченный верстак — придётся крафтить его заново. Сначала сохрани, потом применяй. Для каждого следующего уровня нужен верстак предыдущего.</div>`;
+  const cards=items.map(wb=>{
+    const icoSrc=wb.icon?img(wb.icon):'';
+    const icoHtml=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
+    const ings=wb.ingredients.map(ig=>ig.prev
+      ?`<li><span class="craft-ing-prev">⬆ ${esc(ig.name)}</span></li>`
+      :`<li><span class="craft-ing-dot"></span>${esc(ig.name)}</li>`
+    ).join('');
+    return `<div class="craft-card"><div class="craft-card-hd"><div class="craft-card-ico">${icoHtml}</div><div><div class="craft-card-lv">Уровень ${wb.level}</div><div class="craft-card-title">${esc(wb.name)}</div></div></div><ul class="craft-ing">${ings}</ul></div>`;
+  }).join('');
+  return `${bar}${warn}<div class="craft-grid">${cards||'<div class="intro muted">Нет данных</div>'}</div>`;
+}
+function setCraftCat(c){craftFilter.cat=c;render();}
+
 function render(){
   const m=$('#main');
   if(activeTab==='terms')m.innerHTML=`<section class="on">${renderTerms()}</section>`;
   else if(activeTab==='gear'){m.innerHTML=`<section class="on">${renderGear()}</section>`;runGearCalc();}
+  else if(activeTab==='craft')m.innerHTML=`<section class="on">${renderCraft()}</section>`;
   else if(activeTab==='items')m.innerHTML=`<section class="on">${renderItems()}</section>`;
   else if(activeTab==='story')m.innerHTML=`<section class="on">${renderStory()}</section>`;
   else if(activeTab==='cars'){m.innerHTML=`<section class="on">${renderCars()}</section>`;runCalc();}

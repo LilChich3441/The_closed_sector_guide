@@ -327,6 +327,9 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 html{scrollbar-color:var(--line2) var(--bg2)}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.tab:focus-visible,.filter:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
 .tab,.filter,.gsel{-webkit-tap-highlight-color:transparent}
+#progress-bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--acid);
+  z-index:9999;pointer-events:none;transition:width .08s linear;
+  box-shadow:0 0 6px rgba(232,184,75,.4);border-radius:0 1px 1px 0}
 #toTop{position:fixed;right:20px;bottom:20px;z-index:80;width:46px;height:46px;border:none;cursor:pointer;
   background:var(--acid);color:var(--bg);font-size:20px;font-weight:700;display:none;align-items:center;justify-content:center;
   clip-path:polygon(0 0,100% 0,100% 78%,50% 100%,0 78%);box-shadow:0 4px 16px rgba(0,0,0,.5);transition:.15s}
@@ -616,6 +619,13 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   color:var(--acid);white-space:nowrap;flex:none;padding:1px 6px;
   border:1px solid rgba(232,184,75,.4);border-radius:3px;background:rgba(232,184,75,.12);min-width:28px;text-align:center}
 .cft-hint-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.gear-sticky-filters{position:sticky;top:41px;z-index:40;
+  background:rgba(22,20,15,.97);backdrop-filter:blur(8px);
+  margin:0 -18px;padding:0 18px 2px;
+  box-shadow:0 4px 16px rgba(0,0,0,.35)}
+@media(max-width:640px){
+  .gear-sticky-filters{top:50px;margin:0 -14px;padding:0 14px 2px}
+}
 .cft-tile-hint{font-size:11px;color:var(--dim);opacity:.7;flex:1;min-width:0}
 .cft-sel-all-btn{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;
   letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;
@@ -650,7 +660,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 #imodal.open #imodal-box{animation:popup-in .28s cubic-bezier(.22,.8,.32,1)}
 #imodal-box{background:var(--panel);border:1px solid var(--line2);border-top:3px solid var(--acid);
   border-radius:10px;max-width:480px;width:100%;position:relative;overflow:hidden;
-  max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.85)}
+  max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.85);
+  overscroll-behavior:none;touch-action:pan-y}
 #imodal-top{display:flex;gap:16px;padding:20px 20px 14px}
 #imodal-ico{width:88px;height:88px;object-fit:cover;background:var(--bg2);border:1px solid var(--line);border-radius:6px;flex:none}
 #imodal-ico-ph{width:88px;height:88px;background:var(--bg2);border:1px dashed var(--line);border-radius:6px;flex:none}
@@ -698,7 +709,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 #mob-sheet{position:fixed;left:0;right:0;bottom:0;z-index:120;
   background:var(--panel);border-radius:16px 16px 0 0;border-top:1px solid var(--line2);
   padding:0 14px 28px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 -12px 48px rgba(0,0,0,.7)}
+  box-shadow:0 -12px 48px rgba(0,0,0,.7);max-height:82vh;overflow-y:auto;overscroll-behavior:contain}
 #mob-sheet.open{transform:translateY(0)}
 .mob-sheet-grip{width:36px;height:4px;border-radius:2px;background:var(--line2);
   margin:12px auto 14px}
@@ -748,6 +759,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 </div>
 <div class="tabs" id="tabs"></div>
 <main id="main"></main>
+<div id="progress-bar"></div>
 <footer>THE CLOSED SECTOR — фанатский справочник • данные могут меняться с патчами</footer>
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">▲</button>
 <div id="imodal" onclick="if(event.target===this)closeItemPopup()">
@@ -1048,12 +1060,14 @@ function renderGear(){
   return `
   ${gcCalc}
   <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания. Части комплектов D.I.S.S. собраны целиком во вкладке «Комплекты».</div>
+  <div class="gear-sticky-filters">
   <div class="bar">
     ${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
   </div>
   <div class="bar" style="margin-top:-8px">
     ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
     <span class="cnt" style="margin-left:auto">${items.length} шт.</span>
+  </div>
   </div>
   <button class="bb2-nav" onclick="setGearCat('best')">🎯 Подбор снаряжения для локации <span class="bb2-nav-arr">→</span></button>
   <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
@@ -1913,10 +1927,67 @@ function applyHL(){
   });
 }
 
+// ── Swipe left/right for tabs (mobile) ──
+let _swX=0,_swY=0,_swLk=false;
+document.addEventListener('touchstart',e=>{
+  _swX=e.touches[0].clientX;
+  _swY=e.touches[0].clientY;
+  _swLk=false;
+},{passive:true});
+document.addEventListener('touchmove',e=>{
+  if(_swLk)return;
+  const dx=e.touches[0].clientX-_swX,dy=e.touches[0].clientY-_swY;
+  if(Math.abs(dy)>Math.abs(dx)+6)_swLk=true;
+},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(_swLk)return;
+  const dx=e.changedTouches[0].clientX-_swX,dy=e.changedTouches[0].clientY-_swY;
+  if(Math.abs(dx)<72||Math.abs(dx)<Math.abs(dy)*1.8)return;
+  if(document.getElementById('imodal').classList.contains('open'))return;
+  if(document.getElementById('mob-sheet').classList.contains('open'))return;
+  const idx=TABS.findIndex(t=>t.id===activeTab);
+  if(dx<0&&idx<TABS.length-1)switchTab(TABS[idx+1].id);
+  else if(dx>0&&idx>0)switchTab(TABS[idx-1].id);
+},{passive:true});
+// ── Swipe down to close item popup ──
+(function(){
+  const _ib=document.getElementById('imodal-box');
+  let _pSY=0,_pTop=false;
+  _ib.addEventListener('touchstart',e=>{
+    _pSY=e.touches[0].clientY;
+    _pTop=_ib.scrollTop<4;
+  },{passive:true});
+  _ib.addEventListener('touchmove',e=>{
+    if(!_pTop)return;
+    const dy=e.touches[0].clientY-_pSY;
+    if(dy>0){
+      _ib.style.transform=`translateY(${Math.min(dy*.55,140)}px)`;
+      _ib.style.opacity=String(Math.max(1-dy/280,.35));
+      _ib.style.transition='none';
+    }
+  },{passive:true});
+  _ib.addEventListener('touchend',e=>{
+    if(!_pTop)return;
+    const dy=e.changedTouches[0].clientY-_pSY;
+    _ib.style.transition='transform .22s ease,opacity .22s ease';
+    if(dy>85){
+      _ib.style.transform='translateY(130%)';
+      _ib.style.opacity='0';
+      setTimeout(closeItemPopup,210);
+    }else{
+      _ib.style.transform='';
+      _ib.style.opacity='';
+    }
+    setTimeout(()=>{_ib.style.transition='';},260);
+  },{passive:true});
+})();
 buildTabs();render();
 window.addEventListener('scroll',()=>{
   const b=document.getElementById('toTop');
   if(b)b.classList.toggle('show',window.scrollY>400);
+  const pb=document.getElementById('progress-bar');
+  if(pb){const h=document.documentElement.scrollHeight-window.innerHeight;
+    pb.style.width=(h>0?Math.min(window.scrollY/h*100,100):0)+'%';}
 });
 </script>
 </body>

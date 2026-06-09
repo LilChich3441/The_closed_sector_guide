@@ -333,6 +333,26 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 #toTop:hover{background:var(--txt)}
 #toTop.show{display:flex}
 /* ===== LOCATIONS + LOOT ===== */
+/* ── location item filter ── */
+.loc-search-wrap{margin-bottom:12px}
+.loc-search-box{display:flex;align-items:center;background:var(--panel);border:1px solid var(--line);
+  border-radius:8px;padding:0 12px;gap:8px;transition:.15s}
+.loc-search-box:focus-within{border-color:rgba(232,184,75,.5);box-shadow:0 0 0 2px rgba(232,184,75,.1)}
+.loc-search-ico{font-size:15px;opacity:.5;flex:none}
+.loc-search-in{flex:1;background:transparent;border:none;outline:none;padding:11px 0;
+  font-size:14px;color:var(--txt);font-family:inherit}
+.loc-search-in::placeholder{color:var(--dim)}
+.loc-search-clear{background:transparent;border:none;color:var(--dim);font-size:16px;
+  cursor:pointer;padding:4px 0;line-height:1;flex:none;transition:.12s}
+.loc-search-clear:hover{color:var(--txt)}
+.loc-found-banner{background:rgba(232,184,75,.07);border:1px solid rgba(232,184,75,.3);
+  border-radius:7px;padding:9px 14px;font-size:13px;color:var(--txt);margin-bottom:12px}
+.loc-found-empty{background:rgba(255,100,100,.06);border-color:rgba(255,100,100,.25);color:var(--dim)}
+.loccard{transition:opacity .18s,filter .18s}
+.loccard.loc-faded{opacity:.22;filter:grayscale(.6);pointer-events:none}
+.loccard.loc-hit{border-color:rgba(232,184,75,.55)!important;box-shadow:0 0 0 1px rgba(232,184,75,.2)}
+.lootitem.loot-match{border-color:var(--acid)!important;box-shadow:0 0 0 2px rgba(232,184,75,.22)!important;
+  background:rgba(232,184,75,.06)!important}
 .loclist{display:flex;flex-direction:column;gap:8px}
 .loccard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid2);border-radius:6px;overflow:hidden}
 .locrow{display:flex;align-items:center;gap:16px;padding:14px 16px;flex-wrap:wrap;transition:background .15s}
@@ -464,10 +484,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   letter-spacing:1.5px;text-transform:uppercase;padding:13px 20px;border-radius:8px;
   cursor:pointer;text-align:left;margin-top:18px;transition:.18s;
   display:flex;align-items:center;justify-content:space-between;gap:8px;
-  animation:nav-pulse 2.8s ease-in-out infinite;position:relative}
-.bb2-nav::before{content:'';position:absolute;inset:0;border-radius:8px;
-  background:linear-gradient(90deg,transparent 0%,rgba(232,184,75,.06) 50%,transparent 100%);
-  pointer-events:none}
+  animation:nav-pulse 2.8s ease-in-out infinite;margin-bottom:12px}
 .bb2-nav:hover{background:rgba(232,184,75,.15);border-color:var(--acid);
   animation:none;box-shadow:0 0 28px rgba(232,184,75,.35),0 0 0 2px rgba(232,184,75,.5)}
 .bb2-nav.on{background:rgba(232,184,75,.13);border-color:var(--acid);
@@ -583,7 +600,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 /* ── ingredients grid ── */
 .cft-ings{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px}
 .cft-ing-item{display:flex;align-items:center;gap:8px;padding:7px 10px;
-  background:var(--bg2);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  background:var(--bg2);border:1px solid var(--line);border-radius:6px}
 .cft-ing-item--prev{border-color:rgba(232,184,75,.35);background:rgba(232,184,75,.06)}
 .cft-ing-ico{width:30px;height:30px;background:var(--panel);border:1px solid var(--line);border-radius:4px;
   flex:none;display:flex;align-items:center;justify-content:center;font-size:14px;overflow:hidden}
@@ -598,7 +615,14 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .cft-ing-cnt{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;
   color:var(--acid);white-space:nowrap;flex:none;padding:1px 6px;
   border:1px solid rgba(232,184,75,.4);border-radius:3px;background:rgba(232,184,75,.12);min-width:28px;text-align:center}
-.cft-tile-hint{font-size:11px;color:var(--dim);margin-bottom:10px;opacity:.7}
+.cft-hint-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cft-tile-hint{font-size:11px;color:var(--dim);opacity:.7;flex:1;min-width:0}
+.cft-sel-all-btn{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;
+  color:var(--dim);background:transparent;border:1px solid var(--line);
+  border-radius:5px;padding:4px 11px;cursor:pointer;transition:.13s;flex:none}
+.cft-sel-all-btn:hover{border-color:var(--line2);color:var(--txt)}
+.cft-sel-all-btn.on{border-color:rgba(232,184,75,.5);color:var(--acid);background:rgba(232,184,75,.07)}
 /* ── craft donate tip ── */
 .cft-tip{display:flex;gap:16px;align-items:flex-start;background:var(--panel);
   border:1px solid rgba(143,196,168,.3);border-left:3px solid var(--steel);
@@ -750,6 +774,7 @@ let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
 let bestFilter={loc:''};
 let craftSelected=new Set([0]);
+let locItemFilter='';
 
 const TABS=[
   {id:'gear',label:'⚙ Снаряжение'},
@@ -1282,11 +1307,12 @@ function runCalc(){
 
 // ---------- LOCATIONS ----------
 function lootCard(it){
+  const matched=locItemFilter&&norm(it.name).includes(locItemFilter);
   const chips=[];
   if(it.rar)chips.push(`<span class="chip rar${it.rar}">${RARN[it.rar]||''}</span>`);
   if(it.heavy)chips.push(`<span class="chip norep">нужна машина</span>`);
   const stat=it.stat?`<div class="lstat"><b>${esc(it.stat)}</b> <span>${esc(it.statlbl)}</span></div>`:'';
-  return `<div class="lootitem rr${it.rar||1}" style="cursor:pointer" data-item-name="${esc(it.name)}" onclick="openItemPopup(this.dataset.itemName)">
+  return `<div class="lootitem rr${it.rar||1}${matched?' loot-match':''}" style="cursor:pointer" data-item-name="${esc(it.name)}" onclick="openItemPopup(this.dataset.itemName)">
     <img class="looticon" src="${img(it.icon)}" alt="" loading="lazy">
     <div class="lootbody">
       <div class="lootname">${esc(it.name)}</div>
@@ -1308,16 +1334,28 @@ function renderLocations(){
     const name=m[1].trim();
     return {name, icon:iconByName[norm(name)]||''};
   }
+  // build item→locs reverse map for current filter
+  const locMatchSet=new Set();
+  if(locItemFilter&&DB.locLoot){
+    DB.locations.forEach((l,i)=>{
+      const bl=DB.locLoot[l.name];
+      if(!bl)return;
+      const all=[...(bl.rec||[]),...(bl.loot||[]),...((bl.boss&&bl.boss.drop)||[])];
+      if(all.some(it=>it&&norm(it.name).includes(locItemFilter)))locMatchSet.add(i);
+    });
+  }
   const cards=DB.locations.map((l,idx)=>{
     const data=DB.locLoot&&DB.locLoot[l.name];
     const hasLoot=!!data;
+    const isMatch=locItemFilter?locMatchSet.has(idx):false;
+    const isFaded=locItemFilter&&!locMatchSet.has(idx);
     const b=hasLoot?data.boss:null;
     const trig=b?triggerItem(b.cond):null;
     const bossTag=b?`<span class="locboss"><i>БОСС</i><b>${esc(b.name)}</b>${trig?`<span class="locboss-need">нужен «${esc(trig.name)}»</span>`:''}</span>`:'';
     const entryTag=(hasLoot&&data.entry)?`<span class="locentry"><i>ключ</i>нужен «${esc(data.entry)}»</span>`:'';
     const head=`
       <div class="locrow" ${hasLoot?`onclick="toggleLoc(${idx})"`:''} ${hasLoot?'style="cursor:pointer"':''}>
-        <div class="locname">${hasLoot?'<span class="locarrow" id="arr'+idx+'">▶</span>':'<span class="locarrow dim">·</span>'}${esc(l.name)}
+        <div class="locname">${hasLoot?`<span class="locarrow" id="arr${idx}">${isMatch?'▼':'▶'}</span>`:'<span class="locarrow dim">·</span>'}${esc(l.name)}
           ${hasLoot?'<span class="loctag">нажми — лут</span>':''}${bossTag}${entryTag}</div>
         <div class="locstats">
           <span class="lst"><b class="danger">${esc(l.atk)}</b><i>атака</i></span>
@@ -1345,7 +1383,7 @@ function renderLocations(){
         ${b.drop&&b.drop.length?`<div class="bossdrop">Добыча с босса</div>
         <div class="lootgrid">${b.drop.map(lootCard).join('')}</div>`:''}
       </div>`:'';
-      body=`<div class="locloot" id="loot${idx}">
+      body=`<div class="locloot${isMatch?' open':''}" id="loot${idx}">
         <div class="lootsec">Рекомендуемое снаряжение в рейд</div>
         <div class="lootgrid">${data.rec.map(lootCard).join('')}</div>
         ${bossBlk}
@@ -1353,14 +1391,27 @@ function renderLocations(){
         <div class="lootgrid">${data.loot.map(lootCard).join('')}</div>
       </div>`;
     }
-    return `<div class="loccard" data-name="${esc(l.name.toLowerCase())}${b?' '+esc(b.name.toLowerCase()):''}">${head}${body}</div>`;
+    return `<div class="loccard${isMatch?' loc-hit':isFaded?' loc-faded':''}" data-name="${esc(l.name.toLowerCase())}${b?' '+esc(b.name.toLowerCase()):''}">${head}${body}</div>`;
   }).join('');
   const brows=DB.bosses.map(b=>`<tr data-name="${esc(b.name.toLowerCase())}">
     <td class="tname"><span class="dotr d5"></span>${esc(b.name)}</td>
     <td class="num danger" data-label="Мин. атака">${esc(b.atk)}</td>
     <td class="num safe" data-label="Мин. защита">${esc(b['def'])}</td>
   </tr>`).join('');
+  const foundBanner=locItemFilter&&locMatchSet.size>0
+    ?`<div class="loc-found-banner">📍 <b>${locMatchSet.size}</b> локац${locMatchSet.size===1?'ия':locMatchSet.size<5?'ии':'ий'} с предметом <b>${esc([...locMatchSet].map(i=>DB.locations[i].name).join(', '))}</b></div>`
+    :locItemFilter?`<div class="loc-found-banner loc-found-empty">Предмет не найден ни на одной локации</div>`:'';
   return `
+  <div class="loc-search-wrap">
+    <div class="loc-search-box">
+      <span class="loc-search-ico">🔍</span>
+      <input class="loc-search-in" id="locItemSearch" type="text"
+        placeholder="Найти предмет на локациях..." value="${esc(locItemFilter)}"
+        oninput="setLocFilter(this.value)">
+      ${locItemFilter?'<button class="loc-search-clear" onclick="clearLocFilter()">✕</button>':''}
+    </div>
+  </div>
+  ${foundBanner}
   <div class="intro">Минимальные <b class="danger">атака</b> и <b class="safe">защита</b> отряда для входа. Защита = «броня + запас HP/стимулятор». Время рейда дано для <b>взрослого бойца (25–40 лет)</b>. <b class="gold">Нажми на локацию</b>, где есть пометка «лут» — раскроется список снаряжения и добычи.</div>
   <div class="loclist">${cards}</div>
   <h2 class="sec" style="margin-top:26px">Боссы</h2>
@@ -1369,6 +1420,16 @@ function renderLocations(){
     <thead><tr><th>Босс</th><th class="num">Мин. атака</th><th class="num">Мин. защита</th></tr></thead>
     <tbody>${brows}</tbody>
   </table>`;
+}
+function setLocFilter(v){
+  locItemFilter=norm(v||'');
+  render();
+}
+function clearLocFilter(){
+  locItemFilter='';
+  const el=document.getElementById('locItemSearch');
+  if(el)el.value='';
+  render();
 }
 function toggleLoc(idx){
   const el=document.getElementById('loot'+idx);
@@ -1681,7 +1742,8 @@ function renderCraft(){
     const resetBtn=`<button class="cft-reset-btn" onclick="craftSelected=new Set([${selArr[0]}]);render()">Сбросить ×${selArr.length}</button>`;
     recipe=`<div class="cft-recipe"><div class="cft-recipe-hd" style="flex-wrap:wrap;gap:8px"><div><div class="cft-recipe-lv">Выбрано верстаков: ${selArr.length}</div><div class="cft-recipe-title">Суммарные материалы</div></div>${resetBtn}</div><div class="cft-recipe-label">Нужно купить / собрать:</div><div class="cft-ings">${matList}</div></div>`;
   }
-  const hint=`<div class="cft-tile-hint">Нажми на верстак — увидишь рецепт&nbsp;&nbsp;•&nbsp;&nbsp;«+» — добавить к сравнению&nbsp;&nbsp;•&nbsp;&nbsp;📍 — где найти предмет</div>`;
+  const selAll=craftSelected.size===(DB.crafting||[]).length;
+  const hint=`<div class="cft-hint-row"><div class="cft-tile-hint">Нажми — рецепт&nbsp;&nbsp;•&nbsp;&nbsp;«+» — сравнить&nbsp;&nbsp;•&nbsp;&nbsp;📍 — где найти</div><button class="cft-sel-all-btn${selAll?' on':''}" onclick="craftSelAll()">${selAll?'✓ Снять всё':'Выбрать все'}</button></div>`;
   return `${warn}${hint}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
 }
 function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
@@ -1689,6 +1751,12 @@ function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen
 function setCraftItem(i){
   craftSelected.clear();
   craftSelected.add(i);
+  render();
+}
+function craftSelAll(){
+  const all=DB.crafting||[];
+  if(craftSelected.size===all.length){craftSelected=new Set([0]);}
+  else{craftSelected=new Set(all.map((_,i)=>i));}
   render();
 }
 function addToCraft(i){

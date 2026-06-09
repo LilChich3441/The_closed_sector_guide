@@ -1424,6 +1424,8 @@ function renderLocations(){
 function setLocFilter(v){
   locItemFilter=norm(v||'');
   render();
+  const el=document.getElementById('locItemSearch');
+  if(el){el.focus();const l=el.value.length;el.setSelectionRange(l,l);}
 }
 function clearLocFilter(){
   locItemFilter='';

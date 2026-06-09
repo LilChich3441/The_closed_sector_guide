@@ -65,6 +65,7 @@ main{max-width:1240px;margin:0 auto;padding:20px 18px 0}
 section{display:none;animation:fade .25s}
 section.on{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+@keyframes popup-in{from{opacity:0;transform:translateY(32px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 .bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:16px 0 14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .filter{background:var(--panel);border:1px solid var(--line);color:var(--dim);padding:7px 16px;
   cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:.8px;font-weight:600;
@@ -151,6 +152,11 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .legend{font-size:11px;color:var(--dim);margin:16px 0;line-height:1.8;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
 .legend .chip{display:inline-block;margin:0 2px}
 .hidden{display:none!important}
+/* search highlight mode */
+#main.search-on [data-name]{transition:opacity .18s,filter .18s,transform .18s;transform-origin:center}
+#main.search-on [data-name].hidden{display:block!important;opacity:.15;filter:grayscale(.7) brightness(.6);pointer-events:none;transform:scale(.97)}
+#main.search-on .card:not(.hidden){box-shadow:0 0 0 2px rgba(232,184,75,.4),0 4px 18px rgba(232,184,75,.12)!important;border-color:rgba(232,184,75,.55)!important}
+#main.search-on .lootitem:not(.hidden){border-color:rgba(232,184,75,.55)!important;box-shadow:0 0 0 1px rgba(232,184,75,.25)!important}
 /* repair calculator */
 .calc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);margin:0 0 18px;border-radius:8px;overflow:visible}
 .calc-head{background:var(--panel2);padding:12px 16px;font-family:'Saira Condensed',sans-serif;font-size:15px;
@@ -451,13 +457,14 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   border-radius:6px;cursor:pointer}
 .bb2-sel:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.18)}
 .bb2-hero-sub{font-size:12px;color:var(--dim);margin-top:8px}
-.bb2-nav{width:100%;background:transparent;border:1px solid rgba(232,184,75,.3);
-  color:var(--acid);font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;padding:9px 16px;border-radius:6px;
-  cursor:pointer;text-align:left;margin-top:8px;transition:.15s;
-  display:flex;align-items:center;justify-content:space-between;gap:8px}
-.bb2-nav:hover{background:rgba(232,184,75,.09);border-color:rgba(232,184,75,.65)}
-.bb2-nav.on{background:rgba(232,184,75,.11);border-color:var(--acid);box-shadow:0 0 0 1px rgba(232,184,75,.22)}
+.bb2-nav{width:100%;background:rgba(232,184,75,.07);border:2px solid rgba(232,184,75,.5);
+  color:var(--acid);font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;padding:12px 18px;border-radius:8px;
+  cursor:pointer;text-align:left;margin-top:10px;transition:.18s;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  box-shadow:0 0 0 1px rgba(232,184,75,.12),inset 0 1px 0 rgba(232,184,75,.1)}
+.bb2-nav:hover{background:rgba(232,184,75,.14);border-color:var(--acid);box-shadow:0 0 12px rgba(232,184,75,.18)}
+.bb2-nav.on{background:rgba(232,184,75,.13);border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.25),0 0 18px rgba(232,184,75,.15)}
 .bb2-nav-arr{font-size:14px;opacity:.45;transition:.15s}
 .bb2-nav:hover .bb2-nav-arr,.bb2-nav.on .bb2-nav-arr{opacity:1}
 .bb2-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
@@ -542,6 +549,13 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .cft-ing-tag{font-family:'Saira Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.5px;
   text-transform:uppercase;color:var(--acid);white-space:nowrap;flex:none;padding:1px 5px;
   border:1px solid rgba(232,184,75,.3);border-radius:3px;background:rgba(232,184,75,.1)}
+.calc-coll .calc-body,.calc-coll .gc-slots,.calc-coll #calcOut,.calc-coll #cmpOut{display:none!important}
+.calc-coll .calc-body,.calc-coll .gc-slots,.calc-coll #calcOut,.calc-coll #cmpOut{display:none!important}
+/* ── craft counter ── */
+.cft-ing-cnt{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;
+  color:var(--acid);white-space:nowrap;flex:none;padding:1px 6px;
+  border:1px solid rgba(232,184,75,.4);border-radius:3px;background:rgba(232,184,75,.12);min-width:28px;text-align:center}
+.cft-tile-hint{font-size:11px;color:var(--dim);margin-bottom:10px;opacity:.7}
 /* ── craft donate tip ── */
 .cft-tip{display:flex;gap:16px;align-items:flex-start;background:var(--panel);
   border:1px solid rgba(143,196,168,.3);border-left:3px solid var(--steel);
@@ -565,7 +579,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 /* ── item popup ── */
 #imodal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:16px;
   background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
-#imodal.open{display:flex;animation:fade .18s}
+#imodal.open{display:flex;animation:fade .22s}
+#imodal.open #imodal-box{animation:popup-in .28s cubic-bezier(.22,.8,.32,1)}
 #imodal-box{background:var(--panel);border:1px solid var(--line2);border-top:3px solid var(--acid);
   border-radius:10px;max-width:480px;width:100%;position:relative;overflow:hidden;
   max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.85)}
@@ -685,12 +700,13 @@ function fmt(n){return (n||0).toLocaleString('ru-RU');}
 function img(k){return (k&&typeof IMG!=='undefined'&&IMG[k])?IMG[k]:'';}
 
 let activeTab=localStorage.getItem('cs_tab')||'gear';
-let gearFilter={cat:'weapons',rar:0};
+let gearFilter={cat:'all',rar:0};
+let calcOpen=localStorage.getItem('cs_calc')!=='0';
 let itemsFilter={transport:0};
 let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
 let bestFilter={loc:''};
-let craftSelected=0;
+let craftSelected=new Set([0]);
 
 const TABS=[
   {id:'gear',label:'⚙ Снаряжение'},
@@ -715,7 +731,12 @@ function buildTabs(){
   const grid=document.getElementById('mob-tab-grid');
   if(grid)grid.innerHTML=TABS.map(t=>`<button class="mob-tab-btn${t.id===activeTab?' on':''}" onclick="switchTab('${t.id}');mobMenuClose()">${t.label}</button>`).join('');
 }
-function switchTab(id){activeTab=id;localStorage.setItem('cs_tab',id);buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});}
+function switchTab(id){
+  activeTab=id;localStorage.setItem('cs_tab',id);
+  document.getElementById('main').classList.remove('search-on');
+  document.getElementById('globalSearch').value='';
+  buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});
+}
 function mobMenuOpen(){document.getElementById('mob-sheet').classList.add('open');document.getElementById('mob-overlay').style.display='block';}
 function mobMenuClose(){document.getElementById('mob-sheet').classList.remove('open');document.getElementById('mob-overlay').style.display='none';}
 
@@ -764,6 +785,11 @@ function lootCatOf(it){
 
 function gearItems(){
   const c=gearFilter.cat;
+  if(c==='all')return[
+    ...DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'})),
+    ...DB.armor.map(x=>({...x,kind:'arm',klbl:'Броня'})),
+    ...DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'}))
+  ];
   if(c==='weapons')return DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'}));
   if(c==='armor')return DB.armor.map(x=>({...x,kind:'arm',klbl:'Броня'}));
   if(c==='helmets')return DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'}));
@@ -822,6 +848,7 @@ function gearCard(it){
 }
 function renderGear(){
   const cats=[
+    ['all','Все',DB.weapons.length+DB.armor.length+DB.helmets.length],
     ['weapons','Оружие',DB.weapons.length],
     ['armor','Броня',DB.armor.length],
     ['helmets','Шлемы',DB.helmets.length],
@@ -831,8 +858,8 @@ function renderGear(){
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
 
   const gcCalc=`
-  <div class="calc">
-    <div class="calc-head">⌖ Калькулятор снаряжения</div>
+  <div class="calc${calcOpen?'':' calc-coll'}">
+    <div class="calc-head" onclick="toggleCalc()" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between">⌖ Калькулятор снаряжения<span style="font-size:11px;color:var(--dim);font-family:sans-serif">${calcOpen?'▲':'▼'}</span></div>
     <div class="calc-body" style="flex-wrap:wrap;gap:14px">
       <div class="calc-field">
         <label>Оружие</label>
@@ -955,9 +982,10 @@ function renderGear(){
   <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания. Части комплектов D.I.S.S. собраны целиком во вкладке «Комплекты».</div>
   <div class="bar">
     ${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
-    <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
+  </div>
+  <div class="bar" style="margin-top:-8px">
     ${rars.map(r=>`<button class="filter ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
-    <span class="cnt">${items.length} шт.</span>
+    <span class="cnt" style="margin-left:auto">${items.length} шт.</span>
   </div>
   <button class="bb2-nav" onclick="setGearCat('best')">🎯 Подбор снаряжения для локации <span class="bb2-nav-arr">→</span></button>
   <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
@@ -1558,24 +1586,49 @@ function renderCraft(){
     const icoSrc=wb.icon?img(wb.icon):'';
     const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
     const short=craftShortName(wb);
-    return `<button class="cft-tile${craftSelected===i?' on':''}" onclick="setCraftItem(${i})"><div class="cft-tile-ico">${ico}</div><div class="cft-tile-name">${short}</div></button>`;
+    return `<button class="cft-tile${craftSelected.has(i)?' on':''}" onclick="setCraftItem(${i})"><div class="cft-tile-ico">${ico}</div><div class="cft-tile-name">${short}</div></button>`;
   }).join('');
-  const sel=all[craftSelected]||all[0];
+  const selArr=[...craftSelected].sort((a,b)=>a-b);
   let recipe='';
-  if(sel){
-    const icoSrc=sel.icon?img(sel.icon):'';
-    const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
-    const ings=sel.ingredients.map(ig=>{
-      const igKey=iconMap[ig.name];
+  if(selArr.length===1){
+    const sel=all[selArr[0]]||all[0];
+    if(sel){
+      const icoSrc=sel.icon?img(sel.icon):'';
+      const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
+      const ings=sel.ingredients.map(ig=>{
+        const igKey=iconMap[ig.name];
+        const igIco=igKey?`<img src="${img(igKey)}" alt="">`:`<span class="cft-ing-ph"></span>`;
+        const tag=ig.prev?`<span class="cft-ing-tag">крафт</span>`:'';
+        return `<div class="cft-ing-item${ig.prev?' cft-ing-item--prev':''}"><div class="cft-ing-ico">${igIco}</div><span class="cft-ing-name">${esc(ig.name)}</span>${tag}</div>`;
+      }).join('');
+      recipe=`<div class="cft-recipe"><div class="cft-recipe-hd"><div class="cft-recipe-ico">${ico}</div><div><div class="cft-recipe-lv">Уровень ${sel.level}</div><div class="cft-recipe-title">${esc(sel.name)}</div></div></div><div class="cft-recipe-label">Необходимо для крафта:</div><div class="cft-ings">${ings}</div></div>`;
+    }
+  } else if(selArr.length>1){
+    const counts={};
+    selArr.forEach(i=>{
+      const wb=all[i];if(!wb)return;
+      wb.ingredients.filter(ig=>!ig.prev).forEach(ig=>{
+        counts[ig.name]=(counts[ig.name]||0)+1;
+      });
+    });
+    const matList=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([name,cnt])=>{
+      const igKey=iconMap[name];
       const igIco=igKey?`<img src="${img(igKey)}" alt="">`:`<span class="cft-ing-ph"></span>`;
-      const tag=ig.prev?`<span class="cft-ing-tag">крафт</span>`:'';
-      return `<div class="cft-ing-item${ig.prev?' cft-ing-item--prev':''}"><div class="cft-ing-ico">${igIco}</div><span class="cft-ing-name">${esc(ig.name)}</span>${tag}</div>`;
+      return `<div class="cft-ing-item"><div class="cft-ing-ico">${igIco}</div><span class="cft-ing-name">${esc(name)}</span>${cnt>1?`<span class="cft-ing-cnt">×${cnt}</span>`:''}</div>`;
     }).join('');
-    recipe=`<div class="cft-recipe"><div class="cft-recipe-hd"><div class="cft-recipe-ico">${ico}</div><div><div class="cft-recipe-lv">Уровень ${sel.level}</div><div class="cft-recipe-title">${esc(sel.name)}</div></div></div><div class="cft-recipe-label">Необходимо для крафта:</div><div class="cft-ings">${ings}</div></div>`;
+    recipe=`<div class="cft-recipe"><div class="cft-recipe-hd"><div><div class="cft-recipe-lv">Выбрано: ${selArr.length} верстака</div><div class="cft-recipe-title">Суммарные материалы</div></div></div><div class="cft-recipe-label">Нужно купить / собрать:</div><div class="cft-ings">${matList}</div></div>`;
   }
-  return `${warn}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
+  const hint=`<div class="cft-tile-hint">Нажми на верстак чтобы посмотреть рецепт — или выбери несколько для подсчёта материалов</div>`;
+  return `${warn}${hint}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
 }
-function setCraftItem(i){craftSelected=i;render();}
+function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
+function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
+function setCraftItem(i){
+  if(craftSelected.has(i)){
+    if(craftSelected.size>1)craftSelected.delete(i);
+  }else{craftSelected.add(i);}
+  render();
+}
 
 function renderCraftTip(){
   const packImg=img('d1');
@@ -1611,7 +1664,13 @@ function render(){
 function globalSearch(q){
   q=q.trim().toLowerCase();
   const nodes=document.querySelectorAll('[data-name]');
-  if(!q){nodes.forEach(n=>n.classList.remove('hidden'));applyHL();return;}
+  const main=document.getElementById('main');
+  if(!q){
+    nodes.forEach(n=>n.classList.remove('hidden'));
+    main.classList.remove('search-on');
+    applyHL();return;
+  }
+  main.classList.add('search-on');
   nodes.forEach(n=>{
     n.classList.toggle('hidden',!n.dataset.name.includes(q));
   });

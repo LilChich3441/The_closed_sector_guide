@@ -457,14 +457,21 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   border-radius:6px;cursor:pointer}
 .bb2-sel:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.18)}
 .bb2-hero-sub{font-size:12px;color:var(--dim);margin-top:8px}
+@keyframes nav-pulse{0%,100%{box-shadow:0 0 8px rgba(232,184,75,.18),0 0 0 2px rgba(232,184,75,.35)}
+  50%{box-shadow:0 0 24px rgba(232,184,75,.4),0 0 0 2px rgba(232,184,75,.6)}}
 .bb2-nav{width:100%;background:rgba(232,184,75,.07);border:2px solid rgba(232,184,75,.5);
   color:var(--acid);font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;padding:12px 18px;border-radius:8px;
-  cursor:pointer;text-align:left;margin-top:10px;transition:.18s;
+  letter-spacing:1.5px;text-transform:uppercase;padding:13px 20px;border-radius:8px;
+  cursor:pointer;text-align:left;margin-top:18px;transition:.18s;
   display:flex;align-items:center;justify-content:space-between;gap:8px;
-  box-shadow:0 0 0 1px rgba(232,184,75,.12),inset 0 1px 0 rgba(232,184,75,.1)}
-.bb2-nav:hover{background:rgba(232,184,75,.14);border-color:var(--acid);box-shadow:0 0 12px rgba(232,184,75,.18)}
-.bb2-nav.on{background:rgba(232,184,75,.13);border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.25),0 0 18px rgba(232,184,75,.15)}
+  animation:nav-pulse 2.8s ease-in-out infinite;position:relative}
+.bb2-nav::before{content:'';position:absolute;inset:0;border-radius:8px;
+  background:linear-gradient(90deg,transparent 0%,rgba(232,184,75,.06) 50%,transparent 100%);
+  pointer-events:none}
+.bb2-nav:hover{background:rgba(232,184,75,.15);border-color:var(--acid);
+  animation:none;box-shadow:0 0 28px rgba(232,184,75,.35),0 0 0 2px rgba(232,184,75,.5)}
+.bb2-nav.on{background:rgba(232,184,75,.13);border-color:var(--acid);
+  animation:none;box-shadow:0 0 0 2px rgba(232,184,75,.3),0 0 22px rgba(232,184,75,.2)}
 .bb2-nav-arr{font-size:14px;opacity:.45;transition:.15s}
 .bb2-nav:hover .bb2-nav-arr,.bb2-nav.on .bb2-nav-arr{opacity:1}
 .bb2-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
@@ -516,9 +523,9 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.6;color:var(--txt)}
 .craft-warn strong{color:var(--hot);display:block;margin-bottom:3px;font-size:15px}
 /* ── craft tiles row ── */
-.cft-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.cft-tile{width:88px;background:var(--panel);border:1px solid var(--line);border-radius:7px;
-  padding:8px 6px 7px;cursor:pointer;text-align:center;transition:.14s;flex:none}
+.cft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-bottom:14px}
+.cft-tile{background:var(--panel);border:1px solid var(--line);border-radius:7px;
+  padding:8px 6px 7px;cursor:pointer;text-align:center;transition:.14s;position:relative}
 .cft-tile:hover{border-color:var(--line2);background:var(--panel2)}
 .cft-tile.on{border-color:var(--acid);background:rgba(232,184,75,.08);box-shadow:0 0 0 1px rgba(232,184,75,.18)}
 .cft-tile-ico{width:60px;height:60px;margin:0 auto 6px;background:var(--bg2);border:1px solid var(--line);
@@ -527,6 +534,43 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .cft-tile-name{font-family:'Saira Condensed',sans-serif;font-size:11px;font-weight:700;
   color:var(--dim);line-height:1.25;letter-spacing:.5px;text-transform:uppercase}
 .cft-tile.on .cft-tile-name{color:var(--acid)}
+/* tile badge and plus btn */
+.cft-tile-badge{position:absolute;top:4px;left:5px;width:17px;height:17px;
+  background:var(--acid);color:#1a1a1a;font-family:'Saira Condensed',sans-serif;font-size:11px;font-weight:700;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3}
+.cft-tile-plus{position:absolute;top:4px;right:4px;width:18px;height:18px;
+  background:rgba(232,184,75,.12);border:1px solid rgba(232,184,75,.3);
+  border-radius:3px;font-size:14px;font-weight:700;line-height:1;color:var(--acid);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:.12s;cursor:pointer;z-index:3;user-select:none}
+.cft-tile:hover .cft-tile-plus,.cft-tile.on .cft-tile-plus{opacity:1}
+.cft-tile-plus:hover{background:rgba(232,184,75,.28);border-color:var(--acid)}
+.cft-reset-btn{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;color:var(--dim);background:transparent;
+  border:1px solid var(--line);border-radius:4px;padding:3px 9px;cursor:pointer;
+  transition:.13s;margin-left:auto;flex:none}
+.cft-reset-btn:hover{border-color:var(--line2);color:var(--txt)}
+/* location tooltip on ingredients */
+.cft-ing-item{position:relative;cursor:default}
+.cft-ing-item[data-locs]{cursor:pointer}
+.cft-loc-pill{font-size:11px;flex:none;opacity:.55;margin-left:2px;transition:.12s}
+.cft-ing-item[data-locs]:hover .cft-loc-pill,.cft-ing-item.tip-open .cft-loc-pill{opacity:1}
+.cft-loc-tip{display:none;position:absolute;bottom:calc(100% + 5px);left:0;z-index:60;
+  background:var(--panel2);border:1px solid var(--line2);border-radius:7px;
+  padding:9px 11px;min-width:180px;max-width:260px;
+  box-shadow:0 6px 20px rgba(0,0,0,.45);pointer-events:none}
+.cft-loc-tip-hd{font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--dim);font-weight:700;margin-bottom:5px}
+.cft-loc-tip-row{font-size:12px;color:var(--txt);padding:1px 0;white-space:nowrap}
+.cft-ing-item[data-locs]:hover .cft-loc-tip,.cft-ing-item.tip-open .cft-loc-tip{display:block}
+@media(max-width:640px){
+  .cft-grid{grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:6px}
+  .cft-tile-plus{opacity:.65;width:22px;height:22px;font-size:16px;top:3px;right:3px}
+  .cft-tile-ico{width:52px;height:52px}
+  .cft-ing-item{padding:9px 10px}
+  .cft-loc-tip{bottom:auto;top:calc(100% + 5px);left:0;right:auto;max-width:calc(100vw - 32px)}
+  .cft-ing-item.tip-open .cft-loc-tip{pointer-events:auto}
+}
 /* ── craft recipe panel ── */
 .cft-recipe{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;animation:fade .15s}
 .cft-recipe-hd{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
@@ -549,7 +593,6 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .cft-ing-tag{font-family:'Saira Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.5px;
   text-transform:uppercase;color:var(--acid);white-space:nowrap;flex:none;padding:1px 5px;
   border:1px solid rgba(232,184,75,.3);border-radius:3px;background:rgba(232,184,75,.1)}
-.calc-coll .calc-body,.calc-coll .gc-slots,.calc-coll #calcOut,.calc-coll #cmpOut{display:none!important}
 .calc-coll .calc-body,.calc-coll .gc-slots,.calc-coll #calcOut,.calc-coll #cmpOut{display:none!important}
 /* ── craft counter ── */
 .cft-ing-cnt{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;
@@ -1574,6 +1617,17 @@ function buildCraftIconMap(){
   if(DB.locLoot){for(const loc in DB.locLoot){const bl=DB.locLoot[loc];[...(bl.rec||[]),...(bl.loot||[]),...(bl.boss&&bl.boss.drop||[])].forEach(it=>{if(it&&it.name&&it.icon&&!m[it.name])m[it.name]=it.icon;});}}
   return m;
 }
+function buildIngLocMap(){
+  const m={};
+  if(!DB.locLoot)return m;
+  for(const loc in DB.locLoot){
+    const bl=DB.locLoot[loc];
+    [...(bl.rec||[]),...(bl.loot||[]),...((bl.boss&&bl.boss.drop)||[])].forEach(it=>{
+      if(it&&it.name){if(!m[it.name])m[it.name]=[];if(!m[it.name].includes(loc))m[it.name].push(loc);}
+    });
+  }
+  return m;
+}
 function craftShortName(wb){
   const map={armor:'Броня',garage:'Гараж',weapons:'Оружие',helmets:'Шлемы',workshop:'Мастер.'};
   return (map[wb.cat]||wb.cat)+' '+['','I','II','III','IV','V'][wb.level]||wb.level;
@@ -1581,26 +1635,36 @@ function craftShortName(wb){
 function renderCraft(){
   const all=DB.crafting||[];
   const iconMap=buildCraftIconMap();
+  const locMap=buildIngLocMap();
   const warn=`<div class="craft-warn"><strong>⚠ Не применяй верстак сразу после создания!</strong>Если использовать только что скрафченный верстак — придётся крафтить его заново. Сначала сохрани, потом применяй. Для каждого следующего уровня нужен верстак предыдущего.</div>`;
+  const selArr=[...craftSelected].sort((a,b)=>a-b);
   const tiles=all.map((wb,i)=>{
     const icoSrc=wb.icon?img(wb.icon):'';
     const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
     const short=craftShortName(wb);
-    return `<button class="cft-tile${craftSelected.has(i)?' on':''}" onclick="setCraftItem(${i})"><div class="cft-tile-ico">${ico}</div><div class="cft-tile-name">${short}</div></button>`;
+    const on=craftSelected.has(i);
+    const num=on&&selArr.length>1?selArr.indexOf(i)+1:0;
+    const badge=num?`<span class="cft-tile-badge">${num}</span>`:'';
+    return `<div class="cft-tile${on?' on':''}" onclick="setCraftItem(${i})" role="button" tabindex="0">${badge}<span class="cft-tile-plus" onclick="event.stopPropagation();addToCraft(${i})" title="Добавить к сравнению">+</span><div class="cft-tile-ico">${ico}</div><div class="cft-tile-name">${short}</div></div>`;
   }).join('');
-  const selArr=[...craftSelected].sort((a,b)=>a-b);
+  function ingHtml(ig,withCnt){
+    const igKey=iconMap[ig.name];
+    const igIco=igKey?`<img src="${img(igKey)}" alt="">`:`<span class="cft-ing-ph"></span>`;
+    const tag=ig.prev?`<span class="cft-ing-tag">крафт</span>`:'';
+    const cnt=withCnt&&withCnt>1?`<span class="cft-ing-cnt">×${withCnt}</span>`:'';
+    const locs=locMap[ig.name]||[];
+    const locAttr=locs.length?` data-locs="${esc(locs.join('|'))}"`  :'';
+    const locPill=locs.length?`<span class="cft-loc-pill" title="Где найти">📍</span>`:'';
+    const locTip=locs.length?`<div class="cft-loc-tip"><div class="cft-loc-tip-hd">Найти в:</div>${locs.map(l=>`<div class="cft-loc-tip-row">• ${esc(l)}</div>`).join('')}</div>`:'';
+    return `<div class="cft-ing-item${ig.prev?' cft-ing-item--prev':''}"${locAttr} onclick="cftLocTap(event,this)"><div class="cft-ing-ico">${igIco}</div><span class="cft-ing-name">${esc(ig.name)}</span>${tag}${cnt}${locPill}${locTip}</div>`;
+  }
   let recipe='';
   if(selArr.length===1){
     const sel=all[selArr[0]]||all[0];
     if(sel){
       const icoSrc=sel.icon?img(sel.icon):'';
       const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
-      const ings=sel.ingredients.map(ig=>{
-        const igKey=iconMap[ig.name];
-        const igIco=igKey?`<img src="${img(igKey)}" alt="">`:`<span class="cft-ing-ph"></span>`;
-        const tag=ig.prev?`<span class="cft-ing-tag">крафт</span>`:'';
-        return `<div class="cft-ing-item${ig.prev?' cft-ing-item--prev':''}"><div class="cft-ing-ico">${igIco}</div><span class="cft-ing-name">${esc(ig.name)}</span>${tag}</div>`;
-      }).join('');
+      const ings=sel.ingredients.map(ig=>ingHtml(ig,0)).join('');
       recipe=`<div class="cft-recipe"><div class="cft-recipe-hd"><div class="cft-recipe-ico">${ico}</div><div><div class="cft-recipe-lv">Уровень ${sel.level}</div><div class="cft-recipe-title">${esc(sel.name)}</div></div></div><div class="cft-recipe-label">Необходимо для крафта:</div><div class="cft-ings">${ings}</div></div>`;
     }
   } else if(selArr.length>1){
@@ -1612,22 +1676,44 @@ function renderCraft(){
       });
     });
     const matList=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([name,cnt])=>{
-      const igKey=iconMap[name];
-      const igIco=igKey?`<img src="${img(igKey)}" alt="">`:`<span class="cft-ing-ph"></span>`;
-      return `<div class="cft-ing-item"><div class="cft-ing-ico">${igIco}</div><span class="cft-ing-name">${esc(name)}</span>${cnt>1?`<span class="cft-ing-cnt">×${cnt}</span>`:''}</div>`;
+      return ingHtml({name},cnt);
     }).join('');
-    recipe=`<div class="cft-recipe"><div class="cft-recipe-hd"><div><div class="cft-recipe-lv">Выбрано: ${selArr.length} верстака</div><div class="cft-recipe-title">Суммарные материалы</div></div></div><div class="cft-recipe-label">Нужно купить / собрать:</div><div class="cft-ings">${matList}</div></div>`;
+    const resetBtn=`<button class="cft-reset-btn" onclick="craftSelected=new Set([${selArr[0]}]);render()">Сбросить ×${selArr.length}</button>`;
+    recipe=`<div class="cft-recipe"><div class="cft-recipe-hd" style="flex-wrap:wrap;gap:8px"><div><div class="cft-recipe-lv">Выбрано верстаков: ${selArr.length}</div><div class="cft-recipe-title">Суммарные материалы</div></div>${resetBtn}</div><div class="cft-recipe-label">Нужно купить / собрать:</div><div class="cft-ings">${matList}</div></div>`;
   }
-  const hint=`<div class="cft-tile-hint">Нажми на верстак чтобы посмотреть рецепт — или выбери несколько для подсчёта материалов</div>`;
+  const hint=`<div class="cft-tile-hint">Нажми на верстак — увидишь рецепт&nbsp;&nbsp;•&nbsp;&nbsp;«+» — добавить к сравнению&nbsp;&nbsp;•&nbsp;&nbsp;📍 — где найти предмет</div>`;
   return `${warn}${hint}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
 }
 function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
 function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
 function setCraftItem(i){
-  if(craftSelected.has(i)){
-    if(craftSelected.size>1)craftSelected.delete(i);
-  }else{craftSelected.add(i);}
+  craftSelected.clear();
+  craftSelected.add(i);
   render();
+}
+function addToCraft(i){
+  if(craftSelected.has(i)){if(craftSelected.size>1)craftSelected.delete(i);}
+  else{craftSelected.add(i);}
+  render();
+}
+function cftLocTap(e,el){
+  e.stopPropagation();
+  if(!el.dataset.locs)return;
+  const was=el.classList.contains('tip-open');
+  document.querySelectorAll('.cft-ing-item.tip-open').forEach(x=>x.classList.remove('tip-open'));
+  if(!was){
+    el.classList.add('tip-open');
+    // position: flip if off-screen right
+    const tip=el.querySelector('.cft-loc-tip');
+    if(tip){const r=tip.getBoundingClientRect();
+      if(r.right>window.innerWidth-8){tip.style.left='auto';tip.style.right='0';}
+      else{tip.style.left='';tip.style.right='';}
+    }
+    setTimeout(()=>document.addEventListener('click',function _o(){
+      document.querySelectorAll('.cft-ing-item.tip-open').forEach(x=>x.classList.remove('tip-open'));
+      document.removeEventListener('click',_o);
+    }),0);
+  }
 }
 
 function renderCraftTip(){

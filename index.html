@@ -508,20 +508,58 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .craft-warn{background:rgba(255,122,69,.1);border:1px solid rgba(255,122,69,.4);border-left:3px solid var(--hot);
   border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.6;color:var(--txt)}
 .craft-warn strong{color:var(--hot);display:block;margin-bottom:3px;font-size:15px}
-.craft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
-.craft-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
-.craft-card-hd{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.craft-card-ico{width:44px;height:44px;background:var(--bg2);border:1px solid var(--line);border-radius:5px;
-  display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;overflow:hidden}
-.craft-card-ico img{width:100%;height:100%;object-fit:cover}
-.craft-card-lv{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:2px}
-.craft-card-title{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--txt);line-height:1.2}
-.craft-ing{list-style:none;padding:0;margin:0}
-.craft-ing li{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(66,59,44,.2);font-size:13px;color:var(--txt)}
-.craft-ing li:last-child{border-bottom:none}
-.craft-ing-prev{background:rgba(232,184,75,.14);border:1px solid rgba(232,184,75,.3);border-radius:4px;
-  padding:2px 8px;font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;color:var(--acid);white-space:nowrap}
-.craft-ing-dot{width:5px;height:5px;border-radius:50%;background:var(--line2);flex:none;margin-left:2px}
+/* ── craft tiles row ── */
+.cft-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.cft-tile{width:72px;background:var(--panel);border:1px solid var(--line);border-radius:7px;
+  padding:7px 5px 6px;cursor:pointer;text-align:center;transition:.14s;flex:none}
+.cft-tile:hover{border-color:var(--line2);background:var(--panel2)}
+.cft-tile.on{border-color:var(--acid);background:rgba(232,184,75,.08);box-shadow:0 0 0 1px rgba(232,184,75,.18)}
+.cft-tile-ico{width:48px;height:48px;margin:0 auto 5px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:20px;overflow:hidden}
+.cft-tile-ico img{width:100%;height:100%;object-fit:cover}
+.cft-tile-name{font-family:'Saira Condensed',sans-serif;font-size:10px;font-weight:700;
+  color:var(--dim);line-height:1.25;letter-spacing:.5px;text-transform:uppercase}
+.cft-tile.on .cft-tile-name{color:var(--acid)}
+/* ── craft recipe panel ── */
+.cft-recipe{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;animation:fade .15s}
+.cft-recipe-hd{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.cft-recipe-ico{width:56px;height:56px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;
+  flex:none;display:flex;align-items:center;justify-content:center;font-size:26px;overflow:hidden}
+.cft-recipe-ico img{width:100%;height:100%;object-fit:cover}
+.cft-recipe-lv{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:3px}
+.cft-recipe-title{font-family:'Saira Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--txt);line-height:1.1}
+.cft-recipe-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:10px}
+/* ── ingredients grid ── */
+.cft-ings{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px}
+.cft-ing-item{display:flex;align-items:center;gap:8px;padding:7px 10px;
+  background:var(--bg2);border:1px solid var(--line);border-radius:6px}
+.cft-ing-item--prev{border-color:rgba(232,184,75,.35);background:rgba(232,184,75,.06)}
+.cft-ing-ico{width:30px;height:30px;background:var(--panel);border:1px solid var(--line);border-radius:4px;
+  flex:none;display:flex;align-items:center;justify-content:center;font-size:14px;overflow:hidden}
+.cft-ing-ico img{width:100%;height:100%;object-fit:cover}
+.cft-ing-ph{display:block;width:8px;height:8px;border-radius:50%;background:var(--line2);margin:auto}
+.cft-ing-name{font-size:12px;color:var(--txt);line-height:1.3;flex:1;min-width:0}
+.cft-ing-tag{font-family:'Saira Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;color:var(--acid);white-space:nowrap;padding:1px 5px;
+  border:1px solid rgba(232,184,75,.3);border-radius:3px;background:rgba(232,184,75,.1)}
+/* ── craft donate tip ── */
+.cft-tip{display:flex;gap:16px;align-items:flex-start;background:var(--panel);
+  border:1px solid rgba(143,196,168,.3);border-left:3px solid var(--steel);
+  border-radius:8px;padding:14px 16px;margin-top:14px}
+.cft-tip-img{flex:none;width:90px;border-radius:6px;overflow:hidden;border:1px solid var(--line2);
+  box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.cft-tip-img img{width:100%;display:block}
+.cft-tip-body{flex:1;min-width:0}
+.cft-tip-head{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.cft-tip-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;
+  color:var(--steel);background:rgba(143,196,168,.12);border:1px solid rgba(143,196,168,.3);
+  border-radius:3px;padding:2px 7px}
+.cft-tip-price{font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--acid)}
+.cft-tip-name{font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--txt);
+  margin-bottom:6px;line-height:1.2}
+.cft-tip-text{font-size:13px;color:var(--dim);line-height:1.6}
+.cft-tip-text strong{color:var(--txt)}
+.cft-tip-warn{margin-top:8px;font-size:12px;color:var(--hot);line-height:1.5}
 /* ── search highlight ── */
 .hl-w{background:rgba(232,184,75,.32);color:var(--txt);border-radius:2px;padding:0 1px}
 /* ── item popup ── */
@@ -558,6 +596,50 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .filter{padding:5px 10px;font-size:11px}
   .tab{padding:10px 11px;font-size:12px}
 }
+/* ── mobile navigation ── */
+#mob-topbar{display:none;align-items:center;gap:0;
+  position:sticky;top:0;z-index:100;
+  background:var(--bg);border-bottom:1px solid var(--line);
+  backdrop-filter:blur(12px);padding:0 14px;height:50px}
+#mob-topbar .mob-logo{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700;
+  color:var(--acid);letter-spacing:1px;flex:none;padding-right:12px;
+  border-right:1px solid var(--line);margin-right:12px}
+#mob-tab-cur{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:600;
+  color:var(--txt);letter-spacing:.5px;flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#mob-menu-btn{flex:none;background:none;border:1px solid var(--line);border-radius:6px;
+  color:var(--dim);width:36px;height:36px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:17px;transition:.15s}
+#mob-menu-btn:hover{border-color:var(--acid);color:var(--acid)}
+#mob-overlay{display:none;position:fixed;inset:0;z-index:110;background:rgba(0,0,0,.6);
+  backdrop-filter:blur(3px);animation:fade .2s}
+#mob-sheet{position:fixed;left:0;right:0;bottom:0;z-index:120;
+  background:var(--panel);border-radius:16px 16px 0 0;border-top:1px solid var(--line2);
+  padding:0 14px 28px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 -12px 48px rgba(0,0,0,.7)}
+#mob-sheet.open{transform:translateY(0)}
+.mob-sheet-grip{width:36px;height:4px;border-radius:2px;background:var(--line2);
+  margin:12px auto 14px}
+.mob-sheet-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);font-weight:700;margin-bottom:12px;text-align:center}
+.mob-tab-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mob-tab-btn{background:var(--bg2);border:1px solid var(--line);border-radius:8px;
+  padding:13px 10px;color:var(--dim);font-family:'Saira Condensed',sans-serif;
+  font-size:14px;font-weight:600;letter-spacing:.5px;text-align:center;cursor:pointer;
+  transition:.14s;line-height:1.25}
+.mob-tab-btn:hover{border-color:var(--line2);color:var(--txt)}
+.mob-tab-btn.on{border-color:var(--acid);color:var(--acid);background:rgba(232,184,75,.08)}
+@media(max-width:640px){
+  header{padding:12px 14px 10px}
+  .hgrid h1{font-size:18px;letter-spacing:.5px}
+  .hgrid h1 b{font-size:9px;letter-spacing:3px}
+  .crest{width:32px;height:38px;font-size:17px}
+  .tagline{display:none}
+  .tabs{display:none!important}
+  .search-wrap{margin-top:10px}
+  #mob-topbar{display:flex}
+  main{padding-top:14px}
+}
 </style>
 </head>
 <body>
@@ -570,6 +652,17 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 </header>
 <div class="search-wrap">
   <input id="globalSearch" placeholder="◂ Глобальный поиск: оружие, броня, цель контракта, локация..." oninput="globalSearch(this.value)">
+</div>
+<div id="mob-topbar">
+  <span class="mob-logo">CS</span>
+  <span id="mob-tab-cur">⚙ Снаряжение</span>
+  <button id="mob-menu-btn" onclick="mobMenuOpen()">☰</button>
+</div>
+<div id="mob-overlay" onclick="mobMenuClose()"></div>
+<div id="mob-sheet">
+  <div class="mob-sheet-grip"></div>
+  <div class="mob-sheet-title">Разделы</div>
+  <div class="mob-tab-grid" id="mob-tab-grid"></div>
 </div>
 <div class="tabs" id="tabs"></div>
 <main id="main"></main>
@@ -597,7 +690,7 @@ let itemsFilter={transport:0};
 let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
 let bestFilter={loc:''};
-let craftFilter={cat:'armor'};
+let craftSelected=0;
 
 const TABS=[
   {id:'gear',label:'⚙ Снаряжение'},
@@ -605,7 +698,7 @@ const TABS=[
   {id:'items',label:'📦 Предметы'},
   {id:'cars',label:'🚗 Транспорт'},
   {id:'story',label:'📋 Задания'},
-  {id:'quests',label:'🎯 Контракты'},
+  {id:'quests',label:'🎯 Ликвидация должников'},
   {id:'locations',label:'📍 Локации'},
   {id:'guides',label:'📖 Гайды'},
   {id:'progress',label:'⭐ Прогресс'},
@@ -616,8 +709,15 @@ let storyFilter={chap:1,giver:'',opt:false};
 function buildTabs(){
   $('#tabs').innerHTML=TABS.map(t=>
     `<div class="tab ${t.id===activeTab?'on':''}" data-tab="${t.id}" onclick="switchTab('${t.id}')">${t.label}</div>`).join('');
+  const cur=TABS.find(t=>t.id===activeTab)||TABS[0];
+  const mobCur=document.getElementById('mob-tab-cur');
+  if(mobCur)mobCur.textContent=cur.label;
+  const grid=document.getElementById('mob-tab-grid');
+  if(grid)grid.innerHTML=TABS.map(t=>`<button class="mob-tab-btn${t.id===activeTab?' on':''}" onclick="switchTab('${t.id}');mobMenuClose()">${t.label}</button>`).join('');
 }
 function switchTab(id){activeTab=id;localStorage.setItem('cs_tab',id);buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});}
+function mobMenuOpen(){document.getElementById('mob-sheet').classList.add('open');document.getElementById('mob-overlay').style.display='block';}
+function mobMenuClose(){document.getElementById('mob-sheet').classList.remove('open');document.getElementById('mob-overlay').style.display='none';}
 
 // ---------- CATALOG (GEAR) ----------
 function norm(s){return (s||'').replace(/[«»„""'']/g,'"').replace(/\s+/g,' ').trim().replace(/ё/g,'е').toLowerCase();}
@@ -705,7 +805,6 @@ function gearCard(it){
   if(it.set)chips.push(`<span class="chip set">${esc(it.set)}</span>`);
   let extra='';
   if(it.note && !/[Бб]осс/.test(it.note))extra=`<div class="note">${esc(it.note)}</div>`;
-  if(it.desc)extra+=`<div class="note">${esc(it.desc)}</div>`;
   const head=it.icon&&typeof img==='function'&&img(it.icon)
     ? `<div class="cnamerow"><img class="gicon" src="${img(it.icon)}" alt="" loading="lazy"><span class="cname">${esc(it.name)}</span></div>`
     : `<div class="cname">${esc(it.name)}</div>`;
@@ -715,7 +814,7 @@ function gearCard(it){
   const statline = (it.klbl||it.stat)
     ? `<div class="statline"><span class="bignum ${it.kind}">${esc(it.stat)||'—'}</span><span class="statlbl">${esc(it.klbl||'')}</span></div>${_bar}`
     : '';
-  return `<div class="card rr${it.rar}" data-name="${esc(it.name.toLowerCase())}">
+  return `<div class="card rr${it.rar}" data-name="${esc(it.name.toLowerCase())}" data-item-name="${esc(it.name)}" onclick="openItemPopup(this.dataset.itemName)" style="cursor:pointer">
     ${head}
     ${statline}
     <div class="chips">${chips.join('')}</div>${extra}
@@ -1122,7 +1221,7 @@ function lootCard(it){
       <div class="lootname">${esc(it.name)}</div>
       ${stat}
       <div class="chips">${chips.join('')}</div>
-      ${it.desc?`<div class="lootdesc">${esc(it.desc)}</div>`:''}
+
     </div>
   </div>`;
 }
@@ -1439,25 +1538,57 @@ function renderTerms(){
   </div>`;
 }
 
-function renderCraft(){
-  const cats=[
-    ['armor','🛡 Броня'],['garage','🔧 Гараж'],['weapons','⚔ Оружие'],['helmets','⛑ Шлемы'],['workshop','🔩 Мастерская'],
-  ];
-  const items=(DB.crafting||[]).filter(x=>x.cat===craftFilter.cat).sort((a,b)=>a.level-b.level);
-  const bar=`<div class="bar">${cats.map(c=>`<button class="filter ${craftFilter.cat===c[0]?'on':''}" onclick="setCraftCat('${c[0]}')">${c[1]}</button>`).join('')}</div>`;
-  const warn=`<div class="craft-warn"><strong>⚠ Не применяй верстак сразу после создания!</strong>Если использовать только что скрафченный верстак — придётся крафтить его заново. Сначала сохрани, потом применяй. Для каждого следующего уровня нужен верстак предыдущего.</div>`;
-  const cards=items.map(wb=>{
-    const icoSrc=wb.icon?img(wb.icon):'';
-    const icoHtml=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
-    const ings=wb.ingredients.map(ig=>ig.prev
-      ?`<li><span class="craft-ing-prev">⬆ ${esc(ig.name)}</span></li>`
-      :`<li><span class="craft-ing-dot"></span>${esc(ig.name)}</li>`
-    ).join('');
-    return `<div class="craft-card"><div class="craft-card-hd"><div class="craft-card-ico">${icoHtml}</div><div><div class="craft-card-lv">Уровень ${wb.level}</div><div class="craft-card-title">${esc(wb.name)}</div></div></div><ul class="craft-ing">${ings}</ul></div>`;
-  }).join('');
-  return `${bar}${warn}<div class="craft-grid">${cards||'<div class="intro muted">Нет данных</div>'}</div>`;
+function buildCraftIconMap(){
+  const m={};
+  [...(DB.crafting||[]),...(DB.weapons||[]),...(DB.armor||[]),...(DB.helmets||[])].forEach(it=>{
+    if(it&&it.name&&it.icon)m[it.name]=it.icon;
+  });
+  return m;
 }
-function setCraftCat(c){craftFilter.cat=c;render();}
+function craftShortName(wb){
+  const map={armor:'Броня',garage:'Гараж',weapons:'Оружие',helmets:'Шлемы',workshop:'Мастер.'};
+  return (map[wb.cat]||wb.cat)+' '+['','I','II','III','IV','V'][wb.level]||wb.level;
+}
+function renderCraft(){
+  const all=DB.crafting||[];
+  const iconMap=buildCraftIconMap();
+  const warn=`<div class="craft-warn"><strong>⚠ Не применяй верстак сразу после создания!</strong>Если использовать только что скрафченный верстак — придётся крафтить его заново. Сначала сохрани, потом применяй. Для каждого следующего уровня нужен верстак предыдущего.</div>`;
+  const tiles=all.map((wb,i)=>{
+    const icoSrc=wb.icon?img(wb.icon):'';
+    const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
+    const short=craftShortName(wb);
+    return `<button class="cft-tile${craftSelected===i?' on':''}" onclick="setCraftItem(${i})"><div class="cft-tile-ico">${ico}</div><div class="cft-tile-name">${short}</div></button>`;
+  }).join('');
+  const sel=all[craftSelected]||all[0];
+  let recipe='';
+  if(sel){
+    const icoSrc=sel.icon?img(sel.icon):'';
+    const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
+    const ings=sel.ingredients.map(ig=>{
+      const igKey=iconMap[ig.name];
+      const igIco=igKey?`<img src="${img(igKey)}" alt="">`:`<span class="cft-ing-ph"></span>`;
+      const tag=ig.prev?`<span class="cft-ing-tag">крафт</span>`:'';
+      return `<div class="cft-ing-item${ig.prev?' cft-ing-item--prev':''}"><div class="cft-ing-ico">${igIco}</div><span class="cft-ing-name">${esc(ig.name)}</span>${tag}</div>`;
+    }).join('');
+    recipe=`<div class="cft-recipe"><div class="cft-recipe-hd"><div class="cft-recipe-ico">${ico}</div><div><div class="cft-recipe-lv">Уровень ${sel.level}</div><div class="cft-recipe-title">${esc(sel.name)}</div></div></div><div class="cft-recipe-label">Необходимо для крафта:</div><div class="cft-ings">${ings}</div></div>`;
+  }
+  return `${warn}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
+}
+function setCraftItem(i){craftSelected=i;render();}
+
+function renderCraftTip(){
+  const packImg=img('d1');
+  if(!packImg)return'';
+  return `<div class="cft-tip">
+    <div class="cft-tip-img"><img src="${packImg}" alt="Инженерный пакет"></div>
+    <div class="cft-tip-body">
+      <div class="cft-tip-head"><span class="cft-tip-label">Альтернатива крафту</span><span class="cft-tip-price">1 499 ₽</span></div>
+      <div class="cft-tip-name">Инженерный пакет</div>
+      <div class="cft-tip-text">Проще купить этот набор — он сразу даёт <strong>Мастерскую 5 уровня</strong> и все необходимые предметы, без многоступенчатого крафта.</div>
+      <div class="cft-tip-warn">⚠ Снаряжение и эвакуатор из набора можно использовать только до <strong>30% износа</strong> — иначе их придётся докупать на рынке.</div>
+    </div>
+  </div>`;
+}
 
 function render(){
   const m=$('#main');
@@ -1507,6 +1638,12 @@ function openItemPopup(name){
       for(const x of [...(bl.rec||[]),...(bl.loot||[]),...(bl.boss&&bl.boss.drop||[])]){
         if(norm(x.name)===n){it=x;break outer;}
       }
+    }
+  }
+  if(!it){
+    for(const arr of ['weapons','armor','helmets']){
+      const found=(DB[arr]||[]).find(x=>norm(x.name)===n);
+      if(found){it=found;break;}
     }
   }
   if(!it)return;

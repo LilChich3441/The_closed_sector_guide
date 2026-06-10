@@ -492,18 +492,34 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   border-radius:6px;cursor:pointer}
 .bb2-sel:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 2px rgba(232,184,75,.18)}
 .bb2-hero-sub{font-size:12px;color:var(--dim);margin-top:8px}
-@keyframes nav-pulse{0%,100%{box-shadow:0 0 8px rgba(232,184,75,.18),0 0 0 2px rgba(232,184,75,.35)}
-  50%{box-shadow:0 0 24px rgba(232,184,75,.4),0 0 0 2px rgba(232,184,75,.6)}}
-.bb2-nav{width:100%;background:rgba(232,184,75,.07);border:2px solid rgba(232,184,75,.5);
+@keyframes nav-rainbow{
+  0%  {border-color:#e8b84b;box-shadow:0 0 18px rgba(232,184,75,.5),0 0 0 2px rgba(232,184,75,.55);background:rgba(232,184,75,.09)}
+  14% {border-color:#e8674b;box-shadow:0 0 18px rgba(232,103,75,.5), 0 0 0 2px rgba(232,103,75,.55);background:rgba(232,103,75,.09)}
+  28% {border-color:#e04baa;box-shadow:0 0 18px rgba(224,75,170,.5), 0 0 0 2px rgba(224,75,170,.55);background:rgba(224,75,170,.09)}
+  42% {border-color:#8d4be8;box-shadow:0 0 18px rgba(141,75,232,.5), 0 0 0 2px rgba(141,75,232,.55);background:rgba(141,75,232,.09)}
+  57% {border-color:#4aaee8;box-shadow:0 0 18px rgba(74,174,232,.5), 0 0 0 2px rgba(74,174,232,.55);background:rgba(74,174,232,.09)}
+  71% {border-color:#4be880;box-shadow:0 0 18px rgba(75,232,128,.5), 0 0 0 2px rgba(75,232,128,.55);background:rgba(75,232,128,.09)}
+  85% {border-color:#e8d44b;box-shadow:0 0 18px rgba(232,212,75,.5), 0 0 0 2px rgba(232,212,75,.55);background:rgba(232,212,75,.09)}
+  100%{border-color:#e8b84b;box-shadow:0 0 18px rgba(232,184,75,.5),0 0 0 2px rgba(232,184,75,.55);background:rgba(232,184,75,.09)}}
+@keyframes shimmer-text{
+  0%  {background-position:200% center}
+  100%{background-position:-200% center}}
+.bb2-nav{width:100%;border:2px solid rgba(232,184,75,.5);
   color:var(--acid);font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;
   letter-spacing:1.5px;text-transform:uppercase;padding:13px 20px;border-radius:8px;
-  cursor:pointer;text-align:left;margin-top:18px;transition:.18s;
+  cursor:pointer;text-align:left;margin-top:18px;transition:border-color .3s,box-shadow .3s,background .3s;
   display:flex;align-items:center;justify-content:space-between;gap:8px;
-  animation:nav-pulse 2.8s ease-in-out infinite;margin-bottom:12px}
-.bb2-nav:hover{background:rgba(232,184,75,.15);border-color:var(--acid);
+  animation:nav-rainbow 4s linear infinite;margin-bottom:12px}
+.bb2-nav .bb2-shimmer-txt{
+  background:linear-gradient(90deg,#e8b84b,#e8674b,#e04baa,#8d4be8,#4aaee8,#4be880,#e8d44b,#e8b84b);
+  background-size:200% auto;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:shimmer-text 3s linear infinite}
+.bb2-nav:hover{background:rgba(232,184,75,.15)!important;border-color:var(--acid)!important;
   animation:none;box-shadow:0 0 28px rgba(232,184,75,.35),0 0 0 2px rgba(232,184,75,.5)}
-.bb2-nav.on{background:rgba(232,184,75,.13);border-color:var(--acid);
+.bb2-nav:hover .bb2-shimmer-txt{-webkit-text-fill-color:var(--acid);background:none}
+.bb2-nav.on{background:rgba(232,184,75,.13)!important;border-color:var(--acid)!important;
   animation:none;box-shadow:0 0 0 2px rgba(232,184,75,.3),0 0 22px rgba(232,184,75,.2)}
+.bb2-nav.on .bb2-shimmer-txt{-webkit-text-fill-color:var(--acid);background:none}
 .bb2-nav-arr{font-size:14px;opacity:.45;transition:.15s}
 .bb2-nav:hover .bb2-nav-arr,.bb2-nav.on .bb2-nav-arr{opacity:1}
 .bb2-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
@@ -636,7 +652,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   margin:0 -18px;padding:0 18px 2px;
   box-shadow:0 4px 16px rgba(0,0,0,.35)}
 @media(max-width:640px){
-  .gear-sticky-filters{top:50px;margin:0 -14px;padding:0 14px 2px}
+  .gear-sticky-filters{position:static;margin:0 -14px;padding:0 14px 2px;box-shadow:none}
 }
 .cft-tile-hint{font-size:11px;color:var(--dim);opacity:.7;flex:1;min-width:0}
 .cft-sel-all-btn{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;
@@ -1087,7 +1103,7 @@ function renderGear(){
       const armRows=combos.slice(0,8).map(c=>`<div class="bb2-opt-row">${si(c.arm.icon,'🛡')}<span class="bb2-opt-name">${esc(c.arm.name)}</span><span class="bb2-combo-sep">+</span>${si(c.hlm.icon,'⛑')}<span class="bb2-opt-name">${esc(c.hlm.name)}</span><span class="bb2-combo-total">${c.total}</span></div>`).join('');
       content=statsHtml+stimHtml+minBuild+`<div class="bb2-opts"><div><div class="bb2-opt-hd">⚔ Оружие <span class="muted">${viableWpns.length} вар.</span></div>${wpnRows||'<div class="bb2-empty">Нет вариантов</div>'}</div><div><div class="bb2-opt-hd">🛡 Броня + шлем <span class="muted">топ-8</span></div>${armRows||'<div class="bb2-empty">Нет вариантов</div>'}</div></div>`;
     }
-    return `${gcCalc}<div class="bar">${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}</div><button class="bb2-nav on" onclick="setGearCat('best')">🎯 Подбор снаряжения для локации<span class="bb2-nav-arr">▼</span></button>${locSel}${content}`;
+    return `${gcCalc}<div class="bar">${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}</div><button class="bb2-nav on" onclick="setGearCat('best')"><span class="bb2-shimmer-txt">🎯 Подбор снаряжения для локации</span><span class="bb2-nav-arr">▼</span></button>${locSel}${content}`;
   }
 
   let items=gearItems();
@@ -1106,7 +1122,7 @@ function renderGear(){
     <span class="cnt" style="margin-left:auto">${items.length} шт.</span>
   </div>
   </div>
-  <button class="bb2-nav" onclick="setGearCat('best')">🎯 Подбор снаряжения для локации <span class="bb2-nav-arr">→</span></button>
+  <button class="bb2-nav" onclick="setGearCat('best')"><span class="bb2-shimmer-txt">🎯 Подбор снаряжения для локации</span><span class="bb2-nav-arr">→</span></button>
   <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
   <div class="legend">
     Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>

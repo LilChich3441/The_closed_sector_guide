@@ -124,6 +124,9 @@ section.on{display:block}
 .sethead{display:flex;align-items:center;gap:8px;font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:10px}
 .setrar{margin-left:auto}
 .setbox .grid{grid-template-columns:1fr;gap:8px}
+.set-preview-row{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0 2px}
+.set-part-preview{font-size:12px;color:var(--dim);background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:3px 8px;white-space:nowrap}
+.set-part-preview .muted{color:var(--acid);opacity:.7}
 .chip.mat{background:var(--panel2);color:var(--dim);border-color:var(--line)}
 .note{font-size:14.5px;color:var(--dim);margin-top:8px;line-height:1.55;font-style:italic}
 /* tables */
@@ -803,7 +806,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
   dmg:Math.max(...DB.weapons.map(w=>parseInt(w.stat)||0)),
-  arm:Math.max(...[...DB.armor,...DB.helmets].map(a=>parseInt(a.stat)||0))
+  arm:Math.max(...DB.armor.map(a=>parseInt(a.stat)||0)),
+  hlm:Math.max(...DB.helmets.map(h=>parseInt(h.stat)||0))
 };
 const $=s=>document.querySelector(s);
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -818,6 +822,7 @@ let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
 let bestFilter={loc:''};
 let craftSelected=new Set([0]);
+let collapsedSets=new Set();
 let locItemFilter='';
 
 const TABS=[
@@ -900,11 +905,11 @@ function gearItems(){
   if(c==='all')return[
     ...DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'})),
     ...DB.armor.map(x=>({...x,kind:'arm',klbl:'Броня'})),
-    ...DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'}))
+    ...DB.helmets.map(x=>({...x,kind:'hlm',klbl:'Защита'}))
   ];
   if(c==='weapons')return DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'}));
   if(c==='armor')return DB.armor.map(x=>({...x,kind:'arm',klbl:'Броня'}));
-  if(c==='helmets')return DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'}));
+  if(c==='helmets')return DB.helmets.map(x=>({...x,kind:'hlm',klbl:'Защита'}));
   // категории из лута локаций
   if(c==='consum'||c==='bags'||c==='items'){
     return allLootItems().filter(it=>lootCatOf(it)===c)
@@ -914,21 +919,22 @@ function gearItems(){
   return [];
 }
 
-// Собирает комплекты D.I.S.S. из всех массивов снаряжения, сгруппированные по set
+// Собирает все комплекты снаряжения из всех массивов, сгруппированные по set
 function setGroups(){
   const all=[
     ...DB.weapons.map(x=>({...x,kind:'dmg',klbl:'Урон'})),
-    ...DB.armor.map(x=>({...x,kind:'arm',klbl:'Защита'})),
-    ...DB.helmets.map(x=>({...x,kind:'arm',klbl:'Защита'})),
-  ].filter(x=>x.set&&/D\.I\.S\.S/i.test(x.set));
+    ...DB.armor.map(x=>({...x,kind:'arm',klbl:'Броня'})),
+    ...DB.helmets.map(x=>({...x,kind:'hlm',klbl:'Защита'})),
+  ].filter(x=>x.set&&/^\(\d+\)\s*Комплект/i.test(x.set));
   const groups={};
   all.forEach(x=>{(groups[x.set]=groups[x.set]||[]).push(x);});
-  // порядок частей внутри сета: перчатки → бронекостюм → шлем
-  const part=n=>/перчатк/i.test(n)?0:/бронекостюм/i.test(n)?1:2;
-  Object.values(groups).forEach(g=>g.sort((a,b)=>part(a.name)-part(b.name)));
-  // порядок сетов: базовый → Mk2 → Mk3
+  // порядок частей: оружие (dmg) → броня (arm) → шлем (hlm)
+  const kindOrd={dmg:0,arm:1,hlm:2};
+  Object.values(groups).forEach(g=>g.sort((a,b)=>(kindOrd[a.kind]||0)-(kindOrd[b.kind]||0)));
+  // порядок сетов: базовый → Mk2 → Mk3, остальные по алфавиту
   const order=Object.keys(groups).sort((a,b)=>{
-    const r=v=>v.includes('Mk3')?3:v.includes('Mk2')?2:1; return r(a)-r(b);
+    const r=v=>v.includes('Mk3')?3:v.includes('Mk2')?2:v.includes('Mk')?1:0;
+    const d=r(a)-r(b); return d!==0?d:a.localeCompare(b,'ru');
   });
   return order.map(name=>({name, rar:groups[name][0].rar, parts:groups[name]}));
 }
@@ -1020,16 +1026,20 @@ function renderGear(){
           </div>`).join('')}
         </div>`
         :'';
+      const collapsed=collapsedSets.has(s.name);
+      const partCount=s.parts.length;
+      const previewStats=s.parts.map(p=>`<span class="set-part-preview">${esc(p.name)}<span class="muted"> ${p.stat||''}</span></span>`).join('');
       return `<div class="setbox rr${s.rar}">
-        <div class="sethead">${esc(s.name.replace(/^\(\d+\)\s*/,''))}
-          <span class="setrar chip rar${s.rar}">${RARN[s.rar]||''}</span></div>
-        ${bHtml}
-        <div class="grid">${s.parts.map(gearCard).join('')}</div>
+        <div class="sethead" onclick="toggleSetCollapse(this,'${esc(s.name)}')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <span>${esc(s.name.replace(/^\(\d+\)\s*/,''))}<span class="setrar chip rar${s.rar}" style="margin-left:8px">${RARN[s.rar]||''}</span></span>
+          <span class="set-toggle-arr" style="font-size:11px;color:var(--dim);white-space:nowrap">${partCount} пред. ${collapsed?'▶':'▼'}</span>
+        </div>
+        ${collapsed?`<div class="set-preview-row">${previewStats}</div>`:`${bHtml}<div class="grid">${s.parts.map(gearCard).join('')}</div>`}
       </div>`;
     }).join('')}</div>`;
     return `
     ${gcCalc}
-    <div class="intro"><b>Комплекты D.I.S.S.</b> — броня из трёх частей: перчатки (урон), бронекостюм и шлем (защита). Здесь видны полные сеты целиком по уровням улучшения Mk1 → Mk2 → Mk3. Эти же предметы есть и в разделах «Оружие», «Броня», «Шлемы».</div>
+    <div class="intro"><b>Комплекты снаряжения</b> — наборы предметов с особыми бонусами при ношении всех частей. Нажмите на название комплекта, чтобы свернуть или развернуть его. Предметы также доступны в разделах «Оружие», «Броня», «Шлемы».</div>
     <div class="bar">
       ${cats.map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}
       <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
@@ -1123,6 +1133,11 @@ function renderGear(){
 }
 function setGearCat(c){gearFilter.cat=c;gearFilter.rar=0;render();}
 function setGearRar(r){gearFilter.rar=r;render();}
+function toggleSetCollapse(el,name){
+  if(collapsedSets.has(name))collapsedSets.delete(name);
+  else collapsedSets.add(name);
+  render();
+}
 function setCmpType(t){cmpFilter.type=t;cmpFilter.a='';cmpFilter.b='';render();}
 function runCmp(){
   const aName=document.getElementById('cmpA')?.value;
@@ -1289,7 +1304,7 @@ function renderCars(){
   let filtered=DB.cars.slice();
   if(carsFilter.cargo)filtered=filtered.filter(c=>c.cargo===carsFilter.cargo);
   if(carsFilter.rar)filtered=filtered.filter(c=>c.rar===carsFilter.rar);
-  filtered.sort((a,b)=>(parseInt(b.speed)||0)-(parseInt(a.speed)||0));
+  filtered.sort((a,b)=>{const aR=/^[А-Яа-яЁё]/.test(a.name),bR=/^[А-Яа-яЁё]/.test(b.name);if(aR!==bR)return aR?-1:1;return a.name.localeCompare(b.name,'ru');});
   const rows=filtered.map(c=>{
     const cost=c.repCost?`${esc(c.repCost)} мат/1%`:'<span class="muted">нет данных</span>';
     const rep=c.repairable?cost:'<span class="danger">не чинится</span>';
@@ -1318,7 +1333,7 @@ function renderCars(){
     <div class="calc-body">
       <div class="calc-field">
         <label>Машина</label>
-        ${mkIconSel('calcCar', DB.cars.filter(c=>c.repairable&&c.repCost).map(c=>({val:c.name,label:c.name,icon:c.icon||''})), 'runCalc()')}
+        ${mkIconSel('calcCar', DB.cars.filter(c=>c.repairable&&c.repCost).sort((a,b)=>{const aR=/^[А-Яа-яЁё]/.test(a.name),bR=/^[А-Яа-яЁё]/.test(b.name);if(aR!==bR)return aR?-1:1;return a.name.localeCompare(b.name,'ru');}).map(c=>({val:c.name,label:c.name,icon:c.icon||''})), 'runCalc()')}
       </div>
       <div class="calc-field">
         <label>Текущая прочность, %</label>

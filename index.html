@@ -121,12 +121,27 @@ section.on{display:block}
 .setbonus-desc{font-size:12.5px;color:var(--txt);line-height:1.5;display:block}
 .setbonus-desc b{color:var(--acid)}
 .setbox.rr4{border-top-color:var(--r4)}.setbox.rr5{border-top-color:var(--r5)}
-.sethead{display:flex;align-items:center;gap:8px;font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:10px}
-.setrar{margin-left:auto}
+.sethead{display:flex;align-items:center;gap:8px;font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:10px;cursor:pointer;justify-content:space-between}
+.sethead-name{flex:1;min-width:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sethead-title{flex:1;min-width:0;overflow-wrap:break-word;word-break:break-word}
+.setrar{flex-shrink:0}
+.set-toggle-arr{flex-shrink:0;font-size:11px;color:var(--dim);white-space:nowrap;font-family:sans-serif;font-weight:400;letter-spacing:0;text-transform:none}
 .setbox .grid{grid-template-columns:1fr;gap:8px}
-.set-preview-row{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0 2px}
-.set-part-preview{font-size:12px;color:var(--dim);background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:3px 8px;white-space:nowrap}
-.set-part-preview .muted{color:var(--acid);opacity:.7}
+.setbonus-compact{padding:8px 12px;margin-bottom:8px}
+.setbonus-compact .setbonus-desc{font-size:12px;color:var(--dim)}
+.set-preview-items{display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;margin-top:4px}
+.set-mini-card{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:6px 10px;flex:1;min-width:130px}
+.set-mini-icon{width:30px;height:30px;object-fit:contain;flex-shrink:0}
+.set-mini-icon.ph{background:repeating-linear-gradient(45deg,var(--bg),var(--bg) 3px,var(--panel2) 3px,var(--panel2) 6px);border-radius:3px;opacity:.4}
+.set-mini-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.set-mini-name{font-size:12.5px;font-family:'Saira Condensed',sans-serif;font-weight:600;color:var(--txt);line-height:1.3}
+@media(max-width:640px){
+  .set-preview-items{flex-direction:column}
+  .set-mini-card{flex:none;min-width:0}
+  .sethead{font-size:13px;letter-spacing:.5px;flex-wrap:wrap;gap:4px}
+  .set-toggle-arr{width:100%;text-align:right;margin-top:-2px}
+}
+.set-mini-stat{font-size:11px;color:var(--acid);opacity:.8;font-family:'Saira Condensed',sans-serif}
 .chip.mat{background:var(--panel2);color:var(--dim);border-color:var(--line)}
 .note{font-size:14.5px;color:var(--dim);margin-top:8px;line-height:1.55;font-style:italic}
 /* tables */
@@ -822,7 +837,7 @@ let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
 let bestFilter={loc:''};
 let craftSelected=new Set([0]);
-let collapsedSets=new Set();
+let expandedSets=new Set();
 let locItemFilter='';
 
 const TABS=[
@@ -1026,15 +1041,27 @@ function renderGear(){
           </div>`).join('')}
         </div>`
         :'';
-      const collapsed=collapsedSets.has(s.name);
+      const collapsed=!expandedSets.has(s.name);
       const partCount=s.parts.length;
-      const previewStats=s.parts.map(p=>`<span class="set-part-preview">${esc(p.name)}<span class="muted"> ${p.stat||''}</span></span>`).join('');
+      const miniItems=s.parts.map(p=>{
+        const ico=p.icon&&img(p.icon)?`<img class="set-mini-icon" src="${img(p.icon)}" alt="" loading="lazy">`:'<div class="set-mini-icon ph"></div>';
+        return `<div class="set-mini-card">
+          ${ico}
+          <div class="set-mini-info">
+            <span class="set-mini-name">${esc(p.name)}</span>
+            ${p.stat?`<span class="set-mini-stat">${p.stat} ${esc(p.klbl||'')}</span>`:''}
+          </div>
+        </div>`;
+      }).join('');
+      const collapsedHtml=`
+        ${si?`<div class="setbonus setbonus-compact">${si.map(b=>`<div class="setbonus-item"><span class="setbonus-ico">${b.icon}</span><div><span class="setbonus-desc">${esc(b.desc)}</span></div></div>`).join('')}</div>`:''}
+        <div class="set-preview-items">${miniItems}</div>`;
       return `<div class="setbox rr${s.rar}">
-        <div class="sethead" onclick="toggleSetCollapse(this,'${esc(s.name)}')" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px">
-          <span>${esc(s.name.replace(/^\(\d+\)\s*/,''))}<span class="setrar chip rar${s.rar}" style="margin-left:8px">${RARN[s.rar]||''}</span></span>
-          <span class="set-toggle-arr" style="font-size:11px;color:var(--dim);white-space:nowrap">${partCount} пред. ${collapsed?'▶':'▼'}</span>
+        <div class="sethead" onclick="toggleSetCollapse(this,'${esc(s.name)}')">
+          <span class="sethead-name"><span class="sethead-title">${esc(s.name.replace(/^\(\d+\)\s*/,''))}</span><span class="setrar chip rar${s.rar}">${RARN[s.rar]||''}</span></span>
+          <span class="set-toggle-arr">${partCount} пред. ${collapsed?'▶':'▼'}</span>
         </div>
-        ${collapsed?`<div class="set-preview-row">${previewStats}</div>`:`${bHtml}<div class="grid">${s.parts.map(gearCard).join('')}</div>`}
+        ${collapsed?collapsedHtml:`${bHtml}<div class="grid">${s.parts.map(gearCard).join('')}</div>`}
       </div>`;
     }).join('')}</div>`;
     return `
@@ -1134,8 +1161,8 @@ function renderGear(){
 function setGearCat(c){gearFilter.cat=c;gearFilter.rar=0;render();}
 function setGearRar(r){gearFilter.rar=r;render();}
 function toggleSetCollapse(el,name){
-  if(collapsedSets.has(name))collapsedSets.delete(name);
-  else collapsedSets.add(name);
+  if(expandedSets.has(name))expandedSets.delete(name);
+  else expandedSets.add(name);
   render();
 }
 function setCmpType(t){cmpFilter.type=t;cmpFilter.a='';cmpFilter.b='';render();}

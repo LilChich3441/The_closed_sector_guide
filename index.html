@@ -158,7 +158,7 @@ section.on{display:block}
 .chip.mat{background:var(--panel2);color:var(--dim);border-color:var(--line)}
 .note{font-size:14.5px;color:var(--dim);margin-top:8px;line-height:1.55;font-style:italic}
 /* tables */
-.tbl{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel);border:1px solid var(--line)}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel);border:1px solid var(--line);display:block;overflow-x:auto}
 .tbl th{background:var(--panel2);color:var(--acid);text-align:left;padding:12px 16px;font-family:'Saira Condensed',sans-serif;
   letter-spacing:1.2px;text-transform:uppercase;font-size:11px;font-weight:700;border-bottom:1px solid var(--line)}
 .tbl td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -413,11 +413,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   background:rgba(229,229,234,.06)!important}
 .loclist{display:flex;flex-direction:column;gap:8px}
 .loccard{background:var(--panel);border:none;border-radius:6px;overflow:hidden}
-.loc-banner{width:100%;height:160px;position:relative;overflow:hidden;flex:none}
-.loc-banner img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;transition:transform .4s cubic-bezier(.2,.9,.3,1),object-position .3s}
+.loc-banner{width:100%;height:200px;position:relative;overflow:hidden;flex:none}
+.loc-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;transition:transform .4s cubic-bezier(.2,.9,.3,1)}
 .loccard:hover .loc-banner img{transform:scale(1.04)}
-.loc-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.08) 0%,rgba(28,28,30,.7) 75%,var(--panel) 100%),linear-gradient(to left,#000 0%,#000 5%,rgba(0,0,0,.75) 25%,rgba(0,0,0,.25) 45%,transparent 60%)}
-@media(max-width:680px){.loc-banner{height:120px}}
+.loc-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.08) 0%,rgba(0,0,0,.35) 40%,rgba(0,0,0,.78) 100%),linear-gradient(to left,rgba(0,0,0,.35) 0%,transparent 55%);pointer-events:none}
+@media(max-width:680px){.loc-banner{height:165px}}
+.loc-banner .locrow{position:absolute;bottom:0;left:0;right:0;z-index:1;background:transparent;padding-bottom:16px}
+.loc-banner .locrow:hover{background:transparent}
 .locrow{display:flex;align-items:center;gap:16px;padding:14px 16px;flex-wrap:wrap;transition:background .15s;position:relative;overflow:hidden}
 .locrow:hover{background:rgba(255,255,255,.025)}
 .locrow::before{content:'';position:absolute;inset:0;background:radial-gradient(circle 130px at var(--mx,0px) var(--my,0px),rgba(229,229,234,.09),transparent 70%);pointer-events:none;opacity:0;transition:opacity .25s}
@@ -707,7 +709,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .bb2-stim{font-size:13px;padding:8px 10px}
 }
 @media(max-width:400px){
-  .bb2-stats{grid-template-columns:1fr 1fr 1fr}
+  .bb2-stats{grid-template-columns:1fr 1fr}
   .bb2-stat-val{font-size:20px}
   .bb2-slots{flex-direction:column;align-items:stretch}
   .bb2-slot{min-width:0}
@@ -950,8 +952,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <div id="imodal" onclick="if(event.target===this)closeItemPopup()">
   <div id="imodal-box"></div>
 </div>
-<script src="images.js"></script>
-<script src="data.js"></script>
+<script src="images.js?v=20260612"></script>
+<script src="data.js?v=20260612"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -1700,8 +1702,8 @@ function renderLocations(){
       </div>`;
     }
     const pos=LOC_POS[l.name]||'center 30%';
-    const banner=l.icon?`<div class="loc-banner"${hasLoot?` onclick="toggleLoc(${idx})" style="cursor:pointer"`:''} ><img src="${esc(l.icon)}" alt="${esc(l.name)}" loading="lazy" style="object-position:${pos}"></div>`:'';
-    return `<div class="loccard${isMatch?' loc-hit':isFaded?' loc-faded':''}" data-name="${esc(l.name.toLowerCase())}${b?' '+esc(b.name.toLowerCase()):''}">${banner}${head}${body}</div>`;
+    const banner=l.icon?`<div class="loc-banner"${hasLoot?` onclick="toggleLoc(${idx})" style="cursor:pointer"`:''} ><img src="${esc(l.icon)}" alt="${esc(l.name)}" loading="lazy" style="object-position:${pos}">${head}</div>`:head;
+    return `<div class="loccard${isMatch?' loc-hit':isFaded?' loc-faded':''}" data-name="${esc(l.name.toLowerCase())}${b?' '+esc(b.name.toLowerCase()):''}"> ${banner}${body}</div>`;
   }).join('');
   const brows=DB.bosses.map(b=>`<tr data-name="${esc(b.name.toLowerCase())}">
     <td class="tname"><span class="dotr d5"></span>${esc(b.name)}</td>
@@ -1731,11 +1733,16 @@ function renderLocations(){
     <tbody>${brows}</tbody>
   </table>`;
 }
+let _locSearchT=null;
 function setLocFilter(v){
-  locItemFilter=norm(v||'');
-  render();
-  const el=document.getElementById('locItemSearch');
-  if(el){el.focus();const l=el.value.length;el.setSelectionRange(l,l);}
+  clearTimeout(_locSearchT);
+  const raw=v||'';
+  _locSearchT=setTimeout(()=>{
+    locItemFilter=norm(raw);
+    render();
+    const el=document.getElementById('locItemSearch');
+    if(el){el.focus();const l=el.value.length;el.setSelectionRange(l,l);}
+  },180);
 }
 function clearLocFilter(){
   locItemFilter='';
@@ -2212,6 +2219,7 @@ function findItemLocs(name){
   return locs;
 }
 function openItemPopup(name){
+  mobMenuClose();
   const n=norm(name);let it=null;
   if(DB.locLoot){
     outer:for(const loc in DB.locLoot){

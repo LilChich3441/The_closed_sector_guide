@@ -654,6 +654,25 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .bb2-slot{min-width:90px}
   .bb2-slot-ico,.bb2-slot-ph{width:56px;height:56px}
   .bb2-slot-val{font-size:20px}
+  /* подбор снаряжения — мобильные правки */
+  .bb2-stats{gap:6px}
+  .bb2-stat{padding:10px 6px}
+  .bb2-stat-lbl{font-size:9px;letter-spacing:1px}
+  .bb2-slots{gap:4px}
+  .bb2-plus{font-size:14px;padding:0}
+  .bb2-opt-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bb2-opt-stat{font-size:14px;min-width:26px}
+  .bb2-combo-total{font-size:13px;min-width:24px}
+  .bb2-nav{padding:11px 14px;font-size:13px;letter-spacing:1px}
+  .bb2-stim{font-size:13px;padding:8px 10px}
+}
+@media(max-width:400px){
+  .bb2-stats{grid-template-columns:1fr 1fr 1fr}
+  .bb2-stat-val{font-size:20px}
+  .bb2-slots{flex-direction:column;align-items:stretch}
+  .bb2-slot{min-width:0}
+  .bb2-plus{display:none}
+  .bb2-slot-ico,.bb2-slot-ph{width:48px;height:48px}
 }
 /* ── craft section ── */
 .craft-warn{background:rgba(192,64,104,.1);border:1px solid rgba(192,64,104,.4);border-left:3px solid var(--hot);

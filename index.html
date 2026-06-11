@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>THE CLOSED SECTOR // Гайд</title>
+<meta name="description" content="Полевой справочник по The Closed Sector — снаряжение, локации, транспорт, крафт и подбор билда.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tcs-guide.killa1.workers.dev">
+<meta property="og:title" content="The Closed Sector — Полевой справочник">
+<meta property="og:description" content="Снаряжение, локации, транспорт, крафт и подбор минимального билда для каждой локации.">
+<meta property="og:image" content="https://tcs-guide.killa1.workers.dev/loc/konvoy.jpg">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Closed Sector — Полевой справочник">
+<meta name="twitter:description" content="Снаряжение, локации, транспорт, крафт и подбор минимального билда для каждой локации.">
+<meta name="twitter:image" content="https://tcs-guide.killa1.workers.dev/loc/konvoy.jpg">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Saira:wght@400;500;600&family=Saira+Semi+Condensed:wght@600;700&display=swap');
 :root{
@@ -509,6 +520,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
   .qface{width:54px;height:54px}
   .qtitle{font-size:19px}
   #globalSearch{font-size:16px}
+  .sec-search-in{font-size:16px}
+  .cname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .lootname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .calc-body{flex-direction:column;align-items:stretch}
   .calc-out{margin-left:0;text-align:left;border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
   .calc-field .gsel,.cinput{width:100%}
@@ -518,6 +532,31 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   text-transform:uppercase;font-family:'Saira Condensed',sans-serif;
   border-top:1px solid var(--line);max-width:1240px;margin-left:auto;margin-right:auto;
   background:linear-gradient(0deg,rgba(229,229,234,.025),transparent)}
+/* ── donate block ── */
+.donate-wrap{max-width:1240px;margin:0 auto;padding:0 18px 36px}
+.donate-box{background:rgba(229,229,234,.06);border:1px solid var(--line);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.donate-icon{font-size:22px;flex-shrink:0;opacity:.75}
+.donate-text{flex:1;min-width:180px}
+.donate-title{font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;color:var(--txt);text-transform:uppercase;margin-bottom:2px}
+.donate-sub{font-size:11px;color:var(--dim);letter-spacing:.3px}
+.donate-cards{display:flex;gap:10px;flex-wrap:wrap}
+.donate-card{display:flex;align-items:center;gap:10px;border-radius:10px;padding:10px 14px;cursor:pointer;transition:.18s;position:relative;overflow:hidden}
+.donate-card-tbank{background:linear-gradient(135deg,rgba(255,196,0,.12),rgba(255,196,0,.05));border:1px solid rgba(255,196,0,.3)}
+.donate-card-tbank:hover{border-color:rgba(255,196,0,.7);background:linear-gradient(135deg,rgba(255,196,0,.18),rgba(255,196,0,.08))}
+.donate-card-sber{background:linear-gradient(135deg,rgba(33,195,84,.12),rgba(33,195,84,.05));border:1px solid rgba(33,195,84,.3)}
+.donate-card-sber:hover{border-color:rgba(33,195,84,.7);background:linear-gradient(135deg,rgba(33,195,84,.18),rgba(33,195,84,.08))}
+.donate-bank img{height:22px;width:22px;object-fit:contain;flex-shrink:0}
+.donate-num{font-family:'JetBrains Mono','Courier New',monospace;font-size:13px;color:var(--txt);letter-spacing:.5px}
+.donate-copy{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0;transition:.18s;white-space:nowrap;margin-left:6px;flex-shrink:0}
+.donate-card-tbank .donate-copy{color:rgba(255,196,0,.9)}
+.donate-card-sber .donate-copy{color:rgba(33,195,84,.9)}
+.donate-card:hover .donate-copy{opacity:1}
+.donate-copy.copied{opacity:1;color:#4ade80}
+@media(hover:none){.donate-copy{opacity:.8}}
+@media(max-width:560px){
+  .donate-card{width:100%}
+  .donate-num{font-size:12px}
+}
 /* ── stat progress bars ── */
 .statbar{height:3px;background:var(--bg2);border-radius:2px;margin:3px 0 6px;overflow:hidden}
 .statfill{height:100%;border-radius:2px}
@@ -546,7 +585,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .loc-pick-hdr-name.dim{color:var(--dim);font-weight:600}
 .loc-pick-hdr-arr{position:relative;z-index:1;color:var(--dim);font-size:11px;flex:none}
 .loc-pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px}
-@media(max-width:560px){.loc-pick-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.loc-pick-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:360px){.loc-pick-grid{grid-template-columns:1fr}}
 .loc-pick-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;cursor:pointer;overflow:hidden;position:relative;display:flex;flex-direction:column;transition:transform .2s cubic-bezier(.34,1.56,.64,1),border-color .18s,box-shadow .18s}
 .loc-pick-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle 90px at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--dc,var(--acid)) 22%,transparent),transparent 70%);pointer-events:none;opacity:0;transition:opacity .25s;z-index:2}
 .loc-pick-card::after{content:'';position:absolute;top:0;right:0;bottom:0;width:50px;background:linear-gradient(to left,color-mix(in srgb,var(--dc,var(--acid)) 14%,transparent),transparent);pointer-events:none;opacity:0;transition:opacity .3s;z-index:2}
@@ -663,7 +703,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .bb2-opt-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .bb2-opt-stat{font-size:14px;min-width:26px}
   .bb2-combo-total{font-size:13px;min-width:24px}
-  .bb2-nav{padding:11px 14px;font-size:13px;letter-spacing:1px}
+  .bb2-nav{padding:11px 14px;font-size:13px;letter-spacing:1px;min-height:44px}
   .bb2-stim{font-size:13px;padding:8px 10px}
 }
 @media(max-width:400px){
@@ -711,7 +751,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .cft-ing-item[data-locs]{cursor:pointer}
 .cft-loc-pill{font-size:11px;flex:none;opacity:.55;margin-left:2px;transition:.12s}
 .cft-ing-item[data-locs]:hover .cft-loc-pill,.cft-ing-item.tip-open .cft-loc-pill{opacity:1}
-.cft-loc-tip{display:none;position:absolute;bottom:calc(100% + 5px);left:0;z-index:60;
+.cft-loc-tip{display:none;position:absolute;bottom:calc(100% + 5px);left:0;z-index:150;
   background:var(--panel2);border:1px solid var(--line2);border-radius:7px;
   padding:9px 11px;min-width:180px;max-width:260px;
   box-shadow:0 6px 20px rgba(0,0,0,.45);pointer-events:none}
@@ -822,8 +862,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 }
 /* ── extra small screens ── */
 @media(max-width:400px){
-  .filter{padding:5px 10px;font-size:11px}
-  .tab{padding:10px 11px;font-size:12px}
+  .filter{padding:6px 10px;min-height:44px}
 }
 /* ── mobile navigation ── */
 #mob-topbar{display:none;align-items:center;gap:0;
@@ -837,8 +876,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   color:var(--txt);letter-spacing:.5px;flex:1;min-width:0;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #mob-menu-btn{flex:none;background:none;border:1px solid var(--line);border-radius:6px;
-  color:var(--dim);width:36px;height:36px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font-size:17px;transition:.15s}
+  color:var(--dim);width:44px;height:44px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:18px;transition:.15s}
 #mob-menu-btn:hover{border-color:var(--acid);color:var(--acid)}
 #mob-overlay{display:none;position:fixed;inset:0;z-index:110;background:rgba(0,0,0,.6);
   backdrop-filter:blur(3px);animation:fade .2s}
@@ -855,7 +894,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .mob-tab-btn{background:var(--bg2);border:1px solid var(--line);border-radius:8px;
   padding:13px 10px;color:var(--dim);font-family:'Saira Condensed',sans-serif;
   font-size:14px;font-weight:600;letter-spacing:.5px;text-align:center;cursor:pointer;
-  transition:.14s;line-height:1.25}
+  transition:.14s;line-height:1.25;min-height:44px}
 .mob-tab-btn:hover{border-color:var(--line2);color:var(--txt)}
 .mob-tab-btn.on{border-color:var(--acid);color:var(--acid);background:rgba(229,229,234,.08)}
 @media(max-width:640px){
@@ -891,7 +930,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
     <div class="tagline">Снаряжение, локации и контракты закрытого сектора. Данные из таблицы сообщества.</div>
   </div>
 </header>
-<input id="globalSearch" style="display:none" oninput="globalSearch(this.value)">
+<input id="globalSearch" style="display:none" oninput="debouncedSearch(this.value)">
 <div id="mob-topbar">
   <span class="mob-logo">TCS</span>
   <span id="mob-tab-cur">⚙ Снаряжение</span>
@@ -936,7 +975,7 @@ function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replac
 function fmt(n){return (n||0).toLocaleString('ru-RU');}
 function img(k){return (k&&typeof IMG!=='undefined'&&IMG[k])?IMG[k]:'';}
 
-let activeTab=localStorage.getItem('cs_tab')||'home';
+let activeTab='home';
 let gearFilter={cat:'all',rar:0,search:''};
 let calcOpen=localStorage.getItem('cs_calc')!=='0';
 let itemsFilter={transport:0,search:''};
@@ -959,6 +998,7 @@ const TABS=[
   {id:'guides',label:'📖 Гайды'},
   {id:'progress',label:'⭐ Прогресс'},
   {id:'terms',label:'📄 Соглашение'},
+  {id:'donate',label:'☕ Поддержать'},
 ];
 let storyFilter={chap:1,giver:'',opt:false};
 
@@ -1443,8 +1483,26 @@ function renderItems(){
   </div>`;
 }
 function setItemsTransport(t){itemsFilter.transport=t;render();}
-function setItemsSearch(v){itemsFilter.search=v;render();}
-function setGearSearch(v){gearFilter.search=v;render();}
+let _itemsSearchT=null;
+function setItemsSearch(v){
+  itemsFilter.search=v;
+  clearTimeout(_itemsSearchT);
+  _itemsSearchT=setTimeout(()=>{
+    render();
+    const el=document.getElementById('itemsSearch');
+    if(el){el.focus();const l=el.value.length;el.setSelectionRange(l,l);}
+  },180);
+}
+let _gearSearchT=null;
+function setGearSearch(v){
+  gearFilter.search=v;
+  clearTimeout(_gearSearchT);
+  _gearSearchT=setTimeout(()=>{
+    render();
+    const el=document.getElementById('gearSearch');
+    if(el){el.focus();const l=el.value.length;el.setSelectionRange(l,l);}
+  },180);
+}
 
 // ---------- CARS ----------
 function cargoLabel(c){
@@ -1972,7 +2030,8 @@ function renderHome(){
     ?`class="dash-hero has-loc" style="background-image:url('${esc(selLoc.icon)}');background-position:${selPos}"`
     :`class="dash-hero"`;
   const locBadge=selLoc?`<div class="dash-loc-badge" onclick="switchTab('gear')">📍 <span class="dash-loc-badge-name">${esc(selLoc.name)}</span> <span style="opacity:.5">→ снаряжение</span></div>`:'';
-  return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${locBadge}</div><div class="dash-grid">${cards}</div></div>`;
+  const donateHtml=`<div class="donate-wrap" style="padding-left:0;padding-right:0;max-width:none;margin-top:8px"><div class="donate-box"><div class="donate-icon">☕</div><div class="donate-text"><div class="donate-title">Поддержать проект</div><div class="donate-sub">Справочник бесплатный и без рекламы — если хочешь поддержать, буду рад</div></div><div class="donate-cards"><div class="donate-card donate-card-tbank" onclick="copyCard(this,'2200702057489457')"><img src="loc/tbank.png" alt="Т-Банк" style="height:22px;width:22px;object-fit:contain"><span class="donate-num">2200 7020 5748 9457</span><span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div><div class="donate-card donate-card-sber" onclick="copyCard(this,'5469400039956201')"><img src="loc/sber.png" alt="Сбер" style="height:22px;width:22px;object-fit:contain"><span class="donate-num">5469 4000 3995 6201</span><span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div></div></div>`;
+  return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${locBadge}</div><div class="dash-grid">${cards}</div>${donateHtml}</div>`;
 }
 function renderCraft(){
   const all=DB.crafting||[];
@@ -2028,7 +2087,6 @@ function renderCraft(){
   return `${warn}${hint}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
 }
 function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
-function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
 function setCraftItem(i){
   craftSelected.clear();
   craftSelected.add(i);
@@ -2079,6 +2137,30 @@ function renderCraftTip(){
   </div>`;
 }
 
+function renderDonate(){
+  return `<div class="donate-wrap" style="padding-top:24px">
+    <div class="donate-box">
+      <div class="donate-icon">☕</div>
+      <div class="donate-text">
+        <div class="donate-title">Поддержать проект</div>
+        <div class="donate-sub">Справочник бесплатный и без рекламы — если хочешь поддержать, буду рад</div>
+      </div>
+      <div class="donate-cards">
+        <div class="donate-card donate-card-tbank" onclick="copyCard(this,'2200702057489457')">
+          <img src="loc/tbank.png" alt="Т-Банк" style="height:22px;width:22px;object-fit:contain">
+          <span class="donate-num">2200 7020 5748 9457</span>
+          <span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span>
+        </div>
+        <div class="donate-card donate-card-sber" onclick="copyCard(this,'5469400039956201')">
+          <img src="loc/sber.png" alt="Сбер" style="height:22px;width:22px;object-fit:contain">
+          <span class="donate-num">5469 4000 3995 6201</span>
+          <span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
 function render(){
   const m=$('#main');
   if(activeTab==='home')m.innerHTML=`<section class="on">${renderHome()}</section>`;
@@ -2092,11 +2174,14 @@ function render(){
   else if(activeTab==='quests')m.innerHTML=`<section class="on">${renderQuests()}</section>`;
   else if(activeTab==='guides')m.innerHTML=`<section class="on">${renderGuides()}</section>`;
   else if(activeTab==='progress')m.innerHTML=`<section class="on">${renderProgress()}</section>`;
+  else if(activeTab==='donate')m.innerHTML=`<section class="on">${renderDonate()}</section>`;
   const gs=$('#globalSearch').value.trim();
   if(gs)globalSearch(gs);
 }
 
 // ---------- GLOBAL SEARCH ----------
+let _searchTimer=null;
+function debouncedSearch(v){clearTimeout(_searchTimer);_searchTimer=setTimeout(()=>globalSearch(v),200);}
 function globalSearch(q){
   q=q.trim().toLowerCase();
   const nodes=document.querySelectorAll('[data-name]');
@@ -2178,18 +2263,33 @@ function closeItemPopup(){
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeItemPopup();});
 
 // ── search highlight ──
+let _hlRaf=null;
 function applyHL(){
-  const q=norm(document.getElementById('globalSearch').value.trim());
-  document.querySelectorAll('.hl-w').forEach(el=>{
-    if(el.parentNode){el.parentNode.replaceChild(document.createTextNode(el.textContent),el);}
-  });
-  if(!q)return;
-  document.querySelectorAll('[data-name]:not(.hidden) .cname,[data-name]:not(.hidden) .lootname').forEach(el=>{
-    const text=el.textContent;
-    const lower=norm(text);
-    const idx=lower.indexOf(q);
-    if(idx<0)return;
-    el.innerHTML=esc(text.slice(0,idx))+`<span class="hl-w">${esc(text.slice(idx,idx+q.length))}</span>`+esc(text.slice(idx+q.length));
+  cancelAnimationFrame(_hlRaf);
+  _hlRaf=requestAnimationFrame(()=>{
+    // restore originals
+    document.querySelectorAll('[data-orig]').forEach(el=>{
+      el.textContent=el.dataset.orig;
+      delete el.dataset.orig;
+    });
+    const q=norm(document.getElementById('globalSearch').value.trim());
+    if(!q)return;
+    document.querySelectorAll('[data-name]:not(.hidden) .cname,[data-name]:not(.hidden) .lootname').forEach(el=>{
+      const text=el.textContent;
+      const lower=norm(text);
+      const idx=lower.indexOf(q);
+      if(idx<0)return;
+      el.dataset.orig=text;
+      const frag=document.createDocumentFragment();
+      if(idx>0)frag.appendChild(document.createTextNode(text.slice(0,idx)));
+      const mark=document.createElement('span');
+      mark.className='hl-w';
+      mark.textContent=text.slice(idx,idx+q.length);
+      frag.appendChild(mark);
+      if(idx+q.length<text.length)frag.appendChild(document.createTextNode(text.slice(idx+q.length)));
+      el.textContent='';
+      el.appendChild(frag);
+    });
   });
 }
 
@@ -2255,6 +2355,13 @@ window.addEventListener('scroll',()=>{
   if(pb){const h=document.documentElement.scrollHeight-window.innerHeight;
     pb.style.width=(h>0?Math.min(window.scrollY/h*100,100):0)+'%';}
 });
+function copyCard(el,num){
+  navigator.clipboard.writeText(num).then(()=>{
+    const span=el.querySelector('.donate-copy');
+    span.textContent='Скопировано!';span.classList.add('copied');
+    setTimeout(()=>{span.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать';span.classList.remove('copied');},2000);
+  });
+}
 </script>
 </body>
 </html>

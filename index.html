@@ -9,12 +9,14 @@
 <meta property="og:url" content="https://tcs-guide.killa1.workers.dev">
 <meta property="og:title" content="The Closed Sector — Полевой справочник">
 <meta property="og:description" content="Снаряжение, локации, транспорт, крафт и подбор минимального билда для каждой локации.">
-<meta property="og:image" content="https://tcs-guide.killa1.workers.dev/loc/konvoy.jpg">
+<meta property="og:image" content="https://tcs-guide.killa1.workers.dev/loc/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Closed Sector — Полевой справочник">
 <meta name="twitter:description" content="Снаряжение, локации, транспорт, крафт и подбор минимального билда для каждой локации.">
-<meta name="twitter:image" content="https://tcs-guide.killa1.workers.dev/loc/konvoy.jpg">
+<meta name="twitter:image" content="https://tcs-guide.killa1.workers.dev/loc/og.jpg">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Saira:wght@400;500;600&family=Saira+Semi+Condensed:wght@600;700&display=swap');
 :root{
@@ -25,7 +27,7 @@
   --cut:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Saira',system-ui,sans-serif;min-height:100vh;scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+html,body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Saira',system-ui,sans-serif;min-height:100vh;scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
 body{
   background-color:var(--bg);
   background-image:
@@ -61,16 +63,29 @@ h1 b{display:block;font-size:12px;letter-spacing:7px;color:var(--acid);font-weig
 #globalSearch::placeholder{color:var(--dim)}
 #globalSearch:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 3px rgba(229,229,234,.18)}
 .search-wrap::before{content:'⌖';position:absolute;left:30px;top:50%;transform:translateY(-50%);color:var(--acid);font-size:16px;pointer-events:none}
-.tabs{display:flex;gap:0;flex-wrap:wrap;margin:20px auto 0;max-width:1240px;padding:0 18px;
+.tabs{display:flex;gap:0;flex-wrap:nowrap;margin:20px auto 0;max-width:1240px;padding:0 18px;
   position:sticky;top:0;z-index:50;background:var(--bg);
   backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs-more{position:relative;display:flex;align-items:stretch;margin-bottom:-1px}
+.tabs-more-btn{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--dim);
+  padding:12px 16px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:16px;
+  font-weight:700;transition:.18s;white-space:nowrap;letter-spacing:2px}
+.tabs-more-btn:hover{color:var(--txt);background:rgba(255,255,255,.05)}
+.tabs-more-btn.on{color:var(--acid);border-bottom-color:var(--acid);background:rgba(229,229,234,.07)}
+.tabs-dropdown{display:none;position:absolute;top:calc(100% + 1px);right:0;
+  background:var(--panel);border:1px solid var(--line);border-radius:0 0 8px 8px;
+  z-index:200;min-width:200px;padding:4px 0;box-shadow:0 12px 32px rgba(0,0,0,.6)}
+.tabs-dropdown.open{display:block}
+.tabs-dropdown .tab{display:block;width:100%;text-align:left;border-bottom:none;padding:10px 18px;border-radius:0;margin-bottom:0}
 .tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--dim);
   padding:12px 16px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:.8px;
   font-weight:600;text-transform:uppercase;transition:.18s;position:relative;border-radius:0;margin-bottom:-1px;white-space:nowrap}
 .tab:hover{color:var(--txt);background:rgba(255,255,255,.05)}
 .tab:active{opacity:.7;transition-duration:.05s}
-.tab.on{color:var(--acid);border-bottom-color:var(--acid);background:rgba(229,229,234,.07)}
+.tab.on{color:var(--acid);background:rgba(229,229,234,.07)}
 .tab.on::after{display:none}
+#tabs-ind{position:absolute;bottom:-1px;height:2px;background:var(--acid);pointer-events:none;z-index:2;left:0;width:0;opacity:0;transition:left .22s cubic-bezier(.4,0,.2,1),width .22s cubic-bezier(.4,0,.2,1),opacity .15s}
+@media(max-width:560px){#tabs-ind{display:none}}
 main{max-width:1240px;margin:0 auto;padding:20px 18px 0}
 section{display:none;animation:fade .25s}
 section.on{display:block}
@@ -482,6 +497,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
     padding:8px 12px 0;scroll-snap-type:x proximity}
   .tabs::-webkit-scrollbar{display:none}
   .tab{flex:0 0 auto;scroll-snap-align:start}
+  .tabs-more{display:none}
 }
 @media(max-width:680px){
   .wrap,main,.tabs,.search-wrap,header .hgrid{padding-left:14px;padding-right:14px}
@@ -799,10 +815,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   color:var(--acid);white-space:nowrap;flex:none;padding:1px 6px;
   border:1px solid rgba(229,229,234,.4);border-radius:3px;background:rgba(229,229,234,.12);min-width:28px;text-align:center}
 .cft-hint-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.gear-sticky-filters{position:sticky;top:41px;z-index:40;
-  background:rgba(0,0,0,.97);backdrop-filter:blur(8px);
-  margin:0 -18px;padding:0 18px 2px;
-  box-shadow:0 4px 16px rgba(0,0,0,.35)}
+.gear-sticky-filters{margin:0 -18px;padding:0 18px 2px}
 @media(max-width:640px){
   .gear-sticky-filters{position:static;margin:0 -14px;padding:0 14px 2px;box-shadow:none}
 }
@@ -1006,15 +1019,45 @@ const TABS=[
 ];
 let storyFilter={chap:1,giver:'',opt:false};
 
+const MORE_TAB_IDS=['progress','terms','donate'];
 function buildTabs(){
-  $('#tabs').innerHTML=TABS.map(t=>
-    `<div class="tab ${t.id===activeTab?'on':''}" data-tab="${t.id}" onclick="switchTab('${t.id}')">${t.label}</div>`).join('');
+  const main=TABS.filter(t=>!MORE_TAB_IDS.includes(t.id));
+  const more=TABS.filter(t=>MORE_TAB_IDS.includes(t.id));
+  const moreActive=more.some(t=>t.id===activeTab);
+  const tabsEl=$('#tabs');
+  if(!tabsEl.querySelector('[data-tab]')){
+    // первичная отрисовка
+    const mainHtml=main.map(t=>`<div class="tab" data-tab="${t.id}" onclick="switchTab('${t.id}')">${t.label}</div>`).join('');
+    const dropHtml=more.map(t=>`<div class="tab" data-tab="${t.id}" onclick="switchTab('${t.id}');closeMoreTabs()">${t.label}</div>`).join('');
+    tabsEl.innerHTML=mainHtml+`<div class="tabs-more" id="tabs-more"><button class="tabs-more-btn" onclick="toggleMoreTabs(event)">···</button><div class="tabs-dropdown" id="tabs-dropdown">${dropHtml}</div></div><div id="tabs-ind"></div>`;
+  }
+  // обновляем классы без пересоздания DOM
+  tabsEl.querySelectorAll('[data-tab]').forEach(t=>t.classList.toggle('on',t.dataset.tab===activeTab));
+  const moreBtn=tabsEl.querySelector('.tabs-more-btn');
+  if(moreBtn)moreBtn.classList.toggle('on',moreActive);
+  requestAnimationFrame(updateTabInd);
   const cur=TABS.find(t=>t.id===activeTab)||TABS[0];
   const mobCur=document.getElementById('mob-tab-cur');
   if(mobCur)mobCur.textContent=cur.label;
   const grid=document.getElementById('mob-tab-grid');
   if(grid)grid.innerHTML=TABS.map(t=>`<button class="mob-tab-btn${t.id===activeTab?' on':''}" onclick="switchTab('${t.id}');mobMenuClose()">${t.label}</button>`).join('');
 }
+function updateTabInd(){
+  const ind=document.getElementById('tabs-ind');
+  const tabsEl=$('#tabs');
+  if(!ind||!tabsEl)return;
+  const active=tabsEl.querySelector('.tab.on, .tabs-more-btn.on');
+  if(!active){ind.style.opacity='0';return;}
+  const tr=tabsEl.getBoundingClientRect();
+  const ar=active.getBoundingClientRect();
+  ind.style.left=(ar.left-tr.left+tabsEl.scrollLeft)+'px';
+  ind.style.width=ar.width+'px';
+  ind.style.opacity='1';
+}
+function toggleMoreTabs(e){e&&e.stopPropagation();const d=document.getElementById('tabs-dropdown');if(d)d.classList.toggle('open');}
+function closeMoreTabs(){const d=document.getElementById('tabs-dropdown');if(d)d.classList.remove('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('#tabs-more'))closeMoreTabs();});
+window.addEventListener('resize',updateTabInd);
 function switchTab(id){
   activeTab=id;localStorage.setItem('cs_tab',id);
   document.getElementById('main').classList.remove('search-on');

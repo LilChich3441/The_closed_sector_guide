@@ -133,43 +133,24 @@ section.on{display:block}
 .chip.boss{background:rgba(196,154,40,.09);color:var(--gold);border-color:rgba(196,154,40,.26)}
 .chip.set{background:rgba(138,92,192,.09);color:var(--r3);border-color:rgba(138,92,192,.24)}
 /* D.I.S.S. sets */
-.setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
-.setbox{border:1px solid var(--line);border-top:3px solid var(--r3);background:var(--panel);padding:11px 12px 13px;border-radius:8px}
-.setbonus{background:rgba(229,229,234,.05);border:1px solid rgba(229,229,234,.22);border-left:3px solid var(--acid);
-  border-radius:6px;padding:10px 12px;margin-bottom:12px}
-.setbonus-hd{font-family:'Saira Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--acid);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.setbonus-hd::before{content:'';flex:1;height:1px;background:rgba(229,229,234,.2)}
-.setbonus-item{display:flex;align-items:flex-start;gap:9px;margin-bottom:6px}
-.setbonus-item:last-child{margin-bottom:0}
-.setbonus-ico{font-size:15px;flex:none;width:22px;text-align:center;margin-top:2px}
-.setbonus-lbl{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--acid);
-  display:block;margin-bottom:2px;letter-spacing:.3px}
-.setbonus-desc{font-size:12.5px;color:var(--txt);line-height:1.5;display:block}
-.setbonus-desc b{color:var(--acid)}
-.setbox.rr4{border-top-color:var(--r4)}.setbox.rr5{border-top-color:var(--r5)}
-.sethead{display:flex;align-items:center;gap:8px;font-family:'Saira Condensed',sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:10px;cursor:pointer;justify-content:space-between}
-.sethead-name{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
-.sethead-title{overflow-wrap:anywhere;line-height:1.2}
-.sethead-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.setrar{flex-shrink:0}
-.set-toggle-arr{flex-shrink:0;font-size:11px;color:var(--dim);white-space:nowrap;font-family:sans-serif;font-weight:400;letter-spacing:0;text-transform:none}
-.setbox .grid{grid-template-columns:1fr;gap:8px}
-.setbonus-compact{padding:8px 12px;margin-bottom:8px}
-.setbonus-compact .setbonus-desc{font-size:12px;color:var(--dim)}
-.set-preview-items{display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;margin-top:4px}
-.set-mini-card{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:6px 10px;flex:1;min-width:130px}
-.set-mini-icon{width:30px;height:30px;object-fit:contain;flex-shrink:0}
-.set-mini-icon.ph{background:repeating-linear-gradient(45deg,var(--bg),var(--bg) 3px,var(--panel2) 3px,var(--panel2) 6px);border-radius:3px;opacity:.4}
-.set-mini-info{display:flex;flex-direction:column;gap:2px;min-width:0}
-.set-mini-name{font-size:12.5px;font-family:'Saira Condensed',sans-serif;font-weight:600;color:var(--txt);line-height:1.3}
-@media(max-width:640px){
-  .set-preview-items{flex-direction:column}
-  .set-mini-card{flex:none;min-width:0}
-  .sethead{font-size:13px;letter-spacing:.5px}
-  .sethead-right{gap:4px}
-}
-.set-mini-stat{font-size:11px;color:var(--acid);opacity:.8;font-family:'Saira Condensed',sans-serif}
+.setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.set-tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,border-color .2s}
+.set-tile:hover{border-color:var(--ta,var(--acid));box-shadow:0 8px 28px rgba(0,0,0,.45)}
+.set-tile-bar{height:3px;background:var(--ta,var(--acid));flex:none}
+.set-tile-body{padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.set-tile-head{display:flex;align-items:flex-start;gap:10px}
+.set-tile-ico{font-size:26px;line-height:1;flex:none}
+.set-tile-meta{flex:1;min-width:0}
+.set-tile-name{font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--txt);line-height:1.25;margin-bottom:5px;overflow-wrap:anywhere}
+.set-tile-bonus{background:rgba(229,229,234,.04);border-radius:7px;border-left:2px solid var(--ta,var(--acid));padding:9px 11px;flex:1}
+.set-tile-blbl{font-family:'Saira Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--ta,var(--acid));text-transform:uppercase;letter-spacing:1.2px;display:block;margin-bottom:4px}
+.set-tile-bdesc{font-size:12.5px;color:var(--txt);line-height:1.55}
+.set-tile-parts{display:flex;gap:6px;flex-wrap:wrap}
+.set-tile-part{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:5px 9px;flex:1;min-width:120px}
+.set-tile-part img{width:28px;height:28px;object-fit:contain;flex-shrink:0}
+.set-tile-part-ph{width:28px;height:28px;background:var(--panel2);border-radius:4px;flex-shrink:0;opacity:.4}
+.set-tile-pname{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:600;color:var(--txt);line-height:1.3}
+@media(max-width:560px){.set-tile-part{min-width:0;flex:1 1 calc(50% - 3px)}.setrow{grid-template-columns:1fr}}
 .chip.mat{background:var(--panel2);color:var(--dim);border-color:var(--line)}
 .note{font-size:14.5px;color:var(--dim);margin-top:8px;line-height:1.55;font-style:italic}
 /* tables */
@@ -973,8 +954,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <div id="imodal" onclick="if(event.target===this)closeItemPopup()">
   <div id="imodal-box"></div>
 </div>
-<script src="images.js?v=20260612"></script>
-<script src="data.js?v=20260612"></script>
+<script src="images.js?v=20260613"></script>
+<script src="data.js?v=20260613"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -1230,39 +1211,30 @@ function renderGear(){
   if(gearFilter.cat==='sets'){
     let sets=setGroups();
     if(gearFilter.rar)sets=sets.filter(s=>s.rar===gearFilter.rar);
+    const rarAccent={1:'var(--dim)',2:'var(--steel)',3:'var(--r3)',4:'var(--r4)',5:'var(--r5)'};
     const setsHtml=`<div class="setrow">${sets.map(s=>{
       const si=(DB.setInfo||{})[s.name];
-      const bHtml=si
-        ?`<div class="setbonus">
-          <div class="setbonus-hd">Бонус комплекта</div>
-          ${si.map(b=>`<div class="setbonus-item">
-            <span class="setbonus-ico">${b.icon}</span>
-            <div><span class="setbonus-lbl">${esc(b.label)}</span>
-            <span class="setbonus-desc">${esc(b.desc)}</span></div>
-          </div>`).join('')}
-        </div>`
-        :'';
-      const collapsed=!expandedSets.has(s.name);
-      const partCount=s.parts.length;
-      const miniItems=s.parts.map(p=>{
-        const ico=p.icon&&img(p.icon)?`<img class="set-mini-icon" src="${img(p.icon)}" alt="" loading="lazy">`:'<div class="set-mini-icon ph"></div>';
-        return `<div class="set-mini-card">
-          ${ico}
-          <div class="set-mini-info">
-            <span class="set-mini-name">${esc(p.name)}</span>
-            ${p.stat?`<span class="set-mini-stat">${p.stat} ${esc(p.klbl||'')}</span>`:''}
-          </div>
-        </div>`;
+      const ta=rarAccent[s.rar]||'var(--acid)';
+      const ico=si&&si[0]&&si[0].icon?si[0].icon:'⚙';
+      const bonusHtml=si&&si[0]?`<div class="set-tile-bonus"><span class="set-tile-blbl">${esc(si[0].label)}</span><span class="set-tile-bdesc">${esc(si[0].desc)}</span></div>`:'';
+      const partsHtml=s.parts.map(p=>{
+        const src=p.icon?img(p.icon):'';
+        const icoEl=src?`<img src="${src}" alt="" loading="lazy">`:`<div class="set-tile-part-ph"></div>`;
+        return `<div class="set-tile-part">${icoEl}<span class="set-tile-pname">${esc(p.name)}</span></div>`;
       }).join('');
-      const collapsedHtml=`
-        ${si?`<div class="setbonus setbonus-compact">${si.map(b=>`<div class="setbonus-item"><span class="setbonus-ico">${b.icon}</span><div><span class="setbonus-desc">${esc(b.desc)}</span></div></div>`).join('')}</div>`:''}
-        <div class="set-preview-items">${miniItems}</div>`;
-      return `<div class="setbox rr${s.rar}">
-        <div class="sethead" onclick="toggleSetCollapse(this,'${esc(s.name)}')">
-          <span class="sethead-name"><span class="sethead-title">${esc(s.name)}</span><span class="setrar chip rar${s.rar}">${RARN[s.rar]||''}</span></span>
-          <span class="set-toggle-arr">${partCount} пред. ${collapsed?'▶':'▼'}</span>
+      return `<div class="set-tile" style="--ta:${ta}">
+        <div class="set-tile-bar"></div>
+        <div class="set-tile-body">
+          <div class="set-tile-head">
+            <div class="set-tile-ico">${ico}</div>
+            <div class="set-tile-meta">
+              <div class="set-tile-name">${esc(s.name)}</div>
+              <span class="chip rar${s.rar}">${RARN[s.rar]||''}</span>
+            </div>
+          </div>
+          ${bonusHtml}
+          <div class="set-tile-parts">${partsHtml}</div>
         </div>
-        ${collapsed?collapsedHtml:`${bHtml}<div class="grid">${s.parts.map(gearCard).join('')}</div>`}
       </div>`;
     }).join('')}</div>`;
     return `

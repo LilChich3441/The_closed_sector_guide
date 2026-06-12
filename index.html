@@ -743,12 +743,26 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .craft-warn strong{color:var(--hot);display:block;margin-bottom:3px;font-size:15px}
 /* ── craft tiles row ── */
 .cft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-bottom:14px}
-/* category color tokens */
-.cft-tile--armor  {--cc:#4a9eff;--cb:rgba(74,158,255,.13);--cg:rgba(74,158,255,.18)}
-.cft-tile--garage {--cc:#e05858;--cb:rgba(224,88,88,.13);--cg:rgba(224,88,88,.18)}
-.cft-tile--weapons{--cc:#c89030;--cb:rgba(200,144,48,.13);--cg:rgba(200,144,48,.18)}
-.cft-tile--helmets{--cc:#9060e0;--cb:rgba(144,96,224,.13);--cg:rgba(144,96,224,.18)}
-.cft-tile--master {--cc:#d04880;--cb:rgba(208,72,128,.13);--cg:rgba(208,72,128,.18)}
+/* level color tokens (match icon background colors) */
+.cft-tile--lv2{--cc:#4a9eff;--cb:rgba(74,158,255,.14);--cg:rgba(74,158,255,.2)}
+.cft-tile--lv3{--cc:#9060e0;--cb:rgba(144,96,224,.14);--cg:rgba(144,96,224,.2)}
+.cft-tile--lv4{--cc:#c89030;--cb:rgba(200,144,48,.14);--cg:rgba(200,144,48,.2)}
+.cft-tile--lv5{--cc:#e05050;--cb:rgba(224,80,80,.14);--cg:rgba(224,80,80,.2)}
+/* craft filters */
+.cft-filters{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.cft-filter-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.cft-filter-lbl{font-family:'Saira Condensed',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;color:var(--dim);opacity:.6;width:28px;flex:none}
+.cft-fbtn{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;
+  color:var(--dim);background:transparent;border:1px solid var(--line);
+  border-radius:5px;padding:3px 11px;cursor:pointer;transition:.13s}
+.cft-fbtn:hover{border-color:var(--line2);color:var(--txt)}
+.cft-fbtn.on{color:var(--txt);background:rgba(229,229,234,.1);border-color:rgba(229,229,234,.45)}
+.cft-fbtn--lv2.on{color:#4a9eff;border-color:#4a9eff;background:rgba(74,158,255,.1)}
+.cft-fbtn--lv3.on{color:#9060e0;border-color:#9060e0;background:rgba(144,96,224,.1)}
+.cft-fbtn--lv4.on{color:#c89030;border-color:#c89030;background:rgba(200,144,48,.1)}
+.cft-fbtn--lv5.on{color:#e05050;border-color:#e05050;background:rgba(224,80,80,.1)}
 .cft-tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;
   padding:0;cursor:pointer;text-align:center;transition:.15s;position:relative;overflow:hidden}
 .cft-tile::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
@@ -1024,6 +1038,7 @@ let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
 let bestFilter={loc:'',locOpen:false};
 let craftSelected=new Set([0]);
+let craftFilter={cat:'',lv:0};
 let expandedSets=new Set();
 let locItemFilter='';
 
@@ -2116,15 +2131,29 @@ function renderCraft(){
   const locMap=buildIngLocMap();
   const warn=`<div class="craft-warn"><strong>⚠ Не применяй верстак сразу после создания!</strong>Если использовать только что скрафченный верстак — придётся крафтить его заново. Сначала сохрани, потом применяй. Для каждого следующего уровня нужен верстак предыдущего.</div>`;
   const selArr=[...craftSelected].sort((a,b)=>a-b);
+  const catMap={armor:'Броня',garage:'Гараж',weapons:'Оружие',helmets:'Шлемы',master:'Мастер.',workshop:'Мастер.'};
+  const lvArr=['','I','II','III','IV','V'];
+  // filter UI
+  const cats=[...new Set(all.map(w=>w.cat))];
+  const lvs=[...new Set(all.map(w=>w.level))].sort((a,b)=>a-b);
+  const catBtns=[`<button class="cft-fbtn${craftFilter.cat===''?' on':''}" onclick="setCraftFilter('','cat')">Все</button>`,
+    ...cats.map(c=>`<button class="cft-fbtn${craftFilter.cat===c?' on':''}" onclick="setCraftFilter('${c}','cat')">${catMap[c]||c}</button>`)
+  ].join('');
+  const lvBtns=[`<button class="cft-fbtn${craftFilter.lv===0?' on':''}" onclick="setCraftFilter(0,'lv')">Все</button>`,
+    ...lvs.map(l=>`<button class="cft-fbtn cft-fbtn--lv${l}${craftFilter.lv===l?' on':''}" onclick="setCraftFilter(${l},'lv')">${lvArr[l]||l}</button>`)
+  ].join('');
+  const filters=`<div class="cft-filters"><div class="cft-filter-row"><span class="cft-filter-lbl">Тип</span>${catBtns}</div><div class="cft-filter-row"><span class="cft-filter-lbl">Ур.</span>${lvBtns}</div></div>`;
   const tiles=all.map((wb,i)=>{
+    if(craftFilter.cat&&wb.cat!==craftFilter.cat)return '';
+    if(craftFilter.lv&&wb.level!==craftFilter.lv)return '';
     const icoSrc=wb.icon?img(wb.icon):'';
     const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
-    const catName={armor:'Броня',garage:'Гараж',weapons:'Оружие',helmets:'Шлемы',master:'Мастер.',workshop:'Мастер.'}[wb.cat]||wb.cat;
-    const lvRoman=['','I','II','III','IV','V'][wb.level]||wb.level;
+    const catName=catMap[wb.cat]||wb.cat;
+    const lvRoman=lvArr[wb.level]||wb.level;
     const on=craftSelected.has(i);
     const num=on&&selArr.length>1?selArr.indexOf(i)+1:0;
     const badge=num?`<span class="cft-tile-badge">${num}</span>`:'';
-    return `<div class="cft-tile cft-tile--${wb.cat}${on?' on':''}" onclick="setCraftItem(${i})" role="button" tabindex="0">${badge}<span class="cft-tile-plus" onclick="event.stopPropagation();addToCraft(${i})" title="Добавить к сравнению">+</span><div class="cft-tile-ico">${ico}</div><div class="cft-tile-cat">${catName}</div><div class="cft-tile-lv">${lvRoman}</div></div>`;
+    return `<div class="cft-tile cft-tile--lv${wb.level}${on?' on':''}" onclick="setCraftItem(${i})" role="button" tabindex="0">${badge}<span class="cft-tile-plus" onclick="event.stopPropagation();addToCraft(${i})" title="Добавить к сравнению">+</span><div class="cft-tile-ico">${ico}</div><div class="cft-tile-cat">${catName}</div><div class="cft-tile-lv">${lvRoman}</div></div>`;
   }).join('');
   function ingHtml(ig,withCnt){
     const igKey=iconMap[ig.name];
@@ -2162,7 +2191,12 @@ function renderCraft(){
   }
   const selAll=craftSelected.size===(DB.crafting||[]).length;
   const hint=`<div class="cft-hint-row"><div class="cft-tile-hint">Нажми — рецепт&nbsp;&nbsp;•&nbsp;&nbsp;«+» — сравнить&nbsp;&nbsp;•&nbsp;&nbsp;📍 — где найти</div><button class="cft-sel-all-btn${selAll?' on':''}" onclick="craftSelAll()">${selAll?'✓ Снять всё':'Выбрать все'}</button></div>`;
-  return `${warn}${hint}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
+  return `${warn}${hint}${filters}<div class="cft-grid">${tiles}</div>${recipe}${renderCraftTip()}`;
+}
+function setCraftFilter(val,which){
+  if(which==='cat'){craftFilter.cat=craftFilter.cat===val?'':val;}
+  else{craftFilter.lv=craftFilter.lv===val?0:val;}
+  render();
 }
 function toggleCalc(){calcOpen=!calcOpen;localStorage.setItem('cs_calc',calcOpen?'1':'0');render();}
 function setCraftItem(i){

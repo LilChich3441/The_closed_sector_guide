@@ -554,6 +554,22 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .donate-card:hover .donate-copy{opacity:1}
 .donate-copy.copied{opacity:1;color:#4ade80}
 @media(hover:none){.donate-copy{opacity:.8}}
+/* ── contacts block ── */
+.contacts-wrap{max-width:1240px;margin:0 auto;padding:0 18px 36px}
+.contacts-box{background:rgba(229,229,234,.06);border:1px solid var(--line);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.contacts-cards{display:flex;gap:10px;flex-wrap:wrap}
+.contacts-card{display:flex;align-items:center;gap:10px;border-radius:10px;padding:10px 14px;cursor:pointer;transition:.18s;text-decoration:none;position:relative}
+.contacts-card-vk{background:linear-gradient(135deg,rgba(0,119,255,.12),rgba(0,119,255,.05));border:1px solid rgba(0,119,255,.3)}
+.contacts-card-vk:hover{border-color:rgba(0,119,255,.7);background:linear-gradient(135deg,rgba(0,119,255,.18),rgba(0,119,255,.08))}
+.contacts-card-tg{background:linear-gradient(135deg,rgba(42,171,238,.12),rgba(42,171,238,.05));border:1px solid rgba(42,171,238,.3)}
+.contacts-card-tg:hover{border-color:rgba(42,171,238,.7);background:linear-gradient(135deg,rgba(42,171,238,.18),rgba(42,171,238,.08))}
+.contacts-ico{width:22px;height:22px;flex-shrink:0}
+.contacts-handle{font-family:'JetBrains Mono','Courier New',monospace;font-size:13px;color:var(--txt);letter-spacing:.5px}
+.contacts-copy{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0;transition:.18s;white-space:nowrap;margin-left:6px;flex-shrink:0;color:rgba(42,171,238,.9)}
+.contacts-card-tg:hover .contacts-copy{opacity:1}
+.contacts-copy.copied{opacity:1!important;color:#4ade80}
+@media(hover:none){.contacts-copy{opacity:.8}}
+@media(max-width:560px){.contacts-card{width:100%}}
 @media(max-width:560px){
   .donate-card{width:100%}
   .donate-num{font-size:12px}
@@ -2204,6 +2220,26 @@ function renderDonate(){
         </div>
       </div>
     </div>
+  </div>
+  <div class="contacts-wrap">
+    <div class="contacts-box">
+      <div class="donate-icon">💬</div>
+      <div class="donate-text">
+        <div class="donate-title">Связь с автором</div>
+        <div class="donate-sub">Нашёл ошибку или хочешь что-то предложить — пиши</div>
+      </div>
+      <div class="contacts-cards">
+        <a class="contacts-card contacts-card-vk" href="https://vk.com/lilchich3441" target="_blank" rel="noopener">
+          <svg class="contacts-ico" viewBox="0 0 24 24" fill="#5181b8" xmlns="http://www.w3.org/2000/svg"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.5h-1.58c-.6 0-.78-.48-1.86-1.57-1-.93-1.4-.93-1.64-.93-.33 0-.43.1-.43.57v1.43c0 .4-.13.64-1.18.64-1.74 0-3.67-1.05-5.02-3.01C5.14 10.46 4.6 8.55 4.6 8.14c0-.24.1-.47.57-.47h1.58c.43 0 .59.2.75.66.83 2.38 2.2 4.47 2.77 4.47.21 0 .31-.1.31-.64V9.73c-.07-1.14-.67-1.24-.67-1.64 0-.2.17-.4.44-.4h2.49c.37 0 .5.2.5.63v3.39c0 .37.17.5.27.5.21 0 .4-.13.8-.53 1.24-1.38 2.12-3.52 2.12-3.52.12-.24.3-.47.73-.47h1.58c.47 0 .57.24.47.57-.2.93-2.1 3.6-2.1 3.6-.17.27-.23.4 0 .7.17.23.72.7 1.09 1.13.67.77 1.19 1.41 1.33 1.86.14.43-.09.66-.54.66z"/></svg>
+          <span class="contacts-handle">ВКонтакте</span>
+        </a>
+        <div class="contacts-card contacts-card-tg" onclick="copyTg(this)">
+          <svg class="contacts-ico" viewBox="0 0 24 24" fill="#2AABEE" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          <span class="contacts-handle">@lilchich3441</span>
+          <span class="contacts-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span>
+        </div>
+      </div>
+    </div>
   </div>`;
 }
 
@@ -2423,6 +2459,13 @@ window.addEventListener('scroll',()=>{
 function copyCard(el,num){
   navigator.clipboard.writeText(num).then(()=>{
     const span=el.querySelector('.donate-copy');
+    span.textContent='Скопировано!';span.classList.add('copied');
+    setTimeout(()=>{span.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать';span.classList.remove('copied');},2000);
+  });
+}
+function copyTg(el){
+  navigator.clipboard.writeText('@lilchich3441').then(()=>{
+    const span=el.querySelector('.contacts-copy');
     span.textContent='Скопировано!';span.classList.add('copied');
     setTimeout(()=>{span.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать';span.classList.remove('copied');},2000);
   });

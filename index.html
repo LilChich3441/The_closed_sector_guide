@@ -223,6 +223,7 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .csub.muted{color:var(--dim);font-size:12px}
 .csub b{color:var(--acid)}
 .cresult.ok{font-size:15px;color:var(--steel);font-family:'Saira Condensed',sans-serif;font-weight:600}
+.cresult.err{font-size:14px;color:#e05c5c;font-family:'Saira Condensed',sans-serif;font-weight:600;margin-bottom:10px}
 @media(max-width:680px){.calc-body{flex-direction:column;align-items:stretch}.calc-out{margin-left:0;text-align:left}.calc-field .gsel,.cinput{width:100%}}
 /* story quests */
 .gsel{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-family:'Saira Condensed',sans-serif;font-size:13px;
@@ -1602,9 +1603,16 @@ function runCalc(){
   const spp=car.spp?parseFloat(car.spp):0;
   let raidsLine='';
   if(spp>0){
-    const full=Math.floor(100/spp);
-    const now=Math.floor(cur/spp);
+    const full=Math.floor(70/spp);
+    const now=cur>=30?Math.floor((cur-30)/spp):0;
     raidsLine=`<div class="csub muted">Хватает на <b>${full}</b> рейд(ов) со 100% · сейчас осталось <b>${now}</b> (теряет ~${esc(car.spp)}% за рейд)</div>`;
+  }
+  if(cur<30){
+    out.innerHTML=`<div class="cresult err">⚠ Транспорт нельзя использовать — прочность ниже 30%. Сначала почините.</div>
+    <div class="cbig">${fmt(total)} <span>мат.</span></div>
+    <div class="csub">восстановить <b>${diff}%</b> × ${per} мат = <b>${fmt(total)}</b> материалов</div>
+    ${raidsLine}`;
+    return;
   }
   if(diff<=0){
     out.innerHTML=`<div class="cresult ok">Чинить не нужно — прочность 100%.</div>${raidsLine}`;

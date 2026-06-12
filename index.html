@@ -2158,7 +2158,8 @@ function renderCraft(){
   function ingHtml(ig,withCnt){
     const igKey=iconMap[ig.name];
     const igIco=igKey?`<img src="${img(igKey)}" alt="">`:`<span class="cft-ing-ph"></span>`;
-    const tag=ig.prev?`<span class="cft-ing-tag">крафт</span>`:'';
+    const isCraftable=ig.prev||(DB.crafting||[]).some(c=>c.name===ig.name);
+    const tag=isCraftable?`<span class="cft-ing-tag">крафт</span>`:'';
     const cnt=withCnt&&withCnt>1?`<span class="cft-ing-cnt">×${withCnt}</span>`:'';
     const locs=locMap[ig.name]||[];
     const locAttr=locs.length?` data-locs="${esc(locs.join('|'))}"`  :'';

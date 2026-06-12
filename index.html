@@ -547,8 +547,10 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .donate-card-sber{background:linear-gradient(135deg,rgba(33,195,84,.12),rgba(33,195,84,.05));border:1px solid rgba(33,195,84,.3)}
 .donate-card-sber:hover{border-color:rgba(33,195,84,.7);background:linear-gradient(135deg,rgba(33,195,84,.18),rgba(33,195,84,.08))}
 .donate-bank img{height:22px;width:22px;object-fit:contain;flex-shrink:0}
-.donate-num{font-family:'JetBrains Mono','Courier New',monospace;font-size:13px;color:var(--txt);letter-spacing:.5px}
-.donate-copy{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0;transition:.18s;white-space:nowrap;margin-left:6px;flex-shrink:0}
+.donate-num{font-family:'JetBrains Mono','Courier New',monospace;font-size:13px;color:var(--txt);letter-spacing:.5px;white-space:nowrap;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.donate-copy{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0;transition:.18s;white-space:nowrap;
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:inherit;padding-left:6px;pointer-events:none}
 .donate-card-tbank .donate-copy{color:rgba(255,196,0,.9)}
 .donate-card-sber .donate-copy{color:rgba(33,195,84,.9)}
 .donate-card:hover .donate-copy{opacity:1}
@@ -626,7 +628,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .dash-hero-eye{font-family:'Saira Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px}
 .dash-hero-title{font-family:'Saira Condensed',sans-serif;font-size:36px;font-weight:900;letter-spacing:1px;text-transform:uppercase;line-height:1.0;margin-bottom:8px}
 .dash-hero-sub{font-size:12px;color:var(--dim);letter-spacing:.4px}
-.dash-layout{display:grid;grid-template-columns:1fr 290px;gap:14px;align-items:start}
+.dash-layout{display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:start}
 .dash-side{display:flex;flex-direction:column;gap:8px;position:sticky;top:58px}
 .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
 @media(max-width:860px){.dash-layout{grid-template-columns:1fr}.dash-side{position:static}}

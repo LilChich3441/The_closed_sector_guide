@@ -2004,7 +2004,7 @@ function renderStory(){
 function setStoryChap(c){storyFilter.chap=c;render();}
 function setStoryGiver(g){storyFilter.giver=g;render();}
 function toggleStoryOpt(){storyFilter.opt=!storyFilter.opt;render();}
-function setStorySearch(v){storyFilter.search=v;render();}
+function setStorySearch(v){storyFilter.search=v;render();const inp=document.querySelector('.gsearch');if(inp){inp.focus();inp.setSelectionRange(v.length,v.length);}}
 
 // ---------- GUIDES ----------
 function renderGuides(){

@@ -742,28 +742,42 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.6;color:var(--txt)}
 .craft-warn strong{color:var(--hot);display:block;margin-bottom:3px;font-size:15px}
 /* ── craft tiles row ── */
-.cft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-bottom:14px}
-.cft-tile{background:var(--panel);border:1px solid var(--line);border-radius:7px;
-  padding:8px 6px 7px;cursor:pointer;text-align:center;transition:.14s;position:relative}
-.cft-tile:hover{border-color:var(--line2);background:var(--panel2)}
-.cft-tile.on{border-color:var(--acid);background:rgba(229,229,234,.08);box-shadow:0 0 0 1px rgba(229,229,234,.18)}
-.cft-tile-ico{width:60px;height:60px;margin:0 auto 6px;background:var(--bg2);border:1px solid var(--line);
-  border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:24px;overflow:hidden}
+.cft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-bottom:14px}
+/* category color tokens */
+.cft-tile--armor  {--cc:#4a9eff;--cb:rgba(74,158,255,.13);--cg:rgba(74,158,255,.18)}
+.cft-tile--garage {--cc:#e05858;--cb:rgba(224,88,88,.13);--cg:rgba(224,88,88,.18)}
+.cft-tile--weapons{--cc:#c89030;--cb:rgba(200,144,48,.13);--cg:rgba(200,144,48,.18)}
+.cft-tile--helmets{--cc:#9060e0;--cb:rgba(144,96,224,.13);--cg:rgba(144,96,224,.18)}
+.cft-tile--master {--cc:#d04880;--cb:rgba(208,72,128,.13);--cg:rgba(208,72,128,.18)}
+.cft-tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:0;cursor:pointer;text-align:center;transition:.15s;position:relative;overflow:hidden}
+.cft-tile::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--cc,var(--line2));border-radius:10px 10px 0 0;z-index:1}
+.cft-tile:hover{border-color:var(--cc,var(--line2));transform:translateY(-2px);
+  box-shadow:0 6px 20px var(--cg,transparent)}
+.cft-tile.on{border-color:var(--cc,var(--acid));
+  box-shadow:0 0 0 1px var(--cc,rgba(229,229,234,.2)),0 6px 20px var(--cg,transparent)}
+.cft-tile-ico{width:66px;height:66px;margin:14px auto 0;background:var(--cb,var(--bg2));
+  border:1px solid rgba(255,255,255,.07);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:26px;overflow:hidden}
 .cft-tile-ico img{width:100%;height:100%;object-fit:cover}
-.cft-tile-name{font-family:'Saira Condensed',sans-serif;font-size:11px;font-weight:700;
-  color:var(--dim);line-height:1.25;letter-spacing:.5px;text-transform:uppercase}
-.cft-tile.on .cft-tile-name{color:var(--acid)}
+.cft-tile-cat{font-family:'Saira Condensed',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;color:var(--cc,var(--dim));
+  line-height:1;margin:8px 0 1px}
+.cft-tile-lv{font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;
+  color:var(--dim);line-height:1;letter-spacing:.5px;padding-bottom:11px}
+.cft-tile.on .cft-tile-lv{color:var(--txt)}
 /* tile badge and plus btn */
-.cft-tile-badge{position:absolute;top:4px;left:5px;width:17px;height:17px;
-  background:var(--acid);color:#1a1a1a;font-family:'Saira Condensed',sans-serif;font-size:11px;font-weight:700;
-  border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3}
-.cft-tile-plus{position:absolute;top:4px;right:4px;width:18px;height:18px;
+.cft-tile-badge{position:absolute;top:7px;left:7px;min-width:18px;height:18px;padding:0 4px;
+  background:var(--cc,var(--acid));color:#111;font-family:'Saira Condensed',sans-serif;font-size:11px;font-weight:700;
+  border-radius:9px;display:flex;align-items:center;justify-content:center;z-index:4}
+.cft-tile-plus{position:absolute;top:6px;right:6px;width:20px;height:20px;
   background:rgba(229,229,234,.12);border:1px solid rgba(229,229,234,.3);
-  border-radius:3px;font-size:14px;font-weight:700;line-height:1;color:var(--acid);
+  border-radius:4px;font-size:15px;font-weight:700;line-height:1;color:var(--cc,var(--acid));
   display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:.12s;cursor:pointer;z-index:3;user-select:none}
+  opacity:0;transition:.12s;cursor:pointer;z-index:4;user-select:none}
 .cft-tile:hover .cft-tile-plus,.cft-tile.on .cft-tile-plus{opacity:1}
-.cft-tile-plus:hover{background:rgba(229,229,234,.28);border-color:var(--acid)}
+.cft-tile-plus:hover{background:rgba(229,229,234,.28);border-color:var(--cc,var(--acid))}
 .cft-reset-btn{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;
   letter-spacing:.5px;text-transform:uppercase;color:var(--dim);background:transparent;
   border:1px solid var(--line);border-radius:4px;padding:3px 9px;cursor:pointer;
@@ -783,9 +797,9 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .cft-loc-tip-row{font-size:12px;color:var(--txt);padding:1px 0;white-space:nowrap}
 .cft-ing-item[data-locs]:hover .cft-loc-tip,.cft-ing-item.tip-open .cft-loc-tip{display:block}
 @media(max-width:640px){
-  .cft-grid{grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:6px}
-  .cft-tile-plus{opacity:.65;width:22px;height:22px;font-size:16px;top:3px;right:3px}
-  .cft-tile-ico{width:52px;height:52px}
+  .cft-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px}
+  .cft-tile-plus{opacity:.65;width:22px;height:22px;font-size:16px;top:5px;right:5px}
+  .cft-tile-ico{width:54px;height:54px}
   .cft-ing-item{padding:9px 10px}
   .cft-loc-tip{bottom:auto;top:calc(100% + 5px);left:0;right:auto;max-width:calc(100vw - 32px)}
   .cft-ing-item.tip-open .cft-loc-tip{pointer-events:auto}
@@ -2105,11 +2119,12 @@ function renderCraft(){
   const tiles=all.map((wb,i)=>{
     const icoSrc=wb.icon?img(wb.icon):'';
     const ico=icoSrc?`<img src="${icoSrc}" alt="">`:'🔧';
-    const short=craftShortName(wb);
+    const catName={armor:'Броня',garage:'Гараж',weapons:'Оружие',helmets:'Шлемы',master:'Мастер.',workshop:'Мастер.'}[wb.cat]||wb.cat;
+    const lvRoman=['','I','II','III','IV','V'][wb.level]||wb.level;
     const on=craftSelected.has(i);
     const num=on&&selArr.length>1?selArr.indexOf(i)+1:0;
     const badge=num?`<span class="cft-tile-badge">${num}</span>`:'';
-    return `<div class="cft-tile${on?' on':''}" onclick="setCraftItem(${i})" role="button" tabindex="0">${badge}<span class="cft-tile-plus" onclick="event.stopPropagation();addToCraft(${i})" title="Добавить к сравнению">+</span><div class="cft-tile-ico">${ico}</div><div class="cft-tile-name">${short}</div></div>`;
+    return `<div class="cft-tile cft-tile--${wb.cat}${on?' on':''}" onclick="setCraftItem(${i})" role="button" tabindex="0">${badge}<span class="cft-tile-plus" onclick="event.stopPropagation();addToCraft(${i})" title="Добавить к сравнению">+</span><div class="cft-tile-ico">${ico}</div><div class="cft-tile-cat">${catName}</div><div class="cft-tile-lv">${lvRoman}</div></div>`;
   }).join('');
   function ingHtml(ig,withCnt){
     const igKey=iconMap[ig.name];

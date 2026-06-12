@@ -548,9 +548,10 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .donate-card-sber:hover{border-color:rgba(33,195,84,.7);background:linear-gradient(135deg,rgba(33,195,84,.18),rgba(33,195,84,.08))}
 .donate-bank img{height:22px;width:22px;object-fit:contain;flex-shrink:0}
 .donate-num{font-family:'JetBrains Mono','Courier New',monospace;font-size:13px;color:var(--txt);letter-spacing:.5px;white-space:nowrap;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
-.donate-copy{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:0;transition:.18s;white-space:nowrap;
-  position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  background:inherit;padding-left:6px;pointer-events:none}
+.donate-copy{opacity:0;transition:.18s;flex:none;width:24px;height:24px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:4px;font-size:0;padding:0;margin-left:4px}
+.donate-copy svg{flex:none}
 .donate-card-tbank .donate-copy{color:rgba(255,196,0,.9)}
 .donate-card-sber .donate-copy{color:rgba(33,195,84,.9)}
 .donate-card:hover .donate-copy{opacity:1}

@@ -813,10 +813,33 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 @media(max-width:640px){
   .cft-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px}
   .cft-tile-plus{opacity:.65;width:22px;height:22px;font-size:16px;top:5px;right:5px}
-  .cft-tile-ico{width:54px;height:54px}
+  .cft-tile-ico{width:54px;height:54px;margin-top:10px}
+  .cft-tile-cat{font-size:9px;margin:5px 0 1px}
+  .cft-tile-lv{font-size:13px;padding-bottom:8px}
+  .cft-fbtn{padding:6px 10px;min-height:36px}
+  .cft-ings{grid-template-columns:1fr}
+  .cft-recipe{padding:12px 12px}
+  .cft-recipe-hd{gap:10px;margin-bottom:10px}
+  .cft-recipe-ico{width:46px;height:46px}
+  .cft-recipe-title{font-size:16px}
   .cft-ing-item{padding:9px 10px}
   .cft-loc-tip{bottom:auto;top:calc(100% + 5px);left:0;right:auto;max-width:calc(100vw - 32px)}
   .cft-ing-item.tip-open .cft-loc-tip{pointer-events:auto}
+  .craft-warn{font-size:13px;padding:12px 14px}
+}
+@media(max-width:480px){
+  .cft-tip{flex-direction:column;gap:12px}
+  .cft-tip-img{width:100%;max-width:none}
+  .cft-filter-lbl{display:none}
+  .cft-hint-row{gap:6px}
+  .cft-tile-hint{font-size:10px}
+}
+@media(max-width:400px){
+  .cft-grid{grid-template-columns:repeat(3,1fr);gap:5px}
+  .cft-tile-ico{width:44px;height:44px;margin-top:8px}
+  .cft-tile-cat{font-size:8px;margin:4px 0 0}
+  .cft-tile-lv{font-size:12px;padding-bottom:6px}
+  .cft-tile-badge{width:15px;height:15px;font-size:9px;top:5px;left:5px}
 }
 /* ── craft recipe panel ── */
 .cft-recipe{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;animation:fade .15s}
@@ -959,9 +982,27 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .crest{width:30px;height:30px;font-size:12px;border-radius:8px}
   .tagline{display:none}
   .tabs{display:none!important}
-  .search-wrap{margin-top:10px}
+  .search-wrap{margin-top:10px;padding:0 14px}
   #mob-topbar{display:flex}
-  main{padding-top:14px}
+  main{padding-top:14px;padding-left:14px;padding-right:14px}
+  .wrap{padding:0 14px}
+  .donate-wrap,.contacts-wrap{padding-left:0;padding-right:0}
+  .dlog-wrap{padding:0}
+  .dash-hero-title{font-size:26px}
+  .dash-card-desc{display:none}
+  .dash-hero-watermark{font-size:90px}
+}
+@media(max-width:480px){
+  #imodal{padding:8px}
+  #imodal-top{padding:14px 14px 10px;gap:12px}
+  #imodal-ico,#imodal-ico-ph{width:64px;height:64px}
+  #imodal-info{padding-right:26px}
+  #imodal-name{font-size:18px}
+  .imodal-sn{font-size:24px}
+  #imodal-desc{padding:10px 14px;font-size:13px}
+  #imodal-locs{padding:10px 14px 14px}
+  .imloc{min-width:110px;flex-basis:110px}
+  .dash-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 <!-- Yandex.Metrika counter -->

@@ -2246,16 +2246,17 @@ function globalSearch(q){
 
 // ── item popup ──
 function findItemLocs(name){
-  const n=norm(name);const locs=[];
-  if(!DB.locLoot)return locs;
+  const n=norm(name);const seen=new Map();
+  if(!DB.locLoot)return[];
   for(const loc in DB.locLoot){
     const bl=DB.locLoot[loc];
-    if((bl.rec||[]).some(it=>norm(it.name)===n))locs.push({loc,type:'снаряга'});
-    if((bl.loot||[]).some(it=>norm(it.name)===n))locs.push({loc,type:'лут'});
-    if(bl.boss&&bl.boss.drop&&bl.boss.drop.some(it=>norm(it.name)===n))
-      locs.push({loc,type:'дроп '+(bl.boss.name||'босс')});
+    const types=[];
+    if((bl.rec||[]).some(it=>norm(it.name)===n))types.push('снаряга');
+    if((bl.loot||[]).some(it=>norm(it.name)===n))types.push('лут');
+    if(bl.boss&&bl.boss.drop&&bl.boss.drop.some(it=>norm(it.name)===n))types.push('дроп '+(bl.boss.name||'босс'));
+    if(types.length)seen.set(loc,{loc,type:types.join(' + ')});
   }
-  return locs;
+  return[...seen.values()];
 }
 function openItemPopup(name){
   mobMenuClose();

@@ -2370,7 +2370,7 @@ function renderDonate(){
   <div class="sponsors-page">
     <div class="sponsors-page-box">
       <div class="sponsors-page-title">🎖️ Поддержали проект</div>
-      <div class="sponsors-page-sub">Эти люди помогли справочнику оставаться бесплатным</div>
+      <div class="sponsors-page-sub">Эти люди помогают справочнику оставаться бесплатным</div>
       <div class="sponsors-page-grid">
         <span class="sponsor-card">MOTOP</span>
         <span class="sponsor-card">LilHappy7</span>
@@ -2616,12 +2616,11 @@ window.addEventListener('scroll',()=>{
     pb.style.width=(h>0?Math.min(window.scrollY/h*100,100):0)+'%';}
 });
 function copyCard(el,num){
-  navigator.clipboard.writeText(num).then(()=>{
-    const span=el.querySelector('.donate-copy');
-    const svgHtml='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-    span.textContent='Скопировано!';span.classList.add('copied');
-    setTimeout(()=>{span.innerHTML=svgHtml+'Копировать';span.classList.remove('copied');},2000);
-  });
+  const span=el.querySelector('.donate-copy');
+  const svgHtml='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+  const showCopied=()=>{span.textContent='Скопировано!';span.classList.add('copied');setTimeout(()=>{span.innerHTML=svgHtml+'Копировать';span.classList.remove('copied');},2000);};
+  const fallback=()=>{const ta=document.createElement('textarea');ta.value=num;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(num).then(showCopied).catch(()=>{fallback();showCopied();});}else{fallback();showCopied();}
 }
 function copyTg(el){
   navigator.clipboard.writeText('@lilchich3441').then(()=>{

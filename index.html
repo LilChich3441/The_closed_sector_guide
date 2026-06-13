@@ -690,26 +690,22 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   50%{box-shadow:0 0 24px rgba(229,229,234,.4),0 0 0 2px rgba(229,229,234,.6)}}
 @keyframes nav-sweep{
   0%{left:-80%}70%,100%{left:130%}}
-.bb2-nav{width:100%;background:rgba(229,229,234,.07);border:2px solid rgba(229,229,234,.5);
-  color:var(--acid);font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;padding:13px 20px;border-radius:8px;
-  cursor:pointer;text-align:left;margin-top:18px;transition:.18s;
-  display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;overflow:hidden;
-  animation:nav-pulse 2.8s ease-in-out infinite;margin-bottom:12px}
-.bb2-nav::before{content:'';position:absolute;top:0;left:-80%;width:45%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(229,229,234,.18),rgba(255,240,180,.22),rgba(229,229,234,.18),transparent);
-  transform:skewX(-18deg);animation:nav-sweep 3.2s ease-in-out infinite;pointer-events:none}
-.bb2-nav .bb2-shimmer-txt{color:var(--acid)}
-.bb2-nav:hover{background:rgba(229,229,234,.15);border-color:var(--acid);
-  animation:none;box-shadow:0 0 28px rgba(229,229,234,.35),0 0 0 2px rgba(229,229,234,.5)}
-.bb2-nav:hover::before{display:none}
-.bb2-nav.on{background:rgba(229,229,234,.13);border-color:var(--acid);
-  animation:none;box-shadow:0 0 22px rgba(229,229,234,.2);
+.best-pick-card{width:100%;background:rgba(229,229,234,.06);border:1.5px solid rgba(229,229,234,.28);
+  border-radius:12px;cursor:pointer;text-align:left;margin-top:14px;margin-bottom:10px;
+  transition:.18s;display:flex;align-items:center;gap:14px;padding:14px 18px;position:relative;overflow:hidden}
+.best-pick-card:hover{background:rgba(229,229,234,.11);border-color:rgba(229,229,234,.65);
+  box-shadow:0 0 20px rgba(229,229,234,.12)}
+.best-pick-card.on{background:rgba(229,229,234,.1);border-color:rgba(229,229,234,.6);
+  box-shadow:0 0 20px rgba(229,229,234,.15);
   border-bottom:none;border-bottom-left-radius:0;border-bottom-right-radius:0;margin-bottom:0}
-.bb2-nav.on::before{display:none}
-.bb2-nav.on+.bb2-hero{border:2px solid var(--acid);border-top:none;border-top-left-radius:0;border-top-right-radius:0;box-shadow:0 0 22px rgba(229,229,234,.2)}
-.bb2-nav-arr{font-size:14px;opacity:.45;transition:.15s}
-.bb2-nav:hover .bb2-nav-arr,.bb2-nav.on .bb2-nav-arr{opacity:1}
+.best-pick-card.on+.bb2-hero{border:1.5px solid rgba(229,229,234,.6);border-top:none;border-top-left-radius:0;border-top-right-radius:0;box-shadow:0 0 20px rgba(229,229,234,.12)}
+.best-pick-ico{font-size:26px;flex-shrink:0;line-height:1}
+.best-pick-body{flex:1;min-width:0;text-align:left}
+.best-pick-title{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:700;
+  letter-spacing:1.4px;text-transform:uppercase;color:var(--acid)}
+.best-pick-desc{font-size:11px;color:var(--dim);margin-top:3px;line-height:1.4}
+.best-pick-arr{font-size:16px;color:var(--acid);opacity:.4;transition:.18s;flex-shrink:0}
+.best-pick-card:hover .best-pick-arr,.best-pick-card.on .best-pick-arr{opacity:1}
 .bb2-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
 .bb2-stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center}
 .bb2-stat-val{font-family:'Saira Condensed',sans-serif;font-size:40px;font-weight:700;line-height:1;margin-bottom:4px}
@@ -766,7 +762,10 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .bb2-opt-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .bb2-opt-stat{font-size:14px;min-width:26px}
   .bb2-combo-total{font-size:13px;min-width:24px}
-  .bb2-nav{padding:11px 14px;font-size:13px;letter-spacing:1px;min-height:44px}
+  .best-pick-card{padding:11px 14px;gap:11px}
+  .best-pick-ico{font-size:22px}
+  .best-pick-title{font-size:13px;letter-spacing:1px}
+  .best-pick-desc{font-size:10px}
   .bb2-stim{font-size:13px;padding:8px 10px}
 }
 @media(max-width:400px){
@@ -1457,7 +1456,7 @@ function renderGear(){
       const armRows=combos.slice(0,8).map(c=>`<div class="bb2-opt-row">${si(c.arm.icon,'🛡')}<span class="bb2-opt-name">${esc(c.arm.name)}</span><span class="bb2-combo-sep">+</span>${si(c.hlm.icon,'⛑')}<span class="bb2-opt-name">${esc(c.hlm.name)}</span><span class="bb2-combo-total">${c.total}</span></div>`).join('');
       content=statsHtml+stimHtml+minBuild+`<div class="bb2-opts"><div><div class="bb2-opt-hd">⚔ Оружие <span class="muted">${viableWpns.length} вар.</span></div>${wpnRows||'<div class="bb2-empty">Нет вариантов</div>'}</div><div><div class="bb2-opt-hd">🛡 Броня + шлем <span class="muted">топ-8</span></div>${armRows||'<div class="bb2-empty">Нет вариантов</div>'}</div></div>`;
     }
-    return `${gcCalc}<div class="bar">${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}</div><button class="bb2-nav on" onclick="setGearCat('best')"><span class="bb2-shimmer-txt">🎯 Подбор снаряжения для локации</span><span class="bb2-nav-arr">▼</span></button>${locSel}${content}`;
+    return `${gcCalc}<div class="bar">${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}</div><button class="best-pick-card on" onclick="setGearCat('best')"><span class="best-pick-ico">🎯</span><span class="best-pick-body"><div class="best-pick-title">Подбор для локации</div><div class="best-pick-desc">Оптимальное снаряжение под конкретный рейд</div></span><span class="best-pick-arr">▼</span></button>${locSel}${content}`;
   }
 
   let items=gearItems();
@@ -1478,7 +1477,7 @@ function renderGear(){
   </div>
   <div class="sec-search-wrap"><input class="sec-search-in" id="gearSearch" type="text" placeholder="🔍 Поиск по названию..." value="${esc(gearFilter.search)}" oninput="setGearSearch(this.value)">${gearFilter.search?`<button class="sec-search-clear" onclick="setGearSearch('')">✕</button>`:''}</div>
   </div>
-  <button class="bb2-nav" onclick="setGearCat('best')"><span class="bb2-shimmer-txt">🎯 Подбор снаряжения для локации</span><span class="bb2-nav-arr">→</span></button>
+  <button class="best-pick-card" onclick="setGearCat('best')"><span class="best-pick-ico">🎯</span><span class="best-pick-body"><div class="best-pick-title">Подбор для локации</div><div class="best-pick-desc">Оптимальное снаряжение под конкретный рейд</div></span><span class="best-pick-arr">→</span></button>
   <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
   <div class="legend">
     Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>

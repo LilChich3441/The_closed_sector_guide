@@ -2197,7 +2197,7 @@ function renderCraft(){
   const all=DB.crafting||[];
   const iconMap=buildCraftIconMap();
   const locMap=buildIngLocMap();
-  const warn=`<div class="craft-warn"><strong>⚠ Не применяй верстак сразу после создания!</strong>Если использовать только что скрафченный верстак — придётся крафтить его заново. Сначала сохрани, потом применяй. Для каждого следующего уровня нужен верстак предыдущего.</div>`;
+  const warn=`<div class="craft-warn"><strong>⚠ Не применяй верстак сразу после создания!</strong>Если использовать только что скрафченный верстак — придётся крафтить его заново. Сначала сохрани и качай до <u>5 уровня</u>, потом применяй. Для каждого следующего уровня нужен верстак предыдущего.</div>`;
   const selArr=[...craftSelected].sort((a,b)=>a-b);
   const catMap={armor:'Броня',garage:'Гараж',weapons:'Оружие',helmets:'Шлемы',master:'Мастер.',workshop:'Мастер.'};
   const lvArr=['','I','II','III','IV','V'];

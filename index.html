@@ -733,7 +733,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .bb2-plus{font-size:20px;font-weight:700;color:var(--line2);flex:none;padding:0 2px;align-self:center}
 .bb2-stim{background:rgba(192,64,104,.1);border:1px solid rgba(192,64,104,.3);border-radius:6px;
   padding:10px 14px;font-size:13px;color:var(--hot);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.bb2-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.bb2-opts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:14px}
 .bb2-opt-hd{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;
   color:var(--dim);font-weight:700;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
 .bb2-opt-row{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:6px;margin-bottom:2px;border:1px solid transparent;transition:.12s}
@@ -749,7 +749,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .bb2-empty{color:var(--dim);font-size:13px;padding:20px;text-align:center}
 @media(max-width:560px){
   .bb2-stat-val{font-size:26px}
-  .bb2-opts{grid-template-columns:1fr}
+  .bb2-opts{grid-template-columns:minmax(0,1fr)}
   .bb2-slot{min-width:90px}
   .bb2-slot-ico,.bb2-slot-ph{width:56px;height:56px}
   .bb2-slot-val{font-size:20px}

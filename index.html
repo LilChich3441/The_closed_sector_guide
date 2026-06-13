@@ -139,6 +139,7 @@ section.on{display:block}
 .chip.norep{background:rgba(217,64,64,.1);color:var(--hot);border-color:rgba(217,64,64,.26)}
 .chip.craft{background:rgba(229,229,234,.1);color:var(--acid);border-color:rgba(229,229,234,.26)}
 .chip.boss{background:rgba(196,154,40,.09);color:var(--gold);border-color:rgba(196,154,40,.26)}
+.chip.grenade{background:rgba(217,120,64,.1);color:#e07a40;border-color:rgba(217,120,64,.3)}
 .chip.set{background:rgba(138,92,192,.09);color:var(--r3);border-color:rgba(138,92,192,.24)}
 /* D.I.S.S. sets */
 .setrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
@@ -1194,6 +1195,7 @@ function mobMenuClose(){document.getElementById('mob-sheet').classList.remove('o
 function norm(s){return (s||'').replace(/[«»„""'']/g,'"').replace(/\s+/g,' ').trim().replace(/ё/g,'е').toLowerCase();}
 
 // Белый список расходников (предметы в рюкзак, расходуются). Без динамита.
+const GRENADES=new Set(['г1','г2','ртд-11','рпог','c4','коктейль молотова','дымовая граната']);
 const CONSUM=new Set(['базовая аптечка','военная аптечка','экспериментальная аптечка',
  'г1','г2','ртд-11','рпог','c4','коктейль молотова','дымовая граната',
  'стимулятор','парацетамин','срочная эвакуация']);
@@ -1227,6 +1229,7 @@ function gearNameSet(){
 function lootCatOf(it){
   const n=norm(it.name);
   if(it.statlbl==='Скорость'||n.indexOf('эвакуатор')>=0)return 'cars';
+  if(GRENADES.has(n))return 'grenade';
   if(CONSUM.has(n))return 'consum';
   if(n.indexOf('рюкзак')>=0||n.indexOf('наплечная сумка')>=0)return 'bags';
   if(gearNameSet().has(n))return 'gear';   // снаряжение — в своих вкладках
@@ -1280,6 +1283,7 @@ function gearCard(it){
   if(it.craft)chips.push(`<span class="chip craft">крафт ${esc(it.craft.replace(/[()]/g,''))}</span>`);
   if(/[Бб]осс/.test(it.note||''))chips.push(`<span class="chip boss">${esc(it.note)}</span>`);
   if(it.set)chips.push(`<span class="chip set">${esc(it.set)}</span>`);
+  if(it.fromLoot&&GRENADES.has(norm(it.name)))chips.push(`<span class="chip grenade">💥 Граната</span>`);
   let extra='';
   if(it.note && !/[Бб]осс/.test(it.note))extra=`<div class="note">${esc(it.note)}</div>`;
   const head=it.icon&&typeof img==='function'&&img(it.icon)
@@ -1620,14 +1624,16 @@ function renderItems(){
     [0,'Все'],
     [1,'Пешком'],
     [2,'На машине'],
+    [3,'💥 Гранаты'],
   ];
   const all=allLootItems().filter(it=>{
     const c=lootCatOf(it);
-    return c==='bags'||c==='consum'||c==='items';
+    return c==='bags'||c==='consum'||c==='items'||c==='grenade';
   }).map(x=>({...x, rarName:RARN[x.rar]||'', kind:x.statlbl==='Урон'?'dmg':'arm', klbl:x.statlbl||'', fromLoot:true}));
   let list=all;
   if(itemsFilter.transport===1)list=all.filter(x=>!x.heavy);
   if(itemsFilter.transport===2)list=all.filter(x=>x.heavy);
+  if(itemsFilter.transport===3)list=all.filter(x=>lootCatOf(x)==='grenade');
   if(itemsFilter.search){const q=norm(itemsFilter.search);list=list.filter(x=>norm(x.name).includes(q));}
   list.sort((a,b)=>(b.rar-a.rar)||(parseInt(b.stat)||0)-(parseInt(a.stat)||0));
   return `
@@ -2210,7 +2216,7 @@ function renderHome(){
   const devlogHtml=(DB.devlog&&DB.devlog.length)?`<div class="dlog-wrap"><div class="dlog-hd">Что нового</div>${DB.devlog.slice(0,5).map(e=>`<div class="dlog-entry"><div class="dlog-date">${esc(e.date)}</div><ul class="dlog-list">${e.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`).join('')}</div>`:'';
   const donateHtml=`<div class="donate-wrap" style="padding-left:0;padding-right:0;max-width:none;margin-top:8px"><div class="donate-box"><div class="donate-icon">🎖️</div><div class="donate-text"><div class="donate-title">Поддержать проект</div><div class="donate-sub">Справочник бесплатный и без рекламы — если хочешь поддержать, буду рад</div><div class="donate-hint">В комментарии к переводу укажи свой ник из игры — добавлю в список спонсоров</div></div><div class="donate-cards"><div class="donate-card donate-card-tbank" onclick="copyCard(this,'2200702057489457')"><img src="loc/tbank.png" alt="Т-Банк" style="height:22px;width:22px;object-fit:contain"><span class="donate-num">2200 7020 5748 9457</span><span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div><div class="donate-card donate-card-sber" onclick="copyCard(this,'5469400039956201')"><img src="loc/sber.png" alt="Сбер" style="height:22px;width:22px;object-fit:contain"><span class="donate-num">5469 4000 3995 6201</span><span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div></div></div>`;
   const contactsHtml=`<div class="contacts-wrap" style="padding-left:0;padding-right:0;max-width:none;margin-top:0"><div class="contacts-box"><div class="donate-icon">💬</div><div class="donate-text"><div class="donate-title">Связь с автором</div><div class="donate-sub">Нашёл ошибку или хочешь что-то предложить — пиши</div></div><div class="contacts-cards"><a class="contacts-card contacts-card-vk" href="https://vk.com/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#5181b8"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.5h-1.58c-.6 0-.78-.48-1.86-1.57-1-.93-1.4-.93-1.64-.93-.33 0-.43.1-.43.57v1.43c0 .4-.13.64-1.18.64-1.74 0-3.67-1.05-5.02-3.01C5.14 10.46 4.6 8.55 4.6 8.14c0-.24.1-.47.57-.47h1.58c.43 0 .59.2.75.66.83 2.38 2.2 4.47 2.77 4.47.21 0 .31-.1.31-.64V9.73c-.07-1.14-.67-1.24-.67-1.64 0-.2.17-.4.44-.4h2.49c.37 0 .5.2.5.63v3.39c0 .37.17.5.27.5.21 0 .4-.13.8-.53 1.24-1.38 2.12-3.52 2.12-3.52.12-.24.3-.47.73-.47h1.58c.47 0 .57.24.47.57-.2.93-2.1 3.6-2.1 3.6-.17.27-.23.4 0 .7.17.23.72.7 1.09 1.13.67.77 1.19 1.41 1.33 1.86.14.43-.09.66-.54.66z"/></svg><span class="contacts-handle">ВКонтакте</span></a><a class="contacts-card contacts-card-tg" href="https://t.me/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#2AABEE"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="contacts-handle">@lilchich3441</span></a></div></div></div>`;
-  const sponsorsHtml=`<div class="sponsors-wrap"><div class="sponsors-hd">★ Поддержали проект</div><div class="sponsors-list"><span class="sponsor">MOTOP</span><span class="sponsor">LilHappy7</span><span class="sponsor">MEDOVIK</span><span class="sponsor">Шмаратосина</span><span class="sponsor">Dezman39</span></div></div>`;
+  const sponsorsHtml=`<div class="sponsors-wrap"><div class="sponsors-hd">★ Поддержали проект</div><div class="sponsors-list"><span class="sponsor">MOTOP</span><span class="sponsor">LilHappy7</span><span class="sponsor">MEDOVIK</span><span class="sponsor">Шмаратосина</span><span class="sponsor">Dezman39</span><span class="sponsor">rurikrok</span></div></div>`;
   const sideHtml=`<div class="dash-side"><div class="dash-side-card">${donateHtml}${sponsorsHtml}${contactsHtml}</div></div>`;
   return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${locBadge}</div><div class="dash-grid">${cards}</div><div class="dash-layout"><div class="dash-main">${devlogHtml}</div>${sideHtml}</div></div>`;
 }
@@ -2372,6 +2378,7 @@ function renderDonate(){
         <span class="sponsor-card">MEDOVIK</span>
         <span class="sponsor-card">Шмаратосина</span>
         <span class="sponsor-card">Dezman39</span>
+        <span class="sponsor-card">rurikrok</span>
       </div>
     </div>
   </div>

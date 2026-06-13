@@ -1133,7 +1133,7 @@ const TABS=[
   {id:'items',label:'📦 Предметы'},
   {id:'cars',label:'🚗 Транспорт'},
   {id:'story',label:'📋 Задания'},
-  {id:'quests',label:'🎯 Ликвидация должников'},
+  {id:'quests',label:'🎯 Ликвидация должников',mobLabel:'🎯 Ликвидация'},
   {id:'locations',label:'📍 Локации'},
   {id:'guides',label:'📖 Гайды'},
   {id:'progress',label:'⭐ Прогресс'},
@@ -1163,7 +1163,7 @@ function buildTabs(){
   const mobCur=document.getElementById('mob-tab-cur');
   if(mobCur)mobCur.textContent=cur.label;
   const grid=document.getElementById('mob-tab-grid');
-  if(grid)grid.innerHTML=TABS.map(t=>`<button class="mob-tab-btn${t.id===activeTab?' on':''}" onclick="switchTab('${t.id}');mobMenuClose()">${t.label}</button>`).join('');
+  if(grid)grid.innerHTML=TABS.map(t=>`<button class="mob-tab-btn${t.id===activeTab?' on':''}" onclick="switchTab('${t.id}');mobMenuClose()">${t.mobLabel||t.label}</button>`).join('');
 }
 function updateTabInd(){
   const ind=document.getElementById('tabs-ind');

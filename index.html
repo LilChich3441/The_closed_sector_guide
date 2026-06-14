@@ -103,13 +103,17 @@ section.on{display:block}
 .filter{background:var(--panel);border:1px solid var(--line);color:var(--dim);padding:7px 14px;
   cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:12px;letter-spacing:.7px;font-weight:700;
   transition:.18s;text-transform:uppercase;border-radius:10px;white-space:nowrap}
-.ftile{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:9px 16px;min-width:64px;text-align:center}
-.ftile .ftico{font-size:18px;line-height:1.25;display:block}
-.ftile .ftcnt{font-size:10px;opacity:.6;font-weight:600;letter-spacing:.5px;display:block;margin-top:1px}
+.ftile{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:9px 16px;min-width:64px;text-align:center;--cc:var(--acid)}
+.ftile .ftico{font-size:22px;line-height:1.2;display:block;color:var(--cc);transition:transform .15s}
+.ftile .ftcnt{font-size:10px;opacity:.55;font-weight:600;letter-spacing:.5px;display:block;margin-top:2px}
 .filter:hover{color:var(--txt);border-color:var(--line2);background:var(--panel2)}
+.ftile:hover{border-color:var(--cc);background:var(--panel2)}
+.ftile:hover .ftico{transform:scale(1.15)}
 .filter:active{transform:scale(.93);transition-duration:.08s}
 .filter.on{background:var(--acid);color:var(--bg);border-color:var(--acid);font-weight:700;box-shadow:0 0 18px rgba(229,229,234,.32)}
-.filter.on .ftcnt{opacity:.5}
+.ftile.on{background:var(--cc);color:var(--bg);border-color:var(--cc);box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.ftile.on .ftico,.ftile.on .ftcnt{color:var(--bg);transform:none}
+.ftile.on .ftcnt{opacity:.65}
 .filter.frar2{color:var(--r2);border-color:rgba(74,171,110,.35)}
 .filter.frar3{color:var(--r3);border-color:rgba(138,92,192,.35)}
 .filter.frar4{color:var(--r4);border-color:rgba(196,154,40,.35)}
@@ -1328,12 +1332,12 @@ function gearCard(it){
 }
 function renderGear(){
   const cats=[
-    ['all','Все',DB.weapons.length+DB.armor.length+DB.helmets.length,'✦'],
-    ['weapons','Оружие',DB.weapons.length,'⚔'],
-    ['armor','Броня',DB.armor.length,'🛡'],
-    ['helmets','Шлемы',DB.helmets.length,'⛑'],
-    ['sets','Комплекты',setGroups().length,'◈'],
-    ['best','Для локации','','🎯'],
+    ['all','Все',DB.weapons.length+DB.armor.length+DB.helmets.length,'✦','var(--acid)'],
+    ['weapons','Оружие',DB.weapons.length,'⚔','var(--hot)'],
+    ['armor','Броня',DB.armor.length,'🛡','var(--steel)'],
+    ['helmets','Шлемы',DB.helmets.length,'⛑','#4a8fc0'],
+    ['sets','Комплекты',setGroups().length,'◈','var(--r3)'],
+    ['best','Для локации','','🎯','var(--r4)'],
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
 
@@ -1406,7 +1410,7 @@ function renderGear(){
     ${gcCalc}
     <div class="intro"><b>Комплекты снаряжения</b> — наборы предметов с особыми бонусами при ношении всех частей. Нажмите на название комплекта, чтобы свернуть или развернуть его. Предметы также доступны в разделах «Оружие», «Броня», «Шлемы».</div>
     <div class="bar">
-      ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
+      ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
       <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
       ${rars.map(r=>`<button class="filter${r[0]>0?` frar${r[0]}`:''} ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
       <span class="cnt">${sets.length} комплект(ов)</span>
@@ -1425,7 +1429,7 @@ function renderGear(){
     return `
     ${gcCalc}
     <div class="bar">
-      ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
+      ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
     </div>
     <div class="intro" style="margin-top:0">Выбери тип и два предмета — сайт сравнит их характеристики.</div>
     <div class="bar" style="margin-top:0">
@@ -1495,7 +1499,7 @@ function renderGear(){
   <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания. Части комплектов D.I.S.S. собраны целиком во вкладке «Комплекты».</div>
   <div class="gear-sticky-filters">
   <div class="bar">
-    ${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
+    ${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
   </div>
   <div class="bar" style="margin-top:-8px">
     ${rars.map(r=>`<button class="filter${r[0]>0?` frar${r[0]}`:''} ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}

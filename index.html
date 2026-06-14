@@ -1337,7 +1337,7 @@ function renderGear(){
     ['armor','Броня',DB.armor.length,'🛡','var(--steel)'],
     ['helmets','Шлемы',DB.helmets.length,'⛑','#4a8fc0'],
     ['sets','Комплекты',setGroups().length,'◈','var(--r3)'],
-    ['best','Подбор','для рейда','⌖','var(--r4)'],
+    ['best','Подбор','для рейда','⌖','var(--r4)','30px'],
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
 
@@ -1410,7 +1410,7 @@ function renderGear(){
     ${gcCalc}
     <div class="intro"><b>Комплекты снаряжения</b> — наборы предметов с особыми бонусами при ношении всех частей. Нажмите на название комплекта, чтобы свернуть или развернуть его. Предметы также доступны в разделах «Оружие», «Броня», «Шлемы».</div>
     <div class="bar">
-      ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
+      ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico"${c[5]?` style="font-size:${c[5]}"`:''}>${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
       <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
       ${rars.map(r=>`<button class="filter${r[0]>0?` frar${r[0]}`:''} ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
       <span class="cnt">${sets.length} комплект(ов)</span>
@@ -1429,7 +1429,7 @@ function renderGear(){
     return `
     ${gcCalc}
     <div class="bar">
-      ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
+      ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico"${c[5]?` style="font-size:${c[5]}"`:''}>${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
     </div>
     <div class="intro" style="margin-top:0">Выбери тип и два предмета — сайт сравнит их характеристики.</div>
     <div class="bar" style="margin-top:0">
@@ -1486,7 +1486,7 @@ function renderGear(){
       const armRows=combos.slice(0,8).map(c=>`<div class="bb2-opt-row">${si(c.arm.icon,'🛡')}<span class="bb2-opt-name">${esc(c.arm.name)}</span><span class="bb2-combo-sep">+</span>${si(c.hlm.icon,'⛑')}<span class="bb2-opt-name">${esc(c.hlm.name)}</span><span class="bb2-combo-total">${c.total}</span></div>`).join('');
       content=statsHtml+stimHtml+minBuild+`<div class="bb2-opts"><div><div class="bb2-opt-hd">⚔ Оружие <span class="muted">${viableWpns.length} вар.</span></div>${wpnRows||'<div class="bb2-empty">Нет вариантов</div>'}</div><div><div class="bb2-opt-hd">🛡 Броня + шлем <span class="muted">топ-8</span></div>${armRows||'<div class="bb2-empty">Нет вариантов</div>'}</div></div>`;
     }
-    return `${gcCalc}<div class="bar">${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}</div>${locSel}${content}`;
+    return `${gcCalc}<div class="bar">${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico"${c[5]?` style="font-size:${c[5]}"`:''}>${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}</div>${locSel}${content}`;
   }
 
   let items=gearItems();
@@ -1499,7 +1499,7 @@ function renderGear(){
   <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания. Части комплектов D.I.S.S. собраны целиком во вкладке «Комплекты».</div>
   <div class="gear-sticky-filters">
   <div class="bar">
-    ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
+    ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico"${c[5]?` style="font-size:${c[5]}"`:''}>${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
   </div>
   <div class="bar" style="margin-top:-8px">
     ${rars.map(r=>`<button class="filter${r[0]>0?` frar${r[0]}`:''} ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}

@@ -2232,7 +2232,7 @@ function renderHome(){
     {id:'cars',ico:'🚗',name:'Транспорт',num:(DB.cars||[]).length,desc:'Скорость, прочность, грузоподъёмность и ремонт',clr:'var(--gold)',glow:'rgba(196,154,40,.08)'},
     {id:'craft',ico:'🔨',name:'Крафт',num:(DB.crafting||[]).length,desc:'Все рецепты и нужные материалы для создания',clr:'var(--hot)',glow:'rgba(192,64,64,.08)'},
     {id:'items',ico:'📦',name:'Предметы',num:(DB.items||[]).length,desc:'Лут с локаций — находки и предметы из рейдов',clr:'#8a5cc0',glow:'rgba(138,92,192,.08)'},
-    {id:'quests',ico:'🎯',name:'Ликвидация',num:(DB.quests||[]).length,desc:'Контракты на устранение целей по локациям',clr:'var(--r5)',glow:'rgba(192,64,104,.08)'},
+    {id:'story',ico:'📋',name:'Задания',num:(DB.story||[]).length,desc:'Сюжетные квесты — персонажи, требования и награды',clr:'#5aaccc',glow:'rgba(90,172,204,.08)'},
   ];
   const cards=secs.map(s=>`<div class="dash-card" onclick="switchTab('${s.id}')" style="--dc:${s.clr};--dg:${s.glow}"><div class="dash-card-ico">${s.ico}</div><div class="dash-card-name">${s.name}</div><div class="dash-card-desc">${s.desc}</div><div class="dash-card-arr">→</div></div>`).join('');
   const selLoc=(DB.locations||[]).find(l=>l.name===bestFilter.loc);

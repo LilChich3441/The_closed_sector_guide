@@ -227,9 +227,14 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 #main.search-on .card:not(.hidden){box-shadow:0 0 0 2px rgba(229,229,234,.4),0 4px 18px rgba(229,229,234,.12)!important;border-color:rgba(229,229,234,.55)!important}
 #main.search-on .lootitem:not(.hidden){border-color:rgba(229,229,234,.55)!important;box-shadow:0 0 0 1px rgba(229,229,234,.25)!important}
 /* repair calculator */
-.calc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acid);margin:0 0 18px;border-radius:8px;overflow:visible}
-.calc-head{background:var(--panel2);padding:12px 16px;font-family:'Saira Condensed',sans-serif;font-size:15px;
-  font-weight:600;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;border-radius:8px 8px 0 0}
+.calc{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--acid);margin:0 0 16px;border-radius:12px;overflow:hidden;box-shadow:0 4px 22px rgba(0,0,0,.32)}
+.calc-head{padding:11px 18px;font-family:'Saira Condensed',sans-serif;font-size:14px;
+  font-weight:700;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s;user-select:none}
+.calc-head:hover{background:rgba(255,255,255,.04)}
+.calc.calc-coll .calc-head{border-bottom:none}
+.calc-hico{font-size:22px;line-height:1;flex:none}
+.calc-htitle{flex:1}
+.calc-htog{font-size:12px;color:var(--dim);font-family:sans-serif}
 .calc-body{padding:16px;display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
 .calc-field{display:flex;flex-direction:column;gap:6px}
 .calc-field label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-family:'Saira Condensed',sans-serif;font-weight:600}
@@ -1343,7 +1348,7 @@ function renderGear(){
 
   const gcCalc=`
   <div class="calc${calcOpen?'':' calc-coll'}">
-    <div class="calc-head" onclick="toggleCalc()" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between">⌖ Калькулятор снаряжения<span style="font-size:11px;color:var(--dim);font-family:sans-serif">${calcOpen?'▲':'▼'}</span></div>
+    <div class="calc-head" onclick="toggleCalc()"><span class="calc-hico">⌖</span><span class="calc-htitle">Калькулятор снаряжения</span><span class="calc-htog">${calcOpen?'▲':'▼'}</span></div>
     <div class="calc-body" style="flex-wrap:wrap;gap:14px">
       <div class="calc-field">
         <label>Оружие</label>

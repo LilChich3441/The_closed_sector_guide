@@ -1237,7 +1237,7 @@ function _loadImgChunk(name,cb){
   s.onload=()=>{_IMG_LOADED[name]=true;cb&&cb();};
   document.head.appendChild(s);
 }
-const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft'],cars:['transport'],locations:['gear','items'],story:['craft','transport']};
+const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft'],cars:['transport','items'],locations:['gear','items'],story:['craft','transport']};
 function switchTab(id){
   activeTab=id;localStorage.setItem('cs_tab',id);
   document.getElementById('main').classList.remove('search-on');
@@ -1710,7 +1710,7 @@ function renderItems(){
       </div>`;
     }).join('');
     return `
-    <div class="intro"><b>Рюкзаки</b> увеличивают количество предметов, которые боец может взять с собой в рейд. Чем редкее рюкзак — тем больше слотов.</div>
+    <div class="intro"><b>Рюкзаки</b> увеличивают количество предметов, которые боец может взять с собой в рейд.</div>
     ${filterBar}
     <div class="bags-grid">${cards}</div>`;
   }

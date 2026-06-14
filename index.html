@@ -1100,13 +1100,13 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <div class="tabs" id="tabs"></div>
 <main id="main"></main>
 <div id="progress-bar"></div>
-<footer>THE CLOSED SECTOR — фанатский справочник • данные могут меняться с патчами<br><span style="font-size:11px;opacity:.45">Неофициальный фан-сайт, не связан с Akari Group. The Closed Sector является торговым знаком Akari Group.</span></footer>
+<footer>THE CLOSED SECTOR — фанатский справочник • данные могут меняться с патчами<br><span style="font-size:11px;opacity:.45">Неофициальный фан-сайт, не связан с Akari Group. The Closed Sector является торговым знаком Akari Group.</span><br><span style="font-size:11px;opacity:.5">📱 Добавить на рабочий стол: iOS — «Поделиться» → «На экран "Домой"» · Android — «⋮» → «Добавить на гл. экран»</span></footer>
 <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">▲</button>
 <div id="imodal" onclick="if(event.target===this)closeItemPopup()">
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=20260614"></script>
+<script src="data.js?v=20260614b"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -1206,7 +1206,7 @@ function _loadImgChunk(name,cb){
   s.onload=()=>{_IMG_LOADED[name]=true;cb&&cb();};
   document.head.appendChild(s);
 }
-const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft'],cars:['transport'],locations:['gear','items']};
+const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft'],cars:['transport'],locations:['gear','items'],story:['craft','transport']};
 function switchTab(id){
   activeTab=id;localStorage.setItem('cs_tab',id);
   document.getElementById('main').classList.remove('search-on');

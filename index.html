@@ -1499,7 +1499,7 @@ function renderGear(){
   <div class="intro">Снаряжение отсортировано по силе. <b>Чем выше редкость — тем мощнее</b>. Пометка «не чинится» не означает одноразовость: предметом можно пользоваться, пока прочность не упадёт до 30%, после чего он ломается. Крафт указывает уровень мастерской для создания. Части комплектов D.I.S.S. собраны целиком во вкладке «Комплекты».</div>
   <div class="gear-sticky-filters">
   <div class="bar">
-    ${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
+    ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
   </div>
   <div class="bar" style="margin-top:-8px">
     ${rars.map(r=>`<button class="filter${r[0]>0?` frar${r[0]}`:''} ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
@@ -1507,7 +1507,6 @@ function renderGear(){
   </div>
   <div class="sec-search-wrap"><input class="sec-search-in" id="gearSearch" type="text" placeholder="🔍 Поиск по названию..." value="${esc(gearFilter.search)}" oninput="setGearSearch(this.value)">${gearFilter.search?`<button class="sec-search-clear" onclick="setGearSearch('')">✕</button>`:''}</div>
   </div>
-  <button class="best-pick-card" onclick="setGearCat('best')"><span class="best-pick-ico">🎯</span><span class="best-pick-body"><div class="best-pick-title">Подбор для локации</div><div class="best-pick-desc">Оптимальное снаряжение под конкретный рейд</div></span><span class="best-pick-arr">→</span></button>
   <div class="grid" id="gearGrid">${items.map(gearCard).join('')}</div>
   <div class="legend">
     Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>

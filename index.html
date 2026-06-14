@@ -202,21 +202,46 @@ section.on{display:block}
 .safe{color:var(--acid)}
 .gold{color:var(--gold)}
 .muted{color:var(--dim)}
-/* quests */
-.quest{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:14px;overflow:hidden}
-.qhead{background:var(--panel2);padding:13px 16px;font-family:'Saira Condensed',sans-serif;font-size:20px;letter-spacing:2px;
-  color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
-.qhead .qn{margin-left:auto;font-size:11px;color:var(--dim);letter-spacing:1px}
-.qstage{padding:11px 16px;border-bottom:1px solid var(--line);display:flex;gap:14px;flex-wrap:wrap}
+/* quests / liquidation */
+.quest{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--hot);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 3px 16px rgba(0,0,0,.22)}
+.qhead{padding:14px 18px;font-family:'Saira Condensed',sans-serif;font-size:17px;letter-spacing:2px;
+  color:var(--txt);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.qhead .q-ico{font-size:16px;color:var(--hot);flex:none}
+.qhead .qn{margin-left:auto;font-size:11px;color:var(--dim);letter-spacing:.8px;background:var(--panel2);padding:3px 10px;border-radius:20px;border:1px solid var(--line2);white-space:nowrap}
+.qstage{padding:10px 18px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
 .qstage:last-child{border-bottom:none}
-.qloc{font-family:'Saira Condensed',sans-serif;letter-spacing:1px;color:var(--gold);min-width:160px;font-size:14px;padding-top:2px}
-.qtargets{display:flex;flex-direction:column;gap:4px;flex:1}
-.qt{font-size:12px;color:var(--txt);padding-left:16px;position:relative}
-.qt::before{content:'›';position:absolute;left:2px;color:var(--acid2)}
-.qt .role{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin-right:4px}
+.qloc{font-family:'Saira Condensed',sans-serif;letter-spacing:.5px;color:var(--gold);font-size:11px;padding:3px 10px;background:rgba(196,154,40,.1);border:1px solid rgba(196,154,40,.25);border-radius:4px;flex:none;text-transform:uppercase;white-space:nowrap;margin-top:2px}
+.qtargets{display:flex;flex-direction:column;gap:5px;flex:1}
+.qt{font-size:13px;color:var(--txt);padding:5px 10px 5px 28px;position:relative;border-radius:5px;background:var(--bg2)}
+.qt::before{content:'◉';position:absolute;left:8px;top:7px;color:var(--hot);font-size:10px}
+.qt .role{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin-right:5px;background:var(--panel2);padding:1px 5px;border-radius:3px;display:inline-block;border:1px solid var(--line2)}
+/* bags */
+.bags-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin:16px 0 8px}
+.bag-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;transition:.18s}
+.bag-card:hover{border-color:var(--line2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.bag-ico{width:60px;height:60px;object-fit:cover;border-radius:8px;background:var(--bg2)}
+.bag-slots-n{font-family:'Saira Condensed',sans-serif;font-size:38px;font-weight:700;line-height:1}
+.bag-slots-lbl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin-top:-4px}
+.bag-nm{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--txt);text-transform:uppercase;letter-spacing:.5px}
+.bag-desc{font-size:12px;color:var(--dim);line-height:1.4}
+/* ranks */
+.rank-steps{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.rank-step{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--panel);border:1px solid var(--line);border-radius:8px;transition:.12s}
+.rank-step:hover{border-color:var(--line2)}
+.rank-step.is-legend{border-top:2px solid var(--r4);background:rgba(196,154,40,.07)}
+.rank-n{font-family:'Saira Condensed',sans-serif;font-size:10px;color:var(--dim);width:18px;text-align:right;flex:none}
+.rank-nm{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:700;text-transform:capitalize;flex:1;color:var(--txt)}
+.rank-xp{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--gold);white-space:nowrap;min-width:80px;text-align:right}
+.rank-sk{font-size:10px;color:var(--dim);background:var(--panel2);padding:2px 8px;border-radius:4px;border:1px solid var(--line);white-space:nowrap;font-weight:600}
+.rank-sk.rank-sk-up{color:var(--steel);border-color:rgba(162,210,245,.3)}
+/* season */
+.season-lvs{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}
+.s-lv-row{display:flex;align-items:center;padding:6px 12px;background:var(--panel);border:1px solid var(--line);border-radius:5px;gap:8px}
+.s-lv-num{font-size:11px;color:var(--dim);flex:1;font-family:'Saira Condensed',sans-serif}
+.s-lv-xp{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--gold)}
 /* ranks/progress columns */
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:780px){.cols{grid-template-columns:1fr}.tagline{display:none}.bignum{font-size:24px}}
+@media(max-width:780px){.cols{grid-template-columns:1fr}.tagline{display:none}.bignum{font-size:24px}.season-lvs{grid-template-columns:1fr}}
 h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3px;color:var(--acid);text-transform:uppercase;margin:8px 0 12px;padding:6px 12px;border-left:2px solid var(--acid);background:var(--panel);border-radius:0 4px 4px 0}
 .legend{font-size:11px;color:var(--dim);margin:16px 0;line-height:1.8;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
 .legend .chip{display:inline-block;margin:0 2px}
@@ -1111,7 +1136,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=20260614b"></script>
+<script src="data.js?v=20260614c"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -1139,6 +1164,7 @@ let activeTab='home';
 let gearFilter={cat:'all',rar:0,search:''};
 let calcOpen=localStorage.getItem('cs_calc')!=='0';
 let itemsFilter={transport:0,search:''};
+let questsSearch='';
 let carsFilter={rar:0,cargo:''};
 let cmpFilter={type:'weapons',a:'',b:''};
 let bestFilter={loc:'',locOpen:false};
@@ -1658,7 +1684,36 @@ function renderItems(){
     [1,'Пешком'],
     [2,'На машине'],
     [3,'💥 Гранаты'],
+    [4,'🎒 Рюкзаки'],
   ];
+  const filterBar=`<div class="bar">
+    ${trs.map(t=>`<button class="filter ${itemsFilter.transport===t[0]?'on':''}" onclick="setItemsTransport(${t[0]})">${t[1]}</button>`).join('')}
+  </div>`;
+
+  // --- Рюкзаки — специальный вид ---
+  if(itemsFilter.transport===4){
+    const slotColors=['','var(--dim)','var(--steel)','var(--r3)','var(--r4)','var(--r5)'];
+    const bags=allLootItems().filter(it=>lootCatOf(it)==='bags').sort((a,b)=>a.rar-b.rar);
+    const cards=bags.map(it=>{
+      const m=(it.desc||'').match(/(\d+)/);
+      const n=m?parseInt(m[1]):0;
+      const clr=slotColors[it.rar]||'var(--dim)';
+      const ico=it.icon&&img(it.icon)?`<img class="bag-ico" src="${img(it.icon)}" alt="" loading="lazy">`:`<div class="bag-ico" style="display:flex;align-items:center;justify-content:center;font-size:28px">🎒</div>`;
+      return `<div class="bag-card">
+        ${ico}
+        <div class="bag-slots-n" style="color:${clr}">+${n}</div>
+        <div class="bag-slots-lbl">доп. предметов</div>
+        <div class="bag-nm">${esc(it.name)}</div>
+        <span class="chip rar${it.rar}">${RARN[it.rar]||''}</span>
+        ${it.desc?`<div class="bag-desc">${esc(it.desc)}</div>`:''}
+      </div>`;
+    }).join('');
+    return `
+    <div class="intro"><b>Рюкзаки</b> увеличивают количество предметов, которые боец может взять с собой в рейд. Чем редкее рюкзак — тем больше слотов.</div>
+    ${filterBar}
+    <div class="bags-grid">${cards}</div>`;
+  }
+
   const all=allLootItems().filter(it=>{
     const c=lootCatOf(it);
     return c==='bags'||c==='consum'||c==='items'||c==='grenade';
@@ -1671,10 +1726,7 @@ function renderItems(){
   list.sort((a,b)=>(b.rar-a.rar)||(parseInt(b.stat)||0)-(parseInt(a.stat)||0));
   return `
   <div class="intro"><b>Предметы</b> — весь лут сектора кроме снаряжения: квестовые вещи, материалы, ценности, электроника, рюкзаки и расходники. <b>Пешком</b> — можно унести без транспорта. <b>На машине</b> — нужна машина с грузом.</div>
-  <div class="bar">
-    ${trs.map(t=>`<button class="filter ${itemsFilter.transport===t[0]?'on':''}" onclick="setItemsTransport(${t[0]})">${t[1]}</button>`).join('')}
-    <span class="cnt">${list.length} шт.</span>
-  </div>
+  ${filterBar}
   <div class="sec-search-wrap"><input class="sec-search-in" id="itemsSearch" type="text" placeholder="🔍 Поиск по названию..." value="${esc(itemsFilter.search)}" oninput="setItemsSearch(this.value)">${itemsFilter.search?`<button class="sec-search-clear" onclick="setItemsSearch('')">✕</button>`:''}</div>
   <div class="grid">${list.map(gearCard).join('')}</div>
   <div class="legend">
@@ -1979,18 +2031,37 @@ function roleSplit(t){
   return esc(t);
 }
 function renderQuests(){
-  return `
-  <div class="intro">Контракты на ликвидацию проходят по локациям по нарастающей. Каждая цель — отдельный NPC, которого нужно устранить. Чем дальше локация, тем выше требования к отряду (см. «Локации»).</div>
-  ${DB.quests.map(q=>{
+  const sq=questsSearch?norm(questsSearch):'';
+  let list=DB.quests.slice();
+  if(sq){
+    list=list.filter(q=>
+      norm(q.name).includes(sq)||
+      q.stages.some(st=>norm(st.loc).includes(sq)||st.targets.some(t=>norm(t).includes(sq)))
+    );
+  }
+  const cards=list.map(q=>{
     const total=q.stages.reduce((s,st)=>s+st.targets.length,0);
-    return `<div class="quest" data-name="${esc((q.name+' '+q.stages.map(s=>s.targets.join(' ')).join(' ')).toLowerCase())}">
-      <div class="qhead">⌖ ${esc(q.name)}<span class="qn">${total} целей</span></div>
+    return `<div class="quest">
+      <div class="qhead"><span class="q-ico">⌖</span>${esc(q.name)}<span class="qn">${total} целей</span></div>
       ${q.stages.map(st=>`<div class="qstage">
-        <div class="qloc">${esc(st.loc)}</div>
+        <div class="qloc">📍 ${esc(st.loc)}</div>
         <div class="qtargets">${st.targets.map(t=>`<div class="qt">${roleSplit(t)}</div>`).join('')}</div>
       </div>`).join('')}
     </div>`;
-  }).join('')}`;
+  }).join('');
+  return `
+  <div class="intro">Контракты на ликвидацию — каждая цель это отдельный NPC на конкретной локации. Чем дальше локация, тем выше требования к отряду.</div>
+  <div class="sec-search-wrap">
+    <input class="sec-search-in" id="questsSearchInp" type="text" placeholder="🔍 Поиск по имени цели, роли или локации…" value="${esc(questsSearch)}" oninput="setQuestsSearch(this.value)">
+    ${questsSearch?`<button class="sec-search-clear" onclick="setQuestsSearch('')">✕</button>`:''}
+  </div>
+  ${cards||'<div class="intro" style="color:var(--dim)">Ничего не найдено</div>'}`;
+}
+function setQuestsSearch(v){
+  questsSearch=v;
+  render();
+  const inp=document.getElementById('questsSearchInp');
+  if(inp){inp.focus();inp.setSelectionRange(v.length,v.length);}
 }
 
 // ---------- STORY QUESTS ----------
@@ -2128,24 +2199,31 @@ function renderGuides(){
 
 // ---------- PROGRESS ----------
 function renderProgress(){
-  const ranks=DB.ranks.map(r=>`<tr data-name="${esc(r.rank.toLowerCase())}">
-    <td class="tname" style="font-size:13px">${esc(r.rank)}</td>
-    <td class="num gold" data-label="Сум. опыт">${esc(r.exp)||'0'}</td>
-    <td class="num muted" data-label="Скиллы">${esc(r.skill)}</td>
-  </tr>`).join('');
-  const season=DB.season.filter(s=>s.xp).map(s=>`<tr data-name="${esc(s.lv.toLowerCase())}">
-    <td class="tname" style="font-size:14px">${esc(s.lv)}</td><td class="num gold" data-label="Требуемый опыт">${esc(s.xp)}</td>
-  </tr>`).join('');
+  const ranks=DB.ranks.map((r,i)=>{
+    const prevSkill=i>0?DB.ranks[i-1].skill:null;
+    const skillUp=prevSkill&&r.skill!==prevSkill;
+    const isLast=i===DB.ranks.length-1;
+    return `<div class="rank-step${isLast?' is-legend':''}">
+      <span class="rank-n">${i+1}</span>
+      <span class="rank-nm">${esc(r.rank)}</span>
+      <span class="rank-xp">${r.exp?esc(r.exp)+' XP':'—'}</span>
+      <span class="rank-sk${skillUp?' rank-sk-up':''}">${esc(r.skill)}</span>
+    </div>`;
+  }).join('');
+  const season=DB.season.filter(s=>s.xp).map(s=>`<div class="s-lv-row">
+    <span class="s-lv-num">${esc(s.lv)}</span>
+    <span class="s-lv-xp">${esc(s.xp)} XP</span>
+  </div>`).join('');
   return `
-  <div class="intro">Слева — <b>звания исполнителей</b> (суммарный опыт и доступный уровень скиллов). Справа — <b>прогресс боевого пропуска сезона</b>: сколько опыта нужно на следующий уровень.</div>
+  <div class="intro"><b>Звания</b> — достигается при накоплении суммарного опыта; открывает новые уровни скиллов бойцов. <b>Боевой пропуск</b> — опыт, нужный для перехода на следующий уровень сезонного пропуска.</div>
   <div class="cols">
     <div>
       <h2 class="sec">Звания исполнителей</h2>
-      <table class="tbl"><thead><tr><th>Звание</th><th class="num">Сум. опыт</th><th class="num">Скиллы</th></tr></thead><tbody>${ranks}</tbody></table>
+      <div class="rank-steps">${ranks}</div>
     </div>
     <div>
       <h2 class="sec">Боевой пропуск (сезон)</h2>
-      <table class="tbl"><thead><tr><th>Уровень</th><th class="num">Требуемый опыт</th></tr></thead><tbody>${season}</tbody></table>
+      <div class="season-lvs">${season}</div>
     </div>
   </div>`;
 }

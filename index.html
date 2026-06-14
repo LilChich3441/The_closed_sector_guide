@@ -1337,7 +1337,7 @@ function renderGear(){
     ['armor','Броня',DB.armor.length,'🛡','var(--steel)'],
     ['helmets','Шлемы',DB.helmets.length,'⛑','#4a8fc0'],
     ['sets','Комплекты',setGroups().length,'◈','var(--r3)'],
-    ['best','Для локации','','🎯','var(--r4)'],
+    ['best','Подбор','для рейда','🎯','var(--r4)'],
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
 
@@ -1486,7 +1486,7 @@ function renderGear(){
       const armRows=combos.slice(0,8).map(c=>`<div class="bb2-opt-row">${si(c.arm.icon,'🛡')}<span class="bb2-opt-name">${esc(c.arm.name)}</span><span class="bb2-combo-sep">+</span>${si(c.hlm.icon,'⛑')}<span class="bb2-opt-name">${esc(c.hlm.name)}</span><span class="bb2-combo-total">${c.total}</span></div>`).join('');
       content=statsHtml+stimHtml+minBuild+`<div class="bb2-opts"><div><div class="bb2-opt-hd">⚔ Оружие <span class="muted">${viableWpns.length} вар.</span></div>${wpnRows||'<div class="bb2-empty">Нет вариантов</div>'}</div><div><div class="bb2-opt-hd">🛡 Броня + шлем <span class="muted">топ-8</span></div>${armRows||'<div class="bb2-empty">Нет вариантов</div>'}</div></div>`;
     }
-    return `${gcCalc}<div class="bar">${cats.filter(c=>c[0]!=='best').map(c=>`<button class="filter ${gearFilter.cat===c[0]?'on':''}" onclick="setGearCat('${c[0]}')">${c[1]} <span class="muted">${c[2]}</span></button>`).join('')}</div><button class="best-pick-card on" onclick="setGearCat('best')"><span class="best-pick-ico">🎯</span><span class="best-pick-body"><div class="best-pick-title">Подбор для локации</div><div class="best-pick-desc">Оптимальное снаряжение под конкретный рейд</div></span><span class="best-pick-arr">▼</span></button>${locSel}${content}`;
+    return `${gcCalc}<div class="bar">${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico">${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}</div>${locSel}${content}`;
   }
 
   let items=gearItems();

@@ -1089,7 +1089,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <div id="imodal" onclick="if(event.target===this)closeItemPopup()">
   <div id="imodal-box"></div>
 </div>
-<script src="images.js?v=20260614"></script>
+<script>const IMG={};</script>
 <script src="data.js?v=20260614"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
@@ -1112,7 +1112,7 @@ const LOC_POS={'Военный конвой':'center 62%','Тайник Сект
 const $=s=>document.querySelector(s);
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function fmt(n){return (n||0).toLocaleString('ru-RU');}
-function img(k){return (k&&typeof IMG!=='undefined'&&IMG[k])?IMG[k]:'';}
+function img(k){return (k&&IMG[k])?IMG[k]:'';}
 
 let activeTab='home';
 let gearFilter={cat:'all',rar:0,search:''};
@@ -1181,11 +1181,25 @@ function toggleMoreTabs(e){e&&e.stopPropagation();const d=document.getElementByI
 function closeMoreTabs(){const d=document.getElementById('tabs-dropdown');if(d)d.classList.remove('open');}
 document.addEventListener('click',function(e){if(!e.target.closest('#tabs-more'))closeMoreTabs();});
 window.addEventListener('resize',updateTabInd);
+const _IMG_CHUNKS={gear:'images-gear.js',items:'images-items.js',craft:'images-craft.js',transport:'images-transport.js'};
+const _IMG_LOADED={};
+function _loadImgChunk(name,cb){
+  if(_IMG_LOADED[name]){cb&&cb();return;}
+  const s=document.createElement('script');
+  s.src=_IMG_CHUNKS[name]+'?v=20260614';
+  s.onload=()=>{_IMG_LOADED[name]=true;cb&&cb();};
+  document.head.appendChild(s);
+}
+const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft'],cars:['transport'],locations:['gear','items']};
 function switchTab(id){
   activeTab=id;localStorage.setItem('cs_tab',id);
   document.getElementById('main').classList.remove('search-on');
   document.getElementById('globalSearch').value='';
   buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});
+  const chunks=_TAB_CHUNKS[id]||[];
+  let pending=chunks.filter(c=>!_IMG_LOADED[c]).length;
+  if(pending===0)return;
+  chunks.forEach(c=>_loadImgChunk(c,()=>{pending--;if(pending===0)render();}));
 }
 function mobMenuOpen(){document.getElementById('mob-sheet').classList.add('open');document.getElementById('mob-overlay').style.display='block';}
 function mobMenuClose(){document.getElementById('mob-sheet').classList.remove('open');document.getElementById('mob-overlay').style.display='none';}
@@ -2608,6 +2622,7 @@ document.addEventListener('touchend',e=>{
   },{passive:true});
 })();
 buildTabs();render();
+setTimeout(()=>_loadImgChunk('gear'),200);
 window.addEventListener('scroll',()=>{
   const b=document.getElementById('toTop');
   if(b)b.classList.toggle('show',window.scrollY>400);

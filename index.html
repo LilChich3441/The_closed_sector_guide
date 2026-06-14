@@ -252,11 +252,11 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 #main.search-on .card:not(.hidden){box-shadow:0 0 0 2px rgba(229,229,234,.4),0 4px 18px rgba(229,229,234,.12)!important;border-color:rgba(229,229,234,.55)!important}
 #main.search-on .lootitem:not(.hidden){border-color:rgba(229,229,234,.55)!important;box-shadow:0 0 0 1px rgba(229,229,234,.25)!important}
 /* repair calculator */
-.calc{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--acid);margin:0 0 16px;border-radius:12px;overflow:hidden;box-shadow:0 4px 22px rgba(0,0,0,.32)}
+.calc{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--acid);margin:0 0 16px;border-radius:12px;overflow:visible;box-shadow:0 4px 22px rgba(0,0,0,.32)}
 .calc-head{padding:11px 18px;font-family:'Saira Condensed',sans-serif;font-size:14px;
-  font-weight:700;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s;user-select:none}
+  font-weight:700;letter-spacing:1.5px;color:var(--acid);text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s;user-select:none;border-radius:12px 12px 0 0}
 .calc-head:hover{background:rgba(255,255,255,.04)}
-.calc.calc-coll .calc-head{border-bottom:none}
+.calc.calc-coll .calc-head{border-bottom:none;border-radius:12px}
 .calc-hico{font-size:22px;line-height:1;flex:none}
 .calc-htitle{flex:1}
 .calc-htog{font-size:12px;color:var(--dim);font-family:sans-serif}
@@ -1690,29 +1690,18 @@ function renderItems(){
     ${trs.map(t=>`<button class="filter ${itemsFilter.transport===t[0]?'on':''}" onclick="setItemsTransport(${t[0]})">${t[1]}</button>`).join('')}
   </div>`;
 
-  // --- Рюкзаки — специальный вид ---
+  // --- Рюкзаки ---
   if(itemsFilter.transport===4){
-    const slotColors=['','var(--dim)','var(--steel)','var(--r3)','var(--r4)','var(--r5)'];
     const bags=allLootItems().filter(it=>lootCatOf(it)==='bags').sort((a,b)=>a.rar-b.rar);
     const cards=bags.map(it=>{
       const m=(it.desc||'').match(/(\d+)/);
       const n=m?parseInt(m[1]):0;
-      const clr=slotColors[it.rar]||'var(--dim)';
-      const icoSrc=it.icon&&img(it.icon);
-      const ico=icoSrc?`<img class="bag-ico" src="${icoSrc}" alt="" loading="lazy">`:`<div class="bag-ico" style="background:var(--bg2);border-radius:8px"></div>`;
-      return `<div class="bag-card" onclick="openItemPopup('${esc(it.name)}')" style="cursor:pointer">
-        ${ico}
-        <div class="bag-slots-n" style="color:${clr}">+${n}</div>
-        <div class="bag-slots-lbl">доп. предметов</div>
-        <div class="bag-nm">${esc(it.name)}</div>
-        <span class="chip rar${it.rar}">${RARN[it.rar]||''}</span>
-        ${it.desc?`<div class="bag-desc">${esc(it.desc)}</div>`:''}
-      </div>`;
+      return gearCard({...it, stat:'+'+n, statlbl:'доп. слотов', kind:'bag', klbl:'доп. слотов', rarName:RARN[it.rar]||'', fromLoot:true});
     }).join('');
     return `
     <div class="intro"><b>Рюкзаки</b> увеличивают количество предметов, которые боец может взять с собой в рейд.</div>
     ${filterBar}
-    <div class="bags-grid">${cards}</div>`;
+    <div class="grid">${cards}</div>`;
   }
 
   const all=allLootItems().filter(it=>{

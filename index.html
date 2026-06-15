@@ -1302,7 +1302,7 @@ function _loadImgChunk(name,cb){
   s.onload=()=>{_IMG_LOADED[name]=true;cb&&cb();};
   document.head.appendChild(s);
 }
-const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft'],cars:['transport','items'],locations:['gear','items'],story:['craft','transport']};
+const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft','items'],cars:['transport','items'],locations:['gear','items'],story:['craft','transport']};
 function switchTab(id){
   activeTab=id;localStorage.setItem('cs_tab',id);history.replaceState(null,'',id==='home'?location.pathname:'#'+id);
   document.getElementById('main').classList.remove('search-on');

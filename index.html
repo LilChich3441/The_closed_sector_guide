@@ -2797,6 +2797,7 @@ document.addEventListener('touchend',e=>{
   },{passive:true});
 })();
 buildTabs();render();if(activeTab!=='home')history.replaceState(null,'','#'+activeTab);
+(function(){const chunks=_TAB_CHUNKS[activeTab]||[];let p=chunks.filter(c=>!_IMG_LOADED[c]).length;if(p===0)return;chunks.forEach(c=>_loadImgChunk(c,()=>{p--;if(p===0)render();}));})();
 (function(){
   const el=document.getElementById('loader');
   if(!el)return;

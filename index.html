@@ -207,6 +207,7 @@ section.on{display:block;animation:fade .2s ease both}
 .carico{width:38px;height:38px;object-fit:cover;background:var(--bg);border:1px solid var(--line);border-radius:3px;flex:none}
 .trav-grid{display:flex;flex-direction:column;gap:2px;margin-top:10px}
 .trav-row{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--bg2);border-radius:6px;gap:10px}
+.trav-loc-ico{width:52px;height:34px;object-fit:cover;border-radius:4px;flex:none;background:var(--panel2)}
 .trav-loc{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.3px;color:var(--txt)}
 .trav-time{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--acid);flex:none;letter-spacing:.5px}
 .trav-hint{font-size:11px;color:var(--dim);margin-top:8px;line-height:1.5}
@@ -1890,7 +1891,11 @@ function runTravelCalc(){
   const car=DB.cars.find(c=>c.name===carName);
   if(!car)return;
   const v=parseFloat(car.speed)||1;
-  const rows=Object.entries(LOC_FORMULA).map(([name,{a,b}])=>({name,mins:a/v+b})).sort((a,b)=>a.mins-b.mins).map(l=>`<div class="trav-row"><span class="trav-loc">${esc(l.name)}</span><span class="trav-time">${minsToHM(l.mins)}</span></div>`).join('');
+  const locIconMap={};(DB.locations||[]).forEach(l=>{if(l.icon)locIconMap[l.name]=l.icon;});
+  const rows=Object.entries(LOC_FORMULA).map(([name,{a,b}])=>({name,mins:a/v+b})).sort((a,b)=>a.mins-b.mins).map(l=>{
+    const ico=locIconMap[l.name]?`<img src="${esc(locIconMap[l.name])}" alt="" class="trav-loc-ico">`:'';
+    return `<div class="trav-row">${ico}<span class="trav-loc">${esc(l.name)}</span><span class="trav-time">${minsToHM(l.mins)}</span></div>`;
+  }).join('');
   out.innerHTML=`<div class="trav-grid">${rows}</div><div class="trav-hint">Скорость машины: <b>${esc(car.speed)}</b> · времена от точки старта до края локации</div>`;
 }
 function runCalc(){

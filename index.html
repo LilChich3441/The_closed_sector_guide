@@ -753,6 +753,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .org-a-btn:active{transform:scale(.95);transition-duration:.08s}
 .org-a-btn-arr{font-size:16px;transition:transform .18s}
 .org-a-btn:hover .org-a-btn-arr{transform:translateX(4px)}
+.org-a-hint{background:rgba(217,64,64,.1);border:1px solid rgba(217,64,64,.3);border-radius:8px;padding:10px 16px;text-align:center;font-size:12px;color:rgba(235,235,245,.6);line-height:1.6;letter-spacing:.3px}
+.org-a-hint-name{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;color:var(--hot);display:block;margin-top:2px}
 @media(max-width:700px){.org-anarchy{flex-wrap:wrap;gap:16px;padding:20px 18px}.org-a-ico{width:54px;height:54px}.org-a-name{font-size:38px;letter-spacing:3px}.org-a-right{width:100%;flex-direction:row;align-items:center;justify-content:space-between}}
 @media(max-width:420px){.org-a-right .org-a-badge{display:none}}
 @media(max-width:560px){.dash-grid{grid-template-columns:1fr 1fr}.dash-hero-title{font-size:28px}}
@@ -2357,7 +2359,7 @@ function renderHome(){
     </div>
     <div class="org-a-right">
       <div class="org-a-badge"><span class="org-a-dot"></span>Набор открыт</div>
-      <a class="org-a-btn" href="https://vk.com/lilchich3441" target="_blank" rel="noopener">Вступить<span class="org-a-btn-arr">→</span></a>
+      <div class="org-a-hint">⚑ Ищи нас в игре по названию<br><span class="org-a-hint-name">«Анархия»</span></div>
     </div>
   </div>`;
   return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${locBadge}</div><div class="dash-grid">${cards}</div>${anarchyHtml}<div class="dash-layout"><div class="dash-main">${devlogHtml}</div>${sideHtml}</div></div>`;

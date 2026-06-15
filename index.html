@@ -1224,7 +1224,7 @@ function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replac
 function fmt(n){return (n||0).toLocaleString('ru-RU');}
 function img(k){return (k&&IMG[k])?IMG[k]:'';}
 
-let activeTab='home';
+let activeTab=(()=>{const h=location.hash.slice(1),ls=localStorage.getItem('cs_tab'),v=['home','gear','craft','items','cars','story','quests','locations','guides','progress','terms','donate'];return v.includes(h)?h:v.includes(ls)?ls:'home';})();
 let gearFilter={cat:'all',rar:0,search:''};
 let calcOpen=localStorage.getItem('cs_calc')!=='0';
 let itemsFilter={transport:0,search:''};
@@ -1291,6 +1291,7 @@ function updateTabInd(){
 function toggleMoreTabs(e){e&&e.stopPropagation();const d=document.getElementById('tabs-dropdown');if(d)d.classList.toggle('open');}
 function closeMoreTabs(){const d=document.getElementById('tabs-dropdown');if(d)d.classList.remove('open');}
 document.addEventListener('click',function(e){if(!e.target.closest('#tabs-more'))closeMoreTabs();});
+window.addEventListener('popstate',()=>{const h=location.hash.slice(1),tid=TABS.some(t=>t.id===h)?h:'home';activeTab=tid;buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});});
 window.addEventListener('resize',updateTabInd);
 const _IMG_CHUNKS={gear:'images-gear.js',items:'images-items.js',craft:'images-craft.js',transport:'images-transport.js'};
 const _IMG_LOADED={};
@@ -1303,7 +1304,7 @@ function _loadImgChunk(name,cb){
 }
 const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft'],cars:['transport','items'],locations:['gear','items'],story:['craft','transport']};
 function switchTab(id){
-  activeTab=id;localStorage.setItem('cs_tab',id);
+  activeTab=id;localStorage.setItem('cs_tab',id);history.replaceState(null,'',id==='home'?location.pathname:'#'+id);
   document.getElementById('main').classList.remove('search-on');
   document.getElementById('globalSearch').value='';
   buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});
@@ -2790,7 +2791,7 @@ document.addEventListener('touchend',e=>{
     setTimeout(()=>{_ib.style.transition='';},260);
   },{passive:true});
 })();
-buildTabs();render();
+buildTabs();render();if(activeTab!=='home')history.replaceState(null,'','#'+activeTab);
 (function(){
   const el=document.getElementById('loader');
   if(!el)return;

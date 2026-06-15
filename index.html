@@ -1118,6 +1118,20 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .imloc{min-width:110px;flex-basis:110px}
   .dash-grid{grid-template-columns:1fr 1fr}
 }
+/* ─── ЗАГРУЗОЧНЫЙ ЭКРАН ──────────────────────────────────────────────────── */
+#loader{position:fixed;inset:0;background:#000;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transition:opacity .55s ease;overflow:hidden}
+#loader.ldr-out{opacity:0;pointer-events:none}
+#loader::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.012) 3px,rgba(255,255,255,.012) 4px);pointer-events:none}
+#loader::after{content:'';position:absolute;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.04),transparent);animation:ldr-scan 3s linear infinite;pointer-events:none}
+@keyframes ldr-scan{0%{top:-120px}100%{top:100%}}
+.ldr-logo{width:72px;height:72px;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:24px;letter-spacing:1px;border-radius:16px;position:relative;animation:ldr-glow 2.2s ease-in-out infinite}
+@keyframes ldr-glow{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.25),0 0 30px rgba(255,255,255,.06)}50%{box-shadow:0 0 0 10px rgba(255,255,255,0),0 0 50px rgba(255,255,255,.14)}}
+.ldr-title{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(235,235,245,.25);margin-top:-14px}
+.ldr-bar-wrap{width:180px;height:1px;background:rgba(255,255,255,.1);border-radius:1px;overflow:hidden}
+.ldr-bar{height:100%;background:#e5e5ea;width:0%;transition:width .35s cubic-bezier(.4,0,.2,1);border-radius:1px}
+.ldr-status{font-family:'Saira Condensed',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(235,235,245,.4);min-height:14px;transition:opacity .2s}
+.ldr-dots::after{content:'';animation:ldr-dot .9s steps(4,end) infinite}
+@keyframes ldr-dot{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -1134,6 +1148,12 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
+<div id="loader">
+  <div class="ldr-logo">TCS</div>
+  <div class="ldr-title">Полевой справочник</div>
+  <div class="ldr-bar-wrap"><div class="ldr-bar" id="ldr-bar"></div></div>
+  <div class="ldr-status ldr-dots" id="ldr-status">ИНИЦИАЛИЗАЦИЯ</div>
+</div>
 <header>
   <div class="hgrid">
     <div class="crest" onclick="switchTab('home')" style="cursor:pointer" title="Главная">TCS</div>
@@ -2753,6 +2773,34 @@ document.addEventListener('touchend',e=>{
   },{passive:true});
 })();
 buildTabs();render();
+(function(){
+  const el=document.getElementById('loader');
+  if(!el)return;
+  const bar=document.getElementById('ldr-bar');
+  const st=document.getElementById('ldr-status');
+  const phases=[
+    [30,'ЗАГРУЗКА БД'],
+    [65,'СБОРКА ИНТЕРФЕЙСА'],
+    [90,'ПОДГОТОВКА ДАННЫХ'],
+    [100,'ГОТОВО'],
+  ];
+  let i=0;
+  function next(){
+    if(i>=phases.length){
+      el.classList.add('ldr-out');
+      setTimeout(()=>el.remove(),600);
+      return;
+    }
+    const[pct,label]=phases[i++];
+    if(bar)bar.style.width=pct+'%';
+    if(st){
+      st.textContent=label;
+      st.classList.toggle('ldr-dots',pct<100);
+    }
+    setTimeout(next,i<phases.length?280:350);
+  }
+  setTimeout(next,80);
+})();
 setTimeout(()=>_loadImgChunk('gear'),200);
 window.addEventListener('scroll',()=>{
   const b=document.getElementById('toTop');

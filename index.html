@@ -1087,7 +1087,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   color:var(--txt);letter-spacing:.5px;flex:1;min-width:0;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #mob-menu-btn{flex:none;background:none;border:1px solid var(--line);border-radius:6px;
-  color:var(--dim);width:44px;height:44px;cursor:pointer;
+  color:var(--dim);width:44px;height:44px;cursor:pointer;position:relative;
   display:flex;align-items:center;justify-content:center;font-size:18px;transition:.15s}
 #mob-menu-btn:hover{border-color:var(--acid);color:var(--acid)}
 #mob-overlay{display:none;position:fixed;inset:0;z-index:110;background:rgba(0,0,0,.6);
@@ -1204,7 +1204,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=4af1bc4d"></script>
+<script src="data.js?v=d18dd96c"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -1308,11 +1308,14 @@ function _loadImgChunk(name,cb){
 }
 const _TAB_CHUNKS={gear:['gear'],items:['gear','items'],craft:['craft','items'],cars:['transport','items'],locations:['gear','items'],story:['craft','transport']};
 function checkNewUpdate(){
-  document.querySelectorAll('[data-tab="home"] .tab-newdot').forEach(d=>d.remove());
+  document.querySelectorAll('.tab-newdot').forEach(d=>d.remove());
   if(!DB.devlog||!DB.devlog.length)return;
   if(localStorage.getItem('cs_seen_update')!==DB.devlog[0].date){
+    const mkDot=()=>{const d=document.createElement('span');d.className='tab-newdot';return d;};
     const t=document.querySelector('[data-tab="home"]');
-    if(t){const d=document.createElement('span');d.className='tab-newdot';t.appendChild(d);}
+    if(t)t.appendChild(mkDot());
+    const m=document.getElementById('mob-menu-btn');
+    if(m)m.appendChild(mkDot());
   }
 }
 function markUpdateSeen(){

@@ -354,6 +354,7 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .bb-minbuild-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:8px;font-family:'Saira Condensed',sans-serif;font-weight:600}
 .bb-minbuild-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .bb-plus{color:var(--dim);font-size:1.1em;font-weight:700}
+.locnote{margin:12px 16px 4px;background:rgba(80,120,200,.08);border:1px solid rgba(80,120,200,.2);border-left:3px solid #5a8adc;border-radius:8px;padding:10px 14px;font-size:0.88em;line-height:1.6;color:var(--txt)}
 .bb-item{display:flex;align-items:center;gap:8px;background:var(--bg2);padding:6px 10px;border-radius:6px}
 .bb-item img,.bb-item span:first-child{width:32px;height:32px;object-fit:contain;display:flex;align-items:center;justify-content:center}
 .bb-item-info{display:flex;flex-direction:column;gap:1px}
@@ -1201,7 +1202,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=dd874be2"></script>
+<script src="data.js?v=b927887f"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -2012,8 +2013,9 @@ function renderLocations(){
         <div class="lootgrid">${b.drop.map(lootCard).join('')}</div>`:''}
       </div>`:'';
       body=`<div class="locloot${isMatch?' open':''}" id="loot${idx}">
-        <div class="lootsec">Рекомендуемое снаряжение в рейд</div>
-        <div class="lootgrid">${data.rec.map(lootCard).join('')}</div>
+        ${data.note?`<div class="locnote">${esc(data.note)}</div>`:''}
+        ${data.rec&&data.rec.length?`<div class="lootsec">Рекомендуемое снаряжение в рейд</div>
+        <div class="lootgrid">${data.rec.map(lootCard).join('')}</div>`:''}
         ${bossBlk}
         <div class="lootsec">Что можно найти на локации</div>
         <div class="lootgrid">${data.loot.map(lootCard).join('')}</div>

@@ -1524,25 +1524,8 @@ function renderGear(){
         ${mkIconSel('gcHlm',[{val:'',label:'— без шлема —',icon:''},...DB.helmets.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(h=>({val:h.name,label:h.name+' ('+h.stat+')',icon:h.icon||''}))], 'runGearCalc()')}
       </div>
       <div class="calc-field">
-        <label>Расходник (+атака)</label>
-        <div style="display:flex;gap:6px;align-items:center">
-          <select class="gsel" id="gcConQty" onchange="runGearCalc()" style="width:72px">
-            <option value="0">0</option>
-            <option value="1">×1</option>
-            <option value="2">×2</option>
-            <option value="3">×3</option>
-            <option value="4">×4</option>
-            <option value="5">×5</option>
-          </select>
-          <select class="gsel" id="gcConType" onchange="runGearCalc()" style="min-width:150px">
-            <option value="0">— тип —</option>
-            <option value="7">РТД-11 (+7/шт)</option>
-            <option value="14">Г1 (+14/шт)</option>
-            <option value="21">Г2 (+21/шт)</option>
-            <option value="33">РПОГ (+33/шт)</option>
-            <option value="77">C4 (+77/шт)</option>
-          </select>
-        </div>
+        <label>Расходники (+атака)</label>
+        <div id="gcConRows"></div>
       </div>
     </div>
     <div class="gc-slots">
@@ -1784,13 +1767,39 @@ function gcSlotUpdate(sfx, item, typeStat) {
     if(slotEl)slotEl.classList.remove('active');
   }
 }
+const _CON_OPTS=[{v:0,l:'— тип —'},{v:7,l:'РТД-11 (+7/шт)'},{v:14,l:'Г1 (+14/шт)'},{v:21,l:'Г2 (+21/шт)'},{v:33,l:'РПОГ (+33/шт)'},{v:77,l:'C4 (+77/шт)'}];
+function _mkConRow(){
+  const d=document.createElement('div');
+  d.className='gcon-row';
+  d.style.cssText='display:flex;gap:6px;align-items:center;margin-bottom:4px';
+  const qOpts=['0','×1','×2','×3','×4','×5'].map((l,i)=>`<option value="${i}">${l}</option>`).join('');
+  const tOpts=_CON_OPTS.map(o=>`<option value="${o.v}">${o.l}</option>`).join('');
+  d.innerHTML=`<select class="gsel gcon-qty" onchange="runGearCalc()" style="width:72px">${qOpts}</select><select class="gsel gcon-type" onchange="onConTypeChange(this)" style="min-width:150px">${tOpts}</select>`;
+  return d;
+}
+function initConRows(){
+  const c=document.getElementById('gcConRows');
+  if(!c||c.children.length)return;
+  c.appendChild(_mkConRow());
+}
+function onConTypeChange(sel){
+  const c=document.getElementById('gcConRows');
+  if(!c)return;
+  const rows=Array.from(c.querySelectorAll('.gcon-row'));
+  const isLast=sel.closest('.gcon-row')===rows[rows.length-1];
+  if(isLast&&sel.value!=='0')c.appendChild(_mkConRow());
+  runGearCalc();
+}
 function runGearCalc(){
   const wName=document.getElementById('gcWpn')?.value;
   const aName=document.getElementById('gcArm')?.value;
   const hName=document.getElementById('gcHlm')?.value;
-  const conQty=parseInt(document.getElementById('gcConQty')?.value)||0;
-  const conType=parseInt(document.getElementById('gcConType')?.value)||0;
-  const conBonus=conQty*conType;
+  let conBonus=0;
+  document.querySelectorAll('#gcConRows .gcon-row').forEach(row=>{
+    const qty=parseInt(row.querySelector('.gcon-qty')?.value)||0;
+    const type=parseInt(row.querySelector('.gcon-type')?.value)||0;
+    conBonus+=qty*type;
+  });
   const w=DB.weapons.find(x=>x.name===wName);
   const a=DB.armor.find(x=>x.name===aName);
   const h=DB.helmets.find(x=>x.name===hName);
@@ -2682,7 +2691,7 @@ function render(){
   const m=$('#main');
   if(activeTab==='home')m.innerHTML=`<section class="on">${renderHome()}</section>`;
   else if(activeTab==='terms')m.innerHTML=`<section class="on">${renderTerms()}</section>`;
-  else if(activeTab==='gear'){m.innerHTML=`<section class="on">${renderGear()}</section>`;runGearCalc();applyPickerColors();}
+  else if(activeTab==='gear'){m.innerHTML=`<section class="on">${renderGear()}</section>`;initConRows();runGearCalc();applyPickerColors();}
   else if(activeTab==='craft')m.innerHTML=`<section class="on">${renderCraft()}</section>`;
   else if(activeTab==='items')m.innerHTML=`<section class="on">${renderItems()}</section>`;
   else if(activeTab==='story')m.innerHTML=`<section class="on">${renderStory()}</section>`;

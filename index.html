@@ -1483,18 +1483,24 @@ function renderGear(){
       </div>
       <div class="calc-field">
         <label>Расходник (+атака)</label>
-        <select class="gsel" id="gcCon" onchange="runGearCalc()" style="min-width:160px">
-          <option value="0">— без расходника —</option>
-          <option value="7">РТД-11 (+7)</option>
-          <option value="14">Г1 (+14)</option>
-          <option value="21">Г2 (+21)</option>
-          <option value="33">РПОГ (+33)</option>
-          <option value="77">Граната ×1 (+77)</option>
-          <option value="154">Граната ×2 (+154)</option>
-          <option value="231">Граната ×3 (+231)</option>
-          <option value="308">Граната ×4 (+308)</option>
-          <option value="385">Граната ×5 (+385)</option>
-        </select>
+        <div style="display:flex;gap:6px;align-items:center">
+          <select class="gsel" id="gcConQty" onchange="runGearCalc()" style="width:72px">
+            <option value="0">0</option>
+            <option value="1">×1</option>
+            <option value="2">×2</option>
+            <option value="3">×3</option>
+            <option value="4">×4</option>
+            <option value="5">×5</option>
+          </select>
+          <select class="gsel" id="gcConType" onchange="runGearCalc()" style="min-width:150px">
+            <option value="0">— тип —</option>
+            <option value="7">РТД-11 (+7/шт)</option>
+            <option value="14">Г1 (+14/шт)</option>
+            <option value="21">Г2 (+21/шт)</option>
+            <option value="33">РПОГ (+33/шт)</option>
+            <option value="77">C4 (+77/шт)</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="gc-slots">
@@ -1740,7 +1746,9 @@ function runGearCalc(){
   const wName=document.getElementById('gcWpn')?.value;
   const aName=document.getElementById('gcArm')?.value;
   const hName=document.getElementById('gcHlm')?.value;
-  const conBonus=parseInt(document.getElementById('gcCon')?.value)||0;
+  const conQty=parseInt(document.getElementById('gcConQty')?.value)||0;
+  const conType=parseInt(document.getElementById('gcConType')?.value)||0;
+  const conBonus=conQty*conType;
   const w=DB.weapons.find(x=>x.name===wName);
   const a=DB.armor.find(x=>x.name===aName);
   const h=DB.helmets.find(x=>x.name===hName);

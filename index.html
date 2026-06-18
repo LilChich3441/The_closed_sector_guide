@@ -460,8 +460,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 #toTop:hover{background:rgba(44,44,46,.98);border-color:rgba(229,229,234,.3);color:var(--txt);transform:translateY(-2px) scale(1.06)!important}
 #toTop:active{transform:scale(.92)!important;transition-duration:.08s}
 #toTop.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
-#support-toast{position:fixed;bottom:80px;right:20px;z-index:150;width:300px;background:linear-gradient(145deg,#161616,#0e0e0e);border:1px solid rgba(196,154,40,.25);border-top:2px solid var(--gold);border-radius:16px;padding:18px 18px 16px;box-shadow:0 16px 48px rgba(0,0,0,.85),0 0 40px rgba(196,154,40,.08);transform:translateX(calc(100% + 32px));opacity:0;transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .35s;pointer-events:none}
-#support-toast.show{transform:translateX(0);opacity:1;pointer-events:auto}
+@keyframes toast-glow{0%,100%{box-shadow:0 16px 48px rgba(0,0,0,.85),0 0 40px rgba(196,154,40,.08)}55%{box-shadow:0 16px 48px rgba(0,0,0,.85),0 0 60px rgba(196,154,40,.28),0 0 0 1px rgba(196,154,40,.2)}}
+#support-toast{position:fixed;bottom:24px;left:50%;z-index:150;width:360px;background:linear-gradient(145deg,#161616,#0e0e0e);border:1px solid rgba(196,154,40,.25);border-top:2px solid var(--gold);border-radius:16px;padding:18px 18px 16px;box-shadow:0 16px 48px rgba(0,0,0,.85),0 0 40px rgba(196,154,40,.08);transform:translateX(-50%) translateY(calc(100% + 32px));opacity:0;transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .35s;pointer-events:none}
+#support-toast.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto;animation:toast-glow 2s ease-in-out .5s 1}
 #support-toast .st-close{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--dim);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px;transition:.15s}
 #support-toast .st-close:hover{color:var(--txt);background:rgba(255,255,255,.07)}
 #support-toast .st-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-right:24px}
@@ -2968,7 +2969,7 @@ window.addEventListener('scroll',()=>{
 (function(){
   const KEY='cs_toast_ts';
   const DELAY=3*60*1000; // 3 минуты
-  const COOLDOWN=7*24*60*60*1000; // повтор раз в 7 дней
+  const COOLDOWN=3*24*60*60*1000; // повтор раз в 3 дня
   const last=parseInt(localStorage.getItem(KEY)||'0');
   if(Date.now()-last<COOLDOWN)return;
   setTimeout(()=>{

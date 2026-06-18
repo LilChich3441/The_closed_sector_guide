@@ -1324,7 +1324,8 @@ function buildTabs(){
   const mobCur=document.getElementById('mob-tab-cur');
   if(mobCur)mobCur.textContent=cur.label;
   const grid=document.getElementById('mob-tab-grid');
-  if(grid)grid.innerHTML=TABS.map(t=>`<button class="mob-tab-btn${t.id===activeTab?' on':''}" onclick="switchTab('${t.id}');mobMenuClose()">${t.mobLabel||t.label}</button>`).join('');
+  const _hasNew=DB.devlog&&DB.devlog.length&&localStorage.getItem('cs_seen_update')!==DB.devlog[0].date;
+  if(grid)grid.innerHTML=TABS.map(t=>`<button class="mob-tab-btn${t.id===activeTab?' on':''}" onclick="switchTab('${t.id}');mobMenuClose()">${t.mobLabel||t.label}${t.id==='home'&&_hasNew?'<span class="tab-newdot" style="top:6px;right:6px"></span>':''}</button>`).join('');
 }
 function updateTabInd(){
   const ind=document.getElementById('tabs-ind');
@@ -1360,8 +1361,6 @@ function checkNewUpdate(){
     const mkDot=()=>{const d=document.createElement('span');d.className='tab-newdot';return d;};
     const t=document.querySelector('[data-tab="home"]');
     if(t)t.appendChild(mkDot());
-    const m=document.getElementById('mob-menu-btn');
-    if(m)m.appendChild(mkDot());
   }
 }
 function markUpdateSeen(){

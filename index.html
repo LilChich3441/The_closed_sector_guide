@@ -752,18 +752,23 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .dlog-date{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:7px}
 .dlog-list{margin:0;padding:0 0 0 14px;display:flex;flex-direction:column;gap:4px}
 .dlog-list li{font-size:13px;color:var(--txt);line-height:1.5}
-.donate-strip{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 18px;margin:12px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.donate-strip-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
-.donate-strip-ico{font-size:20px;flex:none}
-.donate-strip-text{min-width:0}
-.donate-strip-title{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--txt)}
-.donate-strip-sub{font-size:11px;color:var(--dim);margin-top:1px}
-.donate-strip-cards{display:flex;gap:7px;flex-wrap:wrap}
-.donate-strip-card{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--line);border-radius:7px;padding:8px 12px;cursor:pointer;transition:.15s;white-space:nowrap;font-size:13px}
-.donate-strip-card:hover{border-color:var(--line2);background:var(--panel2)}
-.donate-strip-num{font-family:'Saira Condensed',sans-serif;letter-spacing:.5px;color:var(--acid)}
-.donate-strip-copy{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:3px}
-.donate-strip-copy.copied{color:var(--steel)}
+.fundraiser{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:12px 0}
+.fundraiser-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.fundraiser-label{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:3px}
+.fundraiser-title{font-family:'Saira Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--txt);letter-spacing:.5px}
+.fundraiser-desc{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.5}
+.fundraiser-sum{text-align:right;flex:none}
+.fundraiser-sum-val{font-family:'Saira Condensed',sans-serif;font-size:28px;font-weight:700;color:var(--steel);letter-spacing:1px;line-height:1}
+.fundraiser-sum-lbl{font-size:11px;color:var(--dim);margin-top:2px}
+.fundraiser-bar-wrap{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:14px}
+.fundraiser-bar{height:100%;background:var(--steel);border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.fundraiser-goal{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);margin-top:-10px;margin-bottom:14px}
+.fundraiser-cards{display:flex;gap:7px;flex-wrap:wrap}
+.fundraiser-card{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:9px 13px;cursor:pointer;transition:.15s;white-space:nowrap}
+.fundraiser-card:hover{border-color:var(--line2);background:var(--panel2)}
+.fundraiser-card-num{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:.4px;color:var(--acid)}
+.fundraiser-card-copy{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:3px}
+.fundraiser-card-copy.copied{color:var(--steel)}
 .promo-block{background:var(--panel);border:1px solid rgba(196,154,40,.35);border-left:3px solid var(--gold);border-radius:8px;padding:14px 16px;margin-bottom:12px}
 .promo-block-label{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
 .promo-block-desc{font-size:12px;color:var(--dim);line-height:1.5;margin-bottom:10px}
@@ -1224,7 +1229,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=c2f9b4e1"></script>
+<script src="data.js?v=e7a3d5f0"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -2444,7 +2449,12 @@ function renderHome(){
   const contactsHtml=`<div class="contacts-wrap" style="padding-left:0;padding-right:0;max-width:none;margin-top:0"><div class="contacts-box"><div class="donate-icon">💬</div><div class="donate-text"><div class="donate-title">Связь с автором</div><div class="donate-sub">Нашёл ошибку или хочешь что-то предложить — пиши</div></div><div class="contacts-cards"><a class="contacts-card contacts-card-vk" href="https://vk.com/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#5181b8"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.5h-1.58c-.6 0-.78-.48-1.86-1.57-1-.93-1.4-.93-1.64-.93-.33 0-.43.1-.43.57v1.43c0 .4-.13.64-1.18.64-1.74 0-3.67-1.05-5.02-3.01C5.14 10.46 4.6 8.55 4.6 8.14c0-.24.1-.47.57-.47h1.58c.43 0 .59.2.75.66.83 2.38 2.2 4.47 2.77 4.47.21 0 .31-.1.31-.64V9.73c-.07-1.14-.67-1.24-.67-1.64 0-.2.17-.4.44-.4h2.49c.37 0 .5.2.5.63v3.39c0 .37.17.5.27.5.21 0 .4-.13.8-.53 1.24-1.38 2.12-3.52 2.12-3.52.12-.24.3-.47.73-.47h1.58c.47 0 .57.24.47.57-.2.93-2.1 3.6-2.1 3.6-.17.27-.23.4 0 .7.17.23.72.7 1.09 1.13.67.77 1.19 1.41 1.33 1.86.14.43-.09.66-.54.66z"/></svg><span class="contacts-handle">ВКонтакте</span></a><a class="contacts-card contacts-card-tg" href="https://t.me/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#2AABEE"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="contacts-handle">@lilchich3441</span></a></div></div></div>`;
   const sponsorsHtml=`<div class="sponsors-wrap"><div class="sponsors-hd">★ Поддержали проект</div><div class="sponsors-list"><span class="sponsor">MOTOP</span><span class="sponsor">LilHappy7</span><span class="sponsor">MEDOVIK</span><span class="sponsor">Шмаратосина</span><span class="sponsor">Dezman39</span><span class="sponsor">rurikrok</span><span class="sponsor">Reanimator</span></div></div>`;
   const svgCopy='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-  const donateStripHtml=`<div class="donate-strip"><div class="donate-strip-left"><div class="donate-strip-ico">🎖️</div><div class="donate-strip-text"><div class="donate-strip-title">Поддержать справочник</div><div class="donate-strip-sub">Бесплатно и без рекламы — если нравится, буду рад</div></div></div><div class="donate-strip-cards"><div class="donate-strip-card" onclick="copyCard(this,'2200702057489457')"><img src="loc/tbank.png" alt="" style="height:18px;width:18px;object-fit:contain"><span class="donate-strip-num">2200 7020 5748 9457</span><span class="donate-strip-copy">${svgCopy}Копировать</span></div><div class="donate-strip-card" onclick="copyCard(this,'5469400039956201')"><img src="loc/sber.png" alt="" style="height:18px;width:18px;object-fit:contain"><span class="donate-strip-num">5469 4000 3995 6201</span><span class="donate-strip-copy">${svgCopy}Копировать</span></div></div></div>`;
+  const fd=DB.donate||{};
+  const fdCollected=fd.collected||0;
+  const fdGoal=fd.goal||0;
+  const fdPct=fdGoal>0?Math.min(100,Math.round(fdCollected/fdGoal*100)):0;
+  const fdBarHtml=fdGoal>0?`<div class="fundraiser-bar-wrap"><div class="fundraiser-bar" style="width:${fdPct}%"></div></div><div class="fundraiser-goal"><span>${fdCollected.toLocaleString('ru')} ₽ собрано</span><span>цель: ${fdGoal.toLocaleString('ru')} ₽</span></div>`:'';
+  const donateStripHtml=`<div class="fundraiser"><div class="fundraiser-top"><div><div class="fundraiser-label">🎖️ Сбор</div><div class="fundraiser-title">${esc(fd.label||'Поддержать справочник')}</div><div class="fundraiser-desc">${esc(fd.desc||'')}</div></div><div class="fundraiser-sum"><div class="fundraiser-sum-val">${fdCollected.toLocaleString('ru')} ₽</div><div class="fundraiser-sum-lbl">собрано</div></div></div>${fdBarHtml}<div class="fundraiser-cards"><div class="fundraiser-card" onclick="copyCard(this,'2200702057489457')"><img src="loc/tbank.png" alt="" style="height:18px;width:18px;object-fit:contain"><span class="fundraiser-card-num">2200 7020 5748 9457</span><span class="fundraiser-card-copy">${svgCopy}Копировать</span></div><div class="fundraiser-card" onclick="copyCard(this,'5469400039956201')"><img src="loc/sber.png" alt="" style="height:18px;width:18px;object-fit:contain"><span class="fundraiser-card-num">5469 4000 3995 6201</span><span class="fundraiser-card-copy">${svgCopy}Копировать</span></div></div></div>`;
   const promoHtml=`<div class="promo-block"><div class="promo-block-label">🤝 Партнёрский промокод</div><div class="promo-block-desc">Используй при регистрации — получишь бонусы для старта в игре</div><div class="promo-code-btn" onclick="copyPromo(this,'LILCHICH')"><span class="promo-code-val">LILCHICH</span><span class="promo-code-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div>`;
   const sideHtml=`<div class="dash-side"><div class="dash-side-card">${promoHtml}${donateHtml}${sponsorsHtml}${contactsHtml}</div></div>`;
   const anarchyHtml=`<div class="org-anarchy">
@@ -2902,7 +2912,7 @@ function copyPromo(el,code){
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(showCopied).catch(showCopied);}else{const ta=document.createElement('textarea');ta.value=code;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);showCopied();}
 }
 function copyCard(el,num){
-  const span=el.querySelector('.donate-copy');
+  const span=el.querySelector('.donate-copy,.fundraiser-card-copy,.donate-strip-copy');
   const svgHtml='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
   const showCopied=()=>{span.textContent='Скопировано!';span.classList.add('copied');setTimeout(()=>{span.innerHTML=svgHtml+'Копировать';span.classList.remove('copied');},2000);};
   const fallback=()=>{const ta=document.createElement('textarea');ta.value=num;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);};

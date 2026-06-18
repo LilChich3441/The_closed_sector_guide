@@ -473,9 +473,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 #support-toast .st-btn:hover{background:rgba(196,154,40,.26);border-color:var(--gold);box-shadow:0 0 16px rgba(196,154,40,.15)}
 #support-toast .st-btn:active{transform:scale(.97)}
 @media(max-width:560px){
-  #support-toast{bottom:0;right:0;left:0;width:auto;border-radius:20px 20px 0 0;border-top:2px solid var(--gold);border-left:1px solid rgba(196,154,40,.25);border-right:1px solid rgba(196,154,40,.25);border-bottom:none;padding:20px 20px 0;padding-bottom:max(24px,env(safe-area-inset-bottom));transform:translateY(calc(100% + 4px))}
+  #support-toast{bottom:0;right:0;left:0;width:auto;border-radius:20px 20px 0 0;border-top:2px solid var(--gold);border-left:1px solid rgba(196,154,40,.25);border-right:1px solid rgba(196,154,40,.25);border-bottom:none;padding:20px 20px calc(20px + env(safe-area-inset-bottom, 16px));transform:translateY(calc(100% + 4px))}
   #support-toast.show{transform:translateY(0)}
-  #support-toast .st-btn{font-size:17px;padding:14px;margin-bottom:0}
+  #support-toast .st-btn{font-size:17px;padding:14px;margin-bottom:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  #support-toast .st-close{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 }
 /* ===== LOCATIONS + LOOT ===== */
 /* ── location item filter ── */
@@ -1141,23 +1142,26 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 /* ── mobile navigation ── */
 #mob-topbar{display:none;align-items:center;gap:0;
   position:sticky;top:0;z-index:100;
-  background:rgba(5,5,5,.88);border-bottom:1px solid rgba(255,255,255,.07);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  padding:0 14px;height:50px;
-  box-shadow:0 2px 24px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.05)}
-#mob-topbar::after{content:'';position:absolute;left:10%;right:10%;bottom:-1px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(229,229,234,.18) 50%,transparent);
+  background:rgba(4,4,4,.92);border-bottom:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:0 14px;height:52px;
+  box-shadow:0 1px 0 rgba(255,255,255,.05),0 4px 30px rgba(0,0,0,.8)}
+#mob-topbar::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(196,154,40,.3) 30%,rgba(196,154,40,.5) 50%,rgba(196,154,40,.3) 70%,transparent 100%);
   pointer-events:none}
-#mob-topbar .mob-logo{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700;
-  color:var(--txt);letter-spacing:1px;flex:none;padding-right:12px;
-  border-right:1px solid var(--line);margin-right:12px}
+#mob-topbar .mob-logo{font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:900;
+  color:var(--txt);letter-spacing:2px;flex:none;padding-right:14px;margin-right:14px;
+  position:relative}
+#mob-topbar .mob-logo::after{content:'';position:absolute;right:0;top:20%;bottom:20%;width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(255,255,255,.2) 50%,transparent)}
 #mob-tab-cur{font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:600;
-  color:var(--txt);letter-spacing:.5px;flex:1;min-width:0;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#mob-menu-btn{flex:none;background:none;border:1px solid var(--line);border-radius:6px;
-  color:var(--dim);width:44px;height:44px;cursor:pointer;position:relative;
-  display:flex;align-items:center;justify-content:center;font-size:18px;transition:.15s}
-#mob-menu-btn:hover{border-color:var(--acid);color:var(--acid)}
+  color:var(--txt);letter-spacing:.4px;flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.92}
+#mob-menu-btn{flex:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;color:var(--txt);width:40px;height:40px;cursor:pointer;position:relative;
+  display:flex;align-items:center;justify-content:center;transition:.18s;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation}
+#mob-menu-btn:hover,#mob-menu-btn:active{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
 #mob-overlay{display:none;position:fixed;inset:0;z-index:110;background:rgba(0,0,0,.6);
   backdrop-filter:blur(3px);animation:fade .2s}
 #mob-sheet{position:fixed;left:0;right:0;bottom:0;z-index:120;
@@ -1255,7 +1259,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 <div id="mob-topbar">
   <span class="mob-logo">TCS</span>
   <span id="mob-tab-cur">⚙ Снаряжение</span>
-  <button id="mob-menu-btn" onclick="mobMenuOpen()">☰</button>
+  <button id="mob-menu-btn" onclick="mobMenuOpen()"><svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect y="0" width="18" height="2" rx="1" fill="currentColor"/><rect y="6" width="13" height="2" rx="1" fill="currentColor"/><rect y="12" width="18" height="2" rx="1" fill="currentColor"/></svg></button>
 </div>
 <div id="mob-overlay" onclick="mobMenuClose()"></div>
 <div id="mob-sheet">

@@ -726,12 +726,26 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .dash-hero-eye{font-family:'Saira Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--acid);font-weight:700;margin-bottom:10px}
 .dash-hero-title{font-family:'Saira Condensed',sans-serif;font-size:36px;font-weight:900;letter-spacing:1px;text-transform:uppercase;line-height:1.0;margin-bottom:8px}
 .dash-hero-sub{font-size:12px;color:var(--dim);letter-spacing:.4px}
-.dash-layout{display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:start}
-.dash-side{position:sticky;top:58px}
-.dash-side-card{background:rgba(229,229,234,.06);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.dash-side-card .donate-wrap,.dash-side-card .contacts-wrap{padding:0!important;margin:0!important;max-width:none!important}
-.dash-side-card .donate-box,.dash-side-card .contacts-box{border:none;border-radius:0;background:transparent;padding:18px 20px;gap:14px}
-.dash-side-card .donate-box{border-bottom:1px solid var(--line)}
+.dash-layout{margin-top:14px}
+.support-section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;margin:14px 0}
+.support-top{margin-bottom:20px}
+.support-eyebrow{font-family:'Saira Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:5px}
+.support-title{font-family:'Saira Condensed',sans-serif;font-size:24px;font-weight:700;letter-spacing:.5px;color:var(--txt);margin-bottom:5px}
+.support-sub{font-size:13px;color:var(--dim);line-height:1.55;max-width:640px}
+.support-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+@media(max-width:560px){.support-cards{grid-template-columns:1fr}}
+.support-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:16px 18px;cursor:pointer;transition:border-color .15s,background .15s,transform .15s;display:flex;align-items:center;gap:14px}
+.support-card:hover{border-color:var(--line2);background:var(--panel2);transform:translateY(-2px)}
+.support-card:active{transform:translateY(0);transition-duration:.05s}
+.support-card-logo{width:36px;height:36px;object-fit:contain;flex:none}
+.support-card-info{flex:1;min-width:0}
+.support-card-bank{font-size:11px;color:var(--dim);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.support-card-num{font-family:'Saira Condensed',sans-serif;font-size:18px;letter-spacing:.8px;color:var(--acid)}
+.support-card-copy{font-size:11px;color:var(--dim);margin-top:5px;display:flex;align-items:center;gap:3px;transition:color .15s}
+.support-card-copy.copied{color:var(--steel)}
+.support-divider{border:none;border-top:1px solid var(--line);margin:0 0 18px}
+.support-sponsors-hd{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+.support-sponsors-grid{display:flex;flex-wrap:wrap;gap:8px}
 .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
 @media(max-width:860px){.dash-layout{grid-template-columns:1fr}.dash-side{position:static}}
 .dash-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 12px 11px;cursor:pointer;overflow:hidden;position:relative;display:flex;flex-direction:column;gap:3px;transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .18s,box-shadow .18s}
@@ -1229,7 +1243,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=e7a3d5f0"></script>
+<script src="data.js?v=c2f84a19"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -2445,18 +2459,8 @@ function renderHome(){
   const dlogE=e=>`<div class="dlog-entry"><div class="dlog-date">${esc(e.date)}</div><ul class="dlog-list">${e.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`;
   const devlogHtml=(DB.devlog&&DB.devlog.length)?`<div class="dlog-wrap"><div class="dlog-hd">Что нового</div>${dlogE(DB.devlog[0])}${DB.devlog.length>1?`<details class="dlog-older"><summary>Предыдущие обновления</summary><div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">${DB.devlog.slice(1,10).map(dlogE).join('')}</div></details>`:''}</div>`:'';
 
-  const donateHtml=`<div class="donate-wrap" style="padding-left:0;padding-right:0;max-width:none;margin-top:8px"><div class="donate-box"><div class="donate-icon">🎖️</div><div class="donate-text"><div class="donate-title">Поддержать проект</div><div class="donate-sub">Справочник бесплатный и без рекламы — если хочешь поддержать, буду рад</div><div class="donate-hint">В комментарии к переводу укажи свой ник из игры — добавлю в список спонсоров</div></div><div class="donate-cards"><div class="donate-card donate-card-tbank" onclick="copyCard(this,'2200702057489457')"><img src="loc/tbank.png" alt="Т-Банк" style="height:22px;width:22px;object-fit:contain"><span class="donate-num">2200 7020 5748 9457</span><span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div><div class="donate-card donate-card-sber" onclick="copyCard(this,'5469400039956201')"><img src="loc/sber.png" alt="Сбер" style="height:22px;width:22px;object-fit:contain"><span class="donate-num">5469 4000 3995 6201</span><span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div></div></div>`;
-  const contactsHtml=`<div class="contacts-wrap" style="padding-left:0;padding-right:0;max-width:none;margin-top:0"><div class="contacts-box"><div class="donate-icon">💬</div><div class="donate-text"><div class="donate-title">Связь с автором</div><div class="donate-sub">Нашёл ошибку или хочешь что-то предложить — пиши</div></div><div class="contacts-cards"><a class="contacts-card contacts-card-vk" href="https://vk.com/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#5181b8"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.5h-1.58c-.6 0-.78-.48-1.86-1.57-1-.93-1.4-.93-1.64-.93-.33 0-.43.1-.43.57v1.43c0 .4-.13.64-1.18.64-1.74 0-3.67-1.05-5.02-3.01C5.14 10.46 4.6 8.55 4.6 8.14c0-.24.1-.47.57-.47h1.58c.43 0 .59.2.75.66.83 2.38 2.2 4.47 2.77 4.47.21 0 .31-.1.31-.64V9.73c-.07-1.14-.67-1.24-.67-1.64 0-.2.17-.4.44-.4h2.49c.37 0 .5.2.5.63v3.39c0 .37.17.5.27.5.21 0 .4-.13.8-.53 1.24-1.38 2.12-3.52 2.12-3.52.12-.24.3-.47.73-.47h1.58c.47 0 .57.24.47.57-.2.93-2.1 3.6-2.1 3.6-.17.27-.23.4 0 .7.17.23.72.7 1.09 1.13.67.77 1.19 1.41 1.33 1.86.14.43-.09.66-.54.66z"/></svg><span class="contacts-handle">ВКонтакте</span></a><a class="contacts-card contacts-card-tg" href="https://t.me/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#2AABEE"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="contacts-handle">@lilchich3441</span></a></div></div></div>`;
-  const sponsorsHtml=`<div class="sponsors-wrap"><div class="sponsors-hd">★ Поддержали проект</div><div class="sponsors-list"><span class="sponsor">MOTOP</span><span class="sponsor">LilHappy7</span><span class="sponsor">MEDOVIK</span><span class="sponsor">Шмаратосина</span><span class="sponsor">Dezman39</span><span class="sponsor">rurikrok</span><span class="sponsor">Reanimator</span></div></div>`;
   const svgCopy='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-  const fd=DB.donate||{};
-  const fdCollected=fd.collected||0;
-  const fdGoal=fd.goal||0;
-  const fdPct=fdGoal>0?Math.min(100,Math.round(fdCollected/fdGoal*100)):0;
-  const fdBarHtml=fdGoal>0?`<div class="fundraiser-bar-wrap"><div class="fundraiser-bar" style="width:${fdPct}%"></div></div><div class="fundraiser-goal"><span>${fdCollected.toLocaleString('ru')} ₽ собрано</span><span>цель: ${fdGoal.toLocaleString('ru')} ₽</span></div>`:'';
-  const donateStripHtml=`<div class="fundraiser"><div class="fundraiser-top"><div><div class="fundraiser-label">🎖️ Сбор</div><div class="fundraiser-title">${esc(fd.label||'Поддержать справочник')}</div><div class="fundraiser-desc">${esc(fd.desc||'')}</div></div><div class="fundraiser-sum"><div class="fundraiser-sum-val">${fdCollected.toLocaleString('ru')} ₽</div><div class="fundraiser-sum-lbl">собрано</div></div></div>${fdBarHtml}<div class="fundraiser-cards"><div class="fundraiser-card" onclick="copyCard(this,'2200702057489457')"><img src="loc/tbank.png" alt="" style="height:18px;width:18px;object-fit:contain"><span class="fundraiser-card-num">2200 7020 5748 9457</span><span class="fundraiser-card-copy">${svgCopy}Копировать</span></div><div class="fundraiser-card" onclick="copyCard(this,'5469400039956201')"><img src="loc/sber.png" alt="" style="height:18px;width:18px;object-fit:contain"><span class="fundraiser-card-num">5469 4000 3995 6201</span><span class="fundraiser-card-copy">${svgCopy}Копировать</span></div></div></div>`;
-  const promoHtml=`<div class="promo-block"><div class="promo-block-label">🤝 Партнёрский промокод</div><div class="promo-block-desc">Используй при регистрации — получишь бонусы для старта в игре</div><div class="promo-code-btn" onclick="copyPromo(this,'LILCHICH')"><span class="promo-code-val">LILCHICH</span><span class="promo-code-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div>`;
-  const sideHtml=`<div class="dash-side"><div class="dash-side-card">${promoHtml}${donateHtml}${sponsorsHtml}${contactsHtml}</div></div>`;
+  const supportHtml=`<div class="support-section"><div class="support-top"><div class="support-eyebrow">🎖️ Поддержать</div><div class="support-title">Поддержать проект</div><div class="support-sub">Справочник бесплатный и без рекламы. Если нравится — буду рад. В комментарии к переводу укажи свой ник из игры — добавлю в список.</div></div><div class="support-cards"><div class="support-card" onclick="copyCard(this,'2200702057489457')"><img class="support-card-logo" src="loc/tbank.png" alt="Т-Банк"><div class="support-card-info"><div class="support-card-bank">Т-Банк</div><div class="support-card-num">2200 7020 5748 9457</div><div class="support-card-copy">${svgCopy}Нажми чтобы скопировать</div></div></div><div class="support-card" onclick="copyCard(this,'5469400039956201')"><img class="support-card-logo" src="loc/sber.png" alt="Сбер"><div class="support-card-info"><div class="support-card-bank">Сбер</div><div class="support-card-num">5469 4000 3995 6201</div><div class="support-card-copy">${svgCopy}Нажми чтобы скопировать</div></div></div></div><hr class="support-divider"><div class="support-sponsors-hd">★ Поддержали проект</div><div class="support-sponsors-grid"><span class="sponsor">MOTOP</span><span class="sponsor">LilHappy7</span><span class="sponsor">MEDOVIK</span><span class="sponsor">Шмаратосина</span><span class="sponsor">Dezman39</span><span class="sponsor">rurikrok</span><span class="sponsor">Reanimator</span></div></div>`;
   const anarchyHtml=`<div class="org-anarchy">
     <svg class="org-a-ico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="50" cy="50" r="45"/>
@@ -2474,7 +2478,8 @@ function renderHome(){
       <div class="org-a-hint">⚑ Ищи нас в игре по названию<br><span class="org-a-hint-name">«Анархия»</span></div>
     </div>
   </div>`;
-  return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${locBadge}</div><div class="dash-grid">${cards}</div>${anarchyHtml}${donateStripHtml}<div class="dash-layout"><div class="dash-main">${devlogHtml}</div>${sideHtml}</div></div>`;
+  const promoHtml=`<div class="promo-block"><div class="promo-block-label">🤝 Партнёрский промокод</div><div class="promo-block-desc">Используй при регистрации — получишь бонусы для старта в игре</div><div class="promo-code-btn" onclick="copyPromo(this,'LILCHICH')"><span class="promo-code-val">LILCHICH</span><span class="promo-code-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div>`;
+  return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${locBadge}</div><div class="dash-grid">${cards}</div>${anarchyHtml}<div class="dash-layout">${devlogHtml}</div>${supportHtml}${promoHtml}</div>`;
 }
 function renderCraft(){
   const all=DB.crafting||[];
@@ -2602,7 +2607,7 @@ function renderCraftTip(){
 }
 
 function renderDonate(){
-  return `<div class="promo-block" style="max-width:680px;margin:24px auto 0"><div class="promo-block-label">🤝 Партнёрский промокод</div><div class="promo-block-desc">Используй при регистрации в игре — получишь бонусы для старта. Пригласи друзей по своему коду и зарабатывай 5–20% с их платежей.</div><div class="promo-code-btn" onclick="copyPromo(this,'LILCHICH')"><span class="promo-code-val">LILCHICH</span><span class="promo-code-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div>
+  return `<div class="promo-block" style="max-width:680px;margin:24px auto 0"><div class="promo-block-label">🤝 Партнёрский промокод</div><div class="promo-block-desc">Используй при регистрации в игре — получишь бонусы для старта.</div><div class="promo-code-btn" onclick="copyPromo(this,'LILCHICH')"><span class="promo-code-val">LILCHICH</span><span class="promo-code-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div>
   <div class="donate-wrap" style="padding-top:16px">
     <div class="donate-box">
       <div class="donate-icon">🎖️</div>
@@ -2912,7 +2917,7 @@ function copyPromo(el,code){
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(showCopied).catch(showCopied);}else{const ta=document.createElement('textarea');ta.value=code;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);showCopied();}
 }
 function copyCard(el,num){
-  const span=el.querySelector('.donate-copy,.fundraiser-card-copy,.donate-strip-copy');
+  const span=el.querySelector('.donate-copy,.fundraiser-card-copy,.donate-strip-copy,.support-card-copy');
   const svgHtml='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
   const showCopied=()=>{span.textContent='Скопировано!';span.classList.add('copied');setTimeout(()=>{span.innerHTML=svgHtml+'Копировать';span.classList.remove('copied');},2000);};
   const fallback=()=>{const ta=document.createElement('textarea');ta.value=num;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);};

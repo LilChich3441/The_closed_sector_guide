@@ -1124,8 +1124,13 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 /* ── mobile navigation ── */
 #mob-topbar{display:none;align-items:center;gap:0;
   position:sticky;top:0;z-index:100;
-  background:var(--bg);border-bottom:1px solid var(--line);
-  backdrop-filter:blur(12px);padding:0 14px;height:50px}
+  background:rgba(5,5,5,.88);border-bottom:1px solid rgba(255,255,255,.07);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  padding:0 14px;height:50px;
+  box-shadow:0 2px 24px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.05)}
+#mob-topbar::after{content:'';position:absolute;left:10%;right:10%;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(229,229,234,.18) 50%,transparent);
+  pointer-events:none}
 #mob-topbar .mob-logo{font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700;
   color:var(--txt);letter-spacing:1px;flex:none;padding-right:12px;
   border-right:1px solid var(--line);margin-right:12px}

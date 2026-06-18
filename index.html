@@ -2968,7 +2968,7 @@ window.addEventListener('scroll',()=>{
 // ── support toast ──
 (function(){
   const KEY='cs_toast_ts';
-  const DELAY=3*60*1000; // 3 минуты
+  const DELAY=60*1000; // 1 минута
   const COOLDOWN=3*24*60*60*1000; // повтор раз в 3 дня
   const last=parseInt(localStorage.getItem(KEY)||'0');
   if(Date.now()-last<COOLDOWN)return;

@@ -784,7 +784,9 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .dash-card:hover{transform:translateY(-4px) scale(1.02);border-color:var(--dc,var(--acid));box-shadow:0 10px 28px rgba(0,0,0,.5),0 0 0 1px var(--dc,var(--acid))}
 .dash-card:active{transform:scale(.96);transition-duration:.08s}
 .dash-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:4px}
-.dash-card-ico{font-size:20px;line-height:1;flex:none}
+.dash-card-ico{line-height:1;flex:none;display:flex;align-items:center}
+.dash-card-ico svg{width:28px;height:28px;stroke:var(--dc,var(--acid));opacity:.85;transition:opacity .18s}
+.dash-card:hover .dash-card-ico svg{opacity:1}
 .dash-card-num{font-family:'Saira Condensed',sans-serif;font-size:30px;font-weight:700;color:var(--dc,var(--acid));line-height:1}
 .dash-card-name{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--txt)}
 .dash-card-desc{font-size:10.5px;color:var(--dim);line-height:1.4;flex:1;margin-top:1px}
@@ -1207,7 +1209,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   .dash-card-desc{font-size:10px;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
   .dash-card{padding:12px 10px 10px}
   .dash-card-name{font-size:11px}
-  .dash-card-ico{font-size:18px}
+  .dash-card-ico svg{width:24px;height:24px}
   .dash-hero-watermark{font-size:90px}
 }
 @media(max-width:480px){
@@ -1298,7 +1300,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=0f37ee95"></script>
+<script src="data.js?v=c04ac53c"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -2520,12 +2522,12 @@ function craftShortName(wb){
 function renderHome(){
   const gearCnt=(DB.weapons||[]).length+(DB.armor||[]).length+(DB.helmets||[]).length;
   const secs=[
-    {id:'gear',ico:'⚙',name:'Снаряжение',num:gearCnt,desc:'Оружие, броня, шлемы и подбор билда для любой локации',clr:'var(--acid)',glow:'rgba(229,229,234,.07)'},
-    {id:'locations',ico:'📍',name:'Локации',num:(DB.locations||[]).length,desc:'Требования, лут, время рейда по каждой локации',clr:'var(--steel)',glow:'rgba(74,171,110,.08)'},
-    {id:'cars',ico:'🚗',name:'Транспорт',num:(DB.cars||[]).length,desc:'Скорость, прочность, грузоподъёмность и ремонт',clr:'var(--gold)',glow:'rgba(196,154,40,.08)'},
-    {id:'craft',ico:'🔨',name:'Крафт',num:(DB.crafting||[]).length,desc:'Все рецепты и нужные материалы для создания',clr:'var(--hot)',glow:'rgba(192,64,64,.08)'},
-    {id:'items',ico:'📦',name:'Предметы',num:(DB.items||[]).length,desc:'Лут с локаций — находки и предметы из рейдов',clr:'#8a5cc0',glow:'rgba(138,92,192,.08)'},
-    {id:'story',ico:'📋',name:'Задания',num:(DB.story||[]).length,desc:'Сюжетные квесты — персонажи, требования и награды',clr:'#5aaccc',glow:'rgba(90,172,204,.08)'},
+    {id:'gear',ico:_TI.gear,name:'Снаряжение',num:gearCnt,desc:'Оружие, броня, шлемы и подбор билда для любой локации',clr:'var(--acid)',glow:'rgba(229,229,234,.07)'},
+    {id:'locations',ico:_TI.locations,name:'Локации',num:(DB.locations||[]).length,desc:'Требования, лут, время рейда по каждой локации',clr:'var(--steel)',glow:'rgba(74,171,110,.08)'},
+    {id:'cars',ico:_TI.cars,name:'Транспорт',num:(DB.cars||[]).length,desc:'Скорость, прочность, грузоподъёмность и ремонт',clr:'var(--gold)',glow:'rgba(196,154,40,.08)'},
+    {id:'craft',ico:_TI.craft,name:'Крафт',num:(DB.crafting||[]).length,desc:'Все рецепты и нужные материалы для создания',clr:'var(--hot)',glow:'rgba(192,64,64,.08)'},
+    {id:'items',ico:_TI.items,name:'Предметы',num:(DB.items||[]).length,desc:'Лут с локаций — находки и предметы из рейдов',clr:'#8a5cc0',glow:'rgba(138,92,192,.08)'},
+    {id:'story',ico:_TI.story,name:'Задания',num:(DB.story||[]).length,desc:'Сюжетные квесты — персонажи, требования и награды',clr:'#5aaccc',glow:'rgba(90,172,204,.08)'},
   ];
   const cards=secs.map(s=>`<div class="dash-card" onclick="switchTab('${s.id}')" style="--dc:${s.clr};--dg:${s.glow}"><div class="dash-card-ico">${s.ico}</div><div class="dash-card-name">${s.name}</div><div class="dash-card-desc">${s.desc}</div><div class="dash-card-arr">→</div></div>`).join('');
   const selLoc=(DB.locations||[]).find(l=>l.name===bestFilter.loc);

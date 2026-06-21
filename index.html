@@ -97,8 +97,9 @@ h1 b{display:block;font-size:12px;letter-spacing:7px;color:var(--acid);font-weig
 .tab:active{opacity:.7;transition-duration:.05s}
 .tab.on{color:var(--tc,var(--txt));background:color-mix(in srgb,var(--tc,white) 13%,transparent)}
 .ti{display:inline-flex;align-items:center;flex:none}
-.ti svg{width:13px;height:13px;flex:none;opacity:.7}
-.tab:hover .ti svg,.tab.on .ti svg{opacity:1}
+.ti svg{width:13px;height:13px;flex:none;stroke:var(--tc,currentColor);opacity:.45;transition:opacity .15s}
+.tab:hover .ti svg{opacity:.8}
+.tab.on .ti svg{opacity:1}
 .tl{display:inline}
 .tab-newdot{position:absolute;top:4px;right:4px;width:6px;height:6px;background:#e53935;border-radius:50%;box-shadow:0 0 0 2px var(--bg);pointer-events:none}
 #tabs-ind{display:none}
@@ -1300,7 +1301,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=c04ac53c"></script>
+<script src="data.js?v=4a86b36b"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={

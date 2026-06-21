@@ -75,30 +75,31 @@ h1 b{display:block;font-size:12px;letter-spacing:7px;color:var(--acid);font-weig
 #globalSearch::placeholder{color:var(--dim)}
 #globalSearch:focus{outline:none;border-color:var(--acid);box-shadow:0 0 0 3px rgba(229,229,234,.18)}
 .search-wrap::before{content:'⌖';position:absolute;left:30px;top:50%;transform:translateY(-50%);color:var(--acid);font-size:16px;pointer-events:none}
-.tabs{display:flex;gap:0;flex-wrap:nowrap;margin:20px auto 0;max-width:1240px;padding:0 18px;
-  position:sticky;top:0;z-index:50;background:var(--bg);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.tabs-more{position:relative;display:flex;align-items:stretch;margin-bottom:-1px}
-.tabs-more-btn{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--dim);
-  padding:12px 16px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:16px;
-  font-weight:700;transition:.18s;white-space:nowrap;letter-spacing:2px}
-.tabs-more-btn:hover{color:var(--txt);background:rgba(255,255,255,.05)}
-.tabs-more-btn.on{color:var(--acid);border-bottom-color:var(--acid);background:rgba(229,229,234,.07)}
-.tabs-dropdown{display:none;position:absolute;top:calc(100% + 1px);right:0;
-  background:var(--panel);border:1px solid var(--line);border-radius:0 0 8px 8px;
-  z-index:200;min-width:200px;padding:4px 0;box-shadow:0 12px 32px rgba(0,0,0,.6)}
+.tabs{display:flex;gap:2px;flex-wrap:nowrap;margin:12px auto 0;max-width:1240px;padding:6px 14px;
+  position:sticky;top:0;z-index:50;background:rgba(6,6,6,.96);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.07);align-items:center}
+.tabs-more{position:relative;display:flex;align-items:center;margin-bottom:0}
+.tabs-more-btn{background:transparent;border:none;color:var(--dim);
+  padding:7px 10px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:15px;
+  font-weight:700;transition:.18s;white-space:nowrap;letter-spacing:1px;border-radius:7px}
+.tabs-more-btn:hover{color:var(--txt);background:rgba(255,255,255,.07)}
+.tabs-more-btn.on{color:var(--txt);background:rgba(229,229,234,.13)}
+.tabs-dropdown{display:none;position:absolute;top:calc(100% + 6px);right:0;
+  background:#111;border:1px solid rgba(255,255,255,.1);border-radius:10px;
+  z-index:200;min-width:200px;padding:5px;box-shadow:0 12px 32px rgba(0,0,0,.7)}
 .tabs-dropdown.open{display:block}
-.tabs-dropdown .tab{display:block;width:100%;text-align:left;border-bottom:none;padding:10px 18px;border-radius:0;margin-bottom:0}
-.tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--dim);
-  padding:12px 12px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:.8px;
-  font-weight:600;text-transform:uppercase;transition:.18s;position:relative;border-radius:0;margin-bottom:-1px;white-space:nowrap}
-.tab:hover{color:var(--txt);background:rgba(255,255,255,.05)}
+.tabs-dropdown .tab{display:flex;width:100%;text-align:left;padding:9px 12px;border-radius:7px;margin-bottom:0;gap:8px}
+.tab{background:transparent;border:none;color:var(--dim);
+  padding:7px 10px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:.6px;
+  font-weight:600;text-transform:uppercase;transition:color .15s,background .15s;position:relative;border-radius:7px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.tab:hover{color:var(--txt);background:rgba(255,255,255,.07)}
 .tab:active{opacity:.7;transition-duration:.05s}
-.tab.on{color:var(--acid);background:rgba(229,229,234,.07)}
-.tab.on::after{display:none}
-.tab-newdot{position:absolute;top:8px;right:3px;width:7px;height:7px;background:#e53935;border-radius:50%;box-shadow:0 0 0 2px var(--bg);pointer-events:none}
-#tabs-ind{position:absolute;bottom:-1px;height:2px;background:var(--acid);pointer-events:none;z-index:2;left:0;width:0;opacity:0;transition:left .22s cubic-bezier(.4,0,.2,1),width .22s cubic-bezier(.4,0,.2,1),opacity .15s}
-@media(max-width:560px){#tabs-ind{display:none}}
+.tab.on{color:var(--txt);background:rgba(229,229,234,.13)}
+.tab svg{flex:none;opacity:.75}
+.tab.on svg{opacity:1}
+.tab-newdot{position:absolute;top:4px;right:4px;width:6px;height:6px;background:#e53935;border-radius:50%;box-shadow:0 0 0 2px var(--bg);pointer-events:none}
+#tabs-ind{display:none}
 main{max-width:1240px;margin:0 auto;padding:20px 18px 0}
 section{display:none}
 section.on{display:block;animation:fade .2s ease both}
@@ -1326,19 +1327,33 @@ let craftFilter={cat:'',lv:0};
 let expandedSets=new Set();
 let locItemFilter='';
 
+const _TI={
+  home:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>',
+  gear:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  craft:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  items:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27,6.96 12,12.01 20.73,6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
+  cars:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+  story:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>',
+  quests:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>',
+  locations:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  guides:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+  progress:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+  terms:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+  donate:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>',
+};
 const TABS=[
-  {id:'home',label:'◉ Главная'},
-  {id:'gear',label:'⚙ Снаряжение'},
-  {id:'craft',label:'🔨 Крафт'},
-  {id:'items',label:'📦 Предметы'},
-  {id:'cars',label:'🚗 Транспорт'},
-  {id:'story',label:'📋 Задания'},
-  {id:'quests',label:'🎯 Ликвидация должников',mobLabel:'🎯 Ликвидация'},
-  {id:'locations',label:'📍 Локации'},
-  {id:'guides',label:'📖 Гайды'},
-  {id:'progress',label:'⭐ Прогресс'},
-  {id:'terms',label:'📄 Соглашение'},
-  {id:'donate',label:'🎖️ Спонсоры'},
+  {id:'home',label:_TI.home+' Главная'},
+  {id:'gear',label:_TI.gear+' Снаряжение'},
+  {id:'craft',label:_TI.craft+' Крафт'},
+  {id:'items',label:_TI.items+' Предметы'},
+  {id:'cars',label:_TI.cars+' Транспорт'},
+  {id:'story',label:_TI.story+' Задания'},
+  {id:'quests',label:_TI.quests+' Ликвидация должников',mobLabel:_TI.quests+' Ликвидация'},
+  {id:'locations',label:_TI.locations+' Локации'},
+  {id:'guides',label:_TI.guides+' Гайды'},
+  {id:'progress',label:_TI.progress+' Прогресс'},
+  {id:'terms',label:_TI.terms+' Соглашение'},
+  {id:'donate',label:_TI.donate+' Спонсоры'},
 ];
 let storyFilter={chap:1,giver:'',opt:false,search:''};
 
@@ -1361,7 +1376,7 @@ function buildTabs(){
   requestAnimationFrame(updateTabInd);
   const cur=TABS.find(t=>t.id===activeTab)||TABS[0];
   const mobCur=document.getElementById('mob-tab-cur');
-  if(mobCur)mobCur.textContent=cur.label;
+  if(mobCur)mobCur.innerHTML=cur.label;
   const grid=document.getElementById('mob-tab-grid');
   const _hasNew=DB.devlog&&DB.devlog.length&&localStorage.getItem('cs_seen_update')!==DB.devlog[0].date;
   if(grid)grid.innerHTML=TABS.map(t=>`<button class="mob-tab-btn${t.id===activeTab?' on':''}" onclick="switchTab('${t.id}');mobMenuClose()">${t.mobLabel||t.label}${t.id==='home'&&_hasNew?'<span class="tab-newdot" style="top:6px;right:6px"></span>':''}</button>`).join('');

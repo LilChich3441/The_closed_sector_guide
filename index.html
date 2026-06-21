@@ -93,11 +93,11 @@ h1 b{display:block;font-size:12px;letter-spacing:7px;color:var(--acid);font-weig
 .tab{background:transparent;border:none;color:var(--dim);
   padding:7px 10px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:.6px;
   font-weight:600;text-transform:uppercase;transition:color .15s,background .15s;position:relative;border-radius:7px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
-.tab:hover{color:var(--txt);background:rgba(255,255,255,.07)}
+.tab:hover{color:var(--tc,var(--txt));background:color-mix(in srgb,var(--tc,white) 8%,transparent)}
 .tab:active{opacity:.7;transition-duration:.05s}
-.tab.on{color:var(--txt);background:rgba(229,229,234,.13)}
-.tab svg{flex:none;opacity:.75}
-.tab.on svg{opacity:1}
+.tab.on{color:var(--tc,var(--txt));background:color-mix(in srgb,var(--tc,white) 13%,transparent)}
+.tab svg{flex:none;opacity:.7}
+.tab:hover svg,.tab.on svg{opacity:1}
 .tab-newdot{position:absolute;top:4px;right:4px;width:6px;height:6px;background:#e53935;border-radius:50%;box-shadow:0 0 0 2px var(--bg);pointer-events:none}
 #tabs-ind{display:none}
 main{max-width:1240px;margin:0 auto;padding:20px 18px 0}
@@ -1342,18 +1342,18 @@ const _TI={
   donate:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>',
 };
 const TABS=[
-  {id:'home',label:_TI.home+' Главная'},
-  {id:'gear',label:_TI.gear+' Снаряжение'},
-  {id:'craft',label:_TI.craft+' Крафт'},
-  {id:'items',label:_TI.items+' Предметы'},
-  {id:'cars',label:_TI.cars+' Транспорт'},
-  {id:'story',label:_TI.story+' Задания'},
-  {id:'quests',label:_TI.quests+' Ликвидация должников',mobLabel:_TI.quests+' Ликвидация'},
-  {id:'locations',label:_TI.locations+' Локации'},
-  {id:'guides',label:_TI.guides+' Гайды'},
-  {id:'progress',label:_TI.progress+' Прогресс'},
-  {id:'terms',label:_TI.terms+' Соглашение'},
-  {id:'donate',label:_TI.donate+' Спонсоры'},
+  {id:'home',label:_TI.home+' Главная',clr:'#e5e5ea'},
+  {id:'gear',label:_TI.gear+' Снаряжение',clr:'#7eb8e8'},
+  {id:'craft',label:_TI.craft+' Крафт',clr:'#d94040'},
+  {id:'items',label:_TI.items+' Предметы',clr:'#9b72d0'},
+  {id:'cars',label:_TI.cars+' Транспорт',clr:'#c49a28'},
+  {id:'story',label:_TI.story+' Задания',clr:'#5aaccc'},
+  {id:'quests',label:_TI.quests+' Ликвидация должников',mobLabel:_TI.quests+' Ликвидация',clr:'#e06060'},
+  {id:'locations',label:_TI.locations+' Локации',clr:'#4aab6e'},
+  {id:'guides',label:_TI.guides+' Гайды',clr:'#d4a843'},
+  {id:'progress',label:_TI.progress+' Прогресс',clr:'#6ab0e8'},
+  {id:'terms',label:_TI.terms+' Соглашение',clr:'#888ea8'},
+  {id:'donate',label:_TI.donate+' Спонсоры',clr:'#c49a28'},
 ];
 let storyFilter={chap:1,giver:'',opt:false,search:''};
 
@@ -1365,8 +1365,8 @@ function buildTabs(){
   const tabsEl=$('#tabs');
   if(!tabsEl.querySelector('[data-tab]')){
     // первичная отрисовка
-    const mainHtml=main.map(t=>`<div class="tab" data-tab="${t.id}" onclick="switchTab('${t.id}')">${t.label}</div>`).join('');
-    const dropHtml=more.map(t=>`<div class="tab" data-tab="${t.id}" onclick="switchTab('${t.id}');closeMoreTabs()">${t.label}</div>`).join('');
+    const mainHtml=main.map(t=>`<div class="tab" data-tab="${t.id}" onclick="switchTab('${t.id}')"${t.clr?` style="--tc:${t.clr}"`:''}>${t.label}</div>`).join('');
+    const dropHtml=more.map(t=>`<div class="tab" data-tab="${t.id}" onclick="switchTab('${t.id}');closeMoreTabs()"${t.clr?` style="--tc:${t.clr}"`:''}>${t.label}</div>`).join('');
     tabsEl.innerHTML=mainHtml+`<div class="tabs-more" id="tabs-more"><button class="tabs-more-btn" onclick="toggleMoreTabs(event)">···</button><div class="tabs-dropdown" id="tabs-dropdown">${dropHtml}</div></div><div id="tabs-ind"></div>`;
   }
   // обновляем классы без пересоздания DOM

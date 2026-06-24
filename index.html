@@ -296,7 +296,17 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .csub b{color:var(--acid)}
 .cresult.ok{font-size:15px;color:var(--steel);font-family:'Saira Condensed',sans-serif;font-weight:600}
 .cresult.err{font-size:14px;color:#e05c5c;font-family:'Saira Condensed',sans-serif;font-weight:600;margin-bottom:10px}
-@media(max-width:680px){.calc-body{flex-direction:column;align-items:stretch}.calc-out{margin-left:0;text-align:left}.calc-field .gsel,.cinput{width:100%}}
+@media(max-width:680px){
+  .calc-body{flex-direction:column;align-items:stretch}
+  .calc-out{margin-left:0;text-align:left}
+  .calc-field .gsel,.cinput{width:100%}
+  .calc-field{width:100%}
+  #gcConRows{width:100%}
+  .gcon-row{flex-wrap:wrap}
+  .gcon-row .gcon-type{min-width:0;flex:1}
+  .gc-slots{flex-direction:column}
+  .gc-slot{min-width:0;width:100%}
+}
 /* story quests */
 .gsel{background:var(--panel);border:1px solid var(--line);color:var(--txt);font-family:'Saira Condensed',sans-serif;font-size:13px;
   padding:8px 13px;letter-spacing:.5px;cursor:pointer;text-transform:uppercase;font-weight:600;border-radius:6px}
@@ -1301,7 +1311,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=4a86b36b"></script>
+<script src="data.js?v=f74a8797"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={

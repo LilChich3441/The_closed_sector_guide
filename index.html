@@ -3047,8 +3047,7 @@ function copyTg(el){
     setTimeout(()=>{span.innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать';span.classList.remove('copied');},2000);
   });
 }
-const _pv=document.querySelector('script[src*="data.js"]')?.src.match(/\?v=(\d+)/)?.[1];
-if(_pv)setInterval(async()=>{try{const t=await(await fetch(location.pathname+'?_='+Date.now(),{cache:'no-store'})).text();const m=t.match(/data\.js\?v=(\d+)/);if(m&&m[1]!==_pv)location.reload(true);}catch(e){}},5*60*1000);
+(async()=>{const KEY='_tcs_v';try{const r=await fetch('version.txt?_='+Date.now(),{cache:'no-store'});const v=(await r.text()).trim();const s=localStorage.getItem(KEY);if(s&&v&&s!==v){localStorage.setItem(KEY,v);location.reload(true);return;}if(v)localStorage.setItem(KEY,v);}catch(e){}})();
 </script>
 </body>
 </html>

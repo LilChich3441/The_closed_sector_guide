@@ -225,16 +225,79 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 #cv{position:fixed;inset:0;z-index:60;pointer-events:none;display:none}
 
+/* ── share screen ──── */
+.share-wrap{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.share-card{
+  background:linear-gradient(160deg,var(--card) 0%,var(--card2) 100%);
+  border:1px solid var(--line2);border-radius:24px;
+  padding:44px 40px 36px;width:100%;max-width:440px;text-align:center;
+  box-shadow:0 32px 80px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.03)
+}
+.share-ico{font-size:52px;margin-bottom:18px;display:block;animation:sway 4s ease-in-out infinite}
+.share-title{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.share-sub{font-size:13px;color:var(--dim);line-height:1.65;margin-bottom:28px}
+.share-url-box{
+  display:flex;align-items:center;gap:0;
+  background:var(--surf);border:1px solid var(--line2);border-radius:11px;
+  overflow:hidden;margin-bottom:12px
+}
+.share-url-txt{flex:1;font-size:11px;color:var(--dim);padding:11px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;font-family:monospace}
+.share-url-copy{flex-shrink:0;padding:11px 16px;border:none;border-left:1px solid var(--line2);background:transparent;color:var(--gold);font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s;white-space:nowrap}
+.share-url-copy:hover{background:rgba(240,192,64,.1)}
+.share-url-copy.copied{color:var(--green)}
+.share-hint{font-size:11px;color:var(--dim2);margin-bottom:20px;line-height:1.5}
+.share-divider{border:none;border-top:1px solid var(--line);margin:20px 0}
+.share-preview-btn{background:none;border:none;color:var(--dim);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.share-preview-btn:hover{color:var(--txt)}
 
-@media(max-width:500px){
-  .setup-card{padding:28px 16px 24px}
-  .cat-tabs{gap:4px}
-  .cat-tab{padding:7px 10px;font-size:11px}
-  .tiles-grid{gap:10px}
-  .m-card{padding:32px 20px}
-  .util-row{top:10px;right:10px;gap:6px}
+@media(max-width:560px){
+  /* setup */
+  .setup-wrap{align-items:flex-start;padding:16px 12px 40px}
+  .setup-card{padding:28px 16px 22px;border-radius:18px}
+  .s-icon{font-size:40px;margin-bottom:12px}
+  .s-sub{font-size:12px;margin-bottom:20px}
+
+  /* cat tabs */
+  .cat-tabs{gap:4px;margin-bottom:12px}
+  .cat-tab{padding:7px 9px;font-size:11px;gap:4px}
+
+  /* item list */
+  .list-scroll{max-height:180px}
+  .item-row{padding:5px 10px;gap:7px}
+  .item-rar{display:none}
+  .item-name{font-size:11px}
+
+  /* qty — big touch targets */
+  .qty-btn{width:38px;height:38px;font-size:20px;border-radius:9px}
+  .qty-val{min-width:22px;font-size:12px}
+
+  /* money */
+  .money-presets{gap:5px}
+  .money-btn{padding:10px 12px;font-size:13px}
+  .money-custom{flex-direction:column;gap:6px}
+  .money-add-btn{width:100%;padding:12px}
+
+  /* game */
+  .game-wrap{padding:58px 12px 50px}
+  .tiles-grid{gap:8px}
+
+  /* util row */
+  .util-row{top:8px;right:8px;gap:5px}
   .util-btn{padding:6px 10px;font-size:11px}
-  .list-scroll{max-height:170px}
+
+  /* modal */
+  .m-card{padding:28px 20px 22px;max-width:calc(100vw - 32px)}
+  .m-item-ico{width:64px;height:64px}
+  .m-item-ico-ph{font-size:52px}
+  .m-prize{font-size:18px}
+
+  /* share */
+  .share-wrap{align-items:flex-start;padding:20px 12px 40px}
+  .share-card{padding:32px 20px 28px;border-radius:18px}
+  .share-ico{font-size:40px;margin-bottom:14px}
+  .share-title{font-size:19px}
+  .share-sub{font-size:12px;margin-bottom:22px}
+
   .h-paste-box{flex-direction:column}
 }
 </style>
@@ -287,7 +350,7 @@ const CATS=[
 let itemCat='items',rarFilter=-1,typeFilter='',itemSearch='';
 let selected=new Map(); /* 'cat:idx' → count */
 let moneyPrizes=[]; /* array of label strings */
-let S={},rafId=null;
+let S={},rafId=null,busy=false;
 
 const enc=obj=>btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
 const dec=s=>{try{return JSON.parse(decodeURIComponent(escape(atob(s))));}catch{return null;}};
@@ -299,7 +362,8 @@ function parseURL(){
   if(!data?.prizes?.length)return{mode:'setup'};
   const ps=p.get('p');
   const picks=ps?new Set(ps.split(',').map(Number).filter(n=>!isNaN(n)&&n<data.prizes.length)):new Set();
-  return{mode:'game',prizes:data.prizes,title:data.title||'',picks,g};
+  const creator=p.get('creator')==='1';
+  return{mode:creator?'creator':'game',prizes:data.prizes,title:data.title||'',picks,g};
 }
 function makeURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';return`${location.origin}${location.pathname}#g=${g}${ps}`;}
 function pushURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';history.replaceState(null,'',`#g=${g}${ps}`);}
@@ -308,6 +372,7 @@ function render(){
   S=parseURL();
   const app=document.getElementById('app');
   if(S.mode==='setup')app.innerHTML=htmlSetup();
+  else if(S.mode==='creator')app.innerHTML=htmlShare();
   else{app.innerHTML=htmlGame();S.picks.forEach(i=>{const el=app.querySelector(`.tile[data-i="${i}"]`);if(el)el.classList.add('flipped','done');});}
 }
 
@@ -528,14 +593,51 @@ function createGame(){
   const title=(document.getElementById('inp-title')?.value||'').trim();
   const prizes=getPrizes();
   if(prizes.length<2)return;
-  history.pushState(null,'',`#g=${enc({prizes,title})}`);
+  const g=enc({prizes,title});
+  history.pushState(null,'',`#g=${g}&creator=1`);
+  render();
+}
+
+function htmlShare(){
+  const{g,prizes,title}=S;
+  const url=makeURL(g,new Set());
+  return`<div class="share-wrap"><div class="share-card">
+  <span class="share-ico">🔗</span>
+  <h2 class="share-title">Игра создана!</h2>
+  <p class="share-sub">Скопируй ссылку и отправь первому участнику.<br>Ты сам не выбираешь плитку — только раздаёшь ссылку.</p>
+  <div class="share-url-box">
+    <span class="share-url-txt" id="su-txt">${ea(url)}</span>
+    <button class="share-url-copy" id="su-btn" onclick="copyShareUrl()">Скопировать</button>
+  </div>
+  <p class="share-hint">Каждый участник открывает плитку, затем передаёт ссылку следующему.<br>Ссылка автоматически обновляется после каждого выбора.</p>
+  <hr class="share-divider">
+  <button class="share-preview-btn" onclick="previewGame()">Посмотреть игру без участия →</button>
+</div></div>`;
+}
+
+async function copyShareUrl(){
+  const{g}=S;
+  const url=makeURL(g,new Set());
+  const btn=document.getElementById('su-btn');
+  try{
+    await navigator.clipboard.writeText(url);
+    if(btn){btn.textContent='✓ Скопировано!';btn.classList.add('copied');}
+    setTimeout(()=>{if(btn){btn.textContent='Скопировать';btn.classList.remove('copied');}},2500);
+  }catch{prompt('Ссылка для участников:',url);}
+}
+
+function previewGame(){
+  const{g}=S;
+  history.replaceState(null,'',`#g=${g}`);
   render();
 }
 
 
 function pickTile(idx){
+  if(busy)return;
   const{picks,g,prizes}=S;if(picks.has(idx))return;
   const el=document.querySelector(`.tile[data-i="${idx}"]`);if(!el)return;
+  busy=true;
   el.onclick=null;el.classList.add('flipped');
   const np=new Set(picks);np.add(idx);pushURL(g,np);S.picks=np;
   setTimeout(()=>{el.classList.add('done');showModal(prizes[idx],np);},560);
@@ -585,7 +687,7 @@ async function shareLink(){
   }catch{prompt('Скопируй ссылку:',url);}
 }
 
-function closeModal(){stopConfetti();document.getElementById('modal').style.display='none';render();}
+function closeModal(){busy=false;stopConfetti();document.getElementById('modal').style.display='none';render();}
 function newGame(){selected.clear();moneyPrizes=[];itemCat='items';rarFilter=-1;typeFilter='';itemSearch='';history.pushState(null,'',location.pathname);render();}
 
 function launchConfetti(){
@@ -598,7 +700,7 @@ function launchConfetti(){
 }
 function stopConfetti(){cancelAnimationFrame(rafId);rafId=null;const cv=document.getElementById('cv');cv.getContext('2d').clearRect(0,0,cv.width,cv.height);cv.style.display='none';}
 
-function calcCols(n){if(n<=2)return 2;if(n===3)return 3;if(n===4)return 2;if(n<=6)return 3;if(n<=8)return 4;if(n===9)return 3;if(n<=12)return 4;if(n<=15)return 5;return 4;}
+function calcCols(n){const raw=n<=2?2:n===3?3:n===4?2:n<=6?3:n<=8?4:n===9?3:n<=12?4:n<=15?5:4;return Math.min(raw,window.innerWidth<480?3:8);}
 function plr(n,a,b,c){const m=n%10,m100=n%100;if(m===1&&m100!==11)return a;if([2,3,4].includes(m)&&![12,13,14].includes(m100))return b;return c;}
 function eh(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function ea(s){return String(s).replace(/'/g,'&#39;');}

@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Призовые плитки</title>
 <style>
 :root{
@@ -44,7 +49,8 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   display:flex;align-items:center;gap:6px;
   padding:8px 14px;border-radius:10px;border:1px solid var(--line2);
   background:transparent;font-family:inherit;font-size:12px;font-weight:700;
-  cursor:pointer;color:var(--dim);transition:all .18s;letter-spacing:.01em
+  cursor:pointer;color:var(--dim);transition:all .18s;letter-spacing:.01em;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent
 }
 .cat-tab .ct-ico{font-size:14px;line-height:1}
 .cat-tab .ct-cnt{
@@ -96,7 +102,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   width:26px;height:26px;border:1px solid var(--line2);border-radius:7px;
   background:transparent;color:var(--dim);font-family:inherit;font-size:16px;font-weight:500;
   line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all .15s;flex-shrink:0
+  transition:all .15s;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent
 }
 .qty-btn:hover:not(:disabled){background:rgba(255,255,255,.08);color:var(--txt);border-color:rgba(255,255,255,.26)}
 .qty-btn:disabled{opacity:.2;cursor:default}
@@ -109,7 +115,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .money-btn{
   padding:9px 16px;border-radius:10px;border:1px solid var(--line2);background:var(--surf);
   font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--dim);
-  transition:all .18s
+  transition:all .18s;touch-action:manipulation;-webkit-tap-highlight-color:transparent
 }
 .money-btn:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);color:var(--txt)}
 .money-custom{display:flex;gap:8px;margin-bottom:14px}
@@ -310,6 +316,8 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   .h-paste-box{flex-direction:column}
 }
 </style>
+</head>
+<body>
 <canvas id="cv"></canvas>
 <div id="app" style="position:relative;z-index:1"></div>
 <div id="modal"></div>
@@ -718,3 +726,5 @@ window.addEventListener('hashchange',()=>{stopConfetti();document.getElementById
 render();
 
 </script>
+</body>
+</html>

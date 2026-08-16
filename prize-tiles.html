@@ -207,6 +207,9 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .g-foot{margin-top:32px;text-align:center}
 .g-hint{font-size:12px;color:var(--dim)}
 .g-done-msg{background:rgba(5,209,156,.08);border:1px solid rgba(5,209,156,.22);border-radius:12px;padding:14px 28px;font-size:14px;color:var(--green)}
+.g-who{font-size:12px;color:var(--dim);margin-top:4px}
+.name-inp{width:100%;box-sizing:border-box;background:var(--surf);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--txt);font-family:inherit;outline:none;margin-top:4px;transition:border-color .2s}
+.name-inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,215,0,.12)}
 
 /* ── modal ─────────────────────────────── */
 #modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
@@ -373,7 +376,11 @@ const CATS=[
 let itemCat='items',rarFilter=-1,typeFilter='',itemSearch='';
 let selected=new Map(); /* 'cat:idx' → count */
 let moneyPrizes=[]; /* array of label strings */
-let S={},rafId=null,busy=false;
+let S={},myPick=null,rafId=null,busy=false;
+
+function gameKey(g){return 'tcs_'+g.slice(0,40);}
+function getMyPick(g){try{const v=localStorage.getItem(gameKey(g));return v?JSON.parse(v):null;}catch{return null;}}
+function saveMyPick(g,idx,who){try{localStorage.setItem(gameKey(g),JSON.stringify({idx,who}));}catch{}}
 
 const enc=obj=>btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
 const dec=s=>{try{return JSON.parse(decodeURIComponent(escape(atob(s))));}catch{return null;}};
@@ -386,17 +393,27 @@ function parseURL(){
   const ps=p.get('p');
   const picks=ps?new Set(ps.split(',').map(Number).filter(n=>!isNaN(n)&&n<data.prizes.length)):new Set();
   const creator=p.get('creator')==='1';
-  return{mode:creator?'creator':'game',prizes:data.prizes,title:data.title||'',picks,g};
+  const preview=p.get('preview')==='1';
+  const who=decodeURIComponent(p.get('who')||'').trim();
+  return{mode:creator?'creator':'game',prizes:data.prizes,title:data.title||'',picks,who,preview,g};
 }
 function makeURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';return`${location.origin}${location.pathname}#g=${encodeURIComponent(g)}${ps}`;}
-function pushURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';history.replaceState(null,'',`#g=${encodeURIComponent(g)}${ps}`);}
+function pushURL(g,picks,who){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';const ws=who?`&who=${encodeURIComponent(who)}`:'';history.replaceState(null,'',`#g=${encodeURIComponent(g)}${ws}${ps}`);}
 
 function render(){
   S=parseURL();
   const app=document.getElementById('app');
-  if(S.mode==='setup')app.innerHTML=htmlSetup();
-  else if(S.mode==='creator')app.innerHTML=htmlShare();
-  else{app.innerHTML=htmlGame();S.picks.forEach(i=>{const el=app.querySelector(`.tile[data-i="${i}"]`);if(el)el.classList.add('flipped','done');});}
+  if(S.mode==='setup'){app.innerHTML=htmlSetup();return;}
+  if(S.mode==='creator'){app.innerHTML=htmlShare();return;}
+  /* game mode */
+  myPick=S.preview?null:getMyPick(S.g);
+  if(!S.preview&&!S.who&&myPick===null){app.innerHTML=htmlNameInput();return;}
+  app.innerHTML=htmlGame();
+  S.picks.forEach(i=>{const el=app.querySelector(`.tile[data-i="${i}"]`);if(el)el.classList.add('flipped','done');});
+  if(myPick!==null){
+    const me=app.querySelector(`.tile[data-i="${myPick.idx}"]`);
+    if(me)me.classList.add('flipped','done');
+  }
 }
 
 function htmlSetup(){
@@ -579,16 +596,18 @@ function updateSelBar(){
 
 /* ── game ── */
 function htmlGame(){
-  const{prizes,title,picks,g}=S,rem=prizes.length-picks.size,done=rem===0,cols=calcCols(prizes.length);
-  const anyPicked=picks.size>0;
+  const{prizes,title,picks,g,who}=S,rem=prizes.length-picks.size,done=rem===0,cols=calcCols(prizes.length);
+  const alreadyPicked=myPick!==null;
   const tiles=prizes.map((p,i)=>{
-    const c=PAL[i%PAL.length],picked=picks.has(i),locked=anyPicked&&!picked;
+    const c=PAL[i%PAL.length],globalPicked=picks.has(i),isMine=alreadyPicked&&myPick.idx===i;
+    const isFlipped=globalPicked||isMine;
+    const locked=alreadyPicked&&!isFlipped;
     const icoHtml=prizeIco(p,36);
     const icoEl=icoHtml
       ?icoHtml.startsWith('<img')?`<img class="tile-back-ico" src="${LABEL_ICO[p]}" alt="">`:`<span class="tile-back-ico-ph">💰</span>`
       :'';
-    return`<div class="tile${picked?' flipped done':locked?' done':''}" data-i="${i}" style="--tc:${c.bg};--tg:${c.glow}"
-      ${!picked&&!locked&&!done?`onclick="pickTile(${i})"`:''}>
+    return`<div class="tile${isFlipped?' flipped done':locked?' done':''}" data-i="${i}" style="--tc:${c.bg};--tg:${c.glow}"
+      ${!isFlipped&&!locked&&!done?`onclick="pickTile(${i})"`:''}>
       <div class="tile-inner">
         <div class="tile-front"><span class="tile-num">${i+1}</span><span class="tile-q">?</span></div>
         <div class="tile-back">
@@ -598,6 +617,10 @@ function htmlGame(){
         </div>
       </div></div>`;
   }).join('');
+  const whoLine=who?`<div class="g-who">Участник: <b>${eh(who)}</b></div>`:'';
+  const hintText=done?`<div class="g-done-msg">Игра завершена — все участники получили призы!</div>`
+    :alreadyPicked?`<p class="g-hint">Вы уже выбрали свой приз${myPick.who?` — <b>${eh(myPick.who)}</b>`:''}</p>`
+    :`<p class="g-hint">Нажми на любую свободную плитку</p>`;
   return`
 <div class="util-row">
   <button class="util-btn" id="share-btn" onclick="shareLink()">Поделиться</button>
@@ -607,10 +630,31 @@ function htmlGame(){
   <div class="g-header">
     <div class="g-title">${eh(title||'Призовые плитки')}</div>
     <div class="g-meta">${done?`<span class="meta-done">Все призы розданы 🎉</span>`:`<b>${rem}</b> ${plr(rem,'плитка','плитки','плиток')} из ${prizes.length}`}</div>
+    ${whoLine}
   </div>
   <div class="tiles-grid" style="--cols:${cols}">${tiles}</div>
-  <div class="g-foot">${done?`<div class="g-done-msg">Игра завершена — все участники получили призы!</div>`:anyPicked?`<p class="g-hint">Выбор сделан — скопируй ссылку и передай следующему участнику</p>`:`<p class="g-hint">Нажми на любую свободную плитку</p>`}</div>
+  <div class="g-foot">${hintText}</div>
 </div>`;
+}
+
+function htmlNameInput(){
+  return`<div class="share-wrap"><div class="share-card" style="max-width:380px">
+  <span class="share-ico">✍️</span>
+  <h2 class="share-title">Введите ваш никнейм</h2>
+  <p class="share-sub">Это подтвердит ваш выбор и защитит от повторного участия.</p>
+  <input class="name-inp" id="who-inp" type="text" placeholder="Ваш никнейм..." maxlength="40"
+    autocomplete="off" onkeydown="if(event.key==='Enter')submitName()">
+  <button class="share-url-copy" style="width:100%;padding:14px;margin-top:12px;font-size:14px" onclick="submitName()">Участвовать →</button>
+</div></div>`;
+}
+
+function submitName(){
+  const val=(document.getElementById('who-inp')?.value||'').trim();
+  if(!val)return;
+  S.who=val;
+  pushURL(S.g,S.picks,val);
+  document.getElementById('app').innerHTML=htmlGame();
+  S.picks.forEach(i=>{const el=document.querySelector(`.tile[data-i="${i}"]`);if(el)el.classList.add('flipped','done');});
 }
 
 function createGame(){
@@ -652,18 +696,20 @@ async function copyShareUrl(){
 
 function previewGame(){
   const{g}=S;
-  history.replaceState(null,'',`#g=${encodeURIComponent(g)}`);
+  history.replaceState(null,'',`#g=${encodeURIComponent(g)}&preview=1`);
   render();
 }
 
 
 function pickTile(idx){
   if(busy)return;
-  const{picks,g,prizes}=S;if(picks.has(idx))return;
+  const{picks,g,prizes,who}=S;if(picks.has(idx))return;
   const el=document.querySelector(`.tile[data-i="${idx}"]`);if(!el)return;
   busy=true;
   el.onclick=null;el.classList.add('flipped');
-  const np=new Set(picks);np.add(idx);pushURL(g,np);S.picks=np;
+  const np=new Set(picks);np.add(idx);
+  pushURL(g,np,who);S.picks=np;
+  saveMyPick(g,idx,who);myPick={idx,who};
   setTimeout(()=>{
     el.classList.add('done');
     document.querySelectorAll('.tile:not(.flipped)').forEach(t=>{t.onclick=null;t.classList.add('done');});

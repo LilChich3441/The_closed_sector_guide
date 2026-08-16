@@ -657,8 +657,8 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .donate-hint::before{content:'★';font-size:11px}
 .donate-cards{display:flex;gap:10px;flex-wrap:wrap}
 .donate-card{display:flex;align-items:center;gap:10px;border-radius:10px;padding:10px 14px;cursor:pointer;transition:.18s;position:relative;overflow:hidden}
-.donate-card-tbank{background:linear-gradient(135deg,rgba(255,196,0,.12),rgba(255,196,0,.05));border:1px solid rgba(255,196,0,.3)}
-.donate-card-tbank:hover{border-color:rgba(255,196,0,.7);background:linear-gradient(135deg,rgba(255,196,0,.18),rgba(255,196,0,.08))}
+.donate-card-yandex{background:linear-gradient(135deg,rgba(252,63,29,.12),rgba(252,63,29,.05));border:1px solid rgba(252,63,29,.3)}
+.donate-card-yandex:hover{border-color:rgba(252,63,29,.7);background:linear-gradient(135deg,rgba(252,63,29,.18),rgba(252,63,29,.08))}
 .donate-card-sber{background:linear-gradient(135deg,rgba(33,195,84,.12),rgba(33,195,84,.05));border:1px solid rgba(33,195,84,.3)}
 .donate-card-sber:hover{border-color:rgba(33,195,84,.7);background:linear-gradient(135deg,rgba(33,195,84,.18),rgba(33,195,84,.08))}
 .donate-bank img{height:22px;width:22px;object-fit:contain;flex-shrink:0}
@@ -667,7 +667,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   display:flex;align-items:center;justify-content:center;
   border-radius:4px;font-size:0;padding:0;margin-left:4px}
 .donate-copy svg{flex:none}
-.donate-card-tbank .donate-copy{color:rgba(255,196,0,.9)}
+.donate-card-yandex .donate-copy{color:rgba(252,63,29,.9)}
 .donate-card-sber .donate-copy{color:rgba(33,195,84,.9)}
 .donate-card:hover .donate-copy{opacity:1}
 .donate-copy.copied{opacity:1;color:#4ade80}
@@ -771,9 +771,9 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .support-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-left:3px solid transparent;border-radius:10px;padding:16px 18px;cursor:pointer;transition:transform .15s,box-shadow .15s;display:flex;align-items:center;gap:14px}
 .support-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.5)}
 .support-card:active{transform:translateY(0)}
-.support-card--tbank{border-left-color:#FFDD2D;background:rgba(255,221,45,.06);box-shadow:0 0 18px rgba(255,221,45,.1),0 0 6px rgba(255,221,45,.06)}
-.support-card--tbank:hover{box-shadow:0 8px 28px rgba(0,0,0,.5),0 0 32px rgba(255,221,45,.2),0 0 8px rgba(255,221,45,.1)}
-.support-card--tbank .support-card-num{color:#FFDD2D}
+.support-card--yandex{border-left-color:#FC3F1D;background:rgba(252,63,29,.06);box-shadow:0 0 18px rgba(252,63,29,.1),0 0 6px rgba(252,63,29,.06)}
+.support-card--yandex:hover{box-shadow:0 8px 28px rgba(0,0,0,.5),0 0 32px rgba(252,63,29,.2),0 0 8px rgba(252,63,29,.1)}
+.support-card--yandex .support-card-num{color:#FC3F1D}
 .support-card--sber{border-left-color:#21A038;background:rgba(33,160,56,.06);box-shadow:0 0 18px rgba(33,160,56,.12),0 0 6px rgba(33,160,56,.07)}
 .support-card--sber:hover{box-shadow:0 8px 28px rgba(0,0,0,.5),0 0 32px rgba(33,160,56,.22),0 0 8px rgba(33,160,56,.1)}
 .support-card--sber .support-card-num{color:#4aab6e}
@@ -1322,7 +1322,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=f5dc221c"></script>
+<script src="data.js?v=b6a5365f"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -2563,7 +2563,7 @@ function renderHome(){
   const orgHtml=`<div class="org-banner"><div class="org-banner__glow"></div><div class="org-banner__sym">Ⓐ</div><div class="org-banner__body"><div class="org-banner__eyebrow">Набор в организацию</div><h3 class="org-banner__title">АНАРХИЯ</h3><p class="org-banner__slogan">Анархия — мать порядка</p><ul class="org-banner__list"><li>Помощь со снаряжением новичкам</li><li>Актуальный гайд и подсказки по локациям</li></ul></div></div>`;
 
   const svgCopy='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-  const supportHtml=`<div class="support-section"><div class="support-top"><div class="support-eyebrow">🎖️ Поддержать</div><div class="support-title">Поддержать проект</div><div class="support-sub">Делаю один, в свободное время, без рекламы. Если справочник хоть раз помог в рейде — буду очень рад поддержке. В комментарии к переводу напиши свой ник — добавлю в список. 🙏</div></div><div class="support-cards"><div class="support-card support-card--tbank" onclick="copyCard(this,'2200702057489457')"><img class="support-card-logo" src="loc/tbank.png" alt="Т-Банк"><div class="support-card-info"><div class="support-card-bank">Т-Банк</div><div class="support-card-num">2200 7020 5748 9457</div><div class="support-card-copy">${svgCopy}Нажми чтобы скопировать</div></div></div><div class="support-card support-card--sber" onclick="copyCard(this,'5469400039956201')"><img class="support-card-logo" src="loc/sber.png" alt="Сбер"><div class="support-card-info"><div class="support-card-bank">Сбер</div><div class="support-card-num">5469 4000 3995 6201</div><div class="support-card-copy">${svgCopy}Нажми чтобы скопировать</div></div></div></div><hr class="support-divider"><div class="support-sponsors-hd">★ Поддержали проект</div><div class="support-sponsors-grid"><span class="sponsor">MOTOP</span><span class="sponsor">LilHappy7</span><span class="sponsor">MEDOVIK</span><span class="sponsor">Шмаратосина</span><span class="sponsor">Dezman39</span><span class="sponsor">rurikrok</span><span class="sponsor">Reanimator</span><span class="sponsor">Sezar</span></div></div>`;
+  const supportHtml=`<div class="support-section"><div class="support-top"><div class="support-eyebrow">🎖️ Поддержать</div><div class="support-title">Поддержать проект</div><div class="support-sub">Делаю один, в свободное время, без рекламы. Если справочник хоть раз помог в рейде — буду очень рад поддержке. В комментарии к переводу напиши свой ник — добавлю в список. 🙏</div></div><div class="support-cards"><div class="support-card support-card--yandex" onclick="copyCard(this,'2204310103246081')"><img class="support-card-logo" src="loc/yandex.svg" alt="Яндекс Банк" style="border-radius:7px"><div class="support-card-info"><div class="support-card-bank">Яндекс Банк</div><div class="support-card-num">2204 3101 0324 6081</div><div class="support-card-copy">${svgCopy}Нажми чтобы скопировать</div></div></div><div class="support-card support-card--sber" onclick="copyCard(this,'5469400039956201')"><img class="support-card-logo" src="loc/sber.png" alt="Сбер"><div class="support-card-info"><div class="support-card-bank">Сбер</div><div class="support-card-num">5469 4000 3995 6201</div><div class="support-card-copy">${svgCopy}Нажми чтобы скопировать</div></div></div></div><hr class="support-divider"><div class="support-sponsors-hd">★ Поддержали проект</div><div class="support-sponsors-grid"><span class="sponsor">MOTOP</span><span class="sponsor">LilHappy7</span><span class="sponsor">MEDOVIK</span><span class="sponsor">Шмаратосина</span><span class="sponsor">Dezman39</span><span class="sponsor">rurikrok</span><span class="sponsor">Reanimator</span><span class="sponsor">Sezar</span></div></div>`;
   const promoHtml=`<div class="promo-block"><div class="promo-block-label">🤝 Партнёрский промокод</div><div class="promo-block-desc">Используй при регистрации — получишь бонусы для старта в игре</div><div class="promo-code-btn" onclick="copyPromo(this,'LILCHICH')"><span class="promo-code-val">LILCHICH</span><span class="promo-code-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span></div></div>`;
   const contactsHtml=`<div class="promo-block" style="border-left-color:#4aab6e;border-color:rgba(74,171,110,.3);margin-top:0"><div class="promo-block-label" style="color:#4aab6e">💬 Связь с автором</div><div class="promo-block-desc">Нашёл ошибку или хочешь что-то предложить — пиши</div><div class="contacts-cards"><a class="contacts-card contacts-card-vk" href="https://vk.com/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#5181b8"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.5h-1.58c-.6 0-.78-.48-1.86-1.57-1-.93-1.4-.93-1.64-.93-.33 0-.43.1-.43.57v1.43c0 .4-.13.64-1.18.64-1.74 0-3.67-1.05-5.02-3.01C5.14 10.46 4.6 8.55 4.6 8.14c0-.24.1-.47.57-.47h1.58c.43 0 .59.2.75.66.83 2.38 2.2 4.47 2.77 4.47.21 0 .31-.1.31-.64V9.73c-.07-1.14-.67-1.24-.67-1.64 0-.2.17-.4.44-.4h2.49c.37 0 .5.2.5.63v3.39c0 .37.17.5.27.5.21 0 .4-.13.8-.53 1.24-1.38 2.12-3.52 2.12-3.52.12-.24.3-.47.73-.47h1.58c.47 0 .57.24.47.57-.2.93-2.1 3.6-2.1 3.6-.17.27-.23.4 0 .7.17.23.72.7 1.09 1.13.67.77 1.19 1.41 1.33 1.86.14.43-.09.66-.54.66z"/></svg><span class="contacts-handle">ВКонтакте</span></a><a class="contacts-card contacts-card-tg" href="https://t.me/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#2AABEE"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="contacts-handle">@lilchich3441</span></a></div></div>`;
   return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${locBadge}</div><div class="dash-grid">${cards}</div><div class="dash-layout">${orgHtml}${devlogHtml}</div>${supportHtml}${promoHtml}${contactsHtml}</div>`;
@@ -2704,9 +2704,9 @@ function renderDonate(){
         <div class="donate-hint">В комментарии к переводу укажи свой ник из игры — добавлю в список спонсоров</div>
       </div>
       <div class="donate-cards">
-        <div class="donate-card donate-card-tbank" onclick="copyCard(this,'2200702057489457')">
-          <img src="loc/tbank.png" alt="Т-Банк" style="height:22px;width:22px;object-fit:contain">
-          <span class="donate-num">2200 7020 5748 9457</span>
+        <div class="donate-card donate-card-yandex" onclick="copyCard(this,'2204310103246081')">
+          <img src="loc/yandex.svg" alt="Яндекс Банк" style="height:22px;width:22px;object-fit:contain;border-radius:5px">
+          <span class="donate-num">2204 3101 0324 6081</span>
           <span class="donate-copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Копировать</span>
         </div>
         <div class="donate-card donate-card-sber" onclick="copyCard(this,'5469400039956201')">

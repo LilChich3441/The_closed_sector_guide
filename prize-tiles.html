@@ -365,8 +365,8 @@ function parseURL(){
   const creator=p.get('creator')==='1';
   return{mode:creator?'creator':'game',prizes:data.prizes,title:data.title||'',picks,g};
 }
-function makeURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';return`${location.origin}${location.pathname}#g=${g}${ps}`;}
-function pushURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';history.replaceState(null,'',`#g=${g}${ps}`);}
+function makeURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';return`${location.origin}${location.pathname}#g=${encodeURIComponent(g)}${ps}`;}
+function pushURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';history.replaceState(null,'',`#g=${encodeURIComponent(g)}${ps}`);}
 
 function render(){
   S=parseURL();
@@ -594,7 +594,7 @@ function createGame(){
   const prizes=getPrizes();
   if(prizes.length<2)return;
   const g=enc({prizes,title});
-  history.pushState(null,'',`#g=${g}&creator=1`);
+  history.pushState(null,'',`#g=${encodeURIComponent(g)}&creator=1`);
   render();
 }
 
@@ -628,7 +628,7 @@ async function copyShareUrl(){
 
 function previewGame(){
   const{g}=S;
-  history.replaceState(null,'',`#g=${g}`);
+  history.replaceState(null,'',`#g=${encodeURIComponent(g)}`);
   render();
 }
 

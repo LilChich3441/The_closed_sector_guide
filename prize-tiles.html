@@ -600,7 +600,6 @@ function htmlGame(){
   return`
 <div class="util-row">
   <button class="util-btn" id="share-btn" onclick="shareLink()">Поделиться</button>
-  <button class="util-btn" onclick="resetGame()">↺ Сбросить</button>
   <button class="util-btn" onclick="newGame()">+ Новая</button>
 </div>
 <div class="game-wrap">
@@ -665,20 +664,6 @@ function pickTile(idx){
   el.onclick=null;el.classList.add('flipped');
   const np=new Set(picks);np.add(idx);pushURL(g,np);S.picks=np;
   setTimeout(()=>{el.classList.add('done');showModal(prizes[idx],np);},560);
-}
-
-function resetGame(){
-  busy=false;
-  S.picks=new Set();
-  pushURL(S.g,S.picks);
-  document.querySelectorAll('.tile').forEach(el=>{
-    const i=+el.dataset.i;
-    el.classList.remove('flipped','done');
-    el.onclick=()=>pickTile(i);
-  });
-  const meta=document.querySelector('.g-meta');
-  if(meta){const r=S.prizes.length;meta.innerHTML=`Осталось призов: <b>${r}</b>`;}
-  document.getElementById('modal').style.display='none';
 }
 
 function showModal(prize,picks){

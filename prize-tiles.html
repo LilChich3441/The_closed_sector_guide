@@ -294,7 +294,13 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
   /* game */
   .game-wrap{padding:58px 12px 50px}
-  .tiles-grid{gap:8px}
+  /* 1fr fills all available width instead of capping at 150px */
+  .tiles-grid{gap:8px;grid-template-columns:repeat(var(--cols,3),1fr)}
+  .tile-back-ico{width:32px;height:32px}
+  .tile-back-ico-ph{font-size:26px}
+  .tile-back-lbl{font-size:8px;letter-spacing:.1em}
+  .tile-back-val{font-size:10px}
+  .tile-q{font-size:clamp(32px,8vw,44px)}
 
   /* util row */
   .util-row{top:8px;right:8px;gap:5px}
@@ -594,6 +600,7 @@ function htmlGame(){
   return`
 <div class="util-row">
   <button class="util-btn" id="share-btn" onclick="shareLink()">Поделиться</button>
+  <button class="util-btn" onclick="resetGame()">↺ Сбросить</button>
   <button class="util-btn" onclick="newGame()">+ Новая</button>
 </div>
 <div class="game-wrap">
@@ -658,6 +665,20 @@ function pickTile(idx){
   el.onclick=null;el.classList.add('flipped');
   const np=new Set(picks);np.add(idx);pushURL(g,np);S.picks=np;
   setTimeout(()=>{el.classList.add('done');showModal(prizes[idx],np);},560);
+}
+
+function resetGame(){
+  busy=false;
+  S.picks=new Set();
+  pushURL(S.g,S.picks);
+  document.querySelectorAll('.tile').forEach(el=>{
+    const i=+el.dataset.i;
+    el.classList.remove('flipped','done');
+    el.onclick=()=>pickTile(i);
+  });
+  const meta=document.querySelector('.g-meta');
+  if(meta){const r=S.prizes.length;meta.innerHTML=`Осталось призов: <b>${r}</b>`;}
+  document.getElementById('modal').style.display='none';
 }
 
 function showModal(prize,picks){

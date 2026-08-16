@@ -580,14 +580,15 @@ function updateSelBar(){
 /* ── game ── */
 function htmlGame(){
   const{prizes,title,picks,g}=S,rem=prizes.length-picks.size,done=rem===0,cols=calcCols(prizes.length);
+  const anyPicked=picks.size>0;
   const tiles=prizes.map((p,i)=>{
-    const c=PAL[i%PAL.length],picked=picks.has(i);
+    const c=PAL[i%PAL.length],picked=picks.has(i),locked=anyPicked&&!picked;
     const icoHtml=prizeIco(p,36);
     const icoEl=icoHtml
       ?icoHtml.startsWith('<img')?`<img class="tile-back-ico" src="${LABEL_ICO[p]}" alt="">`:`<span class="tile-back-ico-ph">💰</span>`
       :'';
-    return`<div class="tile${picked?' flipped done':''}" data-i="${i}" style="--tc:${c.bg};--tg:${c.glow}"
-      ${!picked&&!done?`onclick="pickTile(${i})"`:''}>
+    return`<div class="tile${picked?' flipped done':locked?' done':''}" data-i="${i}" style="--tc:${c.bg};--tg:${c.glow}"
+      ${!picked&&!locked&&!done?`onclick="pickTile(${i})"`:''}>
       <div class="tile-inner">
         <div class="tile-front"><span class="tile-num">${i+1}</span><span class="tile-q">?</span></div>
         <div class="tile-back">
@@ -608,7 +609,7 @@ function htmlGame(){
     <div class="g-meta">${done?`<span class="meta-done">Все призы розданы 🎉</span>`:`<b>${rem}</b> ${plr(rem,'плитка','плитки','плиток')} из ${prizes.length}`}</div>
   </div>
   <div class="tiles-grid" style="--cols:${cols}">${tiles}</div>
-  <div class="g-foot">${done?`<div class="g-done-msg">Игра завершена — все участники получили призы!</div>`:`<p class="g-hint">Нажми на любую свободную плитку</p>`}</div>
+  <div class="g-foot">${done?`<div class="g-done-msg">Игра завершена — все участники получили призы!</div>`:anyPicked?`<p class="g-hint">Выбор сделан — скопируй ссылку и передай следующему участнику</p>`:`<p class="g-hint">Нажми на любую свободную плитку</p>`}</div>
 </div>`;
 }
 
@@ -663,7 +664,11 @@ function pickTile(idx){
   busy=true;
   el.onclick=null;el.classList.add('flipped');
   const np=new Set(picks);np.add(idx);pushURL(g,np);S.picks=np;
-  setTimeout(()=>{el.classList.add('done');showModal(prizes[idx],np);},560);
+  setTimeout(()=>{
+    el.classList.add('done');
+    document.querySelectorAll('.tile:not(.flipped)').forEach(t=>{t.onclick=null;t.classList.add('done');});
+    showModal(prizes[idx],np);
+  },560);
 }
 
 function showModal(prize,picks){

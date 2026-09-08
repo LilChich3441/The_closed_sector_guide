@@ -1323,7 +1323,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=6b5459c6"></script>
+<script src="data.js?v=gsk-rassvet"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -1341,7 +1341,7 @@ function atkColor(atk){
   return `rgb(${r},${g},${b})`;
 }
 function applyPickerColors(){document.querySelectorAll('.loc-pick-card').forEach(card=>{const loc=(DB.locations||[]).find(l=>l.name===card.dataset.n);if(loc)card.style.setProperty('--dc',atkColor(loc.atk));});}
-const LOC_POS={'Военный конвой':'center 62%','Тайник Сектантов':'center 22%','ВЧ 66001':'0% 30%','Кварталы Кастовска':'0% 30%','Лес':'0% 30%','Село "Тали"':'0% 30%','Место крушения':'center 40%','Центр Кастовска':'0% 30%','Казармы ВЧ':'0% 30%'};
+const LOC_POS={'Военный конвой':'center 62%','Тайник Сектантов':'center 22%','ВЧ 66001':'0% 30%','Кварталы Кастовска':'0% 30%','ГСК «Рассвет»':'0% 30%','Лес':'0% 30%','Село "Тали"':'0% 30%','Место крушения':'center 40%','Центр Кастовска':'0% 30%','Казармы ВЧ':'0% 30%'};
 const $=s=>document.querySelector(s);
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function fmt(n){return (n||0).toLocaleString('ru-RU');}
@@ -1437,7 +1437,7 @@ const _IMG_LOADED={};
 function _loadImgChunk(name,cb){
   if(_IMG_LOADED[name]){cb&&cb();return;}
   const s=document.createElement('script');
-  s.src=_IMG_CHUNKS[name]+'?v=20260614';
+  s.src=_IMG_CHUNKS[name]+'?v=20260908b';
   s.onload=()=>{_IMG_LOADED[name]=true;cb&&cb();};
   document.head.appendChild(s);
 }

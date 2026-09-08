@@ -574,6 +574,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.t
 .bosshow-lbl{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hot);margin-bottom:3px}
 .bosstext{font-size:13px;color:var(--dim);line-height:1.55;margin:8px 0}
 .bosstext b{color:var(--txt);font-weight:600}
+.boss-warn{display:flex;gap:9px;align-items:flex-start;background:rgba(196,154,40,.1);border:1px solid rgba(196,154,40,.32);border-left:3px solid var(--gold);border-radius:6px;padding:10px 13px;margin:10px 0;font-size:12.5px;line-height:1.5;color:var(--txt)}
+.boss-warn-ic{flex:none;color:var(--gold);font-size:14px;line-height:1.4}
+.boss-warn b{color:var(--gold);font-weight:700}
 .bossdrop{font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--r5);margin:14px 0 8px}
 /* бейдж босса в строке локации */
 .locboss{display:inline-flex;align-items:baseline;gap:7px;font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.4px;line-height:1.3;
@@ -2185,6 +2188,7 @@ function renderLocations(){
             <span class="s"><b class="safe">${esc(b['def'])}</b><i>защита</i></span>
           </div>
         </div>
+        <div class="boss-warn"><span class="boss-warn-ic">⚠</span><span>На босса иди в <b>самом лучшем снаряжении</b> — это пошаговый бой на выживание. Атака и защита выше — это минимум по рекомендованному набору локации, для боя с боссом бери максимум.</span></div>
         ${trigBlk}
         ${b.fight?`<div class="bosstext">${esc(b.fight)}</div>`:''}
         ${b.drop&&b.drop.length?`<div class="bossdrop">Добыча с босса</div>

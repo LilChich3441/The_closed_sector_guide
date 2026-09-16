@@ -197,7 +197,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .tile-front::after{content:'';position:absolute;inset:0;background:linear-gradient(108deg,transparent 36%,rgba(255,255,255,.13) 50%,transparent 64%);transform:translateX(-100%);transition:transform 0s}
 .tile:not(.done):not(.flipped):hover .tile-front::after{transform:translateX(100%);transition:transform .5s ease}
 .tile:not(.done):not(.flipped):hover .tile-front{box-shadow:0 10px 42px var(--tg),inset 0 1px 0 rgba(255,255,255,.24)}
-.tile-num{position:absolute;top:7px;left:9px;font-size:9px;font-weight:800;letter-spacing:.06em;color:rgba(255,255,255,.45);line-height:1}
+.tile-num{position:absolute;top:6px;left:8px;font-size:clamp(16px,4.5vw,26px);font-weight:900;letter-spacing:0;color:rgba(255,255,255,.92);line-height:1;text-shadow:0 1px 4px rgba(0,0,0,.5)}
 .tile-q{font-size:clamp(28px,5vw,44px);font-weight:900;color:rgba(255,255,255,.9);text-shadow:0 2px 16px rgba(0,0,0,.3);line-height:1}
 .tile-back{transform:rotateY(180deg);background:var(--card2);border:1.5px solid var(--tc);box-shadow:0 4px 22px var(--tg);overflow:hidden;text-align:center}
 .tile-back-ico{width:clamp(22px,3.5vw,40px);height:clamp(22px,3.5vw,40px);object-fit:contain;flex-shrink:0}
@@ -377,9 +377,6 @@ function htmlSetup(){
   <span class="s-icon">🎁</span>
   <h1 class="s-title">Призовые плитки</h1>
   <p class="s-sub">Выбери призы — плитки перемешаются, и ты сам не будешь знать, что где.<br>Дальше кликай на плитки, которые называют игроки.</p>
-  <label class="flbl" for="inp-title">Название</label>
-  <input id="inp-title" class="finput" type="text" placeholder="Розыгрыш TCS · Август 2026" autocomplete="off">
-  <div class="fgap"></div>
   <label class="flbl">Призы</label>
   ${htmlCatTabs()}
   ${itemCat==='money'?htmlMoney():htmlItemPicker()}
@@ -496,9 +493,14 @@ function setTypeFilter(t){typeFilter=t;rerender();}
 function onSearch(v){itemSearch=v;rerender();}
 
 function rerender(){
-  const tv=document.getElementById('inp-title')?.value||'';
+  const active=document.activeElement;
+  const wasSearch=active&&active.classList&&active.classList.contains('list-search');
+  const selStart=active?active.selectionStart:null;
   render();
-  const ti=document.getElementById('inp-title');if(ti)ti.value=tv;
+  if(wasSearch){
+    const ns=document.querySelector('.list-search');
+    if(ns){ns.focus();try{ns.setSelectionRange(selStart,selStart);}catch{}}
+  }
 }
 
 function setQty(cat,idx,delta){
@@ -588,10 +590,9 @@ function htmlGame(){
 }
 
 function createGame(){
-  const title=(document.getElementById('inp-title')?.value||'').trim();
   const prizes=shuffle(getPrizes());
   if(prizes.length<2)return;
-  const g=enc({prizes,title});
+  const g=enc({prizes});
   history.pushState(null,'',`#g=${encodeURIComponent(g)}`);
   render();
 }

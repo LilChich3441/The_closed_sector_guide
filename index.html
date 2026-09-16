@@ -194,7 +194,9 @@ section.on{display:block;animation:fade .2s ease both}
 .set-tile-blbl{font-family:'Saira Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--ta,var(--acid));text-transform:uppercase;letter-spacing:1.2px;display:block;margin-bottom:4px}
 .set-tile-bdesc{font-size:12.5px;color:var(--txt);line-height:1.55}
 .set-tile-parts{display:flex;gap:6px;flex-wrap:wrap}
-.set-tile-part{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:5px 9px;flex:1;min-width:120px}
+.set-tile-part{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:5px 9px;flex:1;min-width:120px;transition:border-color .15s,background .15s,transform .15s}
+.set-tile-part:hover{border-color:var(--ta,var(--acid));background:var(--panel2);transform:translateY(-1px)}
+.set-tile-part:active{transform:translateY(0);opacity:.8}
 .set-tile-part img{width:28px;height:28px;object-fit:contain;flex-shrink:0}
 .set-tile-part-ph{width:28px;height:28px;background:var(--panel2);border-radius:4px;flex-shrink:0;opacity:.4}
 .set-tile-pname{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:600;color:var(--txt);line-height:1.3}
@@ -1698,7 +1700,7 @@ function renderGear(){
       const partsHtml=s.parts.map(p=>{
         const src=p.icon?img(p.icon):'';
         const icoEl=src?`<img src="${src}" alt="" loading="lazy">`:`<div class="set-tile-part-ph"></div>`;
-        return `<div class="set-tile-part">${icoEl}<span class="set-tile-pname">${esc(p.name)}</span></div>`;
+        return `<div class="set-tile-part" data-item-name="${esc(p.name)}" onclick="openItemPopup(this.dataset.itemName)" style="cursor:pointer">${icoEl}<span class="set-tile-pname">${esc(p.name)}</span></div>`;
       }).join('');
       return `<div class="set-tile" style="--ta:${ta}">
         <div class="set-tile-bar"></div>

@@ -207,9 +207,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .g-foot{margin-top:32px;text-align:center}
 .g-hint{font-size:12px;color:var(--dim)}
 .g-done-msg{background:rgba(5,209,156,.08);border:1px solid rgba(5,209,156,.22);border-radius:12px;padding:14px 28px;font-size:14px;color:var(--green)}
-.g-who{font-size:12px;color:var(--dim);margin-top:4px}
-.name-inp{width:100%;box-sizing:border-box;background:var(--surf);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--txt);font-family:inherit;outline:none;margin-top:4px;transition:border-color .2s}
-.name-inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,215,0,.12)}
 
 /* ── modal ─────────────────────────────── */
 #modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
@@ -235,31 +232,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .m-btn-secondary:hover{color:var(--txt);border-color:rgba(255,255,255,.24)}
 
 #cv{position:fixed;inset:0;z-index:60;pointer-events:none;display:none}
-
-/* ── share screen ──── */
-.share-wrap{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.share-card{
-  background:linear-gradient(160deg,var(--card) 0%,var(--card2) 100%);
-  border:1px solid var(--line2);border-radius:24px;
-  padding:44px 40px 36px;width:100%;max-width:440px;text-align:center;
-  box-shadow:0 32px 80px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.03)
-}
-.share-ico{font-size:52px;margin-bottom:18px;display:block;animation:sway 4s ease-in-out infinite}
-.share-title{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
-.share-sub{font-size:13px;color:var(--dim);line-height:1.65;margin-bottom:28px}
-.share-url-box{
-  display:flex;align-items:center;gap:0;
-  background:var(--surf);border:1px solid var(--line2);border-radius:11px;
-  overflow:hidden;margin-bottom:12px
-}
-.share-url-txt{flex:1;font-size:11px;color:var(--dim);padding:11px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;font-family:monospace}
-.share-url-copy{flex-shrink:0;padding:11px 16px;border:none;border-left:1px solid var(--line2);background:transparent;color:var(--gold);font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s;white-space:nowrap}
-.share-url-copy:hover{background:rgba(240,192,64,.1)}
-.share-url-copy.copied{color:var(--green)}
-.share-hint{font-size:11px;color:var(--dim2);margin-bottom:20px;line-height:1.5}
-.share-divider{border:none;border-top:1px solid var(--line);margin:20px 0}
-.share-preview-btn{background:none;border:none;color:var(--dim);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.share-preview-btn:hover{color:var(--txt)}
 
 @media(max-width:560px){
   /* setup */
@@ -315,13 +287,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   .m-item-ico-ph{font-size:52px}
   .m-prize{font-size:18px}
 
-  /* share */
-  .share-wrap{align-items:flex-start;padding:20px 12px 32px}
-  .share-card{padding:28px 16px 24px;border-radius:18px}
-  .share-ico{font-size:40px;margin-bottom:14px}
-  .share-title{font-size:19px}
-  .share-sub{font-size:12px;margin-bottom:20px}
-
   .h-paste-box{flex-direction:column}
 }
 </style>
@@ -376,14 +341,16 @@ const CATS=[
 let itemCat='items',rarFilter=-1,typeFilter='',itemSearch='';
 let selected=new Map(); /* 'cat:idx' → count */
 let moneyPrizes=[]; /* array of label strings */
-let S={},myPick=null,rafId=null,busy=false;
-
-function gameKey(g){return 'tcs_'+g.slice(0,40);}
-function getMyPick(g){try{const v=localStorage.getItem(gameKey(g));return v?JSON.parse(v):null;}catch{return null;}}
-function saveMyPick(g,idx,who){try{localStorage.setItem(gameKey(g),JSON.stringify({idx,who}));}catch{}}
+let S={},rafId=null,busy=false;
 
 const enc=obj=>btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
 const dec=s=>{try{return JSON.parse(decodeURIComponent(escape(atob(s))));}catch{return null;}};
+
+function shuffle(arr){
+  const a=arr.slice();
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
 
 function parseURL(){
   const raw=location.hash.replace(/^#/,''),p=new URLSearchParams(raw),g=p.get('g');
@@ -392,35 +359,24 @@ function parseURL(){
   if(!data?.prizes?.length)return{mode:'setup'};
   const ps=p.get('p');
   const picks=ps?new Set(ps.split(',').map(Number).filter(n=>!isNaN(n)&&n<data.prizes.length)):new Set();
-  const creator=p.get('creator')==='1';
-  const preview=p.get('preview')==='1';
-  const who=decodeURIComponent(p.get('who')||'').trim();
-  return{mode:creator?'creator':'game',prizes:data.prizes,title:data.title||'',picks,who,preview,g};
+  return{mode:'game',prizes:data.prizes,title:data.title||'',picks,g};
 }
 function makeURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';return`${location.origin}${location.pathname}#g=${encodeURIComponent(g)}${ps}`;}
-function pushURL(g,picks,who){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';const ws=who?`&who=${encodeURIComponent(who)}`:'';history.replaceState(null,'',`#g=${encodeURIComponent(g)}${ws}${ps}`);}
+function pushURL(g,picks){const ps=picks.size?`&p=${[...picks].sort((a,b)=>a-b).join(',')}`:'';history.replaceState(null,'',`#g=${encodeURIComponent(g)}${ps}`);}
 
 function render(){
   S=parseURL();
   const app=document.getElementById('app');
   if(S.mode==='setup'){app.innerHTML=htmlSetup();return;}
-  if(S.mode==='creator'){app.innerHTML=htmlShare();return;}
-  /* game mode */
-  myPick=S.preview?null:getMyPick(S.g);
-  if(!S.preview&&!S.who&&myPick===null){app.innerHTML=htmlNameInput();return;}
   app.innerHTML=htmlGame();
   S.picks.forEach(i=>{const el=app.querySelector(`.tile[data-i="${i}"]`);if(el)el.classList.add('flipped','done');});
-  if(myPick!==null){
-    const me=app.querySelector(`.tile[data-i="${myPick.idx}"]`);
-    if(me)me.classList.add('flipped','done');
-  }
 }
 
 function htmlSetup(){
   return`<div class="setup-wrap"><div class="setup-card">
   <span class="s-icon">🎁</span>
   <h1 class="s-title">Призовые плитки</h1>
-  <p class="s-sub">Каждый участник выбирает плитку и узнаёт свой приз.<br>Готово — делись ссылкой.</p>
+  <p class="s-sub">Выбери призы — плитки перемешаются, и ты сам не будешь знать, что где.<br>Дальше кликай на плитки, которые называют игроки.</p>
   <label class="flbl" for="inp-title">Название</label>
   <input id="inp-title" class="finput" type="text" placeholder="Розыгрыш TCS · Август 2026" autocomplete="off">
   <div class="fgap"></div>
@@ -596,18 +552,15 @@ function updateSelBar(){
 
 /* ── game ── */
 function htmlGame(){
-  const{prizes,title,picks,g,who}=S,rem=prizes.length-picks.size,done=rem===0,cols=calcCols(prizes.length);
-  const alreadyPicked=myPick!==null;
+  const{prizes,title,picks,g}=S,rem=prizes.length-picks.size,done=rem===0,cols=calcCols(prizes.length);
   const tiles=prizes.map((p,i)=>{
-    const c=PAL[i%PAL.length],globalPicked=picks.has(i),isMine=alreadyPicked&&myPick.idx===i;
-    const isFlipped=globalPicked||isMine;
-    const locked=alreadyPicked&&!isFlipped;
+    const c=PAL[i%PAL.length],isFlipped=picks.has(i);
     const icoHtml=prizeIco(p,36);
     const icoEl=icoHtml
       ?icoHtml.startsWith('<img')?`<img class="tile-back-ico" src="${LABEL_ICO[p]}" alt="">`:`<span class="tile-back-ico-ph">💰</span>`
       :'';
-    return`<div class="tile${isFlipped?' flipped done':locked?' done':''}" data-i="${i}" style="--tc:${c.bg};--tg:${c.glow}"
-      ${!isFlipped&&!locked&&!done?`onclick="pickTile(${i})"`:''}>
+    return`<div class="tile${isFlipped?' flipped done':''}" data-i="${i}" style="--tc:${c.bg};--tg:${c.glow}"
+      ${!isFlipped&&!done?`onclick="pickTile(${i})"`:''}>
       <div class="tile-inner">
         <div class="tile-front"><span class="tile-num">${i+1}</span><span class="tile-q">?</span></div>
         <div class="tile-back">
@@ -617,109 +570,49 @@ function htmlGame(){
         </div>
       </div></div>`;
   }).join('');
-  const whoLine=who?`<div class="g-who">Участник: <b>${eh(who)}</b></div>`:'';
-  const hintText=done?`<div class="g-done-msg">Игра завершена — все участники получили призы!</div>`
-    :alreadyPicked?`<p class="g-hint">Вы уже выбрали свой приз${myPick.who?` — <b>${eh(myPick.who)}</b>`:''}</p>`
-    :`<p class="g-hint">Нажми на любую свободную плитку</p>`;
+  const hintText=done?`<div class="g-done-msg">Все призы розданы!</div>`
+    :`<p class="g-hint">Кликай на плитку, которую называет игрок</p>`;
   return`
 <div class="util-row">
-  <button class="util-btn" id="share-btn" onclick="shareLink()">Поделиться</button>
+  <button class="util-btn" id="share-btn" onclick="shareLink()">Скопировать ссылку</button>
   <button class="util-btn" onclick="newGame()">+ Новая</button>
 </div>
 <div class="game-wrap">
   <div class="g-header">
     <div class="g-title">${eh(title||'Призовые плитки')}</div>
     <div class="g-meta">${done?`<span class="meta-done">Все призы розданы 🎉</span>`:`<b>${rem}</b> ${plr(rem,'плитка','плитки','плиток')} из ${prizes.length}`}</div>
-    ${whoLine}
   </div>
   <div class="tiles-grid" style="--cols:${cols}">${tiles}</div>
   <div class="g-foot">${hintText}</div>
 </div>`;
 }
 
-function htmlNameInput(){
-  return`<div class="share-wrap"><div class="share-card" style="max-width:380px">
-  <span class="share-ico">✍️</span>
-  <h2 class="share-title">Введите ваш никнейм</h2>
-  <p class="share-sub">Это подтвердит ваш выбор и защитит от повторного участия.</p>
-  <input class="name-inp" id="who-inp" type="text" placeholder="Ваш никнейм..." maxlength="40"
-    autocomplete="off" onkeydown="if(event.key==='Enter')submitName()">
-  <button class="share-url-copy" style="width:100%;padding:14px;margin-top:12px;font-size:14px" onclick="submitName()">Участвовать →</button>
-</div></div>`;
-}
-
-function submitName(){
-  const val=(document.getElementById('who-inp')?.value||'').trim();
-  if(!val)return;
-  S.who=val;
-  pushURL(S.g,S.picks,val);
-  document.getElementById('app').innerHTML=htmlGame();
-  S.picks.forEach(i=>{const el=document.querySelector(`.tile[data-i="${i}"]`);if(el)el.classList.add('flipped','done');});
-}
-
 function createGame(){
   const title=(document.getElementById('inp-title')?.value||'').trim();
-  const prizes=getPrizes();
+  const prizes=shuffle(getPrizes());
   if(prizes.length<2)return;
   const g=enc({prizes,title});
-  history.pushState(null,'',`#g=${encodeURIComponent(g)}&creator=1`);
+  history.pushState(null,'',`#g=${encodeURIComponent(g)}`);
   render();
 }
-
-function htmlShare(){
-  const{g,prizes,title}=S;
-  const url=makeURL(g,new Set());
-  return`<div class="share-wrap"><div class="share-card">
-  <span class="share-ico">🔗</span>
-  <h2 class="share-title">Игра создана!</h2>
-  <p class="share-sub">Скопируй ссылку и отправь первому участнику.<br>Ты сам не выбираешь плитку — только раздаёшь ссылку.</p>
-  <div class="share-url-box">
-    <span class="share-url-txt" id="su-txt">${ea(url)}</span>
-    <button class="share-url-copy" id="su-btn" onclick="copyShareUrl()">Скопировать</button>
-  </div>
-  <p class="share-hint">Каждый участник открывает плитку, затем передаёт ссылку следующему.<br>Ссылка автоматически обновляется после каждого выбора.</p>
-  <hr class="share-divider">
-  <button class="share-preview-btn" onclick="previewGame()">Просмотреть плитки без участия →</button>
-</div></div>`;
-}
-
-async function copyShareUrl(){
-  const{g}=S;
-  const url=makeURL(g,new Set());
-  const btn=document.getElementById('su-btn');
-  try{
-    await navigator.clipboard.writeText(url);
-    if(btn){btn.textContent='✓ Скопировано!';btn.classList.add('copied');}
-    setTimeout(()=>{if(btn){btn.textContent='Скопировать';btn.classList.remove('copied');}},2500);
-  }catch{prompt('Ссылка для участников:',url);}
-}
-
-function previewGame(){
-  const{g}=S;
-  history.replaceState(null,'',`#g=${encodeURIComponent(g)}&preview=1`);
-  render();
-}
-
 
 function pickTile(idx){
   if(busy)return;
-  const{picks,g,prizes,who}=S;if(picks.has(idx))return;
+  const{picks,g,prizes}=S;if(picks.has(idx))return;
   const el=document.querySelector(`.tile[data-i="${idx}"]`);if(!el)return;
   busy=true;
   el.onclick=null;el.classList.add('flipped');
   const np=new Set(picks);np.add(idx);
-  pushURL(g,np,who);S.picks=np;
-  saveMyPick(g,idx,who);myPick={idx,who};
+  pushURL(g,np);S.picks=np;
   setTimeout(()=>{
     el.classList.add('done');
-    document.querySelectorAll('.tile:not(.flipped)').forEach(t=>{t.onclick=null;t.classList.add('done');});
     showModal(prizes[idx],np);
   },560);
 }
 
 function showModal(prize,picks){
   launchConfetti();
-  const{g,prizes}=S,rem=prizes.length-picks.size,url=makeURL(g,picks);
+  const{prizes}=S,rem=prizes.length-picks.size;
   const icoUri=LABEL_ICO[prize];
   const icoHtml=icoUri
     ?`<img class="m-item-ico" src="${icoUri}" alt="" style="animation:wiggle .55s .36s ease both">`
@@ -730,25 +623,11 @@ function showModal(prize,picks){
 <div class="m-bd" onclick="closeModal()"></div>
 <div class="m-card">
   ${icoHtml}
-  <div class="m-lbl">Ваш приз</div>
+  <div class="m-lbl">Приз</div>
   <div class="m-prize">${eh(prize)}</div>
-  ${rem>0
-    ?`<p class="m-hint">Скопируй ссылку и передай следующему участнику</p>
-      <button class="m-btn-primary" id="m-cp" onclick="copyAndClose('${ea(url)}')">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Скопировать ссылку</button>`
-    :`<p class="m-hint">Это последний приз — игра завершена!</p>`}
-  <button class="m-btn-secondary" onclick="closeModal()">Закрыть</button>
+  <p class="m-hint">${rem>0?`Осталось ${rem} ${plr(rem,'плитка','плитки','плиток')}`:'Это был последний приз — игра завершена!'}</p>
+  <button class="m-btn-primary" onclick="closeModal()">Продолжить</button>
 </div>`;
-}
-
-async function copyAndClose(url){
-  const btn=document.getElementById('m-cp');
-  try{
-    await navigator.clipboard.writeText(url);
-    if(btn){btn.innerHTML='✓ Скопировано!';btn.style.cssText='width:100%;border:none;border-radius:11px;cursor:default;background:#05d19c;color:#02150e;font-family:inherit;font-size:14px;font-weight:800;padding:14px;display:flex;align-items:center;justify-content:center;margin-bottom:9px;';}
-    setTimeout(closeModal,1300);
-  }catch{if(btn){btn.style.fontSize='10px';btn.style.wordBreak='break-all';btn.textContent=url;}}
 }
 
 async function shareLink(){

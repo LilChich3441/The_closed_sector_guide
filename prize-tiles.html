@@ -35,7 +35,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .setup-card{
   background:linear-gradient(160deg,var(--card) 0%,var(--card2) 100%);
   border:1px solid var(--line2);border-radius:24px;
-  padding:44px 40px 36px;width:100%;max-width:520px;
+  padding:48px 48px 40px;width:100%;max-width:680px;
   box-shadow:0 32px 80px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.03);
 }
 .s-icon{font-size:52px;text-align:center;margin-bottom:16px;display:block;animation:sway 4s ease-in-out infinite}
@@ -89,7 +89,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   color:var(--txt);font-family:inherit;font-size:13px;padding:10px 14px;outline:none
 }
 .list-search::placeholder{color:var(--dim);opacity:.5}
-.list-scroll{max-height:220px;overflow-y:auto}
+.list-scroll{max-height:340px;overflow-y:auto}
 .list-scroll::-webkit-scrollbar{width:4px}
 .list-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
 
@@ -341,11 +341,13 @@ const PAL=[
 ];
 
 const CATS=[
+  {id:'all',      label:'Всё',      ico:'🎯', count:DB.items.length+DB.gear.length+DB.transport.length},
   {id:'items',    label:'Предметы', ico:'📦', count:DB.items.length},
   {id:'gear',     label:'Снаряга',  ico:'🛡️', count:DB.gear.length},
   {id:'transport',label:'Машины',   ico:'🚗', count:DB.transport.length},
   {id:'money',    label:'Деньги',   ico:'💰', count:null},
 ];
+const ALL_CATS=['items','gear','transport'];
 
 let itemCat='items',rarFilter=-1,typeFilter='',itemSearch='';
 let selected=new Map(); /* 'cat:idx' → count */
@@ -404,10 +406,13 @@ function htmlCatTabs(){
 }
 
 function htmlItemPicker(){
-  const arr=DB[itemCat],catIco=ICONS[itemCat]||{};
+  const isAll=itemCat==='all';
+  const cats=isAll?ALL_CATS:[itemCat];
+  const entries=[];
+  cats.forEach(c=>{ DB[c].forEach((it,idx)=>entries.push({cat:c,idx,it})); });
   const gearTypes=itemCat==='gear'?['Оружие','Броня','Шлем']:[];
 
-  const vis=arr.filter(it=>
+  const vis=entries.filter(({it})=>
     (rarFilter<0||it.r===rarFilter)&&
     (typeFilter===''||it.t===typeFilter)&&
     (itemSearch===''||it.n.toLowerCase().includes(itemSearch.toLowerCase()))
@@ -418,7 +423,7 @@ function htmlItemPicker(){
     ${gearTypes.map(t=>`<button class="chip${typeFilter===t?' active':''}" onclick="setTypeFilter('${t}')">${TYPE_ICO[t]} ${t}</button>`).join('')}
   </div>`:'';
 
-  const pRars=[...new Set(arr.map(x=>x.r))].sort();
+  const pRars=[...new Set(entries.map(({it})=>it.r))].sort();
   const rarRow=`<div class="rar-row">
     <button class="chip${rarFilter<0?' active':''}" onclick="setRarFilter(-1)">Все</button>
     ${pRars.map(r=>`<button class="chip${rarFilter===r?' active':''}" onclick="setRarFilter(${r})">
@@ -427,20 +432,21 @@ function htmlItemPicker(){
   </div>`;
 
   const rows=vis.length===0?`<div class="item-empty">Ничего не найдено</div>`
-    :vis.map(it=>{
-      const idx=arr.indexOf(it),key=`${itemCat}:${idx}`,qty=selected.get(key)||0;
+    :vis.map(({cat,idx,it})=>{
+      const key=`${cat}:${idx}`,qty=selected.get(key)||0;
+      const catIco=ICONS[cat]||{};
       const imgSrc=catIco[it.n];
       const icoHtml=imgSrc?`<img class="item-ico" src="${imgSrc}" alt="">`:
-        `<div class="item-ico-ph">${itemCat==='gear'?(TYPE_ICO[it.t]||'?'):itemCat==='transport'?(MOTO.has(it.n.toLowerCase())?'🏍️':'🚗'):'?'}</div>`;
-      return`<div class="item-row${qty>0?' sel':''}">
+        `<div class="item-ico-ph">${cat==='gear'?(TYPE_ICO[it.t]||'?'):cat==='transport'?(MOTO.has(it.n.toLowerCase())?'🏍️':'🚗'):'?'}</div>`;
+      return`<div class="item-row${qty>0?' sel':''}" data-cat="${cat}" data-idx="${idx}">
         ${icoHtml}
         <span class="item-rbar" style="background:${it.rc}"></span>
         <span class="item-name">${eh(it.l)}</span>
         <span class="item-rar" style="color:${it.rc}">${it.rn}</span>
         <div class="qty-ctrl">
-          <button class="qty-btn" onclick="setQty('${itemCat}',${idx},-1)" ${qty===0?'disabled':''}>−</button>
+          <button class="qty-btn" onclick="setQty('${cat}',${idx},-1)" ${qty===0?'disabled':''}>−</button>
           <span class="qty-val${qty>0?' on':''}">${qty}</span>
-          <button class="qty-btn" onclick="setQty('${itemCat}',${idx},+1)">+</button>
+          <button class="qty-btn" onclick="setQty('${cat}',${idx},+1)">+</button>
         </div>
       </div>`;
     }).join('');
@@ -465,7 +471,7 @@ function htmlMoney(){
     ${presets.map(v=>`<button class="money-btn" onclick="addMoney(${v})">${v.toLocaleString('ru-RU')}</button>`).join('')}
   </div>
   <div class="money-custom">
-    <input class="money-input" id="money-inp" type="number" min="1" placeholder="Своя сумма">
+    <input class="money-input" id="money-inp" type="text" inputmode="numeric" placeholder="Своя сумма" oninput="formatMoneyInput(this)">
     <button class="money-add-btn" onclick="addMoneyCustom()">+ Добавить</button>
   </div>
   ${moneyPrizes.length?`<div class="money-list">${chips}</div>`:''}`
@@ -518,32 +524,27 @@ function setQty(cat,idx,delta){
   const cur=selected.get(key)||0,nxt=Math.max(0,cur+delta);
   if(nxt===0)selected.delete(key);else selected.set(key,nxt);
   /* update just the row */
-  const rows=document.querySelectorAll('.item-row');
-  const arr=DB[cat];
-  rows.forEach(row=>{
+  const row=document.querySelector(`.item-row[data-cat="${cat}"][data-idx="${idx}"]`);
+  if(row){
     const qv=row.querySelector('.qty-val');
     const qbtns=row.querySelectorAll('.qty-btn');
-    if(!qv)return;
-    const rowIdx=arr.findIndex(it=>{
-      /* match by name from item-name text */
-      const nm=row.querySelector('.item-name')?.textContent;
-      return it.l===nm;
-    });
-    if(rowIdx===idx&&cat===itemCat){
-      const q=selected.get(key)||0;
-      qv.textContent=q;
-      qv.className='qty-val'+(q>0?' on':'');
-      qbtns[0].disabled=q===0;
-      row.classList.toggle('sel',q>0);
-    }
-  });
+    const q=selected.get(key)||0;
+    qv.textContent=q;
+    qv.className='qty-val'+(q>0?' on':'');
+    qbtns[0].disabled=q===0;
+    row.classList.toggle('sel',q>0);
+  }
   updateSelBar();
 }
 
 function addMoney(v){moneyPrizes.push(v.toLocaleString('ru-RU'));rerender();}
+function formatMoneyInput(inp){
+  const digits=inp.value.replace(/\D/g,'');
+  inp.value=digits?Number(digits).toLocaleString('ru-RU'):'';
+}
 function addMoneyCustom(){
   const inp=document.getElementById('money-inp');
-  const v=parseInt(inp?.value||'');
+  const v=parseInt((inp?.value||'').replace(/\D/g,''));
   if(!v||v<1)return;
   moneyPrizes.push(v.toLocaleString('ru-RU'));
   rerender();

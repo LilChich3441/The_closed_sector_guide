@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Призовые плитки</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;900&family=Saira:wght@400;500;600&display=swap');
 :root{
   --bg:#07090f;--surf:#0c0f1a;--card:#111522;--card2:#161c2e;
   --line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.13);
@@ -14,12 +15,20 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{overflow-x:hidden}
-body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+body{font-family:'Saira',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:radial-gradient(rgba(255,255,255,.025) 1px,transparent 1px);background-size:28px 28px}
 body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse 60% 50% at 12% 18%,rgba(67,97,238,.07) 0%,transparent 55%),
              radial-gradient(ellipse 50% 60% at 88% 82%,rgba(155,93,229,.06) 0%,transparent 55%)}
+
+/* ── brand crest ──────────────────────── */
+.brand-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px}
+.brand-crest{width:32px;height:32px;flex:none;background:#fff;color:#000;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-family:'Saira Condensed',sans-serif;
+  font-weight:700;font-size:12px;letter-spacing:.4px;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+.brand-name{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim)}
 
 /* ── setup ─────────────────────────────── */
 .setup-wrap{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -31,7 +40,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 }
 .s-icon{font-size:52px;text-align:center;margin-bottom:16px;display:block;animation:sway 4s ease-in-out infinite}
 @keyframes sway{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-9px) rotate(4deg)}}
-.s-title{font-size:clamp(22px,5vw,28px);font-weight:800;letter-spacing:-.03em;text-align:center;margin-bottom:6px}
+.s-title{font-family:'Saira Condensed',sans-serif;font-size:clamp(24px,5vw,32px);font-weight:900;letter-spacing:-.01em;text-transform:uppercase;text-align:center;margin-bottom:6px}
 .s-sub{font-size:13px;color:var(--dim);text-align:center;line-height:1.65;margin-bottom:30px}
 .flbl{display:block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);margin-bottom:6px}
 .finput{
@@ -48,8 +57,8 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .cat-tab{
   display:flex;align-items:center;gap:6px;
   padding:8px 14px;border-radius:10px;border:1px solid var(--line2);
-  background:transparent;font-family:inherit;font-size:12px;font-weight:700;
-  cursor:pointer;color:var(--dim);transition:all .18s;letter-spacing:.01em;
+  background:transparent;font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;color:var(--dim);transition:all .18s;letter-spacing:.03em;text-transform:uppercase;
   touch-action:manipulation;-webkit-tap-highlight-color:transparent
 }
 .cat-tab .ct-ico{font-size:14px;line-height:1}
@@ -161,7 +170,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* go button */
 .btn-go{
   width:100%;border:none;border-radius:12px;cursor:pointer;
-  font-family:inherit;font-size:15px;font-weight:800;padding:15px;letter-spacing:.01em;
+  font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:800;padding:15px;letter-spacing:.03em;text-transform:uppercase;
   background:linear-gradient(135deg,#f0c040,#e0a820);color:#1a1000;
   box-shadow:0 4px 24px rgba(240,192,64,.3);
   transition:transform .15s,box-shadow .15s,opacity .15s;margin-top:6px
@@ -173,7 +182,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* ── game ──────────────────────────────── */
 .game-wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 70px}
 .g-header{text-align:center;margin-bottom:40px}
-.g-title{font-size:clamp(20px,4vw,30px);font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.g-title{font-family:'Saira Condensed',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:900;letter-spacing:0;text-transform:uppercase;margin-bottom:8px}
 .g-meta{font-size:13px;color:var(--dim)}
 .g-meta b{color:var(--gold);font-variant-numeric:tabular-nums}
 .meta-done{color:var(--green);font-weight:700}
@@ -224,7 +233,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .m-item-ico-ph{font-size:64px;margin-bottom:12px;display:block;line-height:1;animation:wiggle .55s .36s ease both}
 @keyframes wiggle{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-12deg) scale(1.2)}75%{transform:rotate(10deg) scale(1.14)}}
 .m-lbl{font-size:9.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.m-prize{font-size:clamp(18px,4.5vw,24px);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:24px}
+.m-prize{font-family:'Saira Condensed',sans-serif;font-size:clamp(19px,4.5vw,26px);font-weight:800;letter-spacing:0;line-height:1.25;margin-bottom:24px}
 .m-hint{font-size:12px;color:var(--dim);line-height:1.6;margin-bottom:14px}
 .m-btn-primary{width:100%;border:none;border-radius:11px;cursor:pointer;background:linear-gradient(135deg,#f0c040,#e0a820);color:#1a1000;font-family:inherit;font-size:14px;font-weight:800;padding:14px 16px;margin-bottom:9px;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,transform .15s}
 .m-btn-primary:hover{background:linear-gradient(135deg,#ffd060,#f0b820);transform:translateY(-1px)}
@@ -374,6 +383,7 @@ function render(){
 
 function htmlSetup(){
   return`<div class="setup-wrap"><div class="setup-card">
+  <div class="brand-row"><span class="brand-crest">TCS</span><span class="brand-name">The Closed Sector</span></div>
   <span class="s-icon">🎁</span>
   <h1 class="s-title">Призовые плитки</h1>
   <p class="s-sub">Выбери призы — плитки перемешаются, и ты сам не будешь знать, что где.<br>Дальше кликай на плитки, которые называют игроки.</p>
@@ -581,6 +591,7 @@ function htmlGame(){
 </div>
 <div class="game-wrap">
   <div class="g-header">
+    <div class="brand-row"><span class="brand-crest">TCS</span><span class="brand-name">The Closed Sector</span></div>
     <div class="g-title">${eh(title||'Призовые плитки')}</div>
     <div class="g-meta">${done?`<span class="meta-done">Все призы розданы 🎉</span>`:`<b>${rem}</b> ${plr(rem,'плитка','плитки','плиток')} из ${prizes.length}`}</div>
   </div>

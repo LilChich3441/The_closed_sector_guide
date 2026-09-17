@@ -327,7 +327,7 @@ for(const cat of['items','gear','transport']){
 function prizeIco(label,px){
   const u=LABEL_ICO[label];
   if(u)return `<img style="width:${px}px;height:${px}px;object-fit:contain;flex-shrink:0" src="${u}" alt="">`;
-  if(label&&label.trim()!==''&&!isNaN(Number(label)))return `<span style="font-size:${Math.round(px*.7)}px;line-height:1;flex-shrink:0">💰</span>`;
+  if(label&&label.trim()!==''&&!isNaN(Number(String(label).replace(/\s/g,''))))return `<span style="font-size:${Math.round(px*.7)}px;line-height:1;flex-shrink:0">💰</span>`;
   return '';
 }
 
@@ -453,7 +453,7 @@ function htmlItemPicker(){
 }
 
 function htmlMoney(){
-  const presets=[50,100,200,500,1000,2000,5000];
+  const presets=[100000,200000,300000,500000,700000,1000000];
   const chips=moneyPrizes.map((lbl,i)=>`
     <div class="money-chip">
       <span class="money-chip-ico">💰</span>
@@ -462,7 +462,7 @@ function htmlMoney(){
     </div>`).join('');
   return`
   <div class="money-presets">
-    ${presets.map(v=>`<button class="money-btn" onclick="addMoney(${v})">${v}</button>`).join('')}
+    ${presets.map(v=>`<button class="money-btn" onclick="addMoney(${v})">${v.toLocaleString('ru-RU')}</button>`).join('')}
   </div>
   <div class="money-custom">
     <input class="money-input" id="money-inp" type="number" min="1" placeholder="Своя сумма">
@@ -540,12 +540,12 @@ function setQty(cat,idx,delta){
   updateSelBar();
 }
 
-function addMoney(v){moneyPrizes.push(String(v));rerender();}
+function addMoney(v){moneyPrizes.push(v.toLocaleString('ru-RU'));rerender();}
 function addMoneyCustom(){
   const inp=document.getElementById('money-inp');
   const v=parseInt(inp?.value||'');
   if(!v||v<1)return;
-  moneyPrizes.push(String(v));
+  moneyPrizes.push(v.toLocaleString('ru-RU'));
   rerender();
 }
 function removeMoney(i){moneyPrizes.splice(i,1);rerender();}
@@ -628,7 +628,7 @@ function showModal(prize,picks){
   const icoUri=LABEL_ICO[prize];
   const icoHtml=icoUri
     ?`<img class="m-item-ico" src="${icoUri}" alt="" style="animation:wiggle .55s .36s ease both">`
-    :`<span class="m-item-ico-ph">${prize.trim()!==''&&!isNaN(Number(prize))?'💰':'🎁'}</span>`;
+    :`<span class="m-item-ico-ph">${prize.trim()!==''&&!isNaN(Number(prize.replace(/\s/g,'')))?'💰':'🎁'}</span>`;
   const modal=document.getElementById('modal');
   modal.style.display='flex';
   modal.innerHTML=`

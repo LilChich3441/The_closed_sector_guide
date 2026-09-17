@@ -53,22 +53,25 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .fgap{height:20px}
 
 /* cat tabs */
-.cat-tabs{display:flex;gap:5px;margin-bottom:16px;flex-wrap:wrap}
+.cat-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
 .cat-tab{
-  display:flex;align-items:center;gap:6px;
-  padding:8px 14px;border-radius:10px;border:1px solid var(--line2);
-  background:transparent;font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;
+  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  padding:9px 16px;min-width:76px;border-radius:10px;border:1px solid var(--line2);
+  background:var(--surf);font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;
   cursor:pointer;color:var(--dim);transition:all .18s;letter-spacing:.03em;text-transform:uppercase;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;--cc:var(--txt)
 }
-.cat-tab .ct-ico{font-size:14px;line-height:1}
+.cat-tab .ct-ico{font-size:20px;line-height:1.2;color:var(--cc);transition:transform .15s}
 .cat-tab .ct-cnt{
-  font-size:9.5px;color:var(--dim2);background:rgba(255,255,255,.06);
-  border-radius:5px;padding:1px 5px;font-weight:600;transition:color .18s
+  font-size:10px;color:var(--dim2);opacity:.7;font-weight:600;letter-spacing:.05em;
+  display:block;margin-top:1px;transition:color .18s,opacity .18s
 }
-.cat-tab.active{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);color:var(--txt)}
-.cat-tab.active .ct-cnt{color:var(--gold)}
-.cat-tab:hover:not(.active){background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.14);color:var(--txt)}
+.cat-tab:hover:not(.active){border-color:var(--cc);background:var(--card2)}
+.cat-tab:hover:not(.active) .ct-ico{transform:scale(1.15)}
+.cat-tab.active{background:var(--cc);border-color:var(--cc);color:var(--bg);box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.cat-tab.active .ct-ico{color:var(--bg)}
+.cat-tab.active .ct-cnt{color:var(--bg);opacity:.65}
+.cat-tab:active{transform:scale(.96);transition-duration:.08s}
 
 /* type chips */
 .type-row,.rar-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
@@ -253,7 +256,8 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
   /* cat tabs */
   .cat-tabs{gap:4px;margin-bottom:10px}
-  .cat-tab{padding:7px 9px;font-size:11px;gap:4px}
+  .cat-tab{padding:7px 10px;min-width:60px;font-size:10.5px;gap:1px}
+  .cat-tab .ct-ico{font-size:17px}
 
   /* filter rows — one scrollable row instead of wrapping */
   .rar-row,.type-row{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
@@ -341,11 +345,11 @@ const PAL=[
 ];
 
 const CATS=[
-  {id:'all',      label:'Всё',      ico:'🎯', count:DB.items.length+DB.gear.length+DB.transport.length},
-  {id:'items',    label:'Предметы', ico:'📦', count:DB.items.length},
-  {id:'gear',     label:'Снаряга',  ico:'🛡️', count:DB.gear.length},
-  {id:'transport',label:'Машины',   ico:'🚗', count:DB.transport.length},
-  {id:'money',    label:'Деньги',   ico:'💰', count:null},
+  {id:'all',      label:'Всё',        ico:'🎯', count:DB.items.length+DB.gear.length+DB.transport.length, cc:'var(--txt)'},
+  {id:'items',    label:'Предметы',   ico:'📦', count:DB.items.length, cc:'#8a5cc0'},
+  {id:'gear',     label:'Снаряжение', ico:'🛡️', count:DB.gear.length, cc:'#4aab6e'},
+  {id:'transport',label:'Машины',     ico:'🚗', count:DB.transport.length, cc:'#c49a28'},
+  {id:'money',    label:'Деньги',     ico:'💰', count:null, cc:'#c04068'},
 ];
 const ALL_CATS=['items','gear','transport'];
 
@@ -399,7 +403,7 @@ function htmlSetup(){
 
 function htmlCatTabs(){
   return`<div class="cat-tabs">${CATS.map(c=>`
-  <button class="cat-tab${itemCat===c.id?' active':''}" onclick="setCat('${c.id}')">
+  <button class="cat-tab${itemCat===c.id?' active':''}" style="--cc:${c.cc}" onclick="setCat('${c.id}')">
     <span class="ct-ico">${c.ico}</span>${c.label}
     ${c.count!==null?`<span class="ct-cnt">${c.count}</span>`:''}
   </button>`).join('')}</div>`;

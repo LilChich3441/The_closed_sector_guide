@@ -3034,6 +3034,24 @@ document.addEventListener('touchend',e=>{
 })();
 buildTabs();render();if(activeTab!=='home')history.replaceState(null,'','#'+activeTab);
 if(activeTab==='home')markUpdateSeen();else checkNewUpdate();
+(function(){
+  const locName=new URLSearchParams(location.search).get('loc');
+  if(!locName||activeTab!=='locations')return;
+  const chunksNeeded=_TAB_CHUNKS['locations']||[];
+  const ready=()=>chunksNeeded.every(c=>_IMG_LOADED[c]);
+  function openDeepLoc(){
+    const idx=DB.locations.findIndex(l=>l.name===locName);
+    if(idx<0)return;
+    const el=document.getElementById('loot'+idx);
+    if(el&&!el.classList.contains('open'))toggleLoc(idx);
+    document.querySelector(`.loccard[data-name^="${locName.toLowerCase()}"]`)?.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  if(ready()){setTimeout(openDeepLoc,50);}
+  else{
+    const iv=setInterval(()=>{if(ready()){clearInterval(iv);setTimeout(openDeepLoc,50);}},100);
+    setTimeout(()=>clearInterval(iv),15000);
+  }
+})();
 (function(){const chunks=_TAB_CHUNKS[activeTab]||[];let p=chunks.filter(c=>!_IMG_LOADED[c]).length;if(p===0)return;chunks.forEach(c=>_loadImgChunk(c,()=>{p--;if(p===0)render();}));})();
 (function(){
   const el=document.getElementById('loader');

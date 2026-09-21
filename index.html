@@ -3138,6 +3138,7 @@ function copyPromoSilent(code){
   });
 }
 function heroPlayClick(code){
+  if(typeof ym!=='undefined') ym(_ymId,'reachGoal','play_click');
   copyPromoSilent(code).then(()=>{
     showToast('🤝 Промокод <b>'+code+'</b> скопирован — вставь при регистрации в игре');
   });

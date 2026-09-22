@@ -1389,9 +1389,16 @@ header .crest{border-radius:12px;box-shadow:0 6px 20px rgba(255,255,255,.08)}
 .tabs-more-btn{border-radius:13px}
 .tabs-dropdown{border-radius:16px;background:rgba(18,18,20,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 #tabs-ind{display:none}
-@media(min-width:861px) and (max-width:1320px){.ti{display:none}.tab{padding:9px 11px}}
-@media(min-width:861px) and (max-width:1120px){.tab{padding:9px 8px;font-size:12px;letter-spacing:.2px}.tabs-more-btn{padding:8px 9px}}
-@media(max-width:860px){.tabs{padding:5px;border-radius:16px}}
+.tabs-compact .ti{display:none}
+.tabs-compact .tab{padding:9px 11px}
+.tabs-tight .tab{padding:9px 8px;font-size:12px;letter-spacing:.2px}
+.tabs-tight .tabs-more-btn{padding:8px 9px}
+.tabs::before,.tabs::after{content:"";flex:none;position:sticky;z-index:2;width:34px;align-self:stretch;pointer-events:none;opacity:0;transition:opacity .2s}
+.tabs::before{left:-5px;margin-right:-36px;order:-1;border-radius:14px 0 0 14px;background:linear-gradient(90deg,rgba(16,16,18,1) 20%,rgba(16,16,18,0))}
+.tabs::after{right:-5px;margin-left:-36px;order:99;border-radius:0 14px 14px 0;background:linear-gradient(270deg,rgba(16,16,18,1) 20%,rgba(16,16,18,0))}
+.tabs.can-left::before,.tabs.can-right::after{opacity:1}
+.tabs-dropdown.open{position:fixed;z-index:300}
+@media(max-width:860px){.tabs{padding:5px;border-radius:16px}.tabs-more{display:flex}}
 
 .dash-wrap>*{animation:dash-rise .6s cubic-bezier(.2,.8,.2,1) both}
 .dash-wrap>*:nth-child(2){animation-delay:.06s}
@@ -1614,10 +1621,10 @@ function buildTabs(){
     tabsEl.innerHTML=mainHtml+`<div class="tabs-more" id="tabs-more"><button class="tabs-more-btn" onclick="toggleMoreTabs(event)">···</button><div class="tabs-dropdown" id="tabs-dropdown">${dropHtml}</div></div><div id="tabs-ind"></div>`;
   }
   // обновляем классы без пересоздания DOM
-  tabsEl.querySelectorAll('[data-tab]').forEach(t=>t.classList.toggle('on',t.dataset.tab===activeTab));
+  document.querySelectorAll('#tabs [data-tab],#tabs-dropdown [data-tab]').forEach(t=>t.classList.toggle('on',t.dataset.tab===activeTab));
   const moreBtn=tabsEl.querySelector('.tabs-more-btn');
   if(moreBtn)moreBtn.classList.toggle('on',moreActive);
-  requestAnimationFrame(updateTabInd);
+  requestAnimationFrame(()=>{fitTabs();scrollActiveTab();});
   const cur=TABS.find(t=>t.id===activeTab)||TABS[0];
   const mobCur=document.getElementById('mob-tab-cur');
   if(mobCur)mobCur.innerHTML=cur.label;
@@ -1639,9 +1646,54 @@ function updateTabInd(){
   const tc=active.style.getPropertyValue('--tc');
   ind.style.setProperty('--tc',tc||'');
 }
-function toggleMoreTabs(e){e&&e.stopPropagation();const d=document.getElementById('tabs-dropdown');if(d)d.classList.toggle('open');}
+function toggleMoreTabs(e){
+  e&&e.stopPropagation();
+  const d=document.getElementById('tabs-dropdown');
+  if(!d)return;
+  if(d.parentNode!==document.body)document.body.appendChild(d);
+  if(d.classList.toggle('open')){
+    const r=document.querySelector('.tabs-more-btn').getBoundingClientRect();
+    d.style.top=(r.bottom+6)+'px';
+    d.style.right=Math.max(8,innerWidth-r.right)+'px';
+  }
+}
+function fitTabs(){
+  const t=document.getElementById('tabs');
+  if(!t||getComputedStyle(t).display==='none')return;
+  const over=()=>t.scrollWidth>t.clientWidth+1;
+  t.classList.remove('tabs-compact','tabs-tight');
+  if(over())t.classList.add('tabs-compact');
+  if(over())t.classList.add('tabs-tight');
+  tabsEdges();
+  updateTabInd();
+}
+function tabsEdges(){
+  const t=document.getElementById('tabs');
+  if(!t)return;
+  t.classList.toggle('can-left',t.scrollLeft>2);
+  t.classList.toggle('can-right',t.scrollLeft+t.clientWidth<t.scrollWidth-2);
+}
+function scrollActiveTab(){
+  const t=document.getElementById('tabs');
+  const a=t&&t.querySelector('.tab.on');
+  if(!a||t.scrollWidth<=t.clientWidth)return;
+  t.scrollTo({left:Math.max(0,a.offsetLeft-t.clientWidth/2+a.offsetWidth/2),behavior:'smooth'});
+}
+(function(){
+  const t=document.getElementById('tabs');
+  if(!t)return;
+  t.addEventListener('wheel',e=>{
+    if(t.scrollWidth<=t.clientWidth||Math.abs(e.deltaY)<=Math.abs(e.deltaX))return;
+    e.preventDefault();
+    t.scrollLeft+=e.deltaY;
+  },{passive:false});
+  t.addEventListener('scroll',()=>{tabsEdges();closeMoreTabs();},{passive:true});
+  window.addEventListener('resize',()=>{fitTabs();closeMoreTabs();});
+  if(window.ResizeObserver)new ResizeObserver(()=>fitTabs()).observe(t);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitTabs);
+})();
 function closeMoreTabs(){const d=document.getElementById('tabs-dropdown');if(d)d.classList.remove('open');}
-document.addEventListener('click',function(e){if(!e.target.closest('#tabs-more'))closeMoreTabs();});
+document.addEventListener('click',function(e){if(!e.target.closest('#tabs-more,#tabs-dropdown'))closeMoreTabs();});
 window.addEventListener('popstate',()=>{const h=location.hash.slice(1),tid=TABS.some(t=>t.id===h)?h:'home';activeTab=tid;buildTabs();render();window.scrollTo({top:0,behavior:'smooth'});});
 window.addEventListener('resize',updateTabInd);
 const _IMG_CHUNKS={gear:'images-gear.js',items:'images-items.js',craft:'images-craft.js',transport:'images-transport.js'};

@@ -1389,10 +1389,11 @@ header .crest{border-radius:12px;box-shadow:0 6px 20px rgba(255,255,255,.08)}
 .tabs-more-btn{border-radius:13px}
 .tabs-dropdown{border-radius:16px;background:rgba(18,18,20,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 #tabs-ind{display:none}
-.tabs-compact .ti{display:none}
-.tabs-compact .tab{padding:9px 11px}
-.tabs-tight .tab{padding:9px 8px;font-size:12px;letter-spacing:.2px}
+.tabs-compact .tab{padding:9px 9px;letter-spacing:.2px;gap:5px}
+.tabs-tight .tab{padding:9px 7px;font-size:12.5px;letter-spacing:.1px}
 .tabs-tight .tabs-more-btn{padding:8px 9px}
+.tabs-noicons .ti{display:none}
+.tabs-noicons .tab{padding:9px 8px;font-size:12px}
 .tabs::before,.tabs::after{content:"";flex:none;position:sticky;z-index:2;width:34px;align-self:stretch;pointer-events:none;opacity:0;transition:opacity .2s}
 .tabs::before{left:-5px;margin-right:-36px;order:-1;border-radius:14px 0 0 14px;background:linear-gradient(90deg,rgba(16,16,18,1) 20%,rgba(16,16,18,0))}
 .tabs::after{right:-5px;margin-left:-36px;order:99;border-radius:0 14px 14px 0;background:linear-gradient(270deg,rgba(16,16,18,1) 20%,rgba(16,16,18,0))}
@@ -1661,9 +1662,8 @@ function fitTabs(){
   const t=document.getElementById('tabs');
   if(!t||getComputedStyle(t).display==='none')return;
   const over=()=>t.scrollWidth>t.clientWidth+1;
-  t.classList.remove('tabs-compact','tabs-tight');
-  if(over())t.classList.add('tabs-compact');
-  if(over())t.classList.add('tabs-tight');
+  t.classList.remove('tabs-compact','tabs-tight','tabs-noicons');
+  for(const c of ['tabs-compact','tabs-tight','tabs-noicons']){if(!over())break;t.classList.add(c);}
   tabsEdges();
   updateTabInd();
 }

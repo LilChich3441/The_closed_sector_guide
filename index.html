@@ -1556,6 +1556,74 @@ header .crest{border-radius:12px;box-shadow:0 6px 20px rgba(255,255,255,.08)}
   .sec-gear .intro::before{left:13px;top:13px}
   .sec-gear .bar>span[style*="width:1px"]{display:none}
 }
+/* ── gear calculator (gcx) ── */
+.sec-gear .gcx .calc-head{flex-wrap:wrap}
+.sec-gear .gcx-hsub{font-family:'Saira',sans-serif;font-size:11.5px;letter-spacing:.2px;text-transform:none;font-weight:500;color:rgba(235,235,245,.45);margin-left:-2px}
+.sec-gear .gcx-body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start;padding:20px 22px 22px}
+.sec-gear .gcx-slots{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sec-gear .gcx-slot{--sc:var(--acid);position:relative;display:flex;flex-direction:column;gap:12px;padding:14px;border-radius:var(--r-md);
+  background:radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--sc) 10%,transparent),transparent 60%),rgba(10,10,12,.55);
+  border:1px solid rgba(255,255,255,.07);transition:border-color .2s,box-shadow .2s}
+.sec-gear .gcx-slot.active{border-color:color-mix(in srgb,var(--sc) 45%,transparent);box-shadow:0 12px 30px -16px color-mix(in srgb,var(--sc) 60%,transparent)}
+.sec-gear .gcx-slot-top{display:flex;align-items:center;gap:12px;min-width:0}
+.sec-gear .gcx-ico{width:54px;height:54px;flex:none;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--sc) 20%,#16161a),#0b0b0d 75%);border:1px solid color-mix(in srgb,var(--sc) 28%,transparent)}
+.sec-gear .gcx-ico img{width:100%;height:100%;object-fit:contain;padding:3px}
+.sec-gear .gcx-ico .gc-sph{width:100%;height:100%;border:none;background:none;border-radius:0;font-size:20px;color:color-mix(in srgb,var(--sc) 80%,#fff);opacity:.75}
+.sec-gear .gcx-meta{display:flex;flex-direction:column;gap:2px;min-width:0}
+.sec-gear .gcx-type{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:rgba(235,235,245,.5);font-weight:700}
+.sec-gear .gcx-val{font-family:'Saira Condensed',sans-serif;font-size:19px;font-weight:700;color:#fff;line-height:1.1}
+.sec-gear .gcx-slot:not(.active):not(.gcx-con) .gcx-val{color:rgba(235,235,245,.3)}
+.sec-gear .gcx-slot .gsi-wrap{display:block;width:100%}
+.sec-gear .gcx-slot .gsi-btn{width:100%;min-width:0;min-height:40px;font-size:12.5px}
+.sec-gear .gcx-slot .gsi-list{width:100%;max-height:320px}
+.sec-gear .gcx-con #gcConRows{display:flex;flex-direction:column;gap:6px}
+.sec-gear .gcx-con .gcon-row{margin:0!important}
+.sec-gear .gcx-con .gcon-type{flex:1;min-width:0!important}
+.sec-gear .gcx-con .gsel{min-height:40px;border-radius:12px;background:rgba(10,10,12,.7);border-color:rgba(255,255,255,.1)}
+
+.sec-gear .gcx-res{display:flex;flex-direction:column;gap:14px;padding:0!important;min-width:0}
+.sec-gear .gcx-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sec-gear .gcx-stat{--c:var(--hot);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:2px;padding:16px 18px;border-radius:var(--r-md);
+  background:radial-gradient(140% 120% at 100% 0%,color-mix(in srgb,var(--c) 22%,transparent),transparent 55%),rgba(10,10,12,.6);
+  border:1px solid color-mix(in srgb,var(--c) 30%,transparent)}
+.sec-gear .gcx-stat.def{--c:var(--steel)}
+.sec-gear .gcx-stat-lbl{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:color-mix(in srgb,var(--c) 75%,#fff)}
+.sec-gear .gcx-stat b{font-family:'Saira Condensed',sans-serif;font-size:52px;font-weight:700;line-height:.95;color:#fff;text-shadow:0 0 30px color-mix(in srgb,var(--c) 50%,transparent)}
+.sec-gear .gcx-stat-sub{font-size:11px;color:rgba(235,235,245,.5)}
+.sec-gear .gcx-empty{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r-md);border:1px dashed rgba(255,255,255,.12);
+  color:rgba(235,235,245,.6);font-size:13px;line-height:1.55}
+.sec-gear .gcx-empty-ico{flex:none;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(255,255,255,.06)}
+.sec-gear .gcx-prog{padding:14px 16px;border-radius:var(--r-md);background:rgba(10,10,12,.55);border:1px solid rgba(255,255,255,.07)}
+.sec-gear .gcx-prog-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;font-size:12px;color:rgba(235,235,245,.6)}
+.sec-gear .gcx-prog-hd b{font-family:'Saira Condensed',sans-serif;font-size:22px;color:#fff}
+.sec-gear .gcx-prog-hd b i{font-style:normal;font-size:14px;color:rgba(235,235,245,.4)}
+.sec-gear .gcx-bar{height:6px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden}
+.sec-gear .gcx-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#2fae6b,#5cd88f);box-shadow:0 0 12px rgba(92,216,143,.5);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.sec-gear .gcx-locs{display:flex;flex-direction:column;gap:4px;max-height:340px;overflow-y:auto;padding-right:4px}
+.sec-gear .gcx-loc{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid transparent;font-size:12px}
+.sec-gear .gcx-loc.ok{background:rgba(74,171,110,.07);border-color:rgba(74,171,110,.16)}
+.sec-gear .gcx-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--hot);box-shadow:0 0 0 3px rgba(217,64,64,.15)}
+.sec-gear .gcx-loc.ok .gcx-dot{background:#4fd18a;box-shadow:0 0 0 3px rgba(79,209,138,.15),0 0 8px #4fd18a}
+.sec-gear .gcx-lname{flex:1;min-width:0;font-family:'Saira Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sec-gear .gcx-loc.no .gcx-lname{color:rgba(235,235,245,.62)}
+.sec-gear .gcx-req{flex:none;font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.sec-gear .gcx-req.ok{color:rgba(120,220,160,.85);background:rgba(74,171,110,.1)}
+.sec-gear .gcx-req.no{color:#ff7a7a;background:rgba(217,64,64,.12)}
+.sec-gear .gcx-req em{font-style:normal;font-weight:600;opacity:.75;margin-left:4px}
+@media(max-width:900px){.sec-gear .gcx-body{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .sec-gear .gcx-hsub{display:none}
+  .sec-gear .gcx-body{padding:14px 14px 16px;gap:14px}
+  .sec-gear .gcx-slots{gap:10px}
+  .sec-gear .gcx-slot{padding:12px;gap:10px}
+  .sec-gear .gcx-ico{width:44px;height:44px;border-radius:12px}
+  .sec-gear .gcx-val{font-size:16px}
+  .sec-gear .gcx-stat{padding:14px}
+  .sec-gear .gcx-stat b{font-size:42px}
+  .sec-gear .gcx-locs{max-height:none}
+}
+@media(max-width:420px){.sec-gear .gcx-slots{grid-template-columns:1fr}}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -1941,33 +2009,23 @@ function renderGear(){
   ];
   const rars=[[0,'Все'],[5,'Мифическое'],[4,'Легендарное'],[3,'Мистическое'],[2,'Редкое'],[1,'Обычное']];
 
+  const gcSlot=(sfx,type,ph,accent,selHtml)=>`<div class="gcx-slot" id="gcSlot_${sfx}" style="--sc:${accent}">
+      <div class="gcx-slot-top"><div class="gcx-ico" id="gcSico_${sfx}"><div class="gc-sph">${ph}</div></div><div class="gcx-meta"><span class="gcx-type">${type}</span><span class="gcx-val" id="gcSval_${sfx}">—</span></div></div>
+      ${selHtml}
+    </div>`;
+  const gcSort=arr=>arr.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0));
   const gcCalc=`
-  <div class="calc${calcOpen?'':' calc-coll'}">
-    <div class="calc-head" onclick="toggleCalc()"><span class="calc-hico">⌖</span><span class="calc-htitle">Калькулятор снаряжения</span><span class="calc-htog">${calcOpen?'▲':'▼'}</span></div>
-    <div class="calc-body" style="flex-wrap:wrap;gap:14px">
-      <div class="calc-field">
-        <label>Оружие</label>
-        ${mkIconSel('gcWpn',[{val:'',label:'— без оружия —',icon:''},...DB.weapons.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(w=>({val:w.name,label:w.name+' ('+w.stat+')',icon:w.icon||''}))], 'runGearCalc()')}
+  <div class="calc gcx${calcOpen?'':' calc-coll'}">
+    <div class="calc-head" onclick="toggleCalc()"><span class="calc-hico">⌖</span><span class="calc-htitle">Калькулятор снаряжения</span><span class="gcx-hsub">атака, защита и доступные локации</span><span class="calc-htog">${calcOpen?'▲':'▼'}</span></div>
+    <div class="calc-body gcx-body">
+      <div class="gcx-slots">
+        ${gcSlot('w','Оружие','⚔','var(--hot)',mkIconSel('gcWpn',[{val:'',label:'— без оружия —',icon:''},...gcSort(DB.weapons).map(w=>({val:w.name,label:w.name+' ('+w.stat+')',icon:w.icon||''}))],'runGearCalc()'))}
+        ${gcSlot('a','Броня','🛡','var(--steel)',mkIconSel('gcArm',[{val:'',label:'— без брони —',icon:''},...gcSort(DB.armor).map(a=>({val:a.name,label:a.name+' ('+a.stat+')',icon:a.icon||''}))],'runGearCalc()'))}
+        ${gcSlot('h','Шлем','⛑','#4a8fc0',mkIconSel('gcHlm',[{val:'',label:'— без шлема —',icon:''},...gcSort(DB.helmets).map(h=>({val:h.name,label:h.name+' ('+h.stat+')',icon:h.icon||''}))],'runGearCalc()'))}
+        <div class="gcx-slot gcx-con" style="--sc:#e07a40"><div class="gcx-slot-top"><div class="gcx-ico"><div class="gc-sph">💥</div></div><div class="gcx-meta"><span class="gcx-type">Расходники</span><span class="gcx-val" id="gcConVal">+0 к атаке</span></div></div><div id="gcConRows"></div></div>
       </div>
-      <div class="calc-field">
-        <label>Броня</label>
-        ${mkIconSel('gcArm',[{val:'',label:'— без брони —',icon:''},...DB.armor.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(a=>({val:a.name,label:a.name+' ('+a.stat+')',icon:a.icon||''}))], 'runGearCalc()')}
-      </div>
-      <div class="calc-field">
-        <label>Шлем</label>
-        ${mkIconSel('gcHlm',[{val:'',label:'— без шлема —',icon:''},...DB.helmets.slice().sort((a,b)=>(parseInt(a.stat)||0)-(parseInt(b.stat)||0)).map(h=>({val:h.name,label:h.name+' ('+h.stat+')',icon:h.icon||''}))], 'runGearCalc()')}
-      </div>
-      <div class="calc-field">
-        <label>Расходники (+атака)</label>
-        <div id="gcConRows"></div>
-      </div>
+      <div id="gcResult" class="gcx-res"></div>
     </div>
-    <div class="gc-slots">
-      <div class="gc-slot" id="gcSlot_w"><div class="gc-sico-w" id="gcSico_w"><div class="gc-sph">⚔</div></div><div class="gc-sinfo"><span class="gc-stype">Оружие</span><span class="gc-sname" id="gcSname_w">не выбрано</span><span class="gc-sval" id="gcSval_w"></span></div></div>
-      <div class="gc-slot" id="gcSlot_a"><div class="gc-sico-w" id="gcSico_a"><div class="gc-sph">🛡</div></div><div class="gc-sinfo"><span class="gc-stype">Броня</span><span class="gc-sname" id="gcSname_a">не выбрано</span><span class="gc-sval" id="gcSval_a"></span></div></div>
-      <div class="gc-slot" id="gcSlot_h"><div class="gc-sico-w" id="gcSico_h"><div class="gc-sph">⛑</div></div><div class="gc-sinfo"><span class="gc-stype">Шлем</span><span class="gc-sname" id="gcSname_h">не выбрано</span><span class="gc-sval" id="gcSval_h"></span></div></div>
-    </div>
-    <div id="gcResult" style="padding:0 16px 16px"></div>
   </div>`;
 
   // --- подраздел Комплекты ---
@@ -2005,9 +2063,7 @@ function renderGear(){
     <div class="intro"><b>Комплекты снаряжения</b> — наборы предметов с особыми бонусами при ношении всех частей. Нажмите на название комплекта, чтобы свернуть или развернуть его. Предметы также доступны в разделах «Оружие», «Броня», «Шлемы».</div>
     <div class="bar">
       ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico"${c[5]?` style="font-size:${c[5]}"`:''}>${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
-      <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
-      ${rars.map(r=>`<button class="filter${r[0]>0?` frar${r[0]}`:''} ${gearFilter.rar===r[0]?'on':''}" onclick="setGearRar(${r[0]})">${r[1]}</button>`).join('')}
-      <span class="cnt">${sets.length} комплект(ов)</span>
+      <span class="cnt" style="margin-left:auto">${sets.length} комплект(ов)</span>
     </div>
     ${setsHtml}
     <div class="legend">
@@ -2190,14 +2246,14 @@ function gcSlotUpdate(sfx, item, typeStat) {
   if(!icoEl)return;
   if(item){
     const src=item.icon?img(item.icon):'';
-    icoEl.innerHTML=src?`<img src="${src}" style="width:36px;height:36px;object-fit:cover;border-radius:5px;background:var(--bg2)">`:'<div class="gc-sph" style="font-size:15px">'+(sfx==='w'?'⚔':sfx==='a'?'🛡':'⛑')+'</div>';
+    icoEl.innerHTML=src?`<img src="${src}" alt="">`:'<div class="gc-sph">'+(sfx==='w'?'⚔':sfx==='a'?'🛡':'⛑')+'</div>';
     if(nameEl)nameEl.textContent=item.name;
     if(valEl)valEl.textContent=item.stat+' '+typeStat;
     if(slotEl)slotEl.classList.add('active');
   } else {
-    icoEl.innerHTML='<div class="gc-sph" style="font-size:15px">'+(sfx==='w'?'⚔':sfx==='a'?'🛡':'⛑')+'</div>';
+    icoEl.innerHTML='<div class="gc-sph">'+(sfx==='w'?'⚔':sfx==='a'?'🛡':'⛑')+'</div>';
     if(nameEl)nameEl.textContent='не выбрано';
-    if(valEl)valEl.textContent='';
+    if(valEl)valEl.textContent='—';
     if(slotEl)slotEl.classList.remove('active');
   }
 }
@@ -2237,35 +2293,37 @@ function runGearCalc(){
   const w=DB.weapons.find(x=>x.name===wName);
   const a=DB.armor.find(x=>x.name===aName);
   const h=DB.helmets.find(x=>x.name===hName);
-  gcSlotUpdate('w',w,'ур.');
-  gcSlotUpdate('a',a,'зщ.');
-  gcSlotUpdate('h',h,'зщ.');
+  gcSlotUpdate('w',w,'урона');
+  gcSlotUpdate('a',a,'защиты');
+  gcSlotUpdate('h',h,'защиты');
+  const cv=document.getElementById('gcConVal');if(cv)cv.textContent='+'+conBonus+' к атаке';
   const atk=(parseInt(w?.stat)||0)+conBonus;
   const armor=(parseInt(a?.stat)||0)+(parseInt(h?.stat)||0);
   const def=armor+100;
   const out=document.getElementById('gcResult');
   if(!out)return;
-  if(!w&&!a&&!h&&!conBonus){out.innerHTML='';return;}
+  const wAtk=parseInt(w?.stat)||0,aDef=parseInt(a?.stat)||0,hDef=parseInt(h?.stat)||0;
+  const statsHtml=`<div class="gcx-stats">
+    <div class="gcx-stat atk"><span class="gcx-stat-lbl">Атака</span><b>${atk}</b><span class="gcx-stat-sub">оружие ${wAtk}${conBonus?` · расходники +${conBonus}`:''}</span></div>
+    <div class="gcx-stat def"><span class="gcx-stat-lbl">Защита</span><b>${def}</b><span class="gcx-stat-sub">броня ${aDef} · шлем ${hDef} · +100 HP</span></div>
+  </div>`;
+  if(!w&&!a&&!h&&!conBonus){
+    out.innerHTML=statsHtml+'<div class="gcx-empty"><div class="gcx-empty-ico">⌖</div>Выбери оружие, броню и шлем — покажу, на какие локации уже можно идти и чего не хватает для остальных.</div>';
+    return;
+  }
+  let okCnt=0;
   const locRows=DB.locations.map(l=>{
     const la=parseInt(l.atk)||0;
     const ld=parseInt((l.def||'').match(/^(\d+)/)?.[1])||0;
-    const okAtk=atk>=la, okDef=def>=ld;
-    const ok=okAtk&&okDef;
-    const miss=[];
-    if(!okAtk)miss.push(`атака: нужно <b>${la}</b>, есть ${atk}`);
-    if(!okDef)miss.push(`защита: нужно <b>${ld}</b>, есть ${def}`);
-    return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px">
-      <span style="font-size:14px;flex:none">${ok?'✅':'❌'}</span>
-      <span style="font-family:'Saira Condensed',sans-serif;font-weight:600;color:var(--txt);flex:1;min-width:0">${esc(l.name)}</span>
-      <span style="font-size:12px;text-align:right">${ok?`<span class="safe">подходит</span>`:miss.map(m=>`<span class="danger">${m}</span>`).join(' · ')}</span>
-    </div>`;
+    const okAtk=atk>=la, okDef=def>=ld, ok=okAtk&&okDef;
+    if(ok)okCnt++;
+    const req=(good,ico,need,have)=>`<span class="gcx-req ${good?'ok':'no'}">${ico} ${need}${good?'':`<em>−${need-have}</em>`}</span>`;
+    return `<div class="gcx-loc ${ok?'ok':'no'}"><span class="gcx-dot"></span><span class="gcx-lname">${esc(l.name)}</span>${req(okAtk,'⚔',la,atk)}${req(okDef,'🛡',ld,def)}</div>`;
   }).join('');
-  out.innerHTML=`
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 14px">
-      <div class="gc-statcard dmg-card"><div class="bignum dmg">${atk}</div><div class="statlbl">атака</div>${conBonus?`<div style="font-size:10px;color:var(--dim);margin-top:2px">расходник +${conBonus}</div>`:''}</div>
-      <div class="gc-statcard arm-card"><div class="bignum arm">${def}</div><div class="statlbl">защита</div><div style="font-size:10px;color:var(--dim);margin-top:2px">броня ${armor} + 100 HP</div></div>
-    </div>
-    <div style="border-top:1px solid var(--line);padding-top:10px">${locRows}</div>`;
+  const total=DB.locations.length, pct=Math.round(okCnt/total*100);
+  out.innerHTML=`${statsHtml}
+    <div class="gcx-prog"><div class="gcx-prog-hd"><span>Доступно локаций</span><b>${okCnt}<i> / ${total}</i></b></div><div class="gcx-bar"><i style="width:${pct}%"></i></div></div>
+    <div class="gcx-locs">${locRows}</div>`;
 }
 
 // ---------- ПРЕДМЕТЫ ----------

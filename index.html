@@ -1410,9 +1410,9 @@ header .crest{border-radius:12px;box-shadow:0 6px 20px rgba(255,255,255,.08)}
 
 .dash-hero{min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
   padding:40px 40px 34px;margin-bottom:14px;border-radius:var(--r-lg);border:1px solid var(--glass-brd);
-  background:#0b0b0c url('loc/hero.jpg') center 42%/cover no-repeat;
+  background:#0b0b0c url('loc/hero.jpg') center 42%/cover no-repeat;background-clip:padding-box;
   box-shadow:0 34px 70px -28px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}
-.dash-hero::before{opacity:1;background:
+.dash-hero::before{opacity:1;border-radius:inherit;background:
   linear-gradient(90deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.62) 38%,rgba(0,0,0,.18) 72%,rgba(0,0,0,.05) 100%),
   linear-gradient(0deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,0) 58%)}
 .dash-hero-watermark{display:none}

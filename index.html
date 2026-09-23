@@ -2966,7 +2966,7 @@ function renderHome(){
   const mkCard=s=>`<div class="dash-card-photo" onclick="switchTab('${s.id}')"><img src="${DASH_BG[s.id]||''}" alt="" loading="lazy">${s.num?`<span class="dash-card-photo-chip">${s.num}</span>`:""}<div class="dash-card-photo-strip">${s.ico}<div class="dash-card-photo-name">${s.name}</div><div class="dash-card-photo-arr">→</div></div></div>`;
   const row1=secs.slice(0,3).map(mkCard).join('');
   const row2=secs.slice(3).map(mkCard).join('');
-  const bossCnt=Object.values(DB.locLoot||{}).filter(x=>x&&x.boss).length;
+  const bossCnt=(DB.bosses||[]).length;
   const heroStats=`<div class="dash-hero-stats">${[[gearCnt,'снаряжение','gear'],[(DB.locations||[]).length,'локации','locations'],[bossCnt,'боссы','locations'],[(DB.crafting||[]).length,'рецепты','craft']].map(([n,l,t])=>`<div class="dash-hero-stat" onclick="switchTab('${t}')"><b>${n}</b><span>${l}</span></div>`).join('')}</div>`;
   const selLoc=(DB.locations||[]).find(l=>l.name===bestFilter.loc);
   const selPos=selLoc?(LOC_POS[selLoc.name]||'center 30%'):'';

@@ -1791,6 +1791,60 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
 @keyframes gs-flash-bg{0%,60%{background:rgba(255,209,102,.16)}100%{background:transparent}}
 @keyframes gs-flash{0%,60%{box-shadow:0 0 0 2px #ffd166,0 0 30px rgba(255,209,102,.35)}100%{box-shadow:0 0 0 0 transparent}}
 @media(max-width:640px){#gs-ov{padding:10px}.gs-box{max-height:88vh;border-radius:18px}.gs-esc{display:none}.gs-keys{display:none}}
+/* ── transport (cx) ── */
+.sec-cars .cx-calcs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 18px;align-items:start}
+.sec-cars .cx-card{--sc:var(--acid);border-radius:var(--r-lg);border:1px solid var(--glass-brd);position:relative;
+  background:radial-gradient(120% 80% at 0% 0%,color-mix(in srgb,var(--sc) 10%,transparent),transparent 55%),linear-gradient(180deg,rgba(30,30,33,.85),rgba(20,20,22,.85));
+  box-shadow:0 24px 50px -30px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.05)}
+.sec-cars .cx-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06)}
+.sec-cars .cx-hico{width:38px;height:38px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;
+  background:color-mix(in srgb,var(--sc) 16%,#121214);border:1px solid color-mix(in srgb,var(--sc) 35%,transparent)}
+.sec-cars .cx-title{font-family:'Saira Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:#fff}
+.sec-cars .cx-hsub{font-size:12px;color:rgba(235,235,245,.5)}
+.sec-cars .cx-body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:10px}
+.sec-cars .cx-lbl{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:rgba(235,235,245,.5);font-weight:700}
+.sec-cars .cx-body .gsi-wrap{display:block;width:100%}
+.sec-cars .cx-body .gsi-btn{width:100%;min-width:0}
+.sec-cars .cx-row{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:12px}
+.sec-cars .cx-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.sec-cars .cx-durin{position:relative}
+.sec-cars .cx-durin .cinput{width:100%;height:42px;border-radius:12px;background:rgba(10,10,12,.7);border-color:rgba(255,255,255,.1);padding-right:28px}
+.sec-cars .cx-durin span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:rgba(235,235,245,.45);font-weight:700}
+.sec-cars .cx-range{width:100%;accent-color:var(--sc);margin:2px 0 4px}
+.sec-cars .cx-out{padding:14px 16px;border-radius:var(--r-md);background:rgba(10,10,12,.55);border:1px solid rgba(255,255,255,.07);min-height:64px}
+.sec-cars .cx-out .cbig{font-family:'Saira Condensed',sans-serif;font-size:44px;font-weight:700;line-height:1;color:#fff;text-shadow:0 0 26px color-mix(in srgb,var(--sc) 45%,transparent)}
+.sec-cars .cx-out .cbig span{font-size:16px;color:rgba(235,235,245,.5)}
+.sec-cars .cx-out .csub{font-size:12.5px;color:rgba(235,235,245,.6);margin-top:6px;line-height:1.5}
+.sec-cars .cx-out .cresult{border-radius:10px;padding:8px 12px;margin-bottom:10px;font-size:13px}
+.sec-cars #travOut .trav-grid{display:flex;flex-direction:column;gap:4px;max-height:330px;overflow-y:auto;margin-top:4px;padding-right:4px}
+.sec-cars #travOut .trav-row{border-radius:11px;padding:6px 10px 6px 6px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+.sec-cars #travOut .trav-loc-ico{width:48px;height:32px;border-radius:8px}
+.sec-cars #travOut .trav-loc{flex:1;min-width:0}
+.sec-cars #travOut .trav-time{color:#8fd3ec}
+.sec-cars .trav-hint{font-size:12px;color:rgba(235,235,245,.5)}
+.sec-cars .cx-filters{display:flex;flex-direction:column;gap:8px;margin:0 0 14px}
+.sec-cars .cx-frow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sec-cars .cx-flbl{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:rgba(235,235,245,.45);font-weight:700;width:86px;flex:none}
+.sec-cars .cx-frow .cnt{margin-left:auto}
+.sec-cars .carname{gap:12px}
+.sec-cars .cx-carico{--rc:#888;width:44px;height:44px;flex:none;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--rc) 22%,#16161a),#0c0c0e 75%);border:1px solid color-mix(in srgb,var(--rc) 35%,transparent)}
+.sec-cars .cx-carico img{width:100%;height:100%;object-fit:contain;padding:2px}
+.sec-cars .cx-nm{display:flex;flex-direction:column;gap:1px;min-width:0}
+.sec-cars .cx-nm b{font-family:'Saira Condensed',sans-serif;font-size:17px;font-weight:700;color:#fff}
+.sec-cars .cx-rar{font-style:normal;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:var(--rc)}
+.sec-cars .tbl td.num .bignum.spd{font-size:18px!important;color:#fff}
+.sec-cars .cx-cargo{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(235,235,245,.75);white-space:nowrap}
+.sec-cars .cx-cargo--truck{color:#e8b84b;border-color:rgba(232,184,75,.3);background:rgba(232,184,75,.08)}
+.sec-cars .cx-cargo--big{color:#8fd3ec;border-color:rgba(143,211,236,.28);background:rgba(143,211,236,.07)}
+.sec-cars .cx-cargo--none{color:rgba(235,235,245,.4)}
+@media(max-width:900px){.sec-cars .cx-calcs{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .sec-cars .cx-head{padding:14px 16px}
+  .sec-cars .cx-body{padding:14px 16px 16px}
+  .sec-cars .cx-flbl{width:100%}
+  .sec-cars .tbl td.tname .carname{width:100%}
+}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -2559,14 +2613,16 @@ function setGearSearch(v){
 
 // ---------- CARS ----------
 function cargoLabel(c){
-  const map={'машины':'🚛 машины','большие грузы':'▣ большие','малые грузы':'▪ малые','ничего':'— ничего'};
-  return map[c]||c;
+  const map={'машины':['машины','truck'],'большие грузы':['большие грузы','big'],'малые грузы':['малые грузы','small'],'ничего':['не возит','none']};
+  const m=map[c];
+  return m?`<span class="cx-cargo cx-cargo--${m[1]}">${m[0]}</span>`:esc(c||'');
 }
 function renderCars(){
   const carIcons={};
   allLootItems().forEach(it=>{ if(it.icon&&(it.statlbl==='Скорость'||/эвакуатор/i.test(it.name))) carIcons[norm(it.name)]=it.icon; });
-  const cargoTypes=[['','Все'],['машины','🚛 Машины'],['большие грузы','▣ Большие'],['малые грузы','▪ Малые'],['ничего','— Ничего']];
-  const rarsCar=[[0,'Все'],[5,'Мифич.'],[4,'Легенд.'],[3,'Мистич.'],[2,'Редкий'],[1,'Обычный']];
+  const cargoTypes=[['','Все'],['машины','Машины'],['большие грузы','Большие'],['малые грузы','Малые'],['ничего','Не возит']];
+  const RARN_CAR={1:'Обычный',2:'Редкий',3:'Мистический',4:'Легендарный',5:'Мифический'};
+  const rarsCar=[[0,'Все'],[5,'Мифические'],[4,'Легендарные'],[3,'Мистические'],[2,'Редкие'],[1,'Обычные']];
   let filtered=DB.cars.slice();
   if(carsFilter.cargo)filtered=filtered.filter(c=>c.cargo===carsFilter.cargo);
   if(carsFilter.rar)filtered=filtered.filter(c=>c.rar===carsFilter.rar);
@@ -2576,63 +2632,54 @@ function renderCars(){
     const rep=c.repairable?cost:'<span class="danger">не чинится</span>';
     const spp=c.spp?esc(c.spp)+'%':'<span class="muted">?</span>';
     const iconKey=c.icon||carIcons[norm(c.name)];
-    const ic=(iconKey&&img(iconKey))?`<img class="carico" src="${img(iconKey)}" alt="" loading="lazy">`:'<span class="carico ph"></span>';
+    const ic=(iconKey&&img(iconKey))?`<span class="cx-carico" style="--rc:var(--r${c.rar})"><img src="${img(iconKey)}" alt="" loading="lazy"></span>`:`<span class="cx-carico" style="--rc:var(--r${c.rar})"></span>`;
     return `<tr data-name="${esc(c.name.toLowerCase())}">
-      <td class="tname"><span class="carname">${ic}<span><span class="dotr d${c.rar}"></span>${esc(c.name)}</span></span></td>
+      <td class="tname"><span class="carname">${ic}<span class="cx-nm"><b>${esc(c.name)}</b><i class="cx-rar" style="--rc:var(--r${c.rar})">${esc(RARN_CAR[c.rar]||c.rarName||'')}</i></span></span></td>
       <td class="num" data-label="Скорость"><span class="bignum spd" style="font-size:20px">${esc(c.speed)}</span></td>
       <td class="num" data-label="СПП">${spp}</td>
       <td data-label="Тип груза">${cargoLabel(c.cargo)}</td>
       <td class="num" data-label="Починка">${rep}</td>
     </tr>`;
   }).join('');
+  const carSort=(a,b)=>{const aR=/^[А-Яа-яЁё]/.test(a.name),bR=/^[А-Яа-яЁё]/.test(b.name);if(aR!==bR)return aR?-1:1;return a.name.localeCompare(b.name,'ru');};
   return `
   <div class="intro"><b>Скорость</b> — насколько быстрее проходит рейд. <b>СПП</b> — средняя потеря прочности за рейд (чем меньше, тем реже чинить). <b>Тип</b> — что машина возит из рейда. Последний столбец — стоимость починки за 1% прочности.</div>
-  <div class="bar">
-    ${cargoTypes.map(([v,l])=>`<button class="filter ${carsFilter.cargo===v?'on':''}" onclick="setCarsCargoFilt('${v}')">${l}</button>`).join('')}
-    <span style="width:1px;height:24px;background:var(--line2);flex:none;margin:0 6px"></span>
-    ${rarsCar.map(([v,l])=>`<button class="filter${v>0?` frar${v}`:''} ${carsFilter.rar===v?'on':''}" onclick="setCarsRar(${v})">${l}</button>`).join('')}
-    <span class="cnt">${filtered.length} шт.</span>
-  </div>
-
-  <div class="calc">
-    <div class="calc-head">🗺 Время до локации</div>
-    <div class="calc-body" style="flex-direction:column;align-items:stretch">
-      <div class="calc-field">
-        <label>Транспорт</label>
+  <div class="cx-calcs">
+    <div class="cx-card" style="--sc:#5aaccc">
+      <div class="cx-head"><span class="cx-hico">⏱</span><div><div class="cx-title">Время до локации</div><div class="cx-hsub">сколько ехать на выбранной машине</div></div></div>
+      <div class="cx-body">
+        <label class="cx-lbl">Машина</label>
         ${mkIconSel('travCar',[{val:'',label:'— выбрать машину —',icon:''},...DB.cars.slice().sort((a,b)=>parseFloat(a.speed)-parseFloat(b.speed)).map(c=>({val:c.name,label:c.name+' (скорость '+c.speed+')',icon:c.icon||carIcons[norm(c.name)]||''}))], 'runTravelCalc()')}
+        <div id="travOut"><div class="trav-hint">Выбери машину — покажу время до каждой локации.</div></div>
       </div>
-      <div id="travOut"><div class="trav-hint">Выберите машину — рассчитаем время до каждой локации</div></div>
+    </div>
+    <div class="cx-card" style="--sc:#e8b84b">
+      <div class="cx-head"><span class="cx-hico">🔧</span><div><div class="cx-title">Калькулятор починки</div><div class="cx-hsub">сколько материалов нужно на ремонт</div></div></div>
+      <div class="cx-body">
+        <div class="cx-row">
+          <div class="cx-field"><label class="cx-lbl">Машина</label>${mkIconSel('calcCar', DB.cars.filter(c=>c.repairable&&c.repCost).sort(carSort).map(c=>({val:c.name,label:c.name,icon:c.icon||''})), 'runCalc()')}</div>
+          <div class="cx-field cx-dur"><label class="cx-lbl">Прочность</label><div class="cx-durin"><input class="cinput" id="calcCur" type="number" min="0" max="100" value="50" oninput="document.getElementById('calcCurR').value=this.value;runCalc()"><span>%</span></div></div>
+        </div>
+        <input class="cx-range" id="calcCurR" type="range" min="0" max="100" value="50" oninput="document.getElementById('calcCur').value=this.value;runCalc()">
+        <div class="cx-out" id="calcOut"></div>
+      </div>
     </div>
   </div>
 
-  <div class="calc">
-    <div class="calc-head">▣ Калькулятор починки</div>
-    <div class="calc-body">
-      <div class="calc-field">
-        <label>Машина</label>
-        ${mkIconSel('calcCar', DB.cars.filter(c=>c.repairable&&c.repCost).sort((a,b)=>{const aR=/^[А-Яа-яЁё]/.test(a.name),bR=/^[А-Яа-яЁё]/.test(b.name);if(aR!==bR)return aR?-1:1;return a.name.localeCompare(b.name,'ru');}).map(c=>({val:c.name,label:c.name,icon:c.icon||''})), 'runCalc()')}
-      </div>
-      <div class="calc-field">
-        <label>Текущая прочность, %</label>
-        <input class="cinput" id="calcCur" type="number" min="0" max="100" value="50" oninput="runCalc()">
-      </div>
-      <div class="calc-out" id="calcOut"></div>
-    </div>
+  <div class="cx-filters">
+    <div class="cx-frow"><span class="cx-flbl">Тип груза</span>${cargoTypes.map(([v,l])=>`<button class="filter ${carsFilter.cargo===v?'on':''}" onclick="setCarsCargoFilt('${v}')">${l}</button>`).join('')}</div>
+    <div class="cx-frow"><span class="cx-flbl">Редкость</span>${rarsCar.map(([v,l])=>`<button class="filter${v>0?` frar${v}`:''} ${carsFilter.rar===v?'on':''}" onclick="setCarsRar(${v})">${l}</button>`).join('')}<span class="cnt">${filtered.length} шт.</span></div>
   </div>
 
   <table class="tbl">
     <thead><tr><th>Машина</th><th class="num">Скорость</th><th class="num">СПП</th><th>Тип груза</th><th class="num">Починка</th></tr></thead>
     <tbody>${rows}</tbody>
-  </table>
-  <div class="legend">
-    Редкость: <span class="chip rar1">Обычный</span><span class="chip rar2">Редкий</span><span class="chip rar3">Мистический</span><span class="chip rar4">Легендарный</span><span class="chip rar5">Мифический</span>
-    &nbsp;•&nbsp; Тип груза: 🚛 эвакуатор возит машины · ▣ большие грузы · ▪ малые грузы · — не возит ничего
-  </div>`;
+  </table>`;
 }
 function runTravelCalc(){
   const carName=document.getElementById('travCar').value;
   const out=document.getElementById('travOut');
-  if(!carName){out.innerHTML='<div class="trav-hint">Выберите машину — рассчитаем время до каждой локации</div>';return;}
+  if(!carName){out.innerHTML='<div class="trav-hint">Выбери машину — покажу время до каждой локации.</div>';return;}
   const car=DB.cars.find(c=>c.name===carName);
   if(!car)return;
   const v=parseFloat(car.speed)||1;

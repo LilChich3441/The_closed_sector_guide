@@ -851,7 +851,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .support-divider{border:none;border-top:1px solid rgba(255,255,255,.07);margin:0 0 18px}
 .support-sponsors-hd{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
 .support-sponsors-grid{display:flex;flex-wrap:wrap;gap:8px}
-.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.dash-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px}
 .dash-grid .dash-card-photo{max-width:none;margin-bottom:0;height:150px}
 @media(max-width:860px){.dash-grid .dash-card-photo{height:135px}.dash-card-photo-name{font-size:17px}}
 .dash-promo-row{grid-column:1/-1;margin:0}
@@ -918,7 +918,7 @@ footer{text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px;marg
 .promo-code-val{font-family:'Saira Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:3px;color:#4a9ede}
 .promo-code-copy{font-size:12px;color:var(--dim);white-space:nowrap;display:flex;align-items:center;gap:4px}
 .promo-code-copy.copied{color:var(--steel)}
-.dash-cta{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.dash-cta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
 .dash-cta-card{position:relative;overflow:hidden;text-align:left;font:inherit;color:var(--txt);background:linear-gradient(135deg,var(--panel2),var(--panel));border:1px solid var(--line2);border-radius:12px;padding:15px 18px;cursor:pointer;transition:transform .16s cubic-bezier(.34,1.56,.64,1),border-color .16s,box-shadow .16s;display:flex;flex-direction:column;gap:7px}
 .cta-shine{position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-18deg);pointer-events:none;transition:left .65s cubic-bezier(.22,.9,.3,1)}
 .dash-cta-card:hover .cta-shine{left:130%}

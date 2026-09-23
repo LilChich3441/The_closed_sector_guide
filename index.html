@@ -1865,6 +1865,39 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   .sec-cars .cx-flbl{width:100%}
   .sec-cars .tbl td.tname .carname{width:100%}
 }
+/* ── transport: per-row repair ── */
+.sec-cars .cx-calcs{grid-template-columns:1fr}
+.sec-cars #travOut .trav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));max-height:none;gap:6px}
+.sec-cars .cx-tblhint{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:10px 14px;border-radius:12px;font-size:13px;color:rgba(235,235,245,.8);
+  background:rgba(232,184,75,.07);border:1px dashed rgba(232,184,75,.35)}
+.sec-cars .cx-tblhint-ico{width:26px;height:26px;flex:none;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(232,184,75,.15)}
+.sec-cars tr.cx-click{cursor:pointer}
+.sec-cars tr.cx-click:hover td{background:rgba(232,184,75,.05)}
+.sec-cars .cx-repcell{display:inline-flex;align-items:center;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.sec-cars .cx-repbtn{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.3px;padding:5px 11px;border-radius:999px;white-space:nowrap;
+  color:#e8b84b;background:rgba(232,184,75,.1);border:1px solid rgba(232,184,75,.32);transition:background .15s,border-color .15s,color .15s}
+.sec-cars .cx-repbtn i{font-style:normal;display:inline-block;transition:transform .2s}
+.sec-cars tr.cx-click:hover .cx-repbtn{background:rgba(232,184,75,.2);border-color:#e8b84b}
+.sec-cars tr.cx-open .cx-repbtn{background:#e8b84b;color:#1a1204;border-color:#e8b84b}
+.sec-cars tr.cx-open .cx-repbtn i{transform:rotate(180deg)}
+.sec-cars tr.cx-open td{background:rgba(232,184,75,.06);border-bottom-color:transparent}
+.sec-cars .tbl .cx-exprow td{padding:6px 16px 18px;background:rgba(232,184,75,.06)}
+.sec-cars .cx-exp{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:center;animation:cx-drop .22s ease}
+@keyframes cx-drop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.sec-cars .cx-exp .cx-lbl b{color:#fff;font-size:14px;letter-spacing:.5px}
+.sec-cars .cx-exp .cx-out{text-align:left}
+@media(max-width:680px){
+  .sec-cars .cx-tblhint{font-size:12.5px}
+  .sec-cars .tbl tr.cx-open{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent}
+  .sec-cars .tbl tr.cx-open td{background:none}
+  .sec-cars .tbl tr.cx-exprow{margin-top:-11px;padding:0 16px 16px;border-top:none;border-radius:0 0 var(--r-md) var(--r-md);background:linear-gradient(180deg,#161618,#141416)}
+  .sec-cars .tbl .cx-exprow td{display:block;padding:0;background:none}
+  .sec-cars .tbl .cx-exprow td::before{display:none}
+  .sec-cars .cx-exp{grid-template-columns:1fr;gap:12px}
+  .sec-cars .cx-repcell{gap:8px}
+  .sec-cars .tbl td.tname,.sec-cars .tbl .cx-exprow td,.sec-cars .cx-exp .cx-lbl{text-align:left}
+  .sec-cars .cx-nm{align-items:flex-start}
+}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -2649,11 +2682,12 @@ function renderCars(){
   filtered.sort((a,b)=>{const aR=/^[А-Яа-яЁё]/.test(a.name),bR=/^[А-Яа-яЁё]/.test(b.name);if(aR!==bR)return aR?-1:1;return a.name.localeCompare(b.name,'ru');});
   const rows=filtered.map(c=>{
     const cost=c.repCost?`${esc(c.repCost)} мат/1%`:'<span class="muted">нет данных</span>';
-    const rep=c.repairable?cost:'<span class="danger">не чинится</span>';
+    const canRep=c.repairable&&c.repCost;
+    const rep=canRep?`<span class="cx-repcell"><span class="cx-rep">${esc(c.repCost)} мат/1%</span><span class="cx-repbtn">🔧 Рассчитать <i>▾</i></span></span>`:(c.repairable?cost:'<span class="danger">не чинится</span>');
     const spp=c.spp?esc(c.spp)+'%':'<span class="muted">?</span>';
     const iconKey=c.icon||carIcons[norm(c.name)];
     const ic=(iconKey&&img(iconKey))?`<span class="cx-carico" style="--rc:var(--r${c.rar})"><img src="${img(iconKey)}" alt="" loading="lazy"></span>`:`<span class="cx-carico" style="--rc:var(--r${c.rar})"></span>`;
-    return `<tr data-name="${esc(c.name.toLowerCase())}">
+    return `<tr data-name="${esc(c.name.toLowerCase())}"${canRep?` class="cx-click" data-car="${esc(c.name)}" onclick="carRepToggle(this)"`:''}>
       <td class="tname"><span class="carname">${ic}<span class="cx-nm"><b>${esc(c.name)}</b><i class="cx-rar" style="--rc:var(--r${c.rar})">${esc(RARN_CAR[c.rar]||c.rarName||'')}</i></span></span></td>
       <td class="num" data-label="Скорость"><span class="bignum spd" style="font-size:20px">${esc(c.speed)}</span></td>
       <td class="num" data-label="СПП">${spp}</td>
@@ -2673,17 +2707,6 @@ function renderCars(){
         <div id="travOut"><div class="trav-hint">Выбери машину — покажу время до каждой локации.</div></div>
       </div>
     </div>
-    <div class="cx-card" style="--sc:#e8b84b">
-      <div class="cx-head"><span class="cx-hico">🔧</span><div><div class="cx-title">Калькулятор починки</div><div class="cx-hsub">сколько материалов нужно на ремонт</div></div></div>
-      <div class="cx-body">
-        <div class="cx-row">
-          <div class="cx-field"><label class="cx-lbl">Машина</label>${mkIconSel('calcCar', DB.cars.filter(c=>c.repairable&&c.repCost).sort(carSort).map(c=>({val:c.name,label:c.name,icon:c.icon||''})), 'runCalc()')}</div>
-          <div class="cx-field cx-dur"><label class="cx-lbl">Прочность</label><div class="cx-durin"><input class="cinput" id="calcCur" type="number" min="0" max="100" value="50" oninput="document.getElementById('calcCurR').value=this.value;runCalc()"><span>%</span></div></div>
-        </div>
-        <div class="cx-rangew" id="calcCurW"><input class="cx-range" id="calcCurR" type="range" min="0" max="100" value="50" style="--p:50%" oninput="document.getElementById('calcCur').value=this.value;runCalc()"><div class="cx-scale"><span>0%</span><span class="cx-min">30% · минимум</span><span>100%</span></div></div>
-        <div class="cx-out" id="calcOut"></div>
-      </div>
-    </div>
   </div>
 
   <div class="cx-filters">
@@ -2691,6 +2714,7 @@ function renderCars(){
     <div class="cx-frow"><span class="cx-flbl">Редкость</span>${rarsCar.map(([v,l])=>`<button class="filter${v>0?` frar${v}`:''} ${carsFilter.rar===v?'on':''}" onclick="setCarsRar(${v})">${l}</button>`).join('')}<span class="cnt">${filtered.length} шт.</span></div>
   </div>
 
+  <div class="cx-tblhint"><span class="cx-tblhint-ico">🔧</span><span>Нажми на машину — появится ползунок прочности и расчёт починки</span></div>
   <table class="tbl">
     <thead><tr><th>Машина</th><th class="num">Скорость</th><th class="num">СПП</th><th>Тип груза</th><th class="num">Починка</th></tr></thead>
     <tbody>${rows}</tbody>
@@ -2710,40 +2734,32 @@ function runTravelCalc(){
   }).join('');
   out.innerHTML=`<div class="trav-grid">${rows}</div><div class="trav-hint">Скорость машины: <b>${esc(car.speed)}</b> · времена от точки старта до края локации</div>`;
 }
-function runCalc(){
-  const car=DB.cars.find(c=>c.name===document.getElementById('calcCar').value);
-  if(!car){return;}
-  let cur=parseFloat(document.getElementById('calcCur').value);
-  if(isNaN(cur))cur=0;
-  cur=Math.max(0,Math.min(100,cur));
-  const rg=document.getElementById('calcCurR');if(rg){rg.value=cur;rg.style.setProperty('--p',cur+'%');}
-  const rw=document.getElementById('calcCurW');if(rw)rw.classList.toggle('cx-danger',cur<30);
-  const per=parseFloat(car.repCost)||0;
-  const diff=Math.max(0,100-cur);
-  const total=Math.round(diff*per);
-  const out=document.getElementById('calcOut');
-  const spp=car.spp?parseFloat(car.spp):0;
-  let raidsLine='';
-  if(spp>0){
-    const full=Math.floor(70/spp);
-    const now=cur>=30?Math.floor((cur-30)/spp):0;
-    raidsLine=`<div class="csub muted">Хватает на <b>${full}</b> рейд(ов) со 100% · сейчас осталось <b>${now}</b> (теряет ~${esc(car.spp)}% за рейд)</div>`;
-  }
-  if(cur<30){
-    out.innerHTML=`<div class="cresult err">⚠ Транспорт нельзя использовать — прочность ниже 30%. Сначала почините.</div>
-    <div class="cbig">${fmt(total)} <span>мат.</span></div>
-    <div class="csub">восстановить <b>${diff}%</b> × ${per} мат = <b>${fmt(total)}</b> материалов</div>
-    ${raidsLine}`;
-    return;
-  }
-  if(diff<=0){
-    out.innerHTML=`<div class="cresult ok">Чинить не нужно — прочность 100%.</div>${raidsLine}`;
-    return;
-  }
-  out.innerHTML=`
-    <div class="cbig">${fmt(total)} <span>мат.</span></div>
-    <div class="csub">восстановить <b>${diff}%</b> × ${per} мат = <b>${fmt(total)}</b> материалов</div>
-    ${raidsLine}`;
+const carDur={};
+function carRepHTML(car,cur){
+  const per=parseFloat(car.repCost)||0,diff=Math.max(0,100-cur),total=Math.round(diff*per),spp=car.spp?parseFloat(car.spp):0;
+  let raids='';
+  if(spp>0){const full=Math.floor(70/spp),now=cur>=30?Math.floor((cur-30)/spp):0;raids=`<div class="csub">Со 100% хватает на <b>${full}</b> рейд(ов) · сейчас осталось <b>${now}</b> (теряет ~${esc(car.spp)}% за рейд)</div>`;}
+  if(diff<=0)return `<div class="cresult ok">Чинить не нужно — прочность 100%.</div>${raids}`;
+  const warn=cur<30?'<div class="cresult err">⚠ Ниже 30% машиной нельзя пользоваться — сначала почини.</div>':'';
+  return `${warn}<div class="cbig">${fmt(total)} <span>мат.</span></div><div class="csub">восстановить <b>${diff}%</b> × ${per} мат = <b>${fmt(total)}</b> материалов</div>${raids}`;
+}
+function carRepToggle(tr){
+  const name=tr.dataset.car,next=tr.nextElementSibling;
+  const wasOpen=!!(next&&next.classList.contains('cx-exprow'));
+  document.querySelectorAll('.sec-cars .cx-exprow').forEach(r=>{const p=r.previousElementSibling;if(p)p.classList.remove('cx-open');r.remove();});
+  if(wasOpen)return;
+  const car=DB.cars.find(c=>c.name===name);if(!car)return;
+  const cur=carDur[name]??50;
+  const row=document.createElement('tr');row.className='cx-exprow';row.dataset.car=name;
+  row.innerHTML=`<td colspan="5"><div class="cx-exp"><div class="cx-exp-l"><div class="cx-lbl">Текущая прочность: <b class="cx-curv">${cur}%</b></div><div class="cx-rangew${cur<30?' cx-danger':''}"><input class="cx-range" type="range" min="0" max="100" value="${cur}" style="--p:${cur}%" oninput="carRepSet(this)" onclick="event.stopPropagation()"><div class="cx-scale"><span>0%</span><span class="cx-min">30% · минимум</span><span>100%</span></div></div></div><div class="cx-exp-r cx-out">${carRepHTML(car,cur)}</div></div></td>`;
+  tr.classList.add('cx-open');tr.after(row);
+}
+function carRepSet(inp){
+  const row=inp.closest('.cx-exprow'),name=row.dataset.car,car=DB.cars.find(c=>c.name===name),cur=+inp.value;
+  carDur[name]=cur;inp.style.setProperty('--p',cur+'%');
+  inp.closest('.cx-rangew').classList.toggle('cx-danger',cur<30);
+  row.querySelector('.cx-curv').textContent=cur+'%';
+  row.querySelector('.cx-exp-r').innerHTML=carRepHTML(car,cur);
 }
 
 // ---------- LOCATIONS ----------
@@ -3409,7 +3425,7 @@ function render(){
   else if(activeTab==='craft')m.innerHTML=`<section class="on sec-x sec-${activeTab}">${renderCraft()}</section>`;
   else if(activeTab==='items')m.innerHTML=`<section class="on sec-x sec-${activeTab}">${renderItems()}</section>`;
   else if(activeTab==='story')m.innerHTML=`<section class="on sec-x sec-${activeTab}">${renderStory()}</section>`;
-  else if(activeTab==='cars'){m.innerHTML=`<section class="on sec-x sec-${activeTab}">${renderCars()}</section>`;runCalc();}
+  else if(activeTab==='cars'){m.innerHTML=`<section class="on sec-x sec-${activeTab}">${renderCars()}</section>`;}
   else if(activeTab==='locations')m.innerHTML=`<section class="on sec-x sec-${activeTab}">${renderLocations()}</section>`;
   else if(activeTab==='quests')m.innerHTML=`<section class="on sec-x sec-${activeTab}">${renderQuests()}</section>`;
   else if(activeTab==='guides')m.innerHTML=`<section class="on sec-x sec-${activeTab}">${renderGuides()}</section>`;

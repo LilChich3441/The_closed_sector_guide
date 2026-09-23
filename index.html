@@ -1712,7 +1712,8 @@ header .crest{border-radius:12px;box-shadow:0 6px 20px rgba(255,255,255,.08)}
 /* guides */
 .sec-guides .gp.gwarn{border-radius:14px;border:1px solid rgba(217,64,64,.25);border-left:1px solid rgba(217,64,64,.25);padding:14px 18px;
   background:radial-gradient(120% 140% at 0% 0%,rgba(217,64,64,.12),transparent 60%),rgba(20,12,14,.7)}
-.sec-guides .grule{border-radius:var(--r-md);border-color:rgba(255,255,255,.07);background:linear-gradient(180deg,#1b1b1e,#141416)}
+.sec-guides .grule{display:block;position:relative;padding:14px 16px 14px 58px;min-height:56px;border-radius:var(--r-md);border-color:rgba(255,255,255,.07);background:linear-gradient(180deg,#1b1b1e,#141416)}
+.sec-guides .grule .grn{position:absolute;left:14px;top:50%;transform:translateY(-50%)}
 .sec-guides .gspec{border-radius:var(--r-md);border-color:rgba(255,255,255,.07);background:radial-gradient(120% 100% at 50% 0%,rgba(255,255,255,.06),transparent 60%),#151517}
 .sec-guides .gmech{border-radius:var(--r-md);border:1px solid rgba(255,255,255,.07);border-left-width:1px;position:relative;overflow:hidden;background:linear-gradient(180deg,#1b1b1e,#141416)}
 .sec-guides .gmech::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:0 3px 3px 0;background:var(--gold)}
@@ -1863,7 +1864,7 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=20260922"></script>
+<script src="data.js?v=20260923"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={

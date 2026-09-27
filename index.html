@@ -1952,6 +1952,67 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   .setx-iname{font-size:13px}
   .setx-name{font-size:21px}
 }
+/* ── guides: switcher + Denisovka ── */
+.gsw{display:flex;gap:10px;flex-wrap:wrap;max-width:840px;margin:14px auto 22px}
+.gsw-b{flex:1 1 260px;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;padding:12px 16px;border-radius:var(--r-md);color:#fff;
+  background:linear-gradient(180deg,#1b1b1e,#141416);border:1px solid rgba(255,255,255,.08);transition:border-color .2s,transform .2s}
+.gsw-b:hover{border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+.gsw-b.on{border-color:var(--gold);background:radial-gradient(120% 120% at 0% 0%,rgba(212,168,67,.16),transparent 60%),#151517}
+.gsw-ico{width:38px;height:38px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(255,255,255,.06)}
+.gsw-b b{display:block;font-family:'Saira Condensed',sans-serif;font-size:16px;font-weight:700}
+.gsw-b i{display:block;font-style:normal;font-size:11.5px;color:rgba(235,235,245,.5);line-height:1.35}
+.dn-hero{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:28px 26px;margin-bottom:16px;border:1px solid rgba(212,168,67,.3);
+  background:radial-gradient(120% 140% at 100% 0%,rgba(217,64,64,.22),transparent 55%),radial-gradient(90% 120% at 0% 100%,rgba(212,168,67,.18),transparent 60%),#111113}
+.dn-hero-tag{display:inline-block;font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:3px;font-weight:700;padding:4px 12px;border-radius:999px;color:#1a1204;background:var(--gold)}
+.dn-hero-t{font-family:'Saira Condensed',sans-serif;font-size:clamp(34px,6vw,52px);font-weight:700;color:#fff;margin:10px 0 6px;line-height:1}
+.dn-hero-s{font-size:14px;color:rgba(235,235,245,.72);max-width:560px;line-height:1.55}
+.dn-hero-s b{color:#fff}
+.dn-prep{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:var(--r-md);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);font-size:14px;line-height:1.6;color:rgba(235,235,245,.85)}
+.dn-prep-i{width:34px;height:34px;flex:none;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;background:rgba(255,255,255,.06)}
+.dn-prep b{color:#fff}
+.dn-rewards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.dn-rw{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 6px 10px;border-radius:var(--r-md);cursor:pointer;
+  background:linear-gradient(180deg,#1b1b1e,#141416);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,transform .2s}
+.dn-rw:hover{border-color:rgba(212,168,67,.55);transform:translateY(-2px)}
+.dn-rw-ico{width:64px;height:64px;border-radius:14px;overflow:hidden;background:#0c0c0e}
+.dn-rw-ico img{width:100%;height:100%;object-fit:cover}
+.dn-rw-n{font-family:'Saira Condensed',sans-serif;font-size:13.5px;font-weight:600;color:#fff;line-height:1.15}
+.dn-rw-note{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.dn-mini{font-size:13px;color:rgba(235,235,245,.55);margin:10px 0 0;line-height:1.55}
+.dn-mini b{color:rgba(255,255,255,.85)}
+.dn-q{position:relative;padding:14px 18px;border-radius:16px 16px 16px 4px;background:#d2d0b0;color:#1d1d14;font-size:14px;line-height:1.5;max-width:520px;margin-bottom:14px}
+.dn-routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.dn-route{--rc:#4fd18a;border-radius:var(--r-lg);padding:16px;border:1px solid color-mix(in srgb,var(--rc) 35%,transparent);
+  background:radial-gradient(120% 70% at 0% 0%,color-mix(in srgb,var(--rc) 12%,transparent),transparent 55%),linear-gradient(180deg,#1b1b1e,#131315)}
+.dn-route--b{--rc:#5aaccc}
+.dn-route-h{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dn-route-n{width:38px;height:38px;flex:none;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Saira Condensed',sans-serif;font-size:20px;font-weight:700;color:#0c0c0e;background:var(--rc)}
+.dn-route-h b{display:block;font-family:'Saira Condensed',sans-serif;font-size:21px;font-weight:700;color:#fff}
+.dn-route-h i{display:block;font-style:normal;font-size:12px;color:var(--rc)}
+.dn-steps{list-style:none;margin:0;padding:0;counter-reset:dn;display:flex;flex-direction:column;gap:8px}
+.dn-step{counter-increment:dn;position:relative;padding:10px 12px 10px 44px;border-radius:12px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.06)}
+.dn-step::before{content:counter(dn);position:absolute;left:10px;top:10px;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:700;color:rgba(235,235,245,.7);background:rgba(255,255,255,.07)}
+.dn-say{display:inline-block;font-size:13.5px;color:#111;background:#f2f2ea;padding:4px 10px;border-radius:8px;font-weight:600}
+.dn-note{font-size:12.5px;color:rgba(235,235,245,.62);margin-top:6px;line-height:1.5}
+.dn-note b{color:#ffd166}
+.dn-step--loot{border-color:rgba(255,209,102,.3);background:rgba(255,209,102,.05)}
+.dn-step--loot::before{content:'★';color:#1a1204;background:#ffd166}
+.dn-step--warn{border-color:rgba(217,64,64,.35);background:rgba(217,64,64,.06)}
+.dn-step--warn::before{content:'!';color:#fff;background:var(--hot)}
+.dn-common .dn-steps{max-width:760px}
+.dn-cheat{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:var(--r-lg);background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.14)}
+.dn-cheat-r>b{display:block;font-family:'Saira Condensed',sans-serif;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.dn-chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.dn-chips span{font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:#fff}
+.dn-chips i{font-style:normal;color:rgba(235,235,245,.35);font-size:12px}
+.dn-credit{margin-top:22px;font-size:12.5px;color:rgba(235,235,245,.45)}
+.dn-credit a{color:var(--gold)}
+@media(max-width:760px){
+  .dn-rewards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .dn-routes{grid-template-columns:1fr}
+  .dn-hero{padding:22px 18px}
+}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -2025,7 +2086,7 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=20260927b"></script>
+<script src="data.js?v=20260927d"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -2048,7 +2109,7 @@ const LOC_POS={'Военный конвой':'center 62%','Тайник Сект
 const $=s=>document.querySelector(s);
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function fmt(n){return (n||0).toLocaleString('ru-RU');}
-const IMG_KEYS=new Set(["d1","i1","i10","i100","i101","i102","i103","i104","i105","i106","i107","i108","i109","i11","i110","i111","i112","i113","i114","i115","i116","i117","i118","i119","i12","i120","i121","i122","i123","i124","i125","i126","i127","i128","i129","i13","i130","i131","i132","i133","i134","i135","i136","i137","i138","i139","i14","i140","i141","i142","i143","i144","i145","i146","i147","i148","i149","i15","i150","i151","i152","i153","i154","i155","i156","i157","i158","i159","i16","i160","i161","i162","i163","i164","i165","i166","i167","i168","i169","i17","i170","i171","i172","i173","i174","i175","i176","i177","i178","i179","i18","i180","i181","i182","i183","i184","i185","i186","i187","i188","i189","i19","i190","i191","i192","i193","i194","i195","i196","i197","i198","i199","i2","i20","i200","i201","i202","i203","i204","i205","i206","i207","i208","i209","i21","i210","i211","i212","i213","i214","i215","i216","i217","i218","i219","i22","i220","i221","i222","i223","i224","i225","i226","i227","i228","i229","i23","i230","i231","i232","i233","i234","i235","i236","i237","i238","i239","i24","i240","i241","i242","i243","i244","i245","i246","i247","i248","i249","i25","i250","i251","i252","i253","i254","i255","i256","i257","i258","i259","i26","i260","i261","i262","i263","i264","i265","i266","i267","i268","i269","i27","i270","i28","i29","i3","i30","i31","i32","i33","i34","i35","i36","i37","i38","i39","i4","i40","i400","i401","i402","i404","i405","i406","i408","i409","i41","i410","i411","i412","i413","i414","i415","i416","i417","i418","i419","i42","i420","i421","i422","i423","i424","i425","i426","i427","i428","i429","i43","i430","i431","i432","i433","i434","i435","i436","i437","i438","i439","i44","i440","i441","i442","i443","i444","i445","i446","i447","i448","i449","i45","i450","i451","i452","i453","i454","i455","i456","i457","i458","i459","i46","i460","i461","i47","i48","i49","i5","i50","i51","i52","i53","i54","i55","i56","i57","i58","i59","i6","i60","i61","i62","i63","i64","i65","i66","i67","i68","i69","i7","i70","i71","i72","i73","i74","i75","i76","i77","i78","i79","i8","i80","i81","i82","i83","i84","i85","i86","i87","i88","i89","i9","i90","i91","i92","i93","i94","i95","i96","i97","i98","i99"]);
+const IMG_KEYS=new Set(["d1","i1","i10","i100","i101","i102","i103","i104","i105","i106","i107","i108","i109","i11","i110","i111","i112","i113","i114","i115","i116","i117","i118","i119","i12","i120","i121","i122","i123","i124","i125","i126","i127","i128","i129","i13","i130","i131","i132","i133","i134","i135","i136","i137","i138","i139","i14","i140","i141","i142","i143","i144","i145","i146","i147","i148","i149","i15","i150","i151","i152","i153","i154","i155","i156","i157","i158","i159","i16","i160","i161","i162","i163","i164","i165","i166","i167","i168","i169","i17","i170","i171","i172","i173","i174","i175","i176","i177","i178","i179","i18","i180","i181","i182","i183","i184","i185","i186","i187","i188","i189","i19","i190","i191","i192","i193","i194","i195","i196","i197","i198","i199","i2","i20","i200","i201","i202","i203","i204","i205","i206","i207","i208","i209","i21","i210","i211","i212","i213","i214","i215","i216","i217","i218","i219","i22","i220","i221","i222","i223","i224","i225","i226","i227","i228","i229","i23","i230","i231","i232","i233","i234","i235","i236","i237","i238","i239","i24","i240","i241","i242","i243","i244","i245","i246","i247","i248","i249","i25","i250","i251","i252","i253","i254","i255","i256","i257","i258","i259","i26","i260","i261","i262","i263","i264","i265","i266","i267","i268","i269","i27","i270","i28","i29","i3","i30","i31","i32","i33","i34","i35","i36","i37","i38","i39","i4","i40","i400","i401","i402","i404","i405","i406","i408","i409","i41","i410","i411","i412","i413","i414","i415","i416","i417","i418","i419","i42","i420","i421","i422","i423","i424","i425","i426","i427","i428","i429","i43","i430","i431","i432","i433","i434","i435","i436","i437","i438","i439","i44","i440","i441","i442","i443","i444","i445","i446","i447","i448","i449","i45","i450","i451","i452","i453","i454","i455","i456","i457","i458","i459","i46","i460","i461","i462","i47","i48","i49","i5","i50","i51","i52","i53","i54","i55","i56","i57","i58","i59","i6","i60","i61","i62","i63","i64","i65","i66","i67","i68","i69","i7","i70","i71","i72","i73","i74","i75","i76","i77","i78","i79","i8","i80","i81","i82","i83","i84","i85","i86","i87","i88","i89","i9","i90","i91","i92","i93","i94","i95","i96","i97","i98","i99"]);
 const IMG_REV={"i456":2,"i457":2,"i458":2};
 function img(k){return (k&&IMG_KEYS.has(k))?'img/'+k+'.webp'+(IMG_REV[k]?'?v='+IMG_REV[k]:''):'';}
 
@@ -3087,7 +3148,104 @@ function toggleStoryOpt(){storyFilter.opt=!storyFilter.opt;render();}
 function setStorySearch(v){storyFilter.search=v;render();const inp=document.querySelector('.gsearch');if(inp){inp.focus();inp.setSelectionRange(v.length,v.length);}}
 
 // ---------- GUIDES ----------
+let guideSel=(()=>{try{return localStorage.getItem('cs_guide')||'locations-howto';}catch(e){return 'locations-howto';}})();
+function setGuide(id){guideSel=id;try{localStorage.setItem('cs_guide',id);}catch(e){}render();window.scrollTo({top:0,behavior:'smooth'});}
 function renderGuides(){
+  const list=DB.guides||[];
+  if(!list.some(g=>g.id===guideSel))guideSel=list[0].id;
+  const pick=`<div class="gsw">${list.map(g=>`<button class="gsw-b${g.id===guideSel?' on':''}" onclick="setGuide('${g.id}')"><span class="gsw-ico">${g.id==='denisovka'?'🎯':'📘'}</span><span><b>${esc(g.short||g.title)}</b><i>${esc(g.subtitle||'')}</i></span></button>`).join('')}</div>`;
+  return pick+(guideSel==='denisovka'?renderGuideDenisovka():renderGuideBasics());
+}
+function dnItem(key,name,note){
+  const src=img(key);
+  return `<div class="dn-rw" data-item-name="${esc(name)}" onclick="openItemPopup(this.dataset.itemName)"><div class="dn-rw-ico">${src?`<img src="${src}" alt="" loading="lazy">`:''}</div><div class="dn-rw-n">${esc(name)}</div>${note?`<div class="dn-rw-note">${note}</div>`:''}</div>`;
+}
+function dnSteps(steps){
+  return `<ol class="dn-steps">${steps.map(s=>`<li class="dn-step${s.warn?' dn-step--warn':''}${s.loot?' dn-step--loot':''}"><div class="dn-say">${esc(s.say)}</div>${s.note?`<div class="dn-note">${s.note}</div>`:''}</li>`).join('')}</ol>`;
+}
+function renderGuideDenisovka(){
+  const quiet=[
+    {say:'Давай по тихому.'},
+    {say:'Давай через кладбище.',note:'Не через лес — там мины и снайперы.'},
+    {say:'Ликвидируй патруль.',note:'Боец снимает патруль и подбирает их оружие — <b>Vector A.R.</b>',loot:1},
+    {say:'Молодчина!'},
+  ];
+  const kpp=[
+    {say:'Пробуем через КПП.'},
+    {say:'Отличная идея! Действуй!',note:'Боец устраивает замыкание на радиовышке — у охраны пропадает связь.'},
+    {say:'Действуй понаглее.',note:'Этот шаг на скриншотах автора пропущен — по ходу диалога подходит именно этот ответ.'},
+    {say:'Наезжай на него!',note:'Растерянный постовой извиняется и отдаёт <b>ключ от таинственного кейса</b>.',loot:1},
+    {say:'Отлично! Разведай обстановку.'},
+  ];
+  const common=[
+    {say:'Больница',note:'Боец находит <b>Экспериментальную аптечку</b>.',loot:1},
+    {say:'Ну тогда нам осталось только здание милиции.',note:'В школу не ходим: там только ром, а после неё в больницу уже не попасть. Пойти и туда и туда нельзя — боец погибнет.',warn:1},
+    {say:'Обойди здание, ищи варианты!'},
+    {say:'Попробуй отвлечь охрану как-нибудь.',note:'Боец поджигает соседнее здание и пробирается внутрь. Попутно подслушивает, что капрал Тернер потерял смартфон в Центре Кастовска — на нём тот самый код.'},
+    {say:'Отличная мысль! Продолжай движение.'},
+    {say:'Пробуй 2110',note:'Код от двери всегда <b>2110</b>. Неверный код — смерть. Искать телефон в Центре Кастовска не нужно.',warn:1},
+    {say:'Не отвлекайся. Что ты видишь? Ищи!',note:'Бункер КГБ: на столе <b>Секретная папка</b>.',loot:1},
+    {say:'Продолжай поиски.',note:'Находит <b>Программатор</b>.',loot:1},
+    {say:'Выбирайся оттуда.'},
+    {say:'Попробуй.',note:'Выход через крышу.'},
+    {say:'Ищи еще варианты.',note:'Лестница с крыши хлипкая, вход охраняют — боец заперт.'},
+    {say:'Выжидай подходящий момент.',note:'Боец находит броню и шлем «Вектора», переодевается и спокойно выходит через главный вход — <b>Vector A.S.</b> и <b>Vector A.H.</b>',loot:1},
+    {say:'До встречи в лагере!'},
+    {say:'Завершить операцию'},
+  ];
+  const chips=a=>a.map(x=>`<span>${esc(x.say)}</span>`).join('<i>→</i>');
+  return `<div class="guide-doc dn" data-name="спецоперация денисовка гайд прохождение варианты кпп кладбище 2110 бункер vector награды">
+    <div class="dn-hero">
+      <div class="dn-hero-tag">СПЕЦОПЕРАЦИЯ</div>
+      <h2 class="dn-hero-t">«Денисовка»</h2>
+      <div class="dn-hero-s">Полное прохождение с 100% выживаемостью и сбором всего лута. Есть <b>два варианта</b> — выбираешь в самом начале.</div>
+    </div>
+
+    <div class="dn-prep">
+      <div class="dn-prep-i">🛡️</div>
+      <div><b>Подготовка.</b> Точных требований к атаке и защите нет, поэтому идём в самом лучшем снаряжении, желательно в броне «Титан». Даже при идеальном прохождении боец возвращается побитым.</div>
+    </div>
+
+    <h3 class="gh">Что можно получить</h3>
+    <div class="dn-rewards">
+      ${dnItem('i222','Vector A.R.','вариант 1')}
+      ${dnItem('i168','Экспериментальная аптечка','больница')}
+      ${dnItem('i462','Секретная папка','бункер')}
+      ${dnItem('i165','Программатор','бункер')}
+      ${dnItem('i221','Vector A.S.','финал')}
+      ${dnItem('i201','Vector A.H.','финал')}
+    </div>
+    <p class="dn-mini">Во втором варианте вместо Vector A.R. дают <b>ключ от таинственного кейса</b>. Нажми на предмет, чтобы открыть его карточку.</p>
+
+    <h3 class="gh">Шаг 1. Выбираем вариант</h3>
+    <div class="dn-q">«Босс, я на подходе к Денисовке. По периметру множество патрулей, пробраться незаметно будет сложно. Как действуем?»</div>
+    <div class="dn-routes">
+      <div class="dn-route dn-route--a">
+        <div class="dn-route-h"><span class="dn-route-n">1</span><div><b>По-тихому</b><i>награда: оружие Vector A.R.</i></div></div>
+        ${dnSteps(quiet)}
+      </div>
+      <div class="dn-route dn-route--b">
+        <div class="dn-route-h"><span class="dn-route-n">2</span><div><b>Через КПП</b><i>награда: ключ от таинственного кейса</i></div></div>
+        ${dnSteps(kpp)}
+      </div>
+    </div>
+    <p class="dn-mini">Вариант «Нужно штурмовать» автор не проходил.</p>
+
+    <h3 class="gh">Шаг 2. Деревня, милиция и бункер</h3>
+    <p class="dn-mini" style="margin-top:-4px">Дальше оба варианта сходятся. Боец видит три объекта: милицию, школу и больницу.</p>
+    <div class="dn-common">${dnSteps(common)}</div>
+
+    <h3 class="gh">Шпаргалка — ответы по порядку</h3>
+    <div class="dn-cheat">
+      <div class="dn-cheat-r"><b>Вариант 1</b><div class="dn-chips">${chips(quiet)}</div></div>
+      <div class="dn-cheat-r"><b>Вариант 2</b><div class="dn-chips">${chips(kpp)}</div></div>
+      <div class="dn-cheat-r"><b>Дальше</b><div class="dn-chips">${chips(common)}</div></div>
+    </div>
+
+    <div class="dn-credit">По гайду <a href="https://vk.com/@geg132009-specoperaciya-quotdenisovkaquot-ne-dopisano" target="_blank" rel="noopener">Александра Юдина</a> во ВКонтакте.</div>
+  </div>`;
+}
+function renderGuideBasics(){
   const gi=DB.guides[0].images;
   const rec=img(gi.rec),rifle=img(gi.rifle),helmet=img(gi.helmet),armor=img(gi.armor),creator=img(gi.creator);
   return `

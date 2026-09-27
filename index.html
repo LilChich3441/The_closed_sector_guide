@@ -1898,6 +1898,12 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   .sec-cars .tbl td.tname,.sec-cars .tbl .cx-exprow td,.sec-cars .cx-exp .cx-lbl{text-align:left}
   .sec-cars .cx-nm{align-items:flex-start}
 }
+.dn-hero--uni{border-color:rgba(90,172,204,.35);background:radial-gradient(120% 140% at 100% 0%,rgba(90,172,204,.22),transparent 55%),radial-gradient(90% 120% at 0% 100%,rgba(217,64,64,.18),transparent 60%),#111113}
+.dn-rewards.dn-rewards--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.dn-danger{margin-top:16px;padding:14px 18px;border-radius:var(--r-md);border:1px solid rgba(217,64,64,.4);background:radial-gradient(120% 140% at 0% 0%,rgba(217,64,64,.16),transparent 60%),rgba(20,12,14,.8)}
+.dn-danger-h{font-family:'Saira Condensed',sans-serif;font-size:14px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:#ff7a7a;margin-bottom:6px}
+.dn-danger ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.6;color:rgba(235,235,245,.85)}
+@media(max-width:760px){.dn-rewards.dn-rewards--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* ── sets showcase ── */
 .setx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:6px}
 .setx{--ta:var(--acid);position:relative;display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:var(--r-lg);overflow:hidden;
@@ -2086,7 +2092,7 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=20260927d"></script>
+<script src="data.js?v=20260927e"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -3153,8 +3159,8 @@ function setGuide(id){guideSel=id;try{localStorage.setItem('cs_guide',id);}catch
 function renderGuides(){
   const list=DB.guides||[];
   if(!list.some(g=>g.id===guideSel))guideSel=list[0].id;
-  const pick=`<div class="gsw">${list.map(g=>`<button class="gsw-b${g.id===guideSel?' on':''}" onclick="setGuide('${g.id}')"><span class="gsw-ico">${g.id==='denisovka'?'🎯':'📘'}</span><span><b>${esc(g.short||g.title)}</b><i>${esc(g.subtitle||'')}</i></span></button>`).join('')}</div>`;
-  return pick+(guideSel==='denisovka'?renderGuideDenisovka():renderGuideBasics());
+  const pick=`<div class="gsw">${list.map(g=>`<button class="gsw-b${g.id===guideSel?' on':''}" onclick="setGuide('${g.id}')"><span class="gsw-ico">${({denisovka:'🎯',university:'🚇'})[g.id]||'📘'}</span><span><b>${esc(g.short||g.title)}</b><i>${esc(g.subtitle||'')}</i></span></button>`).join('')}</div>`;
+  return pick+(guideSel==='denisovka'?renderGuideDenisovka():guideSel==='university'?renderGuideUniversity():renderGuideBasics());
 }
 function dnItem(key,name,note){
   const src=img(key);
@@ -3243,6 +3249,90 @@ function renderGuideDenisovka(){
     </div>
 
     <div class="dn-credit">По гайду <a href="https://vk.com/@geg132009-specoperaciya-quotdenisovkaquot-ne-dopisano" target="_blank" rel="noopener">Александра Юдина</a> во ВКонтакте.</div>
+  </div>`;
+}
+function renderGuideUniversity(){
+  const parts=[
+    {t:'Часть 1. Дверь с кодом',steps:[
+      {say:'Можешь включить фонарь, но будь аккуратен.'},
+      {say:'Хорошая мысль. Попробуй!',note:'Заглядываем в нетронутую дверь слева.'},
+      {say:'Действуй!',note:'Боец сбегает за ломом и вскрывает вторую дверь.'},
+      {say:'Это атомная электростанция Кастовска. Попробуй год ее постройки ввести. Хм, кажется 1980.',note:'Код — год постройки атомной электростанции Кастовска: <b>1980</b> (не 1977 и не 1988). Внутри — <b>Ключ от казарм</b>.',loot:1},
+      {say:'Возвращайся в тоннель.'},
+    ]},
+    {t:'Часть 2. Засада',steps:[
+      {say:'Есть где спрятаться? Не лезь на рожон. Займи укрытие, а потом атакуй сзади.',note:'Двое идут навстречу — ликвидируем. Получаем <b>Жетон рекрутинга</b> и немного урона.',loot:1},
+      {say:'Продолжай движение.'},
+    ]},
+    {t:'Часть 3. Логово сектантов',steps:[
+      {say:'Мне кажется или там справа есть какой-то проем?'},
+      {say:'Может стоить пройти там?'},
+      {say:'Попробуй аккуратно продвинуться вперед, не привлекая внимание.'},
+      {say:'Попробуй подсмотреть что там происходит.',note:'В кабинете лежит странный ключ с черепом — <b>Ключ сектантов</b>.',loot:1},
+      {say:'Отлично, возвращайся обратно.',note:'Бойца замечают.'},
+      {say:'Займи удобную позицию и вступай в бой.',note:'Не отступать! «Беги!» здесь — мгновенная смерть. В бою прилично ранят, но боец выживает.',warn:1},
+      {say:'Уноси ноги!'},
+    ]},
+    {t:'Часть 4. Станция «Университет» и Дамир',steps:[
+      {say:'Будь осторожен.'},
+      {say:'Не привлекай к себе внимание.',note:'Не осматриваемся на станции — лута нет, только урон.',warn:1},
+      {say:'Подберись поближе.'},
+      {say:'Кого?',note:'Один из сектантов — Дамир.'},
+      {say:'Подслушай их разговор.'},
+      {say:'Слушай внимательно. Это может быть важно.'},
+      {say:'Отходи на безопасное расстояние.',note:'Дальше не слушаем: разговор про «супероружие» заканчивается мгновенной смертью.',warn:1},
+      {say:'Не рискуй. Дождись удобного момента и ликвидируй Дамира по-тихому.',note:'Подошёл третий — не нападаем, даём всем разойтись.'},
+      {say:'Принял. Конец связи.',note:'Боец идёт за Дамиром.'},
+      {say:'Рано.'},
+      {say:'Рано! Мы не знаем что там впереди.'},
+      {say:'Понаблюдай, но не суетись. Нужно застать Дамира врасплох.',note:'Дамир заходит в «казармы» сектантов.'},
+      {say:'Однозначно. Жди.',note:'Ждать может быть долго — сообщения приходят через 5–40 минут.'},
+      {say:'Действуй!',note:'Засада в тоннеле. Боец отбирает арбалет — <b>Сломанный арбалет</b>, но Дамир убегает.',loot:1},
+      {say:'Аккуратно зайди на «Университет» и разведай обстановку, он не мог далеко уйти!'},
+      {say:'Без боя не прорваться. Атакуй!',note:'Дальше выбора нет — везде один вариант ответа.'},
+      {say:'Беги!!!!!'},
+      {say:'Нет, нет, нет! Не говори так, ты справишься! Главное, не сдавайся!'},
+      {say:'Нет! Прием! Приееем??',note:'Трагичный момент — но на самом деле всё хорошо.'},
+      {say:'Слава богу! Молодчина! Давай теперь двигай к выходу, без приключений только.'},
+      {say:'Принято! Жду!'},
+      {say:'Завершить операцию'},
+    ]},
+  ];
+  const all=parts.flatMap(p=>p.steps);
+  return `<div class="guide-doc dn" data-name="спецоперация университет гайд прохождение дамир метро сектанты арбалет 1980 награды">
+    <div class="dn-hero dn-hero--uni">
+      <div class="dn-hero-tag">СПЕЦОПЕРАЦИЯ</div>
+      <h2 class="dn-hero-t">«Университет»</h2>
+      <div class="dn-hero-s">Прохождение с 100% выживаемостью и сбором всего лута. Операция <b>одноразовая</b> — появляется, когда механик просит принести арбалет.</div>
+    </div>
+
+    <div class="dn-prep">
+      <div class="dn-prep-i">🛡️</div>
+      <div><b>Подготовка.</b> Экипировка уровня комплекта «Учение некроманта» или выше и аптечка на 300 HP. По сюжету боец всё равно возвращается с минимальным здоровьем. Сообщения приходят через 5–15 минут, иногда до 40.</div>
+    </div>
+
+    <h3 class="gh">Что можно получить</h3>
+    <div class="dn-rewards dn-rewards--4">
+      ${dnItem('i189','Ключ от казарм','часть 1')}
+      ${dnItem('i164','Жетон рекрутинга','часть 2')}
+      ${dnItem('i158','Ключ сектантов','часть 3')}
+      ${dnItem('i50','Сломанный арбалет','часть 4 · для квеста')}
+    </div>
+
+    <div class="dn-danger">
+      <div class="dn-danger-h">☠ Мгновенная смерть</div>
+      <ul>
+        <li>Часть 3 — отступить («Беги!») после того, как бойца заметили.</li>
+        <li>Часть 4 — дослушать разговор про супероружие вместо «Отходи на безопасное расстояние».</li>
+      </ul>
+    </div>
+
+    ${parts.map((p,i)=>`<h3 class="gh">${esc(p.t)}</h3>${i===0?'<div class="dn-q">«Командир, я в тоннеле. Здесь нифига не видно. Без фонаря буду очень долго продвигаться. С другой стороны, если буду светить, могу привлечь к себе ненужное внимание. Как поступить?»</div>':''}<div class="dn-common">${dnSteps(p.steps)}</div>`).join('')}
+
+    <h3 class="gh">Шпаргалка — ответы по порядку</h3>
+    <div class="dn-cheat">${parts.map(p=>`<div class="dn-cheat-r"><b>${esc(p.t.replace(/^Часть (\d)\..*/,'Часть $1'))}</b><div class="dn-chips">${p.steps.map(x=>`<span>${esc(x.say)}</span>`).join('<i>→</i>')}</div></div>`).join('')}</div>
+
+    <div class="dn-credit">По гайду <a href="https://vk.com/@geg132009-specoperaciya-universitet" target="_blank" rel="noopener">Александра Юдина</a> во ВКонтакте.</div>
   </div>`;
 }
 function renderGuideBasics(){

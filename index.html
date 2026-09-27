@@ -1898,6 +1898,60 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   .sec-cars .tbl td.tname,.sec-cars .tbl .cx-exprow td,.sec-cars .cx-exp .cx-lbl{text-align:left}
   .sec-cars .cx-nm{align-items:flex-start}
 }
+/* ── sets showcase ── */
+.setx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:6px}
+.setx{--ta:var(--acid);position:relative;display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:var(--r-lg);overflow:hidden;
+  border:1px solid transparent;
+  background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--ta) 16%,transparent),transparent 60%) padding-box,
+    linear-gradient(180deg,#1b1b1e,#131315) padding-box,
+    linear-gradient(140deg,color-mix(in srgb,var(--ta) 65%,transparent),rgba(255,255,255,.06) 40%,rgba(255,255,255,.04) 60%,color-mix(in srgb,var(--ta) 45%,transparent)) border-box;
+  box-shadow:0 26px 50px -30px rgba(0,0,0,.95);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.setx:hover{transform:translateY(-3px);box-shadow:0 30px 60px -28px rgba(0,0,0,.95),0 0 40px -12px color-mix(in srgb,var(--ta) 45%,transparent)}
+.setx.r5::after{content:'';position:absolute;inset:-40%;pointer-events:none;
+  background:conic-gradient(from 0deg,transparent 0 70%,color-mix(in srgb,var(--ta) 22%,transparent) 80%,transparent 90%);animation:setx-spin 7s linear infinite;opacity:.8}
+@keyframes setx-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.setx.r5::after{animation:none}}
+.setx>*{position:relative;z-index:1}
+.setx-head{display:flex;align-items:center;gap:14px}
+.setx-emoji{width:48px;height:48px;flex:none;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:24px;
+  background:color-mix(in srgb,var(--ta) 16%,#111113);border:1px solid color-mix(in srgb,var(--ta) 40%,transparent);box-shadow:0 0 22px -6px color-mix(in srgb,var(--ta) 70%,transparent)}
+.setx-meta{flex:1;min-width:0}
+.setx-eyebrow{font-family:'Saira Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(235,235,245,.45);font-weight:700}
+.setx-eyebrow span{color:var(--ta)}
+.setx-name{font-family:'Saira Condensed',sans-serif;font-size:24px;font-weight:700;line-height:1.05;color:#fff;letter-spacing:.3px}
+.setx-sum{display:flex;gap:8px;flex:none}
+.setx-s{display:flex;flex-direction:column;align-items:center;min-width:62px;padding:6px 10px;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);
+  font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(235,235,245,.5);font-weight:700}
+.setx-s b{font-family:'Saira Condensed',sans-serif;font-size:20px;letter-spacing:0;line-height:1.05}
+.setx-s.dmg b{color:#ff6b6b}.setx-s.def b{color:#5cd88f}
+.setx-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.setx-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 8px 10px;border-radius:var(--r-md);cursor:pointer;
+  background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s,transform .2s}
+.setx-item:hover{border-color:color-mix(in srgb,var(--ta) 60%,transparent);background:color-mix(in srgb,var(--ta) 8%,rgba(0,0,0,.3));transform:translateY(-2px)}
+.setx-ico{width:84px;height:84px;border-radius:18px;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--ta) 30%,#17171b),#0c0c0e 72%)}
+.setx-ico img{width:92%;height:92%;object-fit:contain;filter:drop-shadow(0 6px 12px rgba(0,0,0,.6));transition:transform .25s}
+.setx-item:hover .setx-ico img{transform:scale(1.07)}
+.setx-iname{font-family:'Saira Condensed',sans-serif;font-size:14.5px;font-weight:600;color:#fff;line-height:1.15}
+.setx-istat{font-size:11px;color:rgba(235,235,245,.5);text-transform:lowercase}
+.setx-istat b{font-family:'Saira Condensed',sans-serif;font-size:14px;color:rgba(255,255,255,.9)}
+.setx-bonus{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--r-md);
+  background:color-mix(in srgb,var(--ta) 9%,rgba(0,0,0,.3));border:1px solid color-mix(in srgb,var(--ta) 28%,transparent);flex:1}
+.setx-bico{width:30px;height:30px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(0,0,0,.35)}
+.setx-blbl{font-family:'Saira Condensed',sans-serif;font-size:11.5px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:var(--ta);margin-bottom:3px}
+.setx-btxt{font-size:13px;line-height:1.55;color:rgba(235,235,245,.85)}
+.setx-bonus--none{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.06)}
+.setx-bonus--none .setx-btxt{color:rgba(235,235,245,.45)}
+@media(max-width:900px){.setx-grid{grid-template-columns:1fr}}
+@media(max-width:480px){
+  .setx{padding:14px}
+  .setx-head{flex-wrap:wrap}
+  .setx-sum{width:100%}
+  .setx-s{flex:1;flex-direction:row;justify-content:center;gap:6px;align-items:baseline}
+  .setx-ico{width:64px;height:64px;border-radius:14px}
+  .setx-iname{font-size:13px}
+  .setx-name{font-size:21px}
+}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -2303,43 +2357,45 @@ function renderGear(){
   if(gearFilter.cat==='sets'){
     let sets=setGroups();
     if(gearFilter.rar)sets=sets.filter(s=>s.rar===gearFilter.rar);
-    const rarAccent={1:'var(--dim)',2:'var(--steel)',3:'var(--r3)',4:'var(--r4)',5:'var(--r5)'};
-    const setsHtml=`<div class="setrow">${sets.map(s=>{
+    const rarAccent={1:'#a9a9b3',2:'var(--r2)',3:'var(--r3)',4:'var(--r4)',5:'var(--r5)'};
+    sets=sets.slice().sort((x,y)=>(y.rar-x.rar));
+    const setsHtml=`<div class="setx-grid">${sets.map(s=>{
       const si=(DB.setInfo||{})[s.name];
       const ta=rarAccent[s.rar]||'var(--acid)';
       const ico=si&&si[0]&&si[0].icon?si[0].icon:'⚙';
-      const bonusHtml=si&&si[0]?`<div class="set-tile-bonus"><span class="set-tile-blbl">${esc(si[0].label)}</span><span class="set-tile-bdesc">${esc(si[0].desc)}</span></div>`:'';
-      const partsHtml=s.parts.map(p=>{
+      const title=s.name.replace(/^Комплект\s*/i,'').replace(/^["«„]|["»“]$/g,'');
+      const dmg=s.parts.filter(p=>p.kind==='dmg').reduce((t,p)=>t+(parseInt(p.stat)||0),0);
+      const def=s.parts.filter(p=>p.kind!=='dmg').reduce((t,p)=>t+(parseInt(p.stat)||0),0);
+      const items=s.parts.map(p=>{
         const src=p.icon?img(p.icon):'';
-        const icoEl=src?`<img src="${src}" alt="" loading="lazy">`:`<div class="set-tile-part-ph"></div>`;
-        return `<div class="set-tile-part" data-item-name="${esc(p.name)}" onclick="openItemPopup(this.dataset.itemName)" style="cursor:pointer">${icoEl}<span class="set-tile-pname">${esc(p.name)}</span></div>`;
+        const lbl=p.kind==='dmg'?'урон':p.kind==='arm'?'броня':'шлем';
+        return `<div class="setx-item" data-item-name="${esc(p.name)}" onclick="openItemPopup(this.dataset.itemName)" title="Открыть карточку">
+          <div class="setx-ico">${src?`<img src="${src}" alt="" loading="lazy">`:''}</div>
+          <div class="setx-iname">${esc(p.name)}</div>
+          <div class="setx-istat"><b>${esc(p.stat)}</b> ${lbl}</div>
+        </div>`;
       }).join('');
-      return `<div class="set-tile" style="--ta:${ta}">
-        <div class="set-tile-bar"></div>
-        <div class="set-tile-body">
-          <div class="set-tile-head">
-            <div class="set-tile-ico">${ico}</div>
-            <div class="set-tile-meta">
-              <div class="set-tile-name">${esc(s.name)}</div>
-              <span class="chip rar${s.rar}">${RARN[s.rar]||''}</span>
-            </div>
-          </div>
-          ${bonusHtml}
-          <div class="set-tile-parts">${partsHtml}</div>
+      const bonus=si&&si[0]
+        ?`<div class="setx-bonus"><span class="setx-bico">${si[0].icon||'✦'}</span><div><div class="setx-blbl">Бонус комплекта · ${esc(si[0].label)}</div><div class="setx-btxt">${esc(si[0].desc)}</div></div></div>`
+        :`<div class="setx-bonus setx-bonus--none"><span class="setx-bico">—</span><div class="setx-btxt">Особого бонуса за полный комплект нет — ценен характеристиками.</div></div>`;
+      return `<div class="setx r${s.rar}" style="--ta:${ta}">
+        <div class="setx-head">
+          <span class="setx-emoji">${ico}</span>
+          <div class="setx-meta"><div class="setx-eyebrow">Комплект · <span>${RARN[s.rar]||''}</span></div><div class="setx-name">${esc(title)}</div></div>
+          <div class="setx-sum">${dmg?`<span class="setx-s dmg"><b>${dmg}</b>урон</span>`:''}${def?`<span class="setx-s def"><b>${def}</b>защита</span>`:''}</div>
         </div>
+        <div class="setx-items">${items}</div>
+        ${bonus}
       </div>`;
     }).join('')}</div>`;
     return `
     ${gcCalc}
-    <div class="intro"><b>Комплекты снаряжения</b> — наборы предметов с особыми бонусами при ношении всех частей. Нажмите на название комплекта, чтобы свернуть или развернуть его. Предметы также доступны в разделах «Оружие», «Броня», «Шлемы».</div>
+    <div class="intro"><b>Комплекты</b> — наборы из трёх предметов. Если надеть все части сразу, исполнитель получает особый бонус. Нажми на предмет, чтобы открыть его карточку.</div>
     <div class="bar">
       ${cats.map(c=>`<button class="filter ftile ${gearFilter.cat===c[0]?'on':''}" style="--cc:${c[4]||'var(--acid)'}" onclick="setGearCat('${c[0]}')"><span class="ftico"${c[5]?` style="font-size:${c[5]}"`:''}>${c[3]||''}</span>${c[1]}${c[2]?`<span class="ftcnt">${c[2]}</span>`:''}</button>`).join('')}
       <span class="cnt" style="margin-left:auto">${sets.length} комплект(ов)</span>
     </div>
-    ${setsHtml}
-    <div class="legend">
-      Редкость: <span class="chip rar1">Обычное</span><span class="chip rar2">Редкое</span><span class="chip rar3">Мистическое</span><span class="chip rar4">Легендарное</span><span class="chip rar5">Мифическое</span>
-    </div>`;
+    ${setsHtml}`;
   }
 
   // --- подраздел Сравнение ---

@@ -1982,7 +1982,8 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
 .dn-rw:hover{border-color:rgba(212,168,67,.55);transform:translateY(-2px)}
 .dn-rw-ico{width:64px;height:64px;border-radius:14px;overflow:hidden;background:#0c0c0e}
 .dn-rw-ico img{width:100%;height:100%;object-fit:cover}
-.dn-rw-n{font-family:'Saira Condensed',sans-serif;font-size:13.5px;font-weight:600;color:#fff;line-height:1.15}
+.dn-rw{min-width:0;overflow:hidden}
+.dn-rw-n{font-family:'Saira Condensed',sans-serif;font-size:clamp(11.5px,1.25vw,13.5px);font-weight:600;color:#fff;line-height:1.15;max-width:100%;hyphens:manual;-webkit-hyphens:manual}
 .dn-rw-note{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700}
 .dn-mini{font-size:13px;color:rgba(235,235,245,.55);margin:10px 0 0;line-height:1.55}
 .dn-mini b{color:rgba(255,255,255,.85)}
@@ -3164,7 +3165,7 @@ function renderGuides(){
 }
 function dnItem(key,name,note){
   const src=img(key);
-  return `<div class="dn-rw" data-item-name="${esc(name)}" onclick="openItemPopup(this.dataset.itemName)"><div class="dn-rw-ico">${src?`<img src="${src}" alt="" loading="lazy">`:''}</div><div class="dn-rw-n">${esc(name)}</div>${note?`<div class="dn-rw-note">${note}</div>`:''}</div>`;
+  return `<div class="dn-rw" data-item-name="${esc(name)}" onclick="openItemPopup(this.dataset.itemName)"><div class="dn-rw-ico">${src?`<img src="${src}" alt="" loading="lazy">`:''}</div><div class="dn-rw-n">${esc(name).replace(/Экспериментальная/,'Экспери&shy;ментальная')}</div>${note?`<div class="dn-rw-note">${note}</div>`:''}</div>`;
 }
 function dnSteps(steps){
   return `<ol class="dn-steps">${steps.map(s=>`<li class="dn-step${s.warn?' dn-step--warn':''}${s.loot?' dn-step--loot':''}"><div class="dn-say">${esc(s.say)}</div>${s.note?`<div class="dn-note">${s.note}</div>`:''}</li>`).join('')}</ol>`;

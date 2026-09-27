@@ -183,6 +183,16 @@ background:linear-gradient(135deg,#e9dcc0,#d9c69c 60%,#cdb485);color:#1c140a;box
 #toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);z-index:60;background:#1c1712;border:1px solid rgba(240,165,58,.5);color:var(--ink);font-size:14px;padding:11px 16px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:calc(100% - 32px);text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 #toast b{color:var(--amber2);font-family:'JetBrains Mono'}
+#go{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(5,4,3,.78);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .2s}
+#go.on{opacity:1;pointer-events:auto}
+.go-box{width:100%;max-width:400px;text-align:center;background:radial-gradient(120% 90% at 50% 0%,rgba(240,165,58,.16),transparent 60%),#15110d;border:1px solid rgba(240,165,58,.45);border-radius:20px;padding:26px 22px 18px;box-shadow:0 30px 80px rgba(0,0,0,.7);transform:translateY(12px) scale(.97);transition:transform .25s}
+#go.on .go-box{transform:none}
+.go-k{font:600 12px 'JetBrains Mono';letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+.go-code{font:700 34px 'JetBrains Mono';letter-spacing:.16em;margin:12px auto;padding:8px 16px;border:2px dashed rgba(240,165,58,.6);border-radius:12px;color:var(--amber2);display:inline-block}
+.go-s{color:var(--dim);font-size:14px;margin-bottom:18px}
+.go-btn{width:100%}
+.go-x{margin-top:10px;background:none;border:0;color:var(--faint);font:500 13px 'Rubik';cursor:pointer;padding:6px}
+.go-x:hover{color:var(--ink)}
 .faq details{border-bottom:1px solid var(--line);padding:4px 0}
 .faq summary{list-style:none;cursor:pointer;padding:14px 30px 14px 0;font:600 18px 'Oswald';text-transform:uppercase;letter-spacing:.02em;position:relative}
 .faq summary::-webkit-details-marker{display:none}
@@ -283,7 +293,7 @@ footer a{color:var(--dim)}
         </div>
       </div>
       <a class="btn btn-amber play js-play" href="#" target="_blank" rel="noopener">▶ Играть в браузере</a>
-      <p class="play-s">Бесплатно · открывается сразу · промокод скопируется автоматически</p>
+      <p class="play-s">Бесплатно · открывается сразу · промокод скопируется сам</p>
     </div>
   </article>
 </section>
@@ -348,9 +358,20 @@ footer a{color:var(--dim)}
 const PROMO='LILCHICH';
 const GAME_URL='https://theclosedsector.com';
 document.querySelectorAll('.js-code').forEach(e=>e.textContent=PROMO);
-document.querySelectorAll('.js-play').forEach(a=>{a.href=GAME_URL;a.addEventListener('click',()=>{
+document.querySelectorAll('.js-play').forEach(a=>{a.href=GAME_URL;a.removeAttribute('target');a.addEventListener('click',e=>{
+  e.preventDefault();
   if(typeof ym!=='undefined')ym(109747108,'reachGoal','play_click');
-  copyText(PROMO);toast('Промокод <b>'+PROMO+'</b> скопирован — вставь при регистрации')})});
+  copyText(PROMO);goModal()})});
+/* перед переходом в игру — окно с промокодом, чтобы его точно увидели */
+let goTimer;
+function goModal(){
+  let m=document.getElementById('go');
+  if(!m){m=document.createElement('div');m.id='go';m.innerHTML='<div class="go-box" role="dialog" aria-modal="true"><div class="go-k">✓ Промокод скопирован</div><div class="go-code">'+PROMO+'</div><p class="go-s">При регистрации в игре вставь его в поле промокода — получишь бонусы для старта.</p><a class="btn btn-amber go-btn" href="'+GAME_URL+'">▶ Перейти в игру <span id="go-n"></span></a><button class="go-x" type="button">Отмена</button></div>';document.body.appendChild(m);
+    m.addEventListener('click',e=>{if(e.target===m||e.target.classList.contains('go-x')){clearInterval(goTimer);m.classList.remove('on')}});}
+  let n=5;const el=document.getElementById('go-n');el.textContent='('+n+')';
+  m.classList.add('on');clearInterval(goTimer);
+  goTimer=setInterval(()=>{n--;el.textContent='('+n+')';if(n<=0){clearInterval(goTimer);location.href=GAME_URL}},1000);
+}
 function copyText(t){if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(t).catch(()=>{});const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
 function toast(h){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t)}t.innerHTML=h;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),3200)}
 

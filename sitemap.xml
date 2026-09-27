@@ -251,6 +251,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://tcs-guide.killa1.workers.dev/gear/armor/sentinel-345.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://tcs-guide.killa1.workers.dev/gear/armor/shturm-a1.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -396,6 +401,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://tcs-guide.killa1.workers.dev/gear/helmets/vigil-a3.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://tcs-guide.killa1.workers.dev/gear/weapons/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -502,6 +512,11 @@
   </url>
   <url>
     <loc>https://tcs-guide.killa1.workers.dev/gear/weapons/ppsh.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tcs-guide.killa1.workers.dev/gear/weapons/raven-px9.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

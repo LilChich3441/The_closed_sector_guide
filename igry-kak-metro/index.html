@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Игры как Метро 2033 и Сталкер — в браузере, без скачивания</title>
+<meta name="description" content="Подборка игр в духе Метро 2033 и Сталкера: постапокалипсис, тоннели, выживание. Первая — The Closed Sector, играется прямо в браузере на телефоне и ПК.">
+<link rel="canonical" href="https://tcs-guide.killa1.workers.dev/igry-kak-metro/">
+<meta name="theme-color" content="#0a0806">
+<link rel="icon" href="/loc/favicon-32.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://tcs-guide.killa1.workers.dev/igry-kak-metro/">
+<meta property="og:title" content="Игры как Метро 2033 и Сталкер — без скачивания">
+<meta property="og:description" content="Постапокалипсис, тоннели и выживание. Первая игра подборки открывается прямо в браузере.">
+<meta property="og:image" content="https://tcs-guide.killa1.workers.dev/loc/og-metro.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="/loc/metro-bg.webp" media="(min-width:700px)">
+<link rel="preload" as="image" href="/loc/metro-bg-m.webp" media="(max-width:699px)">
+<script>
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109747108','ym');
+ym(109747108,'init',{clickmap:true,accurateTrackBounce:true,trackLinks:true});
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Rubik:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ItemList","name":"Игры как Метро 2033 и Сталкер","itemListElement":[
+{"@type":"ListItem","position":1,"name":"The Closed Sector"},
+{"@type":"ListItem","position":2,"name":"Day R Survival"},
+{"@type":"ListItem","position":3,"name":"This War of Mine"},
+{"@type":"ListItem","position":4,"name":"Lifeline"},
+{"@type":"ListItem","position":5,"name":"Fallout Shelter"},
+{"@type":"ListItem","position":6,"name":"60 Seconds! Atomic Adventure"}]}
+</script>
+<style>
+:root{--bg:#0a0806;--ink:#f4ede2;--dim:rgba(244,237,226,.64);--faint:rgba(244,237,226,.38);--amber:#f0a53a;--amber2:#ffcf7a;--rust:#b4532a;--red:#e2463b;--green:#8fe39a;
+--panel:rgba(22,18,14,.78);--line:rgba(244,237,226,.1);--line2:rgba(244,237,226,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Rubik',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+
+/* ── grain & scanlines ── */
+body:before{content:"";position:fixed;inset:-50%;z-index:50;pointer-events:none;opacity:.07;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* ── hero ── */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:url(/loc/metro-bg.webp) center 40%/cover;animation:kb 28s ease-in-out infinite alternate;transform-origin:62% 45%}
+@keyframes kb{from{transform:scale(1.04)}to{transform:scale(1.14) translate(-1.5%,1%)}}
+.hero:after{content:"";position:absolute;inset:0;z-index:-1;
+background:linear-gradient(180deg,rgba(10,8,6,.55) 0%,rgba(10,8,6,.05) 28%,rgba(10,8,6,.25) 55%,var(--bg) 97%),
+radial-gradient(90% 60% at 50% 100%,rgba(10,8,6,.85),transparent 70%)}
+.topbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:16px max(16px,env(safe-area-inset-left))}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand i{width:34px;height:34px;border-radius:9px;background:var(--ink);color:#000;font:700 13px 'Oswald';display:flex;align-items:center;justify-content:center;font-style:normal}
+.brand span{font:600 12px 'Oswald';letter-spacing:.22em;text-transform:uppercase;color:var(--ink);text-shadow:0 1px 8px #000}
+.top-link{font:500 12px 'Oswald';letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:7px 12px;border:1px solid rgba(244,237,226,.3);border-radius:8px;background:rgba(0,0,0,.35);backdrop-filter:blur(6px)}
+.top-link:hover{border-color:var(--amber);color:var(--amber2)}
+.hero-in{padding:0 16px 9vh;max-width:900px;margin:0 auto;width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:500 12px 'JetBrains Mono';letter-spacing:.14em;text-transform:uppercase;color:var(--amber2);background:rgba(0,0,0,.45);border:1px solid rgba(240,165,58,.35);padding:5px 11px;border-radius:6px;margin-bottom:16px;backdrop-filter:blur(4px)}
+.eyebrow b{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.2}}
+h1{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(40px,8.4vw,92px);line-height:.95;letter-spacing:-.005em;text-shadow:0 4px 30px rgba(0,0,0,.7)}
+h1 em{font-style:normal;color:var(--amber);background:linear-gradient(180deg,var(--amber2),var(--amber) 55%,var(--rust));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 22px rgba(240,165,58,.35))}
+h1 small{display:block;font-size:.42em;letter-spacing:.06em;margin-top:.35em;color:var(--ink);opacity:.92}
+.lead{margin-top:18px;max-width:560px;font-size:clamp(15px,1.8vw,17px);color:rgba(244,237,226,.84);text-shadow:0 1px 10px #000}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 16px 'Oswald';letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:0;border-radius:12px;padding:15px 24px;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn-amber{background:linear-gradient(180deg,var(--amber2),var(--amber));color:#1a0f02;box-shadow:0 10px 30px -8px rgba(240,165,58,.7),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-amber:hover{box-shadow:0 14px 40px -6px rgba(240,165,58,.9),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-ghost{background:rgba(0,0,0,.4);color:var(--ink);border:1px solid rgba(244,237,226,.3);backdrop-filter:blur(6px)}
+.btn-ghost:hover{border-color:var(--ink)}
+.scroll-hint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:22px;height:34px;border:2px solid rgba(244,237,226,.4);border-radius:12px}
+.scroll-hint:after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--amber);animation:sh 1.8s infinite}
+@keyframes sh{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
+
+/* ── section heads ── */
+section{padding:70px 0 10px}
+.sh{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
+.sh-n{font:700 15px 'JetBrains Mono';color:var(--amber)}
+.sh h2{font:700 clamp(26px,4.6vw,40px)/1.05 'Oswald';text-transform:uppercase}
+.sh-line{flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent);align-self:center}
+
+/* ── #1 card ── */
+.top1{position:relative;border-radius:22px;padding:1px;background:linear-gradient(140deg,rgba(240,165,58,.8),rgba(180,83,42,.25) 40%,rgba(244,237,226,.08) 70%,rgba(240,165,58,.5));box-shadow:0 30px 80px -30px rgba(240,165,58,.35)}
+.top1-in{border-radius:21px;background:radial-gradient(120% 80% at 100% 0%,rgba(240,165,58,.12),transparent 55%),#100d0a;padding:28px 26px 26px;overflow:hidden;position:relative}
+.rank{position:absolute;right:-8px;top:-30px;font:700 190px/1 'Oswald';color:rgba(240,165,58,.07);pointer-events:none;user-select:none}
+.tag{display:inline-block;font:600 11px 'JetBrains Mono';letter-spacing:.16em;text-transform:uppercase;color:#1a0f02;background:var(--amber);padding:4px 9px;border-radius:5px;margin-bottom:12px}
+.top1 h3{font:700 clamp(32px,5.5vw,48px)/1 'Oswald';text-transform:uppercase;margin-bottom:12px}
+.top1 p.d{color:var(--dim);font-size:15.5px;max-width:640px}
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 26px}
+.feat{border:1px solid var(--line);border-radius:14px;padding:14px;background:rgba(255,255,255,.025);transition:border-color .2s,transform .2s}
+.feat:hover{border-color:rgba(240,165,58,.45);transform:translateY(-2px)}
+.feat-i{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(240,165,58,.12);border:1px solid rgba(240,165,58,.25);margin-bottom:10px}
+.feat b{display:block;font:600 17px 'Oswald';text-transform:uppercase;letter-spacing:.02em}
+.feat span{display:block;font-size:13px;color:var(--dim);line-height:1.45;margin-top:3px}
+
+/* ── radio ── */
+.radio{border-radius:18px;background:#0b0a09;border:1px solid var(--line2);overflow:hidden;box-shadow:inset 0 0 60px rgba(0,0,0,.8)}
+.radio-h{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line);font:500 11.5px 'JetBrains Mono';letter-spacing:.1em;text-transform:uppercase;color:var(--faint);background:rgba(255,255,255,.02)}
+.radio-h .rec{display:flex;align-items:center;gap:6px;color:var(--red)}
+.radio-h .rec:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.2s infinite}
+.radio-h .fq{margin-left:auto;color:var(--green)}
+.wave{display:flex;align-items:center;gap:2px;height:16px}
+.wave i{width:2px;background:var(--green);border-radius:1px;animation:wv 1s ease-in-out infinite;opacity:.8}
+@keyframes wv{0%,100%{height:3px}50%{height:15px}}
+.radio-b{padding:16px;min-height:280px;display:flex;flex-direction:column;gap:9px;font-size:14.5px;position:relative;
+background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
+.m{max-width:84%;padding:9px 13px;border-radius:14px;line-height:1.45;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.m.on{opacity:1;transform:none}
+.m.in{background:#24201b;border-bottom-left-radius:4px}
+.m.in:before{content:"БОЕЦ";display:block;font:600 10px 'JetBrains Mono';letter-spacing:.14em;color:var(--green);margin-bottom:2px}
+.m.out{align-self:flex-end;background:linear-gradient(180deg,rgba(240,165,58,.3),rgba(240,165,58,.2));border:1px solid rgba(240,165,58,.35);border-bottom-right-radius:4px}
+.m.sys{align-self:center;max-width:100%;text-align:center;font:600 11.5px 'JetBrains Mono';letter-spacing:.14em;text-transform:uppercase;color:var(--red);padding:6px}
+.m.sys.good{color:var(--green)}
+.typing{align-self:flex-start;display:none;gap:4px;padding:12px 14px;background:#24201b;border-radius:14px;border-bottom-left-radius:4px}
+.typing.on{display:flex}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--dim);animation:tp 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{0%,60%,100%{opacity:.25;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+.choices{display:none;flex-direction:column;gap:8px;padding:0 16px 16px}
+.choices.on{display:flex}
+.choices-l{font:500 11px 'JetBrains Mono';letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.ch{text-align:left;font:500 14.5px 'Rubik';color:var(--ink);background:rgba(240,165,58,.06);border:1px solid rgba(240,165,58,.35);border-radius:12px;padding:11px 14px;cursor:pointer;transition:background .2s,border-color .2s}
+.ch:hover{background:rgba(240,165,58,.16);border-color:var(--amber)}
+.ch:before{content:"▸ ";color:var(--amber)}
+.radio.glitch .radio-b{animation:gl .5s steps(2) 2}
+@keyframes gl{0%{filter:none;transform:none}25%{filter:hue-rotate(40deg) contrast(1.6);transform:translateX(-3px)}50%{filter:invert(.1);transform:translateX(3px)}75%{filter:contrast(2) brightness(.6)}100%{filter:none;transform:none}}
+.replay{align-self:center;margin-top:4px;font:600 12px 'JetBrains Mono';letter-spacing:.12em;text-transform:uppercase;color:var(--amber2);background:none;border:1px dashed rgba(240,165,58,.5);border-radius:8px;padding:6px 12px;cursor:pointer;display:none}
+.replay.on{display:inline-block}
+
+/* ── pass / promo ── */
+.pass{position:relative;margin-top:26px;display:grid;grid-template-columns:1fr auto;border-radius:16px;overflow:hidden;
+background:linear-gradient(135deg,#e9dcc0,#d9c69c 60%,#cdb485);color:#1c140a;box-shadow:0 20px 50px -20px rgba(0,0,0,.9)}
+.pass:before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");mix-blend-mode:multiply;opacity:.5;pointer-events:none}
+.pass-l{padding:18px 20px;position:relative}
+.pass-k{font:700 11px 'JetBrains Mono';letter-spacing:.2em;text-transform:uppercase;color:#7a4a18}
+.pass-t{font:700 26px/1.05 'Oswald';text-transform:uppercase;margin:4px 0 6px}
+.pass-s{font-size:13.5px;color:#4a3a24;max-width:380px}
+.pass-r{position:relative;padding:18px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-left:2px dashed rgba(28,20,10,.35);min-width:230px}
+.pass-r:before,.pass-r:after{content:"";position:absolute;left:-11px;width:20px;height:20px;border-radius:50%;background:#100d0a}
+.pass-r:before{top:-10px}.pass-r:after{bottom:-10px}
+.code{font:700 26px 'JetBrains Mono';letter-spacing:.16em;padding:6px 14px;border:2px solid #1c140a;border-radius:8px;background:rgba(255,255,255,.35)}
+.copy{font:600 13px 'Oswald';letter-spacing:.12em;text-transform:uppercase;background:#1c140a;color:#f1e6cf;border:0;border-radius:8px;padding:9px 16px;cursor:pointer;min-width:150px}
+.copy.ok{background:#2f6b3a}
+.stamp{position:absolute;right:18px;top:12px;font:700 13px 'Oswald';letter-spacing:.18em;color:rgba(170,40,30,.75);border:2px solid rgba(170,40,30,.7);border-radius:6px;padding:2px 8px;transform:rotate(-9deg);pointer-events:none}
+.play{margin-top:14px;width:100%;font-size:19px;padding:18px}
+.play-s{text-align:center;font-size:12.5px;color:var(--faint);margin-top:8px}
+
+/* ── other games ── */
+.games{display:grid;gap:12px}
+.g{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start;padding:18px 18px 18px 14px;border-radius:16px;background:var(--panel);border:1px solid var(--line);transition:border-color .2s,transform .2s,background .2s;position:relative;overflow:hidden}
+.g:hover{border-color:rgba(240,165,58,.35);transform:translateX(3px);background:rgba(30,24,18,.85)}
+.g-n{font:700 44px/1 'Oswald';color:transparent;-webkit-text-stroke:1.5px rgba(244,237,226,.3);text-align:center}
+.g h3{font:600 21px/1.15 'Oswald';text-transform:uppercase;letter-spacing:.02em}
+.g p{color:var(--dim);font-size:14px;margin-top:4px}
+.g-why{margin-top:8px;font-size:13px;color:var(--amber2);opacity:.9}
+.g-why:before{content:"Похоже на Метро: ";color:var(--faint)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tags span{font:500 11px 'JetBrains Mono';letter-spacing:.06em;text-transform:uppercase;color:var(--faint);border:1px solid var(--line2);border-radius:20px;padding:2px 9px}
+
+/* ── faq ── */
+.guide{display:block;position:relative;border-radius:20px;overflow:hidden;text-decoration:none;border:1px solid var(--line2);isolation:isolate;transition:border-color .2s,transform .2s}
+.guide:hover{border-color:rgba(240,165,58,.5);transform:translateY(-2px)}
+.guide-bg{position:absolute;inset:0;z-index:-2;background:url(/loc/metro-bg.webp) 8% 88%/cover;transition:transform 6s ease}
+.guide:hover .guide-bg{transform:scale(1.06)}
+.guide:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,8,6,.96) 30%,rgba(10,8,6,.7) 65%,rgba(10,8,6,.35))}
+.guide-in{padding:28px 26px}
+.guide-k{font:600 11.5px 'JetBrains Mono';letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+.guide-t{font:700 clamp(26px,4.4vw,38px)/1.05 'Oswald';text-transform:uppercase;margin:6px 0 8px}
+.guide-t span{color:var(--amber)}
+.guide-s{color:var(--dim);font-size:14.5px;max-width:520px}
+.guide-l{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;margin:16px 0 20px;max-width:600px}
+.guide-l li{font-size:14px;display:flex;gap:8px;align-items:flex-start}
+.guide-l b{font-weight:400}
+.guide-b{padding:12px 20px;font-size:15px}
+.guide:hover .guide-b{border-color:var(--amber);color:var(--amber2)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);z-index:60;background:#1c1712;border:1px solid rgba(240,165,58,.5);color:var(--ink);font-size:14px;padding:11px 16px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:calc(100% - 32px);text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+#toast b{color:var(--amber2);font-family:'JetBrains Mono'}
+.faq details{border-bottom:1px solid var(--line);padding:4px 0}
+.faq summary{list-style:none;cursor:pointer;padding:14px 30px 14px 0;font:600 18px 'Oswald';text-transform:uppercase;letter-spacing:.02em;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:4px;top:10px;font:400 26px 'Oswald';color:var(--amber);transition:transform .2s}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq details p{color:var(--dim);font-size:14.5px;padding:0 0 16px;max-width:680px}
+
+/* ── final ── */
+.final{margin:80px 0 0;position:relative;min-height:380px;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.final:before{content:"";position:absolute;inset:0;z-index:-2;background:url(/loc/metro-bg.webp) 12% 85%/cover;filter:saturate(.8)}
+.final:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--bg),rgba(10,8,6,.45) 35%,rgba(10,8,6,.55) 70%,var(--bg))}
+.final h2{font:700 clamp(30px,5.5vw,54px)/1 'Oswald';text-transform:uppercase;max-width:640px;text-shadow:0 4px 24px #000}
+.final p{color:rgba(244,237,226,.82);margin:14px 0 22px;max-width:520px;text-shadow:0 1px 10px #000}
+footer{text-align:center;color:var(--faint);font-size:12px;padding:30px 16px 40px;line-height:1.8}
+footer a{color:var(--dim)}
+
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.on{opacity:1;transform:none}
+
+@media(max-width:699px){
+.hero-bg{background-image:url(/loc/metro-bg-m.webp);background-position:center 30%}
+.feats{grid-template-columns:1fr}
+.feat{display:grid;grid-template-columns:38px 1fr;gap:0 12px;align-items:center}
+.feat-i{margin:0;grid-row:span 2}
+.top1-in{padding:22px 16px 18px}
+.pass{grid-template-columns:1fr}
+.pass-r{border-left:0;border-top:2px dashed rgba(28,20,10,.35);min-width:0}
+.pass-r:before,.pass-r:after{top:-11px;left:auto;bottom:auto}
+.pass-r:before{left:-10px}.pass-r:after{right:-10px}
+.pass-k{padding-right:84px}
+.stamp{right:12px;top:14px;font-size:11px}
+.g{grid-template-columns:44px 1fr;gap:10px}
+.g-n{font-size:34px}
+.btn{width:100%}
+.guide-l{grid-template-columns:1fr}
+.guide-in{padding:22px 18px}
+.guide:after{background:linear-gradient(180deg,rgba(10,8,6,.9),rgba(10,8,6,.96))}
+.brand span{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv,.m{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<script>document.body.classList.add('js')</script>
+
+<header class="hero">
+  <div class="hero-bg" role="img" aria-label="Заброшенный город после катастрофы, вход в метро"></div>
+  <div class="topbar">
+    <a class="brand" href="/"><i>TCS</i><span>The Closed Sector · гайд</span></a>
+    <a class="top-link" href="/">Гайд по игре</a>
+  </div>
+  <div class="hero-in">
+    <div class="eyebrow"><b></b>Подборка · постапокалипсис</div>
+    <h1>Игры как <em>Метро 2033</em> и Сталкер<small>— прямо в браузере</small></h1>
+    <p class="lead">Тоннели, радиация, заброшенные станции и выживание, где каждое решение может стоить жизни. Собрали игры с той самой атмосферой. Первую можно начать через минуту, без скачивания.</p>
+    <div class="hero-cta">
+      <a class="btn btn-amber js-play" href="#" target="_blank" rel="noopener">▶ Играть в The Closed Sector</a>
+      <a class="btn btn-ghost" href="#top1">Смотреть подборку</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"></div>
+</header>
+
+<main class="wrap">
+
+<section id="top1">
+  <div class="sh rv"><span class="sh-n">01</span><h2>Лучшая в браузере</h2><span class="sh-line"></span></div>
+  <article class="top1 rv">
+    <div class="top1-in">
+      <div class="rank" aria-hidden="true">№1</div>
+      <span class="tag">Без скачивания · телефон и ПК</span>
+      <h3>The Closed Sector</h3>
+      <p class="d">Самая «метровская» браузерная игра. Ты — командир на связи, а твой боец один идёт через заброшенные тоннели, станции, бункеры и мёртвые кварталы. Он пишет тебе по рации, ты решаешь, что делать. Один неверный ответ — и боец больше не выйдет на связь.</p>
+
+      <div class="feats">
+        <div class="feat"><div class="feat-i">📻</div><b>Связь по рации</b><span>Сообщения приходят с задержкой, как от живого человека</span></div>
+        <div class="feat"><div class="feat-i">☠️</div><b>Цена ошибки</b><span>Не тот ответ — и боец погибает вместе со снаряжением</span></div>
+        <div class="feat"><div class="feat-i">🎒</div><b>Лут и боссы</b><span>Оружие, броня, комплекты, спецоперации и крафт</span></div>
+      </div>
+
+      <div class="radio" id="radio">
+        <div class="radio-h"><span class="rec">Эфир</span><span>Канал 7</span><span class="wave" aria-hidden="true"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.2s"></i></span><span class="fq">143.8 МГц</span></div>
+        <div class="radio-b" id="rb" aria-live="polite"></div>
+        <div class="choices" id="ch"><div class="choices-l">Твой ответ, командир:</div></div>
+      </div>
+      <p class="play-s">Попробуй ответить — так выглядит игра.</p>
+
+      <div class="pass">
+        <div class="stamp">Допуск</div>
+        <div class="pass-l">
+          <div class="pass-k">Пропуск в сектор · новичку</div>
+          <div class="pass-t">Бонус при регистрации</div>
+          <div class="pass-s js-bonus">Введи промокод при регистрации в игре — получишь бонусы для старта.</div>
+        </div>
+        <div class="pass-r">
+          <div class="code js-code">LILCHICH</div>
+          <button class="copy" id="copy" type="button">Скопировать код</button>
+        </div>
+      </div>
+      <a class="btn btn-amber play js-play" href="#" target="_blank" rel="noopener">▶ Играть в браузере</a>
+      <p class="play-s">Бесплатно · открывается сразу · промокод скопируется автоматически</p>
+    </div>
+  </article>
+</section>
+
+<section id="guide">
+  <a class="guide rv" href="/">
+    <div class="guide-bg" aria-hidden="true"></div>
+    <div class="guide-in">
+      <div class="guide-k">Уже начал играть?</div>
+      <h2 class="guide-t">Полный гайд по <span>The Closed Sector</span></h2>
+      <p class="guide-s">Чтобы боец возвращался живым и с добычей — всё собрано на одном сайте:</p>
+      <ul class="guide-l">
+        <li><b>🛡️</b>Всё оружие, броня, шлемы и комплекты</li>
+        <li><b>🗺️</b>Все локации: что где падает и с чем идти</li>
+        <li><b>💀</b>Боссы и как их найти</li>
+        <li><b>🎯</b>Спецоперации — ответы по шагам</li>
+        <li><b>🧮</b>Калькулятор снаряжения и крафт</li>
+        <li><b>🚙</b>Транспорт и время до локаций</li>
+      </ul>
+      <span class="btn btn-ghost guide-b">Открыть гайд →</span>
+    </div>
+  </a>
+</section>
+
+<section id="games">
+  <div class="sh rv"><span class="sh-n">02</span><h2>Ещё игры в том же духе</h2><span class="sh-line"></span></div>
+  <p class="rv" style="color:var(--dim);margin:-8px 0 18px;font-size:14.5px">Эти игры уже нужно скачивать на телефон, но атмосфера того стоит.</p>
+  <div class="games">
+    <div class="g rv"><div class="g-n">2</div><div><h3>Day R Survival</h3><p>Выживание на просторах постъядерного СССР: голод, холод, радиация и долгие переходы между мёртвыми городами.</p><div class="g-why">советский постапокалипсис и дефицит всего</div><div class="tags"><span>выживание</span><span>открытый мир</span><span>android · ios</span></div></div></div>
+    <div class="g rv"><div class="g-n">3</div><div><h3>This War of Mine</h3><p>Горстка гражданских в осаждённом городе. Днём прячешься в укрытии, ночью выходишь на вылазки за едой и лекарствами.</p><div class="g-why">ночные вылазки и тяжёлый моральный выбор</div><div class="tags"><span>выживание</span><span>драма</span><span>android · ios</span></div></div></div>
+    <div class="g rv"><div class="g-n">4</div><div><h3>Lifeline</h3><p>Текстовая история: выживший астронавт пишет тебе и ждёт совета. Ответы идут с паузами, как настоящая переписка.</p><div class="g-why">та же механика «связи» с героем, но в космосе</div><div class="tags"><span>текстовая</span><span>в реальном времени</span><span>android · ios</span></div></div></div>
+    <div class="g rv"><div class="g-n">5</div><div><h3>Fallout Shelter</h3><p>Строишь убежище после ядерной войны, распределяешь ресурсы и отправляешь жителей исследовать пустоши.</p><div class="g-why">жизнь под землёй после ядерной войны</div><div class="tags"><span>менеджмент</span><span>постапокалипсис</span><span>android · ios · pc</span></div></div></div>
+    <div class="g rv"><div class="g-n">6</div><div><h3>60 Seconds! Atomic Adventure</h3><p>Минута, чтобы схватить всё нужное до взрыва, а потом — выживание в бункере с тем, что успел унести.</p><div class="g-why">бункер, припасы и вылазки наружу</div><div class="tags"><span>бункер</span><span>чёрный юмор</span><span>android · ios · pc</span></div></div></div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="sh rv"><span class="sh-n">03</span><h2>Вопросы</h2><span class="sh-line"></span></div>
+  <details class="rv"><summary>Есть ли игра как Метро 2033 без скачивания?</summary><p>Да — The Closed Sector. Она открывается прямо в браузере на телефоне или компьютере: тоннели, заброшенные станции, мутанты и выживание, но в формате переписки с бойцом по рации.</p></details>
+  <details class="rv"><summary>Чем The Closed Sector похожа на Сталкер?</summary><p>Закрытая зона, вылазки за лутом, аномально опасные локации и боссы, снаряжение, которое можно потерять вместе с бойцом. Главное отличие — ты не бегаешь сам, а руководишь бойцом по связи.</p></details>
+  <details class="rv"><summary>Игра бесплатная?</summary><p>Да, играть можно бесплатно. А с промокодом выше новичок получает бонус при регистрации.</p></details>
+  <details class="rv"><summary>Где найти гайды по The Closed Sector?</summary><p>На <a href="/">главной странице этого сайта</a>: всё снаряжение и комплекты, локации, боссы и пошаговые прохождения спецопераций.</p></details>
+</section>
+
+</main>
+
+<section class="final" id="start">
+  <div class="wrap rv">
+    <h2>Командир, боец ждёт твоего приказа</h2>
+    <p>Открой игру, введи промокод <b class="js-code" style="color:var(--amber2);font-family:'JetBrains Mono'">LILCHICH</b> и выведи бойца живым из первой вылазки.</p>
+    <div class="hero-cta" style="margin-top:0"><a class="btn btn-amber js-play" href="#" target="_blank" rel="noopener">▶ Выйти на связь</a><a class="btn btn-ghost" href="/">Гайд по игре</a></div>
+  </div>
+</section>
+
+<footer>
+  <a href="/">Гайд по The Closed Sector</a> · <a href="/gear/">Снаряжение</a> · <a href="/locations/">Локации</a> · <a href="/bosses/">Боссы</a><br>
+  Неофициальный фан-сайт, не связан с Akari Group. The Closed Sector является торговым знаком Akari Group.<br>
+  Названия остальных игр принадлежат их правообладателям.
+</footer>
+
+<script>
+const PROMO='LILCHICH';
+const GAME_URL='https://theclosedsector.com';
+document.querySelectorAll('.js-code').forEach(e=>e.textContent=PROMO);
+document.querySelectorAll('.js-play').forEach(a=>{a.href=GAME_URL;a.addEventListener('click',()=>{
+  if(typeof ym!=='undefined')ym(109747108,'reachGoal','play_click');
+  copyText(PROMO);toast('Промокод <b>'+PROMO+'</b> скопирован — вставь при регистрации')})});
+function copyText(t){if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(t).catch(()=>{});const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+function toast(h){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t)}t.innerHTML=h;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),3200)}
+
+document.getElementById('copy').addEventListener('click',function(){
+  const b=this,done=()=>{b.textContent='✓ Скопировано';b.classList.add('ok');setTimeout(()=>{b.textContent='Скопировать код';b.classList.remove('ok')},1800)};
+  if(typeof ym!=='undefined')ym(109747108,'reachGoal','promo_copy');
+  Promise.resolve(copyText(PROMO)).then(done);
+});
+
+let ioSeen=false;
+const io=new IntersectionObserver(es=>{ioSeen=true;es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+
+/* ── radio mini-scene ── */
+const rb=document.getElementById('rb'),ch=document.getElementById('ch'),radio=document.getElementById('radio');
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+let typing;
+function add(cls,txt){const m=document.createElement('div');m.className='m '+cls;m.textContent=txt;rb.insertBefore(m,typing);requestAnimationFrame(()=>requestAnimationFrame(()=>m.classList.add('on')));return m}
+async function say(txt,t){const my=run;typing.classList.add('on');await wait(t||1300);if(my!==run)return;typing.classList.remove('on');add('in',txt);await wait(500)}
+const opts=[
+  {t:'Займи укрытие и атакуй их со спины.',end:async()=>{await say('Понял. Жду…',900);await say('Готово. Оба лежат. Нашёл у одного жетон.',1700);add('sys good','+ Жетон рекрутинга')}},
+  {t:'Беги обратно, не рискуй!',end:async()=>{await say('Бегу!!! Они меня заметили…',1000);await wait(700);radio.classList.add('glitch');add('sys','— связь с бойцом потеряна —');await wait(1100);radio.classList.remove('glitch')}},
+  {t:'Не двигайся, пусть пройдут мимо.',end:async()=>{await say('Прошли в метре от меня… Пронесло.',1600);add('sys good','Боец цел. Идём дальше')}},
+];
+let run=0;
+async function scene(){
+  const my=++run;
+  rb.innerHTML='';typing=document.createElement('div');typing.className='typing';typing.innerHTML='<i></i><i></i><i></i>';rb.appendChild(typing);
+  ch.querySelectorAll('.ch').forEach(b=>b.remove());ch.classList.remove('on');
+  await say('Командир, я в тоннеле. Нифига не видно. Включу фонарь — могу привлечь внимание.',1100);
+  if(my!==run)return;add('out','Включи, но будь аккуратен.');await wait(700);
+  await say('Слышу шаги. Их двое. Идут прямо на меня…',1700);
+  if(my!==run)return;
+  opts.forEach(o=>{const b=document.createElement('button');b.className='ch';b.type='button';b.textContent=o.t;b.onclick=async()=>{ch.classList.remove('on');add('out',o.t);await wait(500);await o.end();await wait(600);const r=document.createElement('button');r.className='replay on';r.type='button';r.textContent='↺ Ещё раз';r.onclick=scene;rb.insertBefore(r,typing)};ch.appendChild(b)});
+  ch.classList.add('on');
+}
+const rio=new IntersectionObserver(es=>{if(es[0].isIntersecting){scene();rio.disconnect()}},{threshold:.35});
+rio.observe(radio);
+/* если IntersectionObserver не сработал — просто показать всё */
+setTimeout(()=>{if(!ioSeen&&!run){document.body.classList.remove('js');rio.disconnect();scene()}},1500);
+</script>
+</body>
+</html>

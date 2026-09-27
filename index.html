@@ -1968,6 +1968,11 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   .setx-iname{font-size:13px}
   .setx-name{font-size:21px}
 }
+.gsw-share{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px 14px;margin:-4px 0 12px;font-size:12.5px}
+.gsw-share a{color:rgba(235,235,245,.6);text-decoration:none}
+.gsw-share a:hover{color:#fff}
+.gsw-share button{font:inherit;color:rgba(235,235,245,.75);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:4px 10px;cursor:pointer}
+.gsw-share button:hover{border-color:rgba(196,154,40,.6);color:#fff}
 /* ── guides: switcher + Denisovka ── */
 .gsw{display:flex;gap:10px;flex-wrap:wrap;max-width:840px;margin:14px auto 22px}
 .gsw-b{flex:1 1 260px;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;padding:12px 16px;border-radius:var(--r-md);color:#fff;
@@ -2077,7 +2082,7 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
 <div class="tabs" id="tabs"></div>
 <main id="main"></main>
 <div id="progress-bar"></div>
-<footer>THE CLOSED SECTOR — фанатский справочник • данные могут меняться с патчами<br><span style="font-size:11px;opacity:.7"><a href="/locations/" style="color:inherit">Все локации</a> · <a href="/bosses/" style="color:inherit">Все боссы</a> · <a href="/gear/" style="color:inherit">Вся снаряга</a> · <a href="/igry-kak-metro/" style="color:inherit">Похожие игры</a></span><br><span style="font-size:11px;opacity:.45">Неофициальный фан-сайт, не связан с Akari Group. The Closed Sector является торговым знаком Akari Group.</span><br><span style="font-size:11px;opacity:.5">📱 Добавить на рабочий стол: iOS — «Поделиться» → «На экран "Домой"» · Android — «⋮» → «Добавить на гл. экран»</span></footer>
+<footer>THE CLOSED SECTOR — фанатский справочник • данные могут меняться с патчами<br><span style="font-size:11px;opacity:.7"><a href="/locations/" style="color:inherit">Все локации</a> · <a href="/bosses/" style="color:inherit">Все боссы</a> · <a href="/gear/" style="color:inherit">Вся снаряга</a> · <a href="/igry-kak-metro/" style="color:inherit">Похожие игры</a> · <a href="/promokod/" style="color:inherit">Промокод</a> · <a href="/guides/denisovka/" style="color:inherit">Денисовка</a> · <a href="/guides/universitet/" style="color:inherit">Университет</a></span><br><span style="font-size:11px;opacity:.45">Неофициальный фан-сайт, не связан с Akari Group. The Closed Sector является торговым знаком Akari Group.</span><br><span style="font-size:11px;opacity:.5">📱 Добавить на рабочий стол: iOS — «Поделиться» → «На экран "Домой"» · Android — «⋮» → «Добавить на гл. экран»</span></footer>
 <div id="vpn-island" onclick="viClick(event)">
   <div class="vi-icon">🔒</div>
   <div class="vi-body">
@@ -3171,7 +3176,13 @@ function renderGuides(){
   const list=DB.guides||[];
   if(!list.some(g=>g.id===guideSel))guideSel=list[0].id;
   const pick=`<div class="gsw">${list.map(g=>`<button class="gsw-b${g.id===guideSel?' on':''}" onclick="setGuide('${g.id}')"><span class="gsw-ico">${({denisovka:'🎯',university:'🚇'})[g.id]||'📘'}</span><span><b>${esc(g.short||g.title)}</b><i>${esc(g.subtitle||'')}</i></span></button>`).join('')}</div>`;
-  return pick+(guideSel==='denisovka'?renderGuideDenisovka():guideSel==='university'?renderGuideUniversity():renderGuideBasics());
+  const gUrl=({denisovka:'/guides/denisovka/',university:'/guides/universitet/'})[guideSel];
+  const share=gUrl?`<div class="gsw-share"><a href="${gUrl}" target="_blank" rel="noopener">🔗 Отдельная страница гайда</a><button type="button" onclick="copyGuideLink(this,'${gUrl}')">Скопировать ссылку</button></div>`:'';
+  return pick+share+(guideSel==='denisovka'?renderGuideDenisovka():guideSel==='university'?renderGuideUniversity():renderGuideBasics());
+}
+function copyGuideLink(btn,path){
+  const u=location.origin+path;const ok=()=>{const o=btn.textContent;btn.textContent='✓ Скопировано';setTimeout(()=>btn.textContent=o,1800);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,ok);}else{const ta=document.createElement('textarea');ta.value=u;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();ok();}
 }
 function dnItem(key,name,note){
   const src=img(key);

@@ -338,6 +338,7 @@ h2.sec{font-family:'Saira Condensed',sans-serif;font-size:13px;letter-spacing:3p
 .gsi-lbl{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:uppercase}
 .gsi-arr{color:var(--dim);font-size:10px;flex:none}
 .gsi-list{position:absolute;top:calc(100% + 2px);left:0;min-width:100%;background:var(--panel2);border:1px solid var(--line2);border-radius:6px;z-index:500;max-height:280px;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+.gsi-lift{position:relative;z-index:600!important}
 .gsi-opt{display:flex;align-items:center;gap:8px;padding:7px 10px;cursor:pointer;font-family:'Saira Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.4px;border-bottom:1px solid var(--line)}
 .gsi-opt:last-child{border-bottom:none}
 .gsi-opt:hover{background:var(--panel);color:var(--acid)}
@@ -2624,8 +2625,25 @@ function mkIconSel(id, opts, onch, initVal) {
   return `<div class="gsi-wrap" id="${id}_wrap"><input type="hidden" id="${id}" value="${esc(f.val)}"><div class="gsi-btn" onclick="gsiToggle('${id}')"><span class="gsi-ico" id="${id}_ico">${icoHtml(f.icon)}</span><span class="gsi-lbl" id="${id}_lbl">${esc(f.label)}</span><span class="gsi-arr">▾</span></div><div class="gsi-list" id="${id}_list" style="display:none">${items}</div></div>`;
 }
 function gsiCloseAll() {
-  document.querySelectorAll('.gsi-list').forEach(el=>el.style.display='none');
+  document.querySelectorAll('.gsi-list').forEach(el=>{el.style.display='none';el.style.maxHeight='';el.style.top='';el.style.bottom='';});
   document.querySelectorAll('.gsi-wrap').forEach(el=>el.style.zIndex='');
+  document.querySelectorAll('.gsi-lift').forEach(el=>el.classList.remove('gsi-lift'));
+}
+// Родители с backdrop-filter/transform создают свой слой — поднимаем их, иначе соседние блоки перекрывают список
+function gsiLift(wrap) {
+  for (let e=wrap.parentElement; e&&e!==document.body; e=e.parentElement) {
+    const cs=getComputedStyle(e);
+    if (cs.backdropFilter!=='none'||cs.webkitBackdropFilter&&cs.webkitBackdropFilter!=='none'||cs.transform!=='none'||cs.filter!=='none'||cs.zIndex!=='auto') e.classList.add('gsi-lift');
+  }
+}
+// Высота списка — по свободному месту на экране; если снизу тесно, а сверху места больше — открываем вверх
+function gsiFit(wrap, list) {
+  const r=wrap.getBoundingClientRect(), vh=window.innerHeight, pad=12;
+  const bar=document.querySelector('.mob-topbar'), top=bar&&bar.offsetParent?Math.max(0,bar.getBoundingClientRect().bottom):0;
+  const cssMax=parseFloat(getComputedStyle(list).maxHeight)||320, need=Math.min(list.scrollHeight,cssMax);
+  const below=vh-r.bottom-pad, above=r.top-top-pad;
+  if (need>below && above>below) { list.style.top='auto'; list.style.bottom='calc(100% + 2px)'; list.style.maxHeight=Math.max(120,Math.min(cssMax,above))+'px'; }
+  else list.style.maxHeight=Math.max(120,Math.min(cssMax,below))+'px';
 }
 function gsiToggle(id) {
   const list = document.getElementById(id+'_list');
@@ -2636,6 +2654,7 @@ function gsiToggle(id) {
     list.style.display = 'block';
     const wrap = document.getElementById(id+'_wrap');
     if (wrap) wrap.style.zIndex = '9999';
+    if (wrap) { gsiLift(wrap); gsiFit(wrap, list); }
   }
 }
 function gsiPick(id, el) {

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Заказать Telegram-бота, парсер или автоматизацию на Python — Егор, разработчик</title>
+<meta name="description" content="Пишу Telegram- и Discord-ботов, парсеры сайтов и маркетплейсов, Excel/Google-таблицы и автоматизацию на Python. Цена и срок — до начала работы. Пишите в Telegram.">
+<link rel="canonical" href="https://tcs-guide.killa1.workers.dev/uslugi/">
+<link rel="icon" href="/loc/favicon-32.png">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tcs-guide.killa1.workers.dev/uslugi/">
+<meta property="og:title" content="Боты, парсеры и автоматизация на Python — на заказ">
+<meta property="og:description" content="Telegram- и Discord-боты, парсеры, таблицы и скрипты под вашу задачу. Автор гайда по The Closed Sector.">
+<meta property="og:image" content="https://tcs-guide.killa1.workers.dev/uslugi/bot.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script>var _ymId=location.hostname.indexOf('github.io')!==-1?109805175:109747108;(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id='+_ymId,'ym');ym(_ymId,'init',{clickmap:true,accurateTrackBounce:true,trackLinks:true});</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;900&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Сколько стоит Telegram-бот?","acceptedAnswer":{"@type":"Answer","text":"Простой бот — от 1 200 ₽. Точную цену и срок называю после того, как прочитаю задачу, до начала работы."}},{"@type":"Question","name":"Как заказать?","acceptedAnswer":{"@type":"Answer","text":"Напишите в Telegram @lilchich3441, что нужно сделать. Если удобнее с безопасной сделкой — можно оформить заказ через Kwork."}},{"@type":"Question","name":"Что я получу в конце?","acceptedAnswer":{"@type":"Answer","text":"Готовый код, инструкцию по запуску и помощь с установкой на ваш сервер или компьютер."}}]}</script>
+<style>
+:root{--acc:#4c8dff;--acc2:#2f6fe0;--dim:rgba(235,235,245,.6);--line:rgba(255,255,255,.08)}
+*{box-sizing:border-box}
+body{margin:0;background:#000;color:#fff;font-family:'Saira',system-ui,sans-serif;line-height:1.6;padding-bottom:40px;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 0;border-bottom:1px solid var(--line);margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand i{width:34px;height:34px;border-radius:9px;background:#fff;color:#000;font:700 13px 'Saira Condensed',sans-serif;display:flex;align-items:center;justify-content:center;font-style:normal}
+.brand span{font:600 12px 'Saira Condensed',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.top-a{font:600 13px 'Saira Condensed',sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:7px 12px;border:1px solid rgba(255,255,255,.18);border-radius:9px;white-space:nowrap}
+.top-a:hover{border-color:var(--acc)}
+.crumbs{font-size:12.5px;color:rgba(235,235,245,.45);margin-bottom:12px}
+.crumbs a{text-decoration:none;color:var(--dim)}
+.hero{position:relative;overflow:hidden;border-radius:22px;padding:34px 28px 30px;border:1px solid rgba(76,141,255,.35);
+  background:radial-gradient(110% 130% at 100% 0%,rgba(76,141,255,.24),transparent 55%),radial-gradient(80% 120% at 0% 100%,rgba(76,141,255,.10),transparent 60%),#0d0f14}
+.hero-k{font:700 12px 'Saira Condensed',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--acc)}
+h1{font:700 clamp(30px,7.6vw,58px)/1.02 'Saira Condensed',sans-serif;overflow-wrap:anywhere;text-transform:uppercase;margin:10px 0 12px;letter-spacing:.01em}
+.hero-s{color:rgba(235,235,245,.78);max-width:600px;margin:0 0 22px;font-size:16px}
+.hero-s b{color:#fff}
+.btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tg{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;text-decoration:none;
+  font:700 18px 'Saira Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:14px 22px;border-radius:12px;box-shadow:0 10px 26px rgba(76,141,255,.35);white-space:nowrap;transition:transform .15s}
+.tg:hover{transform:translateY(-2px)}
+.tg svg{width:20px;height:20px;flex:none}
+.alt{font:600 14px 'Saira',sans-serif;color:var(--dim);text-decoration:none;padding:12px 6px;border-bottom:1px dashed rgba(235,235,245,.3)}
+.alt:hover{color:#fff}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.facts span{font-size:12.5px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(235,235,245,.85)}
+h2{font:700 22px 'Saira Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.sv{display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:16px;background:linear-gradient(180deg,#17181c,#111215);border:1px solid var(--line);transition:border-color .2s}
+.sv:hover{border-color:rgba(76,141,255,.45)}
+.sv-i{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(76,141,255,.14)}
+.sv b{font:700 19px/1.2 'Saira Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em;margin-top:4px}
+.sv p{margin:0;font-size:14px;color:var(--dim);line-height:1.5;flex:1}
+.sv em{font-style:normal;font:700 16px 'Saira Condensed',sans-serif;color:var(--acc);letter-spacing:.04em}
+.work{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.wk{border-radius:16px;overflow:hidden;background:#111215;border:1px solid var(--line);display:flex;flex-direction:column}
+.wk img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#1a1a1d}
+.wk div{padding:14px 16px 16px}
+.wk b{display:block;font:700 18px 'Saira Condensed',sans-serif;text-transform:uppercase}
+.wk span{font-size:13.5px;color:var(--dim);line-height:1.5;display:block}
+.wk i{display:inline-block;font-style:normal;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:4px}
+.wk a{color:var(--acc)}
+.steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;padding:0;margin:0}
+.steps li{counter-increment:s;padding:16px;border-radius:14px;background:#111215;border:1px solid var(--line);font-size:14.5px;color:rgba(235,235,245,.85)}
+.steps li:before{content:counter(s);display:flex;width:34px;height:34px;border-radius:10px;align-items:center;justify-content:center;margin-bottom:10px;font:700 18px 'Saira Condensed',sans-serif;background:rgba(76,141,255,.16);color:var(--acc)}
+.steps b{color:#fff}
+.faq details{border-bottom:1px solid var(--line);padding:2px 0}
+.faq summary{cursor:pointer;list-style:none;padding:13px 28px 13px 0;font:700 17px 'Saira Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:4px;top:8px;font-size:24px;color:var(--acc)}
+.faq details[open] summary:after{content:"−"}
+.faq p{color:var(--dim);font-size:14.5px;margin:0 0 14px}
+.cta{margin:38px 0 0;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:22px 24px;border-radius:18px;border:1px solid rgba(76,141,255,.4);
+  background:radial-gradient(120% 140% at 0% 0%,rgba(76,141,255,.16),transparent 60%),#0d0f14}
+.cta b{display:block;font:700 26px/1.1 'Saira Condensed',sans-serif;text-transform:uppercase}
+.cta span{font-size:14px;color:var(--dim)}
+footer{text-align:center;color:rgba(235,235,245,.4);font-size:12px;line-height:1.8;margin-top:40px;padding:0 16px}
+footer a{color:var(--dim)}
+@media(max-width:640px){.hero{padding:26px 18px 22px}.tg{width:100%;justify-content:center}.cta{grid-template-columns:1fr}.brand span{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="brand" href="../"><i>TCS</i><span>The Closed Sector · гайд</span></a><a class="top-a" href="../">← В гайд</a></div>
+  <div class="crumbs"><a href="../">Гайд</a> › Услуги программиста</div>
+
+  <section class="hero">
+    <div class="hero-k">💻 Разработка на заказ</div>
+    <h1>Боты, парсеры и автоматизация на Python</h1>
+    <p class="hero-s">Привет, я Егор — автор этого гайда. Делаю <b>Telegram- и Discord-ботов</b>, <b>парсеры</b>, <b>таблицы</b> и <b>скрипты</b>, которые забирают на себя рутину. Опишите задачу — скажу цену и срок до начала работы.</p>
+    <div class="btns">
+      <a class="tg" href="https://t.me/lilchich3441" target="_blank" rel="noopener" data-goal="dev_tg_click"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3Z"/></svg>Написать в Telegram</a>
+      <a class="alt" href="https://kwork.ru/user/lilchich3441" target="_blank" rel="noopener" data-goal="dev_kwork_click">или заказать через Kwork с безопасной сделкой</a>
+    </div>
+    <div class="facts"><span>⏱ Отвечаю в течение дня</span><span>💬 Цена до начала работы</span><span>📦 Код + инструкция по запуску</span></div>
+  </section>
+
+  <h2>Что делаю</h2>
+  <div class="svc">
+    <div class="sv"><div class="sv-i">🤖</div><b>Telegram-боты</b><p>Запись и заявки, каталог, оплата, рассылки, напоминания, админка для владельца. Telegram и MAX.</p><em>от 1 200 ₽</em></div>
+    <div class="sv"><div class="sv-i">🎮</div><b>Боты для игровых сообществ</b><p>Discord- и Telegram-боты для кланов: роли, напоминания о событиях, статистика, справка по игре прямо в чате.</p><em>от 1 200 ₽</em></div>
+    <div class="sv"><div class="sv-i">🕸️</div><b>Парсинг</b><p>Сайты, Ozon, Wildberries, каталоги и объявления → в Excel или Google-таблицу. Разово или с обновлением по расписанию.</p><em>от 2 000 ₽</em></div>
+    <div class="sv"><div class="sv-i">📊</div><b>Таблицы Excel / Google</b><p>Учёт заказов, склада и денег: формулы, сводные, отчёты и проверки, чтобы не считать руками.</p><em>от 1 000 ₽</em></div>
+    <div class="sv"><div class="sv-i">⚙️</div><b>Автоматизация на Python</b><p>Скрипты под вашу рутину: выгрузки, автопостинг, обработка файлов, связка сервисов между собой.</p><em>от 1 200 ₽</em></div>
+    <div class="sv"><div class="sv-i">🌐</div><b>Сайты и справочники</b><p>Быстрые сайты-справочники и лендинги — как этот гайд: поиск, калькуляторы, отдельные SEO-страницы.</p><em>цена по задаче</em></div>
+  </div>
+
+  <h2>Примеры работ</h2>
+  <div class="work">
+    <div class="wk"><img src="site.webp" alt="Гайд по The Closed Sector — главная страница" loading="lazy" width="800" height="600"><div><i>Живой проект</i><b>Этот сайт-гайд</b><span>Справочник по игре: снаряжение, локации, боссы, поиск и калькулятор снаряжения. Сотни страниц собираются из одной базы. <a href="../">Посмотреть →</a></span></div></div>
+    <div class="wk"><img src="bot.webp" alt="Пример Telegram-бота для записи клиентов" loading="lazy" width="800" height="600"><div><i>Пример</i><b>Бот для записи и заявок</b><span>Клиент сам выбирает услугу и время, владельцу приходит готовая заявка.</span></div></div>
+    <div class="wk"><img src="parser.webp" alt="Пример парсинга цен конкурентов в таблицу" loading="lazy" width="800" height="600"><div><i>Пример</i><b>Цены конкурентов в таблицу</b><span>Парсер Ozon и WB каждое утро обновляет таблицу и подсвечивает, где дешевле.</span></div></div>
+    <div class="wk"><img src="tables.webp" alt="Пример таблицы учёта заказов" loading="lazy" width="800" height="600"><div><i>Пример</i><b>Учёт заказов в таблице</b><span>Итоги, долги и динамика к прошлому месяцу считаются сами.</span></div></div>
+  </div>
+
+  <h2>Как работаем</h2>
+  <ol class="steps">
+    <li><b>Пишете задачу</b> в Telegram — своими словами, можно голосовым или скриншотами.</li>
+    <li>Задаю пару вопросов и называю <b>цену и срок</b>.</li>
+    <li>Делаю и показываю, как работает, — <b>до сдачи</b>.</li>
+    <li>Отдаю <b>код и инструкцию</b>, помогаю запустить у вас.</li>
+  </ol>
+
+  <h2>Вопросы</h2>
+  <div class="faq">
+    <details><summary>Сколько стоит Telegram-бот?</summary><p>Простой бот — от 1 200 ₽. Точную цену и срок называю после того, как прочитаю задачу, до начала работы.</p></details>
+    <details><summary>Как заказать?</summary><p>Напишите в Telegram <a href="https://t.me/lilchich3441" target="_blank" rel="noopener" data-goal="dev_tg_click">@lilchich3441</a>, что нужно сделать. Если удобнее с безопасной сделкой — можно оформить заказ через <a href="https://kwork.ru/user/lilchich3441" target="_blank" rel="noopener" data-goal="dev_kwork_click">Kwork</a>.</p></details>
+    <details><summary>Что я получу в конце?</summary><p>Готовый код, инструкцию по запуску и помощь с установкой на ваш сервер или компьютер.</p></details>
+    <details><summary>Делаешь читы или ботов для игр?</summary><p>Нет — никаких читов, накруток и обхода правил игр. Только боты для сообществ, справочники и полезные инструменты.</p></details>
+  </div>
+
+  <div class="cta"><div><b>Есть задача?</b><span>Опишите её в паре предложений — отвечу и предложу решение.</span></div><a class="tg" href="https://t.me/lilchich3441" target="_blank" rel="noopener" data-goal="dev_tg_click"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.6 19.9c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3Z"/></svg>Написать</a></div>
+</div>
+<footer><a href="../">Гайд по The Closed Sector</a> · <a href="../promokod/">Промокод</a> · <a href="../locations/">Локации</a> · <a href="./">Услуги программиста</a><br>Примеры работ с подписью «Пример» — демо на вымышленных данных.</footer>
+<script>
+document.addEventListener('click',function(e){var a=e.target.closest('[data-goal]');if(!a)return;try{typeof ym!=='undefined'&&ym(_ymId,'reachGoal',a.dataset.goal)}catch(_){}});
+</script>
+</body>
+</html>

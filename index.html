@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="Снаряжение, локации, транспорт, крафт и подбор минимального билда для каждой локации.">
 <meta name="twitter:image" content="https://tcs-guide.killa1.workers.dev/loc/og.jpg">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Saira:wght@400;500;600&family=Saira+Semi+Condensed:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Saira:wght@400;500;600&family=Saira+Semi+Condensed:wght@600;700&family=Creepster&display=swap');
 :root{
   --bg:#000000;--bg2:#0a0a0a;--panel:#1c1c1e;--panel2:#2c2c2e;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.13);
   --txt:#ffffff;--dim:rgba(235,235,245,.5);--acid:#e5e5ea;--acid2:#aeaeb2;--hot:#d94040;--gold:#c49a28;--steel:#4aab6e;
@@ -1910,6 +1910,43 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   .sec-cars .cx-nm{align-items:flex-start}
 }
 .dn-hero--uni{border-color:rgba(90,172,204,.35);background:radial-gradient(120% 140% at 100% 0%,rgba(90,172,204,.22),transparent 55%),radial-gradient(90% 120% at 0% 100%,rgba(217,64,64,.18),transparent 60%),#111113}
+.dn-hero--1329{border-color:rgba(230,120,50,.4);background:radial-gradient(120% 140% at 100% 0%,rgba(230,110,40,.26),transparent 55%),radial-gradient(90% 120% at 0% 100%,rgba(70,150,170,.18),transparent 60%),#111113}
+.dn--hw{--hw-o:#ff7a1a;--hw-o2:#ffb347;--hw-p:#9b5cff}
+.dn--hw .dn-hero--1329{border-color:rgba(255,122,26,.5);background:radial-gradient(70% 90% at 92% 10%,rgba(255,122,26,.35),transparent 60%),radial-gradient(80% 120% at 0% 100%,rgba(130,60,220,.35),transparent 60%),linear-gradient(180deg,#140a1c,#0b0710);box-shadow:0 20px 60px -25px rgba(255,122,26,.55),inset 0 0 80px rgba(0,0,0,.6)}
+.dn--hw .dn-hero-tag{background:linear-gradient(135deg,var(--hw-o2),var(--hw-o));color:#1a0800}
+.dn--hw .dn-hero-t{font-family:'Creepster','Saira Condensed',cursive;font-weight:400;letter-spacing:.04em;color:var(--hw-o2);text-shadow:0 0 18px rgba(255,122,26,.75),0 0 44px rgba(255,90,0,.45),0 4px 0 #3a1200;animation:hwFlicker 5s infinite}
+@keyframes hwFlicker{0%,18%,22%,62%,64%,100%{opacity:1}20%,63%{opacity:.45}}
+.dn--hw .dn-hero-s{position:relative;z-index:1}
+.dn--hw .dn-hero-s b{color:var(--hw-o2)}
+.hw-web{position:absolute;left:0;top:0;width:110px;height:110px;color:rgba(255,255,255,.14);pointer-events:none}
+.hw-pump{position:absolute;right:18px;bottom:10px;font-size:clamp(54px,9vw,92px);line-height:1;filter:drop-shadow(0 0 22px rgba(255,122,26,.75));animation:hwBob 4s ease-in-out infinite;pointer-events:none}
+@keyframes hwBob{50%{transform:translateY(-6px) rotate(-4deg)}}
+.hw-bats{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hw-bats i{position:absolute;font-style:normal;font-size:20px;opacity:.75;animation:hwBat 9s linear infinite}
+.hw-bats i:nth-child(1){top:18%;left:-10%;animation-delay:0s}
+.hw-bats i:nth-child(2){top:8%;left:-10%;font-size:14px;animation-delay:3s;animation-duration:11s}
+.hw-bats i:nth-child(3){top:34%;left:-10%;font-size:16px;animation-delay:6s;animation-duration:13s}
+@keyframes hwBat{0%{transform:translate(0,0)}25%{transform:translate(30vw,-14px)}50%{transform:translate(60vw,10px)}75%{transform:translate(85vw,-10px)}100%{transform:translate(120vw,0)}}
+.dn--hw .dn-prep{border-color:rgba(155,92,255,.35);background:linear-gradient(135deg,rgba(155,92,255,.12),rgba(255,122,26,.06))}
+.dn--hw .gh{color:var(--hw-o2);border-bottom-color:rgba(255,122,26,.25)}
+.dn--hw .gh::before{content:'🕯️ ';font-size:.85em}
+.dn--hw .dn-q{background:#e8d8b8;box-shadow:0 0 0 1px rgba(255,122,26,.35),0 10px 30px -12px rgba(255,122,26,.5)}
+.dn--hw .dn-rw{border-color:rgba(255,122,26,.3);background:radial-gradient(90% 80% at 50% 0%,rgba(255,122,26,.16),transparent 70%),#120c14}
+.dn--hw .dn-rw:hover{border-color:var(--hw-o)}
+.dn--hw .dn-rw-note{color:var(--hw-o2)}
+.dn--hw .dn-route--a{--rc:#ff9a3c}
+.dn--hw .dn-route--b{--rc:#b07cff}
+.dn--hw .dn-route{background:radial-gradient(120% 70% at 0% 0%,color-mix(in srgb,var(--rc) 16%,transparent),transparent 55%),linear-gradient(180deg,#1a1320,#110c15)}
+.dn--hw .dn-step{background:rgba(20,8,28,.55);border-color:rgba(155,92,255,.14)}
+.dn--hw .dn-say{background:#ffe2c2;color:#2a1000}
+.dn--hw .dn-note b{color:var(--hw-o2)}
+.dn--hw .dn-step--loot{border-color:rgba(255,122,26,.45);background:rgba(255,122,26,.08)}
+.dn--hw .dn-step--loot::before{content:'🎃';background:none;font-size:16px}
+.dn--hw .dn-mini b{color:var(--hw-o2)}
+.dn--hw .dn-cheat{border-color:rgba(255,122,26,.3);background:rgba(155,92,255,.05)}
+.dn--hw .dn-cheat-r>b{color:var(--hw-o)}
+@media(max-width:640px){.hw-pump{right:14px;bottom:auto;top:84px;font-size:46px}.hw-web{width:70px;height:70px}}
+@media(prefers-reduced-motion:reduce){.hw-bats,.dn--hw .dn-hero-t,.hw-pump{animation:none}}
 .dn-rewards.dn-rewards--4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .dn-danger{margin-top:16px;padding:14px 18px;border-radius:var(--r-md);border:1px solid rgba(217,64,64,.4);background:radial-gradient(120% 140% at 0% 0%,rgba(217,64,64,.16),transparent 60%),rgba(20,12,14,.8)}
 .dn-danger-h{font-family:'Saira Condensed',sans-serif;font-size:14px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:#ff7a7a;margin-bottom:6px}
@@ -1974,6 +2011,22 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
 .gsw-share a:hover{color:#fff}
 .gsw-share button{font:inherit;color:rgba(235,235,245,.75);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:4px 10px;cursor:pointer}
 .gsw-share button:hover{border-color:rgba(196,154,40,.6);color:#fff}
+/* ── halloween event banner ── */
+.hw-ev{position:relative;overflow:hidden;display:flex;align-items:center;gap:16px;margin-bottom:12px;padding:18px 20px 18px 22px;border-radius:18px;cursor:pointer;border:1px solid rgba(255,122,26,.5);background:radial-gradient(60% 140% at 100% 50%,rgba(255,122,26,.35),transparent 65%),radial-gradient(70% 140% at 0% 100%,rgba(130,60,220,.4),transparent 60%),linear-gradient(135deg,#1a0d22,#0d0712);box-shadow:0 14px 40px -18px rgba(255,122,26,.7);transition:transform .18s,box-shadow .18s}
+.hw-ev:hover{transform:translateY(-2px);box-shadow:0 18px 50px -16px rgba(255,122,26,.9)}
+.hw-ev-body{position:relative;z-index:1;flex:1;min-width:0}
+.hw-ev-k{font-family:'Saira Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#c9a2ff}
+.hw-ev-t{font-family:'Creepster','Saira Condensed',cursive;font-size:clamp(26px,4vw,38px);line-height:1.05;color:#ffb347;letter-spacing:.03em;text-shadow:0 0 16px rgba(255,122,26,.7),0 3px 0 #3a1200;margin:2px 0 4px}
+.hw-ev-s{font-size:13.5px;color:rgba(255,236,220,.78)}
+.hw-ev-b{position:relative;z-index:1;flex:none;font-family:'Saira Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#1a0800;background:linear-gradient(135deg,#ffb347,#ff7a1a);padding:11px 16px;border-radius:12px;box-shadow:0 8px 22px rgba(255,122,26,.45)}
+.hw-ev-pump{position:relative;z-index:1;flex:none;font-size:52px;line-height:1;filter:drop-shadow(0 0 18px rgba(255,122,26,.8));animation:hwBob 4s ease-in-out infinite}
+.hw-ev-bats{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hw-ev-bats i{position:absolute;font-style:normal;font-size:16px;opacity:.7;left:-8%;animation:hwBat 10s linear infinite}
+.hw-ev-bats i:nth-child(1){top:12%}
+.hw-ev-bats i:nth-child(2){top:60%;font-size:12px;animation-delay:3.5s;animation-duration:12s}
+.hw-ev-bats i:nth-child(3){top:30%;font-size:13px;animation-delay:7s;animation-duration:14s}
+@media(max-width:640px){.hw-ev{flex-wrap:wrap;padding:16px}.hw-ev-pump{font-size:40px}.hw-ev-b{width:100%;text-align:center}}
+@media(prefers-reduced-motion:reduce){.hw-ev-bats,.hw-ev-pump{animation:none}}
 /* ── guides: switcher + Denisovka ── */
 .gsw{display:flex;gap:10px;flex-wrap:wrap;max-width:840px;margin:14px auto 22px}
 .gsw-b{flex:1 1 260px;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;padding:12px 16px;border-radius:var(--r-md);color:#fff;
@@ -2109,7 +2162,7 @@ tr.gs-flash td{animation:gs-flash-bg 1.8s ease}
   <div id="imodal-box"></div>
 </div>
 <script>const IMG={};</script>
-<script src="data.js?v=20260930c"></script>
+<script src="data.js?v=20261021a"></script>
 <script>
 const RARN={1:'Обычное',2:'Редкое',3:'Мистическое',4:'Легендарное',5:'Мифическое'};
 const STAT_MAX={
@@ -2132,7 +2185,7 @@ const LOC_POS={'Военный конвой':'center 62%','Тайник Сект
 const $=s=>document.querySelector(s);
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function fmt(n){return (n||0).toLocaleString('ru-RU');}
-const IMG_KEYS=new Set(["d1","i1","i10","i100","i101","i102","i103","i104","i105","i106","i107","i108","i109","i11","i110","i111","i112","i113","i114","i115","i116","i117","i118","i119","i12","i120","i121","i122","i123","i124","i125","i126","i127","i128","i129","i13","i130","i131","i132","i133","i134","i135","i136","i137","i138","i139","i14","i140","i141","i142","i143","i144","i145","i146","i147","i148","i149","i15","i150","i151","i152","i153","i154","i155","i156","i157","i158","i159","i16","i160","i161","i162","i163","i164","i165","i166","i167","i168","i169","i17","i170","i171","i172","i173","i174","i175","i176","i177","i178","i179","i18","i180","i181","i182","i183","i184","i185","i186","i187","i188","i189","i19","i190","i191","i192","i193","i194","i195","i196","i197","i198","i199","i2","i20","i200","i201","i202","i203","i204","i205","i206","i207","i208","i209","i21","i210","i211","i212","i213","i214","i215","i216","i217","i218","i219","i22","i220","i221","i222","i223","i224","i225","i226","i227","i228","i229","i23","i230","i231","i232","i233","i234","i235","i236","i237","i238","i239","i24","i240","i241","i242","i243","i244","i245","i246","i247","i248","i249","i25","i250","i251","i252","i253","i254","i255","i256","i257","i258","i259","i26","i260","i261","i262","i263","i264","i265","i266","i267","i268","i269","i27","i270","i28","i29","i3","i30","i31","i32","i33","i34","i35","i36","i37","i38","i39","i4","i40","i400","i401","i402","i404","i405","i406","i408","i409","i41","i410","i411","i412","i413","i414","i415","i416","i417","i418","i419","i42","i420","i421","i422","i423","i424","i425","i426","i427","i428","i429","i43","i430","i431","i432","i433","i434","i435","i436","i437","i438","i439","i44","i440","i441","i442","i443","i444","i445","i446","i447","i448","i449","i45","i450","i451","i452","i453","i454","i455","i456","i457","i458","i459","i46","i460","i461","i462","i47","i48","i49","i5","i50","i51","i52","i53","i54","i55","i56","i57","i58","i59","i6","i60","i61","i62","i63","i64","i65","i66","i67","i68","i69","i7","i70","i71","i72","i73","i74","i75","i76","i77","i78","i79","i8","i80","i81","i82","i83","i84","i85","i86","i87","i88","i89","i9","i90","i91","i92","i93","i94","i95","i96","i97","i98","i99"]);
+const IMG_KEYS=new Set(["i463","i464","i465","i466","d1","i1","i10","i100","i101","i102","i103","i104","i105","i106","i107","i108","i109","i11","i110","i111","i112","i113","i114","i115","i116","i117","i118","i119","i12","i120","i121","i122","i123","i124","i125","i126","i127","i128","i129","i13","i130","i131","i132","i133","i134","i135","i136","i137","i138","i139","i14","i140","i141","i142","i143","i144","i145","i146","i147","i148","i149","i15","i150","i151","i152","i153","i154","i155","i156","i157","i158","i159","i16","i160","i161","i162","i163","i164","i165","i166","i167","i168","i169","i17","i170","i171","i172","i173","i174","i175","i176","i177","i178","i179","i18","i180","i181","i182","i183","i184","i185","i186","i187","i188","i189","i19","i190","i191","i192","i193","i194","i195","i196","i197","i198","i199","i2","i20","i200","i201","i202","i203","i204","i205","i206","i207","i208","i209","i21","i210","i211","i212","i213","i214","i215","i216","i217","i218","i219","i22","i220","i221","i222","i223","i224","i225","i226","i227","i228","i229","i23","i230","i231","i232","i233","i234","i235","i236","i237","i238","i239","i24","i240","i241","i242","i243","i244","i245","i246","i247","i248","i249","i25","i250","i251","i252","i253","i254","i255","i256","i257","i258","i259","i26","i260","i261","i262","i263","i264","i265","i266","i267","i268","i269","i27","i270","i28","i29","i3","i30","i31","i32","i33","i34","i35","i36","i37","i38","i39","i4","i40","i400","i401","i402","i404","i405","i406","i408","i409","i41","i410","i411","i412","i413","i414","i415","i416","i417","i418","i419","i42","i420","i421","i422","i423","i424","i425","i426","i427","i428","i429","i43","i430","i431","i432","i433","i434","i435","i436","i437","i438","i439","i44","i440","i441","i442","i443","i444","i445","i446","i447","i448","i449","i45","i450","i451","i452","i453","i454","i455","i456","i457","i458","i459","i46","i460","i461","i462","i47","i48","i49","i5","i50","i51","i52","i53","i54","i55","i56","i57","i58","i59","i6","i60","i61","i62","i63","i64","i65","i66","i67","i68","i69","i7","i70","i71","i72","i73","i74","i75","i76","i77","i78","i79","i8","i80","i81","i82","i83","i84","i85","i86","i87","i88","i89","i9","i90","i91","i92","i93","i94","i95","i96","i97","i98","i99"]);
 const IMG_REV={"i456":2,"i457":2,"i458":2};
 function img(k){return (k&&IMG_KEYS.has(k))?'img/'+k+'.webp'+(IMG_REV[k]?'?v='+IMG_REV[k]:''):'';}
 
@@ -3190,14 +3243,15 @@ function setStorySearch(v){storyFilter.search=v;render();const inp=document.quer
 
 // ---------- GUIDES ----------
 let guideSel=(()=>{try{return localStorage.getItem('cs_guide')||'locations-howto';}catch(e){return 'locations-howto';}})();
+function openGuide(id){guideSel=id;try{localStorage.setItem('cs_guide',id);}catch(e){}switchTab('guides');}
 function setGuide(id){guideSel=id;try{localStorage.setItem('cs_guide',id);}catch(e){}render();window.scrollTo({top:0,behavior:'smooth'});}
 function renderGuides(){
   const list=DB.guides||[];
   if(!list.some(g=>g.id===guideSel))guideSel=list[0].id;
-  const pick=`<div class="gsw">${list.map(g=>`<button class="gsw-b${g.id===guideSel?' on':''}" onclick="setGuide('${g.id}')"><span class="gsw-ico">${({denisovka:'🎯',university:'🚇'})[g.id]||'📘'}</span><span><b>${esc(g.short||g.title)}</b><i>${esc(g.subtitle||'')}</i></span></button>`).join('')}</div>`;
-  const gUrl=({denisovka:'/guides/denisovka/',university:'/guides/universitet/'})[guideSel];
+  const pick=`<div class="gsw">${list.map(g=>`<button class="gsw-b${g.id===guideSel?' on':''}" onclick="setGuide('${g.id}')"><span class="gsw-ico">${({denisovka:'🎯',university:'🚇',op1329:'⏱️'})[g.id]||'📘'}</span><span><b>${esc(g.short||g.title)}</b><i>${esc(g.subtitle||'')}</i></span></button>`).join('')}</div>`;
+  const gUrl=({denisovka:'/guides/denisovka/',university:'/guides/universitet/',op1329:'/guides/13-29/'})[guideSel];
   const share=gUrl?`<div class="gsw-share"><a href="${gUrl}" target="_blank" rel="noopener">🔗 Отдельная страница гайда</a><button type="button" onclick="copyGuideLink(this,'${gUrl}')">Скопировать ссылку</button></div>`:'';
-  return pick+share+(guideSel==='denisovka'?renderGuideDenisovka():guideSel==='university'?renderGuideUniversity():renderGuideBasics());
+  return pick+share+(guideSel==='denisovka'?renderGuideDenisovka():guideSel==='university'?renderGuideUniversity():guideSel==='op1329'?renderGuide1329():renderGuideBasics());
 }
 function copyGuideLink(btn,path){
   const u=location.origin+path;const ok=()=>{const o=btn.textContent;btn.textContent='✓ Скопировано';setTimeout(()=>btn.textContent=o,1800);};
@@ -3374,6 +3428,130 @@ function renderGuideUniversity(){
     <div class="dn-cheat">${parts.map(p=>`<div class="dn-cheat-r"><b>${esc(p.t.replace(/^Часть (\d)\..*/,'Часть $1'))}</b><div class="dn-chips">${p.steps.map(x=>`<span>${esc(x.say)}</span>`).join('<i>→</i>')}</div></div>`).join('')}</div>
 
     <div class="dn-credit">По гайду <a href="https://vk.com/@geg132009-specoperaciya-universitet" target="_blank" rel="noopener">Александра Юдина</a> во ВКонтакте.</div>
+  </div>`;
+}
+function renderGuide1329(){
+  const start=[
+    {say:'Осмотрись снаружи, прежде чем входить.',note:'Возле подвального окна нетронутый снег… или пыль, и один свежий след ботинка, который обрывается у стены.'},
+    {say:'Проверяй подвал.',note:'Внизу ржавая гермодверь, из-за неё идёт свет.'},
+    {say:'Сначала проверь, можно ли вернуться назад.',note:'Лестница на месте, связь есть.'},
+    {say:'На связи.',note:'За дверью — чистый корпус, будто его никогда не забрасывали.'},
+    {say:'Осмотрись.',note:'Люди в халатах бойца не замечают. На календаре — <b>12 ноября 1988 года</b>.'},
+    {say:'Какое время?',note:'13:17, часы идут. Можно вместо этого «Попробуй с кем-нибудь заговорить» → «Иди дальше» — рука проходит сквозь людей, дальше всё то же.'},
+    {say:'Не вмешивайся. Наблюдай.',note:'В конце коридора — человек в современной броне и с оружием. Он заметил бойца.'},
+    {say:'Не лезь. Осмотри помещение рядом.',note:'Старый прибор с застывшим 13:29 — боец забирает <b>Хронометр «13:29»</b>.',loot:1},
+    {say:'Хорошо. Теперь ищи неизвестного.',note:'Свежая гильза. Слева шаги неизвестного, справа учёные обсуждают образец Л11.'},
+    {say:'Слушай про Л11.',note:'Ампулу передадут Николаю Шелепанову, эксперимент — в 13:29. Сейчас 13:24.'},
+    {say:'Ищи неизвестного.',note:'Стоит у двери в центральный сектор: «Опусти. Ты всё равно пришёл слишком поздно».'},
+    {say:'Кто ты?',note:'«Имя ничего не изменит». Смотрит на часы: «Три минуты».'},
+    {say:'Три минуты до чего?',note:'Можно спросить «Что произойдёт в 13:29?» — ответ тот же. Неизвестный уходит в центральный сектор.'},
+    {say:'Иди за ним. Осторожно.',note:'Коридор то новый, то разрушенный — две версии места накладываются друг на друга.'},
+    {say:'Продолжай.',note:'Кабинет, на столе кассета с маркировкой НС-0.'},
+    {say:'Забирай кассету.',note:'<b>Архивная кассета НС-0</b>.',loot:1},
+    {say:'Отлично. Двигайся дальше.',note:'Неизвестный кричит Шелепанову, чтобы тот не трогал ампулу.'},
+    {say:'Подойди ближе.',note:'13:28. Неизвестный достаёт оружие и целится в Шелепанова. <b>Здесь развилка.</b>'},
+  ];
+  const save=[
+    {say:'Предупреди Шелепанова. Пусть положит ампулу.',note:'Шелепанов слышит бойца и кладёт ампулу на стол.'},
+    {say:'Объясни ему, что произойдёт.'},
+    {say:'Уводи его от стола.',note:'Стол сдвигается сам, ампула катится к краю.'},
+    {say:'Не прикасайся к ней!'},
+    {say:'Что на часах?',note:'13:29.'},
+    {say:'…',note:'Ампула разбилась.'},
+    {say:'Приём?!',note:'Всё плывёт, стены то целые, то разрушенные.'},
+    {say:'Выбирайся оттуда!',note:'Выход то появляется, то исчезает.'},
+    {say:'Осмотрись. Может быть другой путь.',note:'На полу светится осколок с маркировкой Л11.'},
+    {say:'Забирай и уходи!',note:'<b>Осколок ампулы Л11</b>.',loot:1},
+    {say:'Теперь беги!'},
+    {say:'Не останавливайся!'},
+    {say:'Давай!',note:'Боец снова в Кастовске.'},
+    {say:'Проверь время.',note:'16:42 — снаружи прошло несколько часов.'},
+    {say:'Возвращайся в лагерь.',note:'Боец хочет заглянуть в комнату Шелепанова.'},
+    {say:'И?',note:'Всё сгнило, только след от разбитого стекла.'},
+    {say:'Что именно?'},
+  ];
+  const stop=[
+    {say:'Останови неизвестного.',note:'Боец сбивает его с ног, оружие отлетает.'},
+    {say:'Спроси, откуда он знает, что произойдёт.',note:'«Потому что я уже видел, как она разбивается».'},
+    {say:'Что происходит?',note:'На часах 13:28:54, всё мигает.'},
+    {say:'Бросай его, спасай ампулу!',note:'Ампула проскальзывает сквозь пальцы.'},
+    {say:'Отходи!'},
+    {say:'Что на часах?',note:'13:29. Этот вопрос на скриншотах обрезан — по ходу диалога подходит именно он.'},
+    {say:'…',note:'Ампула разбилась.'},
+    {say:'Приём?!',note:'Всё плывёт, стены то целые, то разрушенные.'},
+    {say:'Где неизвестный?',note:'Сидит у стены и смеётся: «Каждый раз одно и то же».'},
+    {say:'Что значит каждый раз?!',note:'Уходит в дым, на полу остаётся металлический жетон.'},
+    {say:'Забери его и уходи!',note:'<b>Жетон неизвестного</b> — без имени, только дата 12.11.1988.',loot:1},
+    {say:'Живо!'},
+    {say:'Не останавливайся!'},
+    {say:'Давай!',note:'Боец снова в Кастовске.'},
+    {say:'Ты цел?',note:'Снаружи прошло несколько часов, а для бойца — минут двадцать.'},
+    {say:'Возвращайся.',note:'Боец хочет заглянуть в комнату Шелепанова.'},
+    {say:'И?',note:'Всё сгнило, но на полу лежит стекло.'},
+    {say:'Л11?'},
+    {say:'Забирай.',note:'<b>Осколок ампулы Л11</b>.',loot:1},
+    {say:'Что именно?'},
+  ];
+  const fin=[
+    {say:'Зачем?',note:'Боец думает, что нулевая среда снова и снова пытается вернуться в 12 ноября 1988 года.'},
+    {say:'Потому что без катастрофы не будет самой среды.',note:'Или «Может быть, она защищает что-то другое» — разницы нет.'},
+    {say:'А неизвестный?',note:'Или «Что думаешь о неизвестном?».'},
+    {say:'Вернёшься туда?'},
+    {say:'Правильно.'},
+    {say:'Возвращайся в лагерь. На сегодня хватит.'},
+    {say:'Завершить операцию',note:'Находки выдаются после завершения.'},
+  ];
+  const chips=a=>a.map(x=>`<span>${esc(x.say)}</span>`).join('<i>→</i>');
+  return `<div class="guide-doc dn dn--hw" data-name="хэллоуин ивент спецоперация 13:29 1329 нулевая среда гайд прохождение шелепанов неизвестный ампула л11 хронометр кассета нс-0 жетон">
+    <div class="dn-hero dn-hero--1329">
+      <svg class="hw-web" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 0L120 120M0 0L60 120M0 0L120 60M0 0L0 120M0 0L120 0"/><path d="M0 24Q14 14 24 0M0 48Q30 30 48 0M0 74Q46 46 74 0M0 100Q60 60 100 0"/></g></svg>
+      <div class="hw-bats" aria-hidden="true"><i>🦇</i><i>🦇</i><i>🦇</i></div>
+      <div class="hw-pump" aria-hidden="true">🎃</div>
+      <div class="dn-hero-tag">🎃 ХЭЛЛОУИН-ИВЕНТ · НУЛЕВАЯ СРЕДА</div>
+      <h2 class="dn-hero-t">«13:29»</h2>
+      <div class="dn-hero-s">Боец спускается в подвал старого корпуса лаборатории и попадает в <b>12 ноября 1988 года</b> — за пять минут до катастрофы. Смертей нет, есть <b>два варианта</b>: чтобы забрать все 4 находки, иди вторым.</div>
+    </div>
+
+    <div class="dn-prep">
+      <div class="dn-prep-i">⏱️</div>
+      <div><b>Временная операция.</b> На момент скриншотов до конца оставалось 18 дней. В обоих прохождениях боец вернулся живым — опасных ответов не найдено.</div>
+    </div>
+
+    <h3 class="gh">Что можно получить</h3>
+    <div class="dn-rewards dn-rewards--4">
+      ${dnItem('i464','Хронометр «13:29»','оба варианта')}
+      ${dnItem('i465','Архивная кассета НС-0','оба варианта')}
+      ${dnItem('i463','Осколок ампулы Л11','оба варианта')}
+      ${dnItem('i466','Жетон неизвестного','только вариант 2')}
+    </div>
+
+    <h3 class="gh">Шаг 1. Корпус и 1988 год</h3>
+    <div class="dn-q">«Командир, я на месте. Координаты из записки привели к старому техническому корпусу лаборатории… Только вот часы на приборной панели машины остановились на 13:29 сразу, как я подъехал».</div>
+    <div class="dn-common">${dnSteps(start)}</div>
+
+    <h3 class="gh">Шаг 2. Выбираем вариант</h3>
+    <div class="dn-routes">
+      <div class="dn-route dn-route--a">
+        <div class="dn-route-h"><span class="dn-route-n">1</span><div><b>Спасти Шелепанова</b><i>3 находки</i></div></div>
+        ${dnSteps(save)}
+      </div>
+      <div class="dn-route dn-route--b">
+        <div class="dn-route-h"><span class="dn-route-n">2</span><div><b>Остановить неизвестного</b><i>4 находки · + Жетон неизвестного</i></div></div>
+        ${dnSteps(stop)}
+      </div>
+    </div>
+    <p class="dn-mini">Главное отличие — когда всё «поплывёт», во втором варианте спрашиваем <b>«Где неизвестный?»</b>: только так выпадает жетон. Осколок ампулы достаётся в обоих вариантах, просто в разный момент.</p>
+
+    <h3 class="gh">Шаг 3. Разговор в Кастовске</h3>
+    <div class="dn-common">${dnSteps(fin)}</div>
+
+    <h3 class="gh">Шпаргалка — ответы по порядку</h3>
+    <div class="dn-cheat">
+      <div class="dn-cheat-r"><b>Начало</b><div class="dn-chips">${chips(start)}</div></div>
+      <div class="dn-cheat-r"><b>Вариант 1</b><div class="dn-chips">${chips(save)}</div></div>
+      <div class="dn-cheat-r"><b>Вариант 2</b><div class="dn-chips">${chips(stop)}</div></div>
+      <div class="dn-cheat-r"><b>Финал</b><div class="dn-chips">${chips(fin)}</div></div>
+    </div>
   </div>`;
 }
 function renderGuideBasics(){
@@ -3574,9 +3752,11 @@ function renderHome(){
 
   const svgCopy='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
   const supportHtml=`<div class="support-section"><div class="support-top"><div class="support-eyebrow">🎖️ Поддержать</div><div class="support-title">Поддержать проект</div><div class="support-sub">Делаю один, в свободное время, без рекламы. Если справочник хоть раз помог в рейде — буду очень рад поддержке. В комментарии к переводу напиши свой ник — добавлю в список. 🙏</div></div><div class="support-cards"><div class="support-card support-card--yandex" onclick="copyCard(this,'2204310103246081')"><img class="support-card-logo" src="loc/yandex.svg" alt="Яндекс Банк" style="border-radius:7px"><div class="support-card-info"><div class="support-card-bank">Яндекс Банк</div><div class="support-card-num">2204 3101 0324 6081</div><div class="support-card-copy">${svgCopy}Нажми чтобы скопировать</div></div></div><div class="support-card support-card--sber" onclick="copyCard(this,'5469400039956201')"><img class="support-card-logo" src="loc/sber.png" alt="Сбер"><div class="support-card-info"><div class="support-card-bank">Сбер</div><div class="support-card-num">5469 4000 3995 6201</div><div class="support-card-copy">${svgCopy}Нажми чтобы скопировать</div></div></div></div><hr class="support-divider"><div class="support-sponsors-hd">★ Поддержали проект</div><div class="support-sponsors-grid"><span class="sponsor">MOTOP</span><span class="sponsor">LilHappy7</span><span class="sponsor">MEDOVIK</span><span class="sponsor">Шмаратосина</span><span class="sponsor">Dezman39</span><span class="sponsor">rurikrok</span><span class="sponsor">Reanimator</span><span class="sponsor">Sezar</span></div></div>`;
+  const evEnd=Date.parse('2026-11-08T00:00:00+03:00'),evDays=Math.ceil((evEnd-Date.now())/864e5);
+  const eventHtml=evDays>0?`<div class="hw-ev" role="button" tabindex="0" onclick="openGuide('op1329')" onkeydown="if(event.key==='Enter')openGuide('op1329')"><div class="hw-ev-bats" aria-hidden="true"><i>🦇</i><i>🦇</i><i>🦇</i></div><div class="hw-ev-pump" aria-hidden="true">🎃</div><div class="hw-ev-body"><div class="hw-ev-k">Хэллоуин-ивент · осталось ${evDays} дн.</div><div class="hw-ev-t">Спецоперация «13:29»</div><div class="hw-ev-s">Нулевая среда: оба пути, все ответы и как забрать все 4 находки</div></div><span class="hw-ev-b">Открыть гайд →</span></div>`:'';
   const ctaHtml=`<div class="dash-cta"><div class="dash-cta-card dash-cta-promo" onclick="copyPromo(this,'LILCHICH')"><span class="cta-shine"></span><div class="dash-cta-eye">🤝 Промокод для игры</div><div class="dash-cta-main"><span class="dash-cta-code">LILCHICH</span><span class="promo-code-copy dash-cta-hint">${svgCopy}Копировать</span></div><div class="dash-cta-sub">Введи при регистрации в игре — получишь бонусы для старта</div></div><a class="dash-cta-card dash-cta-vpn" href="uslugi/" onclick="if(typeof ym!=='undefined')ym(_ymId,'reachGoal','dev_banner_click')"><span class="cta-shine"></span><div class="dash-cta-eye">💻 Услуги программиста</div><div class="dash-cta-main"><span class="dash-cta-vpn-badge">&lt;/&gt;</span><span class="dash-cta-donate-txt">Заказать</span><span class="dash-cta-arrow">→</span></div><div class="dash-cta-sub">Telegram-боты, парсеры и автоматизация на Python</div></a><button type="button" class="dash-cta-card dash-cta-donate" onclick="(document.querySelector('.support-section')||{}).scrollIntoView&&document.querySelector('.support-section').scrollIntoView({behavior:'smooth',block:'start'})"><span class="cta-shine"></span><div class="dash-cta-eye">🎖 Поддержать</div><div class="dash-cta-main"><span class="dash-cta-donate-txt">Помочь проекту</span><span class="dash-cta-arrow">→</span></div><div class="dash-cta-sub">Справочник делаю один, в свободное время, без рекламы</div></button></div>`;
   const contactsHtml=`<div class="promo-block" style="border-left-color:#4aab6e;border-color:rgba(74,171,110,.3);margin-top:0"><div class="promo-block-label" style="color:#4aab6e">💬 Связь с автором</div><div class="promo-block-desc">Нашёл ошибку или хочешь что-то предложить — пиши</div><div class="contacts-cards"><a class="contacts-card contacts-card-vk" href="https://vk.com/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#5181b8"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.5h-1.58c-.6 0-.78-.48-1.86-1.57-1-.93-1.4-.93-1.64-.93-.33 0-.43.1-.43.57v1.43c0 .4-.13.64-1.18.64-1.74 0-3.67-1.05-5.02-3.01C5.14 10.46 4.6 8.55 4.6 8.14c0-.24.1-.47.57-.47h1.58c.43 0 .59.2.75.66.83 2.38 2.2 4.47 2.77 4.47.21 0 .31-.1.31-.64V9.73c-.07-1.14-.67-1.24-.67-1.64 0-.2.17-.4.44-.4h2.49c.37 0 .5.2.5.63v3.39c0 .37.17.5.27.5.21 0 .4-.13.8-.53 1.24-1.38 2.12-3.52 2.12-3.52.12-.24.3-.47.73-.47h1.58c.47 0 .57.24.47.57-.2.93-2.1 3.6-2.1 3.6-.17.27-.23.4 0 .7.17.23.72.7 1.09 1.13.67.77 1.19 1.41 1.33 1.86.14.43-.09.66-.54.66z"/></svg><span class="contacts-handle">ВКонтакте</span></a><a class="contacts-card contacts-card-tg" href="https://t.me/lilchich3441" target="_blank" rel="noopener"><svg class="contacts-ico" viewBox="0 0 24 24" fill="#2AABEE"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="contacts-handle">@lilchich3441</span></a></div></div>`;
-  return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${heroStats}<a class="dash-hero-cta" href="https://theclosedsector.com" target="_blank" rel="noopener noreferrer" onclick="return heroPlayClick(event,'LILCHICH')"><span class="dash-hero-cta-ico">▶</span><span class="dash-hero-cta-txt"><span class="dash-hero-cta-eye">Играть в</span><span class="dash-hero-cta-name">The Closed Sector</span></span></a>${locBadge}</div>${ctaHtml}<div class="dash-grid">${row1}${row2}</div><div class="dash-layout">${orgHtml}${devlogHtml}</div>${supportHtml}${contactsHtml}</div>`;
+  return `<div class="dash-wrap"><div ${heroAttr}><div class="dash-hero-watermark">TCS</div><div class="dash-hero-eye">Полевой справочник</div><div class="dash-hero-title">The Closed<br>Sector</div><div class="dash-hero-sub">Снаряжение · Локации · Транспорт · Крафт</div>${heroStats}<a class="dash-hero-cta" href="https://theclosedsector.com" target="_blank" rel="noopener noreferrer" onclick="return heroPlayClick(event,'LILCHICH')"><span class="dash-hero-cta-ico">▶</span><span class="dash-hero-cta-txt"><span class="dash-hero-cta-eye">Играть в</span><span class="dash-hero-cta-name">The Closed Sector</span></span></a>${locBadge}</div>${eventHtml}${ctaHtml}<div class="dash-grid">${row1}${row2}</div><div class="dash-layout">${orgHtml}${devlogHtml}</div>${supportHtml}${contactsHtml}</div>`;
 }
 function renderCraft(){
   const all=DB.crafting||[];

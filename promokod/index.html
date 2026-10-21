@@ -56,6 +56,12 @@
 .hw-bats i:nth-child(1){top:18%;left:-10%;animation-delay:0s}
 .hw-bats i:nth-child(2){top:8%;left:-10%;font-size:14px;animation-delay:3s;animation-duration:11s}
 .hw-bats i:nth-child(3){top:34%;left:-10%;font-size:16px;animation-delay:6s;animation-duration:13s}
+.hw-bats i,.hw-ev-bats i{width:26px;height:13px;font-size:0;filter:drop-shadow(0 0 3px rgba(255,140,40,.75))}
+.hw-bats i::before,.hw-ev-bats i::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 30'%3E%3Cpath fill='%23170a1f' d='M32 9l-2.6-5.5-.9 4.3C25 6 21.5 4.3 17 3.5 11 2.4 5 3.4 0 6.5c4.2.6 7.4 2.8 8.6 6.4 3-1.6 6.4-1.4 9 .8 2.2-1.8 5.4-1.6 7.4.6.9 3.8 3.4 7.4 7 9.7 3.6-2.3 6.1-5.9 7-9.7 2-2.2 5.2-2.4 7.4-.6 2.6-2.2 6-2.4 9-.8 1.2-3.6 4.4-5.8 8.6-6.4-5-3.1-11-4.1-17-3-4.5.8-8 2.5-11.5 4.3l-.9-4.3z'/%3E%3C/svg%3E") center/contain no-repeat;animation:hwFlap .32s ease-in-out infinite alternate}
+.hw-bats i:nth-child(2),.hw-ev-bats i:nth-child(2){width:18px;height:9px}
+.hw-bats i:nth-child(3),.hw-ev-bats i:nth-child(3){width:21px;height:10px}
+.hw-bats i:nth-child(2)::before,.hw-ev-bats i:nth-child(2)::before{animation-duration:.26s}
+@keyframes hwFlap{from{transform:scaleY(1)}to{transform:scaleY(.35) translateY(2px)}}
 @keyframes hwBat{0%{transform:translate(0,0)}25%{transform:translate(30vw,-14px)}50%{transform:translate(60vw,10px)}75%{transform:translate(85vw,-10px)}100%{transform:translate(120vw,0)}}
 .dn--hw .dn-prep{border-color:rgba(155,92,255,.35);background:linear-gradient(135deg,rgba(155,92,255,.12),rgba(255,122,26,.06))}
 .dn--hw .gh{color:var(--hw-o2);border-bottom-color:rgba(255,122,26,.25)}
@@ -229,7 +235,7 @@ footer a{color:rgba(235,235,245,.6)}
 <h2 class="gh">Вопросы</h2>
 <div class="faq"><details><summary>Какой промокод в The Closed Sector?</summary><p>Промокод <b>LILCHICH</b>. Введи его при регистрации в игре — получишь бонусы для старта.</p></details><details><summary>Где вводить промокод?</summary><p>В поле промокода при регистрации нового аккаунта. Скопируй код кнопкой выше, открой игру и вставь его, когда будешь регистрироваться.</p></details><details><summary>Нужно ли что-то скачивать?</summary><p>Нет. The Closed Sector — браузерная игра, она открывается прямо на телефоне или компьютере.</p></details><details><summary>Что делать после регистрации?</summary><p>Загляни в <a href="/">гайд по игре</a>: там всё снаряжение и комплекты, локации с лутом, боссы, калькулятор снаряжения и прохождения спецопераций.</p></details></div>
 <h2 class="gh">Гайды для старта</h2>
-<div class="more"><a href="/guides/13-29/"><b>Спецоперация «13:29»</b><span>Нулевая среда: оба пути и 4 находки</span></a><a href="/guides/denisovka/"><b>Спецоперация «Денисовка»</b><span>Оба варианта прохождения и награды</span></a><a href="/guides/universitet/"><b>Спецоперация «Университет»</b><span>Весь лут и ловушки с мгновенной смертью</span></a><a href="/"><b>Весь гайд</b><span>Снаряжение, локации, боссы, крафт</span></a></div>
+<div class="more"><a href="/guides/nulevaya-sreda/"><b>Нулевая среда</b><span>Хэллоуин-ивент: оба пути и 4 находки</span></a><a href="/guides/denisovka/"><b>Спецоперация «Денисовка»</b><span>Оба варианта прохождения и награды</span></a><a href="/guides/universitet/"><b>Спецоперация «Университет»</b><span>Весь лут и ловушки с мгновенной смертью</span></a><a href="/"><b>Весь гайд</b><span>Снаряжение, локации, боссы, крафт</span></a></div>
 </div>
 <footer><a href="/">Гайд по The Closed Sector</a> · <a href="/promokod/">Промокод</a> · <a href="/items/">Предметы</a> · <a href="/gear/">Снаряжение</a> · <a href="/locations/">Локации</a> · <a href="/bosses/">Боссы</a><br>Неофициальный фан-гайд по игре The Closed Sector («Закрытый сектор»), не связан с Akari Group. The Closed Sector является торговым знаком Akari Group.</footer>
 <script>

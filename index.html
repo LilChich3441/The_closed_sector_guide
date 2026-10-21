@@ -3255,9 +3255,7 @@ function renderGuides(){
   const list=DB.guides||[];
   if(!list.some(g=>g.id===guideSel))guideSel=list[0].id;
   const pick=`<div class="gsw">${list.map(g=>`<button class="gsw-b${g.id===guideSel?' on':''}" onclick="setGuide('${g.id}')"><span class="gsw-ico">${({denisovka:'🎯',university:'🚇',op1329:'⏱️'})[g.id]||'📘'}</span><span><b>${esc(g.short||g.title)}</b><i>${esc(g.subtitle||'')}</i></span></button>`).join('')}</div>`;
-  const gUrl=({denisovka:'/guides/denisovka/',university:'/guides/universitet/',op1329:'/guides/nulevaya-sreda/'})[guideSel];
-  const share=gUrl?`<div class="gsw-share"><a href="${gUrl}" target="_blank" rel="noopener">🔗 Отдельная страница гайда</a><button type="button" onclick="copyGuideLink(this,'${gUrl}')">Скопировать ссылку</button></div>`:'';
-  return pick+share+(guideSel==='denisovka'?renderGuideDenisovka():guideSel==='university'?renderGuideUniversity():guideSel==='op1329'?renderGuide1329():renderGuideBasics());
+  return pick+(guideSel==='denisovka'?renderGuideDenisovka():guideSel==='university'?renderGuideUniversity():guideSel==='op1329'?renderGuide1329():renderGuideBasics());
 }
 function copyGuideLink(btn,path){
   const u=location.origin+path;const ok=()=>{const o=btn.textContent;btn.textContent='✓ Скопировано';setTimeout(()=>btn.textContent=o,1800);};
